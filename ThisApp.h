@@ -13,6 +13,8 @@ private:
     void registerMenu(turnip::cmd::Menu &menu) override;
     turnip::cmd::Translator *createTranslator() const override;
     void registerRepresentaions();
+
+    std::string appName() const override;
 };
 
 #endif // THISAPP_H

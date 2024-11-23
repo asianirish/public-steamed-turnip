@@ -45,3 +45,8 @@ void ThisApp::registerRepresentaions()
     RepresentationManager::registerRepresentation("hex_int",
                                                   std::make_unique<HexIntRep>());
 }
+
+std::string ThisApp::appName() const
+{
+    return std::string("steamed-turnip");
+}
