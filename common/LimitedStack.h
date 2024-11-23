@@ -19,6 +19,13 @@ public:
         stack_.push_back(value);
     }
 
+    void push_front(const T& value) {
+        if (stack_.size() == maxSize_) {
+            stack_.pop_back();  // Remove the newest element from the back
+        }
+        stack_.push_front(value);  // Add new element to the front
+    }
+
     void pop() {
         if (!stack_.empty()) {
             stack_.pop_back();
