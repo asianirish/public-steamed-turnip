@@ -1,6 +1,7 @@
 #include "TaskManager.h"
+#include "cmd/Action.h"
+#include "cmd/err/ConversionException.h"
 
-#include "cmd/PrintAction.h"
 #include "common/Factory.h"
 
 namespace turnip {
@@ -26,12 +27,41 @@ void TaskManager::execute(const Value &actionDesc, const InputArgList &inputArgs
             auto argDefs = actionDef.argDefs();
             auto inputArgIt = inputArgs.begin();
 
-            for (auto &inputArg : inputArgs) { // TODO: (auto &argDef : argDefs)
-                // TODO: convert to a corresponding Value type
-                // TODO: auto arg = argDef.convert(inputArg);
-                args.push_back(inputArg); // TODO: args.push_back(arg);
-                ++inputArgIt;
+            int index = 0;
+            for (auto &argDef : argDefs) {
+
+                Value arg;
+                if (inputArgIt != inputArgs.end()) {
+                    try {
+                        arg = argDef.convertInput(*inputArgIt);
+                    } catch (err::ConversionException &e) {
+                        auto error = err::Error::createArgumentConversionError(e.type(), e.input(), index, argDef.name());
+                        errorCallback_(error);
+                        return;
+                    }
+                } else {
+                    arg = argDef.defaultValue();
+
+                    if (arg.isNull()) {
+                        auto error = err::Error::createMissingRequiredArgumentError(index, argDef.name());
+                        errorCallback_(error);
+                        return;
+                    }
+                }
+                std::cout << "DEBUG ARG:" << arg << std::endl;
+                args.push_back(arg);
+
+                if (inputArgIt != inputArgs.end()) {
+                    ++inputArgIt;
+                }
+                ++index;
             }
+
+            // TEST: alternative for std::thread
+            // auto a = std::async(&TaskManager::executeAction, this, actionPtr, args);
+            // auto b = a.share();
+            // static std::list<decltype(b)> lst;
+            // lst.push_back(b);
 
             // Create a new thread to execute the action
             std::thread actionThread(&TaskManager::executeAction, this, actionPtr, args);
@@ -42,11 +72,9 @@ void TaskManager::execute(const Value &actionDesc, const InputArgList &inputArgs
             actionThread.detach();
         }
     }
+    // TODO: handle map
 
-    } // TODO: handle map
-
-
-
+}
 
 void TaskManager::executeAction(ActionPtr action, const ArgList &args)
 {
