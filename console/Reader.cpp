@@ -3,6 +3,7 @@
 #include <iostream>
 #include <unistd.h>
 #include <termios.h>
+#include <fstream>
 
 namespace turnip {
 namespace console {
@@ -30,6 +31,7 @@ Reader::Reader(const std::list<std::string> &command_list) : history_(1024), // 
 
 void Reader::read()
 {
+    readHistory();
     setRawMode(true);
 
     std::string command;
@@ -91,6 +93,7 @@ void Reader::read()
     }
 
     setRawMode(false);
+    writeHistory();
 }
 
 void Reader::onTabKey(std::size_t &cursor_position, std::string &command) const
@@ -130,13 +133,17 @@ void Reader::onEnterKey(std::size_t &cursor_position, std::string &command, bool
     }
 
     std::cout << "handling: " << command << std::endl << std::flush;
-    history_.push(command);
+
     if (command == "exit" || command == "quit") {
         stop = true;
     } else if (command == "menu") {
         std::cout << "Menu: " << std::endl;
         displayMenu();
     } else {
+        if (history_.empty() || history_.back() != command) {
+            history_.push(command);
+        }
+
         stop = false;
         callback_(command);
     }
@@ -294,6 +301,60 @@ void Reader::displayMenu() const
         std::cout << command << std::endl;
     }
 
+}
+
+void Reader::writeHistory() const
+{
+    // Open the file in write mode
+    std::ofstream file(historyFileName_);
+
+    // Check if the file is open
+    if (!file.is_open()) {
+        return /*false*/;
+    }
+
+    // Write each string in the list to the file on a new line
+    for (const auto &str : history_) {
+        file << str << std::endl;
+    }
+
+    // Close the file
+    file.close();
+
+    return /*true*/;
+}
+
+void Reader::readHistory()
+{
+    // Open the file in read mode
+    std::ifstream file(historyFileName_);
+
+    // Check if the file is open
+    if (!file.is_open()) {
+        return /*false*/;
+    }
+
+    std::string line;
+    // Read the file line by line
+    while (std::getline(file, line)) {
+        history_.push(line); // Add each line to the list
+    }
+
+    // Close the file
+    file.close();
+    historyIndex_ = history_.size(); // the previous one will be size() - 1 (the last one)
+
+    return /*true*/;
+}
+
+std::string Reader::getHistoryFileName() const
+{
+    return historyFileName_;
+}
+
+void Reader::setHistoryFileName(const std::string &newHistoryFileName)
+{
+    historyFileName_ = newHistoryFileName;
 }
 
 void Reader::setCallback(const Callback &newCallback)

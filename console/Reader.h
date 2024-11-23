@@ -25,6 +25,10 @@ public:
 
     void onResult(const std::string &resultString);
     void onError(const std::string &errorString);
+
+    std::string getHistoryFileName() const;
+    void setHistoryFileName(const std::string &newHistoryFileName);
+
 private:
     void onTabKey(std::size_t &cursor_position, std::string &command) const;
     void onEnterKey(std::size_t &cursor_position, std::string &command, bool &stop) const;
@@ -46,6 +50,9 @@ private:
 
     void displayMenu() const;
 
+    void writeHistory() const;
+    void readHistory();
+
 private:
     mutable common::LimitedStack<std::string> history_;
     mutable size_t historyIndex_;
@@ -53,6 +60,8 @@ private:
     const std::list<std::string> &commandList_;
 
     Callback callback_;
+
+    std::string historyFileName_ {".command_history"};
 };
 
 } // namespace console
