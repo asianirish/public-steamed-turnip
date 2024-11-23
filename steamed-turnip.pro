@@ -21,6 +21,7 @@ SOURCES += \
         cmd/def/ArgDef.cpp \
         cmd/def/TypeDef.cpp \
         cmd/err/AdditionalInfo.cpp \
+        cmd/err/ConversionException.cpp \
         cmd/rep/BoolRep.cpp \
         cmd/rep/CharRep.cpp \
         cmd/rep/DecIntRep.cpp \
@@ -52,6 +53,7 @@ HEADERS += \
     cmd/def/ArgDef.h \
     cmd/def/TypeDef.h \
     cmd/err/AdditionalInfo.h \
+    cmd/err/ConversionException.h \
     cmd/rep/BoolRep.h \
     cmd/rep/CharRep.h \
     cmd/rep/DecIntRep.h \
