@@ -24,6 +24,7 @@ SOURCES += \
         cmd/err/ArgumentConversionInfo.cpp \
         cmd/err/ArgumentInfo.cpp \
         cmd/err/ConversionException.cpp \
+        cmd/err/MissingRequiredArgumentInfo.cpp \
         cmd/rep/BoolRep.cpp \
         cmd/rep/CharRep.cpp \
         cmd/rep/DecIntRep.cpp \
@@ -58,6 +59,7 @@ HEADERS += \
     cmd/err/ArgumentConversionInfo.h \
     cmd/err/ArgumentInfo.h \
     cmd/err/ConversionException.h \
+    cmd/err/MissingRequiredArgumentInfo.h \
     cmd/rep/BoolRep.h \
     cmd/rep/CharRep.h \
     cmd/rep/DecIntRep.h \
