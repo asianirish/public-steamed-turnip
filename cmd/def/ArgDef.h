@@ -25,6 +25,8 @@ public:
     Value defaultValue() const;
     void setDefaultValue(const Value &newDefaultValue);
 
+    Value convertInput(const std::string &input) const;
+
 private:
     TypeDef type_;
     std::string name_;

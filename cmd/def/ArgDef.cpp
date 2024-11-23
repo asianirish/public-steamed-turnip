@@ -46,6 +46,11 @@ void ArgDef::setDefaultValue(const Value &newDefaultValue)
     defaultValue_ = newDefaultValue;
 }
 
+Value ArgDef::convertInput(const std::string &input) const
+{
+    return type_.convertInput(input);
+}
+
 } // namespace def
 } // namespace cmd
 } // namespace turnip
