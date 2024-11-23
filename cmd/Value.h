@@ -8,6 +8,10 @@
 namespace turnip {
 namespace cmd {
 
+class Value;
+
+using ValueData = std::variant<std::monostate, bool, char, int64_t, double, std::string, common::SharedMap<std::string, Value>>;
+
 class Value
 {
 public:
@@ -29,7 +33,7 @@ public:
 
     Value(const std::map<std::string, Value> &mp);
 
-    std::variant<std::monostate, bool, char, int64_t, double, std::string, common::SharedMap<std::string, Value>> data() const {
+    ValueData data() const {
         return data_;
     }
 
@@ -52,7 +56,7 @@ public:
     operator char() const;
 
 private:
-    std::variant<std::monostate, bool, char, int64_t, double, std::string, common::SharedMap<std::string, Value>> data_;
+    ValueData data_;
 
     friend std::ostream& operator<<(std::ostream& os, const Value& value);
 };
