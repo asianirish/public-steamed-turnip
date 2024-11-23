@@ -27,6 +27,7 @@ void App::init()
     mainMenu_.setTranslator(trnsl);
     registerMenu(mainMenu_);
 
+    registerRepresentaions();
     // TODO: Add your initialization code here.
 
 }
