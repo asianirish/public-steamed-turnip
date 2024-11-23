@@ -25,8 +25,6 @@ void Menu::processString(const std::string &input)
 {
     if (translator_) {
         Info info = translator_->translate(input);
-        ArgList argList;
-
         execute(info.command(), info.args());
     }
 }
