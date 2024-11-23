@@ -48,6 +48,11 @@ Value::Value(const std::map<std::string, Value> &mp) : data_(mp)
 
 }
 
+bool Value::isNull() const
+{
+    return std::holds_alternative<std::monostate>(data_);
+}
+
 Value::operator std::string() const
 {
     std::ostringstream os;

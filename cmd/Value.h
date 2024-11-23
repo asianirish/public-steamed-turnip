@@ -33,6 +33,8 @@ public:
         return data_;
     }
 
+    bool isNull() const;
+
     // Conversion operator to std::string
     operator std::string() const;
 
