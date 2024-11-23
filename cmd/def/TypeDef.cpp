@@ -47,6 +47,18 @@ std::string TypeDef::name() const
     return typeInfoMap.at(index_).name;
 }
 
+Value TypeDef::convertInput(const std::string &input) const
+{
+    auto inRep = rep::RepresentationManager::representation(inputRep_);
+
+    if (inRep) {
+        return inRep->input(input);
+    }
+
+    // TODO: else { copy error information to the returning value
+    return Value();
+}
+
 } // namespace def
 } // namespace cmd
 } // namespace turnip

@@ -38,6 +38,8 @@ public:
 
     std::string name() const;
 
+    Value convertInput(const std::string &input) const;
+
 private:
     TypeDef();
 
