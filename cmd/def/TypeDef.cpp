@@ -38,6 +38,15 @@ TypeDef TypeDef::createIntTypedef(const std::string &inputRep, const std::string
     return td;
 }
 
+TypeDef TypeDef::createStringTypedef(const std::string &inputRep, const std::string &outputRep)
+{
+    auto td = TypeDef(4);
+    td.inputRep_ = inputRep;
+    td.outputRep_ = outputRep;
+
+    return td;
+}
+
 TypeDef::Id TypeDef::id() const
 {
     return typeInfoMap.at(index_).id;

@@ -32,7 +32,10 @@ public:
                                      const std::string &outputRep = App::DEFAULT_NULL_REPRESENTATION);
 
     static TypeDef createIntTypedef(const std::string & inputRep = App::DEFAULT_INT_REPRESENTATION,
-                                    const std::string &output_Rep = App::DEFAULT_INT_REPRESENTATION);
+                                    const std::string &outputRep = App::DEFAULT_INT_REPRESENTATION);
+
+    static TypeDef createStringTypedef(const std::string & inputRep = App::DEFAULT_STRING_REPRESENTATION,
+                                    const std::string &outputRep = App::DEFAULT_STRING_REPRESENTATION);
 
     Id id() const;
 
