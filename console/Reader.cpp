@@ -263,6 +263,17 @@ void Reader::onDownArrowKey(std::size_t &cursor_position, std::string &command)
     }
 }
 
+void Reader::onResult(const std::string &resultString)
+{
+    std::cout << "Result: " << resultString << std::endl;
+    displayPrompt();
+}
+
+void Reader::onError(const std::string &errorString)
+{
+    std::cout << "Error: " << errorString << std::endl;
+}
+
 std::string Reader::findStringWithPrefix(const std::string &prefix) const
 {
     if (prefix.empty()) {

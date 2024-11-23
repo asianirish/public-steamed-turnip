@@ -23,6 +23,8 @@ public:
 
     void setCallback(const Callback &newCallback);
 
+    void onResult(const std::string &resultString);
+    void onError(const std::string &errorString);
 private:
     void onTabKey(std::size_t &cursor_position, std::string &command) const;
     void onEnterKey(std::size_t &cursor_position, std::string &command, bool &stop) const;
