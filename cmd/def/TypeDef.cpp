@@ -1,4 +1,5 @@
 #include "TypeDef.h"
+#include "cmd/rep/RepresentationManager.h"
 
 namespace turnip {
 namespace cmd {
