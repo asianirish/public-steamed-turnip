@@ -25,8 +25,15 @@ def::ActionDef PrintAction::actionDef() const
 Value PrintAction::actImpl(const ArgList &args)
 {
     std::cout << "\nPrintAction" << std::endl;
-    for (auto &arg : args) {
-        std::cout << arg << std::endl;
+
+    sleep(20);
+    // using namespace std::chrono_literals;
+    // std::this_thread::sleep_for(20s);
+
+    for (int i = 0; i < 100000000; ++i) {
+        for (auto &arg : args) {
+            std::cout << arg;
+        }
     }
 
     return true;
