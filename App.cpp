@@ -38,6 +38,8 @@ void App::exec()
     auto f = std::bind(&cmd::Menu::processString, &mainMenu_, std::placeholders::_1);
     reader.setCallback(f);
 
+    std::string historyFileName {"." + appName() + ".command-history"};
+    reader.setHistoryFileName(historyFileName);
     reader.read();
 }
 
