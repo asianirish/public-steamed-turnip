@@ -50,6 +50,30 @@ public:
         return stack_.at(n);
     }
 
+    const T &back() const {
+        return stack_.back();
+    }
+
+    // Provide begin iterator for range-based for loop
+    typename std::deque<T>::iterator begin() {
+        return stack_.begin();
+    }
+
+    // Provide const begin iterator
+    typename std::deque<T>::const_iterator begin() const {
+        return stack_.begin();
+    }
+
+    // Provide end iterator for range-based for loop
+    typename std::deque<T>::iterator end() {
+        return stack_.end();
+    }
+
+    // Provide const end iterator
+    typename std::deque<T>::const_iterator end() const {
+        return stack_.end();
+    }
+
 private:
     std::deque<T> stack_;
     size_t maxSize_;
