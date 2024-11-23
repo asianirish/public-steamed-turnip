@@ -1,4 +1,5 @@
 #include "IntRep.h"
+#include "cmd/err/ConversionException.h"
 
 namespace turnip {
 namespace cmd {
@@ -14,6 +15,20 @@ Value IntRep::input(const std::string &str)
 std::string IntRep::output(const Value &value)
 {
     return outputImpl(value);
+}
+
+int64_t IntRep::inputImpl(const std::string &str)
+{
+    try {
+        std::size_t pos;
+        int64_t number = std::stoll(str, &pos, base());
+        if (pos != str.length()) {
+            throw err::ConversionException("int", str);
+        }
+        return number;
+    } catch (const std::exception &e) {
+        throw err::ConversionException("int", str);
+    }
 }
 
 } // namespace rep

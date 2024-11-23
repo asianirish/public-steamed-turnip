@@ -16,8 +16,10 @@ public:
     std::string output(const Value &value) override;
 
 private:
-    virtual int64_t inputImpl(const std::string &str) = 0;
+    int64_t inputImpl(const std::string &str);
     virtual std::string outputImpl(int64_t number) = 0;
+
+    virtual int base() const = 0;
 };
 
 } // namespace rep

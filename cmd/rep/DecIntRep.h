@@ -13,11 +13,12 @@ public:
     DecIntRep();
 
 private:
-    // Converts a string representation of a decimal integer to an int64_t
-    int64_t inputImpl(const std::string &str);
-
     // Converts an int64_t to its string representation
-    std::string outputImpl(int64_t number);
+    std::string outputImpl(int64_t number) override;
+
+    int base() const override {
+        return 10;
+    }
 };
 
 } // namespace rep
