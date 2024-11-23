@@ -6,6 +6,8 @@
 class ThisApp : public turnip::App
 {
 public:
+    static std::string HEX_INT_REPRESENTATION;
+
     ThisApp();
 
 private:

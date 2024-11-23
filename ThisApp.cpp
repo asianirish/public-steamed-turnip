@@ -10,6 +10,8 @@ using namespace turnip;
 using namespace cmd;
 using namespace rep;
 
+std::string ThisApp::HEX_INT_REPRESENTATION {"hex_int"};
+
 ThisApp::ThisApp() {}
 
 void ThisApp::registerActions()
@@ -42,7 +44,7 @@ void ThisApp::registerRepresentaions()
 {
     App::registerRepresentaions();
 
-    RepresentationManager::registerRepresentation("hex_int",
+    RepresentationManager::registerRepresentation(HEX_INT_REPRESENTATION,
                                                   std::make_unique<HexIntRep>());
 }
 
