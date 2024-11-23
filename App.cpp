@@ -35,11 +35,24 @@ void App::init()
 void App::exec()
 {
     console::Reader reader(mainMenu_.commandList());
-    auto f = std::bind(&cmd::Menu::processString, &mainMenu_, std::placeholders::_1);
-    reader.setCallback(f);
 
     std::string historyFileName {"." + appName() + ".command-history"};
     reader.setHistoryFileName(historyFileName);
+
+    {
+        auto f = std::bind(&cmd::Menu::processString, &mainMenu_, std::placeholders::_1);
+        reader.setCallback(f);
+    }
+
+    {
+        auto f = std::bind(&console::Reader::onResult, &reader, std::placeholders::_1);
+        mainMenu_.setResultCallback(f);
+    }
+
+    {
+        auto f = std::bind(&console::Reader::onError, &reader, std::placeholders::_1);
+        mainMenu_.setErrorCallback(f);
+    }
     reader.read();
 }
 
