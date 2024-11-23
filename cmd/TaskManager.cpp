@@ -50,7 +50,6 @@ void TaskManager::execute(const Value &actionDesc, const InputArgList &inputArgs
 
 void TaskManager::executeAction(ActionPtr action, const ArgList &args)
 {
-
     // Set a callback using TaskManager's member function
     action->setCallback(std::bind(&TaskManager::onActionComplete, this, std::placeholders::_1));
 
@@ -60,7 +59,21 @@ void TaskManager::executeAction(ActionPtr action, const ArgList &args)
 
 void TaskManager::onActionComplete(const Value &result)
 {
-    std::cout << "result is: " << result << std::endl;
+    // TODO: save the result of pure functions
+
+    if (callback_) {
+        callback_(result);
+    }
+}
+
+void TaskManager::setErrorCallback(const ErrorCallback &newErrorCallback)
+{
+    errorCallback_ = newErrorCallback;
+}
+
+void TaskManager::setCallback(const ResultCallback &newCallback)
+{
+    callback_ = newCallback;
 }
 
 } // namespace cmd
