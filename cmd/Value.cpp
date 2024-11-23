@@ -110,6 +110,32 @@ Value::operator int64_t() const
     }, data_);
 }
 
+Value::operator double() const
+{
+    return std::visit([](auto&& arg) -> double {
+        using T = std::decay_t<decltype(arg)>;
+        if constexpr (std::is_same_v<T, std::monostate>) {
+            return 0.0;  // Consider `std::monostate` as zero.
+        } else if constexpr (std::is_same_v<T, bool>) {
+            return arg ? 1.0 : 0.0;  // Convert `bool` to 1.0 or 0.0.
+        } else if constexpr (std::is_same_v<T, char>) {
+            return static_cast<double>(arg);  // Convert char to double.
+        } else if constexpr (std::is_same_v<T, int64_t>) {
+            return static_cast<double>(arg);  // Convert integer to double.
+        } else if constexpr (std::is_same_v<T, double>) {
+            return arg;  // Direct conversion if already a double.
+        } else if constexpr (std::is_same_v<T, std::string>) {
+            try {
+                return std::stod(arg);  // Convert string to double.
+            } catch (...) {
+                return 0.0;  // Handle conversion failure, default to zero.
+            }
+        } else if constexpr (std::is_same_v<T, common::SharedMap<std::string, Value>>) {
+            return 0.0;  // Maps can't be directly converted to a double, default to zero.
+        }
+    }, data_);
+}
+
 Value::operator bool() const
 {
     return std::visit([](auto&& arg) -> bool {

@@ -41,6 +41,10 @@ public:
     // Conversion operator to int
     operator int64_t() const;
 
+    // Conversion operator to double
+    operator double() const;
+
+
     // Conversion operator to bool
     operator bool() const;
 
