@@ -1,14 +1,25 @@
 #include "PrintAction.h"
+// #include <thread>
+
+#include <unistd.h>
 
 namespace turnip {
 namespace cmd {
+
+using namespace def;
 
 PrintAction::PrintAction() {}
 
 def::ActionDef PrintAction::actionDef() const
 {
-    // TODO: implement
-    return def::ActionDef();
+    ActionDef actionDef;
+
+    const auto typeDef = TypeDef::createStringTypedef();
+    ArgDef argDef;
+    argDef.setType(typeDef);
+    actionDef.addArgDef(argDef);
+
+    return actionDef;
 }
 
 Value PrintAction::actImpl(const ArgList &args)
