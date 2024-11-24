@@ -26,7 +26,7 @@ public:
     void onResult(const std::string &resultString);
     void onError(const std::string &errorString);
 
-    std::string getHistoryFileName() const;
+    std::string historyFileName() const;
     void setHistoryFileName(const std::string &newHistoryFileName);
 
 private:

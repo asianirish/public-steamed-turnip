@@ -347,7 +347,7 @@ void Reader::readHistory()
     return /*true*/;
 }
 
-std::string Reader::getHistoryFileName() const
+std::string Reader::historyFileName() const
 {
     return historyFileName_;
 }
