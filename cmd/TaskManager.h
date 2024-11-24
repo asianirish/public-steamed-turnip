@@ -1,6 +1,7 @@
 #ifndef TASKMANAGER_H
 #define TASKMANAGER_H
 
+#include "cmd/Task.h"
 #include "cmd/Types.h"
 #include "cmd/err/Error.h"
 
@@ -29,6 +30,8 @@ private:
 
     // Member function to be called upon action completion
     void onActionComplete(const Value &result);
+
+    Task task(const std::string &className, const InputArgList &inputArgs);
 
     ResultCallback callback_;
     ErrorCallback errorCallback_;
