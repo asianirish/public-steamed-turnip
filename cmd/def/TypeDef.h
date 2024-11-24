@@ -18,16 +18,6 @@ using namespace rep;
 class TypeDef
 {
 public:
-    // in the order of the type arguments specified for Value::data_, as they appear in the sequence of the template arguments
-    enum class Id {
-        Invalid,
-        Bool,
-        Char,
-        Int,
-        String,
-        Map,
-    };
-
     static TypeDef createNullTypedef(const std::string &inputRep = App::DEFAULT_NULL_REPRESENTATION,
                                      const std::string &outputRep = App::DEFAULT_NULL_REPRESENTATION);
 
@@ -37,27 +27,12 @@ public:
     static TypeDef createStringTypedef(const std::string & inputRep = App::DEFAULT_STRING_REPRESENTATION,
                                     const std::string &outputRep = App::DEFAULT_STRING_REPRESENTATION);
 
-    Id id() const;
-
-    std::string name() const;
-
     Value convertInput(const std::string &input) const;
 
 private:
     TypeDef();
 
-    TypeDef(std::size_t index);
-
 private:
-    std::size_t index_;
-
-    struct TypeInfo{
-        Id id;
-        std::string name;
-    };
-
-    static std::map<size_t, TypeInfo> typeInfoMap;
-
     std::string inputRep_;
     std::string outputRep_;
 };

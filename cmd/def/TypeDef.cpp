@@ -5,21 +5,7 @@ namespace turnip {
 namespace cmd {
 namespace def {
 
-std::map<size_t, TypeDef::TypeInfo> TypeDef::typeInfoMap {
-    {0, {TypeDef::Id::Invalid, "Invalid"}},
-    {1, {TypeDef::Id::Bool, "Bool"}},
-    {2, {TypeDef::Id::Char, "Char"}},
-    {3, {TypeDef::Id::Int, "Int"}},
-    {4, {TypeDef::Id::String, "String"}},
-    {5, {TypeDef::Id::Map, "Map"}}
-};
-
-TypeDef::TypeDef() : TypeDef(0) {}
-
-TypeDef::TypeDef(std::size_t index) : index_(index)
-{
-
-}
+TypeDef::TypeDef() {}
 
 TypeDef TypeDef::createNullTypedef(const std::string &inputRep, const std::string &outputRep)
 {
@@ -31,7 +17,7 @@ TypeDef TypeDef::createNullTypedef(const std::string &inputRep, const std::strin
 
 TypeDef TypeDef::createIntTypedef(const std::string &inputRep, const std::string &outputRep)
 {
-    auto td = TypeDef(3);
+    auto td = TypeDef();
     td.inputRep_ = inputRep;
     td.outputRep_ = outputRep;
 
@@ -40,21 +26,11 @@ TypeDef TypeDef::createIntTypedef(const std::string &inputRep, const std::string
 
 TypeDef TypeDef::createStringTypedef(const std::string &inputRep, const std::string &outputRep)
 {
-    auto td = TypeDef(4);
+    auto td = TypeDef();
     td.inputRep_ = inputRep;
     td.outputRep_ = outputRep;
 
     return td;
-}
-
-TypeDef::Id TypeDef::id() const
-{
-    return typeInfoMap.at(index_).id;
-}
-
-std::string TypeDef::name() const
-{
-    return typeInfoMap.at(index_).name;
 }
 
 Value TypeDef::convertInput(const std::string &input) const
