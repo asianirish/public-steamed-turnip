@@ -39,7 +39,8 @@ SOURCES += \
         cmd/rep/SimpleStringRep.cpp \
         cmd/rep/StringRep.cpp \
         console/Reader.cpp \
-        main.cpp
+        main.cpp \
+        test/TestSharedVector.cpp
 
 HEADERS += \
     App.h \
@@ -79,4 +80,5 @@ HEADERS += \
     common/LimitedStack.h \
     common/SharedMap.h \
     common/SharedVector.h \
-    console/Reader.h
+    console/Reader.h \
+    test/TestSharedVector.h
