@@ -78,4 +78,5 @@ HEADERS += \
     common/Factory.h \
     common/LimitedStack.h \
     common/SharedMap.h \
+    common/SharedVector.h \
     console/Reader.h
