@@ -7,7 +7,9 @@ TestSharedVector::TestSharedVector() {}
 
 turnip::cmd::def::ActionDef TestSharedVector::actionDef() const
 {
-    return {};
+    turnip::cmd::def::ActionDef actionDef;
+    actionDef.setDescription("Shared Vector Test");
+    return actionDef;;
 }
 
 turnip::cmd::Value TestSharedVector::actImpl(const turnip::cmd::ArgList &args)

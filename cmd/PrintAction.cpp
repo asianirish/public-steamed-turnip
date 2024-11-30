@@ -19,6 +19,8 @@ def::ActionDef PrintAction::actionDef() const
     argDef.setType(typeDef);
     actionDef.addArgDef(argDef);
 
+    actionDef.setDescription("Outputs the specified string");
+
     return actionDef;
 }
 

@@ -6,7 +6,9 @@ TestCmdValue::TestCmdValue() {}
 
 turnip::cmd::def::ActionDef TestCmdValue::actionDef() const
 {
-    return {};
+    def::ActionDef actionDef;
+    actionDef.setDescription("Command Value Test");
+    return actionDef;
 }
 
 turnip::cmd::Value TestCmdValue::actImpl(const turnip::cmd::ArgList &args)
