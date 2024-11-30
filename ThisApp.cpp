@@ -6,6 +6,7 @@
 #include "cmd/rep/RepresentationManager.h"
 #include "cmd/rep/HexIntRep.h"
 
+#include "test/TestCmdValue.h"
 #include "test/TestSharedVector.h"
 
 using namespace turnip;
@@ -20,6 +21,7 @@ void ThisApp::registerActions()
 {
     REGISTER_TURNIP_CLASS(Action, PrintAction);
     REGISTER_TURNIP_CLASS(Action, TestSharedVector);
+    REGISTER_TURNIP_CLASS(Action, TestCmdValue);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
@@ -37,6 +39,7 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerCommand("exit", Value());
     menu.registerCommand("print", "PrintAction");
     menu.registerCommand("shv", "TestSharedVector");
+    menu.registerCommand("cval", "TestCmdValue");
 }
 
 Translator *ThisApp::createTranslator() const

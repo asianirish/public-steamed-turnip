@@ -40,6 +40,7 @@ SOURCES += \
         cmd/rep/StringRep.cpp \
         console/Reader.cpp \
         main.cpp \
+        test/TestCmdValue.cpp \
         test/TestSharedVector.cpp
 
 HEADERS += \
@@ -81,4 +82,5 @@ HEADERS += \
     common/SharedMap.h \
     common/SharedVector.h \
     console/Reader.h \
+    test/TestCmdValue.h \
     test/TestSharedVector.h
