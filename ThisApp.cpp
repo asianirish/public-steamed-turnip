@@ -6,7 +6,6 @@
 #include "cmd/rep/RepresentationManager.h"
 #include "cmd/rep/HexIntRep.h"
 
-#include "test/Aft.h"
 #include "test/TestSharedVector.h"
 
 using namespace turnip;
