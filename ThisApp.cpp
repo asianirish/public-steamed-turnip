@@ -44,8 +44,7 @@ void ThisApp::registerRepresentaions()
 {
     App::registerRepresentaions();
 
-    RepresentationManager::registerRepresentation(HEX_INT_REPRESENTATION,
-                                                  std::make_unique<HexIntRep>());
+    RepresentationManager::registerRepresentation<HexIntRep>();
 }
 
 std::string ThisApp::appName() const

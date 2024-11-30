@@ -15,8 +15,15 @@ class RepresentationManager
 public:
     RepresentationManager() = delete;
 
-    // Registers a new representation with a given key
-    static bool registerRepresentation(const std::string& key, std::unique_ptr<Representation> representation);
+    // Declare a template method
+    template<typename T>
+    void print(const T& value);
+
+    template<typename T>
+    static bool registerRepresentation();
+
+    // Registers a new representation using its classKey
+    // static bool registerRepresentation(std::unique_ptr<Representation> representation);
 
     // Retrieves a representation by key
     static Representation* representation(const std::string& key);
@@ -24,6 +31,18 @@ public:
 private:
     static std::unordered_map<std::string, std::unique_ptr<Representation>> representations_;
 };
+
+template<typename T>
+inline bool RepresentationManager::registerRepresentation()
+{
+    auto rep = std::make_unique<T>();
+    std::string key = rep->classKey();
+    auto result = representations_.emplace(key, std::move(rep));
+    return result.second;
+}
+
+
+
 
 } // namespace rep
 } // namespace cmd

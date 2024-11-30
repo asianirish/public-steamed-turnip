@@ -58,20 +58,15 @@ void App::exec()
 
 void App::registerRepresentaions()
 {
-    RepresentationManager::registerRepresentation(DEFAULT_NULL_REPRESENTATION,
-                                                  std::make_unique<NullRep>());
+    RepresentationManager::registerRepresentation<NullRep>();
 
-    RepresentationManager::registerRepresentation(DEFAULT_BOOL_REPRESENTATION,
-                                                  std::make_unique<BoolRep>());
+    RepresentationManager::registerRepresentation<BoolRep>();
 
-    RepresentationManager::registerRepresentation(DEFAULT_CHAR_REPRESENTATION,
-                                                  std::make_unique<SimpleCharRep>());
+    RepresentationManager::registerRepresentation<SimpleCharRep>();
 
-    RepresentationManager::registerRepresentation(DEFAULT_INT_REPRESENTATION,
-                                                  std::make_unique<DecIntRep>());
+    RepresentationManager::registerRepresentation<DecIntRep>();
 
-    RepresentationManager::registerRepresentation(DEFAULT_STRING_REPRESENTATION,
-                                                  std::make_unique<SimpleStringRep>());
+    RepresentationManager::registerRepresentation<SimpleStringRep>();
 }
 
 } // namespace turnip
