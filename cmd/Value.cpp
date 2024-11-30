@@ -79,6 +79,15 @@ Value::operator std::string() const
                 os << "\"" << it->first << "\": " << std::string(it->second);
             }
             os << "}";
+        } else if constexpr (std::is_same_v<T, VariantList>) {
+            os << "[";
+            for (auto it = arg.begin(); it != arg.end(); ++it) {
+                if (it != arg.begin()) {
+                    os << ", ";
+                }
+                os << std::string(*it);  // Assuming Value has a suitable operator std::string()
+            }
+            os << "]";
         }
     }, data_);
     return os.str();
@@ -106,6 +115,8 @@ Value::operator int64_t() const
             }
         } else if constexpr (std::is_same_v<T, VariantMap>) {
             return 0; // or throw an exception since a map can't be directly converted to int64_t
+        } else if constexpr (std::is_same_v<T, VariantList>) {
+            return 0; // or throw an exception since a map can't be directly converted to int64_t
         }
     }, data_);
 }
@@ -132,6 +143,8 @@ Value::operator double() const
             }
         } else if constexpr (std::is_same_v<T, VariantMap>) {
             return 0.0;  // Maps can't be directly converted to a double, default to zero.
+        } else if constexpr (std::is_same_v<T, VariantList>) {
+            return 0.0; // Lists can't be directly converted to a double, default to zero.
         }
     }, data_);
 }
@@ -160,6 +173,8 @@ Value::operator bool() const
             return !arg.empty();  // Non-empty strings are generally `true`.
         } else if constexpr (std::is_same_v<T, VariantMap>) {
             return !arg.empty();  // Non-empty maps are `true`.
+        } else if constexpr (std::is_same_v<T, VariantList>) {
+            return !arg.empty();  // Non-empty lists are `true`.
         }
     }, data_);
 }
@@ -182,6 +197,8 @@ Value::operator char() const
             return !arg.empty() ? arg.front() : '\0';  // Use first character of non-empty string.
         } else if constexpr (std::is_same_v<T, VariantMap>) {
             return '\0';  // Maps can't be directly converted to a char, returning null character.
+        } else if constexpr (std::is_same_v<T, VariantList>) {
+            return '\0';  // Lists can't be directly converted to a char, returning null character.
         }
     }, data_);
 }
