@@ -18,6 +18,10 @@ public:
     std::string nullString() const;
     void setNullString(const std::string &newNull_string);
 
+    std::string classKey() const override {
+        return "default_null";
+    }
+
 private:
     std::string nullString_ {"null"};
 

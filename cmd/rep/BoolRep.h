@@ -34,6 +34,9 @@ public:
     std::string customFalse() const;
     void setCustomFalse(const std::string &newCustomFalse);
 
+    std::string classKey() const override {
+        return "default_bool";
+    }
 private:
     Kind kind_ {Kind::TrueFalse};
 

@@ -14,6 +14,8 @@ public:
 
     virtual Value input(const std::string &str) = 0;
     virtual std::string output(const Value &value) = 0;
+
+    virtual std::string classKey() const = 0;
 };
 
 } // namespace rep

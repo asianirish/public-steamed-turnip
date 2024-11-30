@@ -14,6 +14,10 @@ public:
 
     std::string inputImpl(const std::string &str) override;
     std::string outputImpl(const std::string &stringValue) override;
+
+    std::string classKey() const override {
+        return "default_string";
+    }
 };
 
 } // namespace rep

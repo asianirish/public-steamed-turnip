@@ -12,6 +12,10 @@ class SimpleCharRep : public CharRep
 public:
     SimpleCharRep();
 
+    std::string classKey() const override {
+        return "default_char";
+    }
+
 private:
     char inputImpl(const std::string &str) override;
     std::string outputImpl(char character) override;
