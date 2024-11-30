@@ -4,6 +4,8 @@
 
 #include "common/Factory.h"
 
+#include <iostream>
+
 namespace turnip {
 namespace cmd {
 
@@ -64,7 +66,6 @@ Task TaskManager::task(const std::string &className, const InputArgList &inputAr
     auto action = common::Factory<Action>::create(className);
     auto actionPtr = ActionPtr(action);
     if (actionPtr) {
-
         ArgList args;
         auto actionDef = actionPtr->actionDef();
         auto argDefs = actionDef.argDefs();
@@ -72,7 +73,6 @@ Task TaskManager::task(const std::string &className, const InputArgList &inputAr
 
         int index = 0;
         for (auto &argDef : argDefs) {
-
             Value arg;
             if (inputArgIt != inputArgs.end()) {
                 try {

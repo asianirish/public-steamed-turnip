@@ -3,6 +3,7 @@
 
 #include "common/SharedMap.h"
 
+#include <iostream>
 #include <variant>
 
 namespace turnip {
@@ -64,6 +65,7 @@ private:
 inline std::ostream& operator<<(std::ostream& os, const Value& value) {
     std::visit([&os](auto&& arg) {
         using T = std::decay_t<decltype(arg)>;
+
         if constexpr (std::is_same_v<T, std::monostate>) {
             os << "invalid";
         } else if constexpr (std::is_same_v<T, bool>) {

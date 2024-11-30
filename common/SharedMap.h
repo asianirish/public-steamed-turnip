@@ -1,9 +1,9 @@
 #ifndef SHAREDMAP_H
 #define SHAREDMAP_H
 
-#include <iostream>
 #include <memory>
 #include <map>
+#include <stdexcept>
 
 namespace turnip {
 namespace common {
