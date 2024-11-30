@@ -51,10 +51,6 @@ public:
 
     // Provide begin iterator for range-based for loop
     typename std::map<Key, Value>::iterator begin() {
-        // Ensure unique ownership for safe modification
-        if (!data_.unique()) {
-            data_ = std::make_shared<std::map<Key, Value>>(*data_);
-        }
         return data_->begin();
     }
 

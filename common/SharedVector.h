@@ -1,7 +1,9 @@
 #ifndef SHAREDVECTOR_H
 #define SHAREDVECTOR_H
 
+#include <iostream>
 #include <memory>
+#include <ostream>
 #include <vector>
 #include <stdexcept>
 
@@ -15,6 +17,8 @@ public:
     SharedVector() : data_(std::make_shared<std::vector<T>>()) {}
 
     SharedVector(const std::vector<T> &vec) : data_(std::make_shared<std::vector<T>>(vec)) {}
+
+    // SharedVector(const SharedVector &other) : data_(other.data_) {}
 
     // Access value by index
     T get(size_t index) const {
@@ -58,10 +62,6 @@ public:
 
     // Provide begin iterator for range-based for loop
     typename std::vector<T>::iterator begin() {
-        // Ensure unique ownership for safe modification
-        if (!data_.unique()) {
-            data_ = std::make_shared<std::vector<T>>(*data_);
-        }
         return data_->begin();
     }
 
@@ -78,6 +78,10 @@ public:
     // Provide const end iterator
     typename std::vector<T>::const_iterator end() const {
         return data_->end();
+    }
+
+    void showDataAddress() const {
+        std::cout << data_.get() << std::endl;
     }
 private:
     std::shared_ptr<std::vector<T>> data_;
