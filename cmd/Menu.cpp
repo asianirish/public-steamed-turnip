@@ -41,7 +41,11 @@ void Menu::processString(const std::string &input)
 
 void Menu::execute(const std::string &command, const InputArgList &args)
 {
+#if __cplusplus >= 202002L
     if (!commands_.contains(command)) {
+#else
+    if (commands_.find(command) == commands_.end()) {
+#endif
         errorCallback_("Command '" + command + "' not found.");
         return;
     }
