@@ -48,6 +48,11 @@ Value::Value(const std::map<std::string, Value> &mp) : data_(mp)
 
 }
 
+Value::Value(const std::vector<Value> &vec) : data_(vec)
+{
+
+}
+
 bool Value::isNull() const
 {
     return std::holds_alternative<std::monostate>(data_);

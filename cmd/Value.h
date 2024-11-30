@@ -30,6 +30,8 @@ public:
 
     Value(const std::map<std::string, Value> &mp);
 
+    Value(const std::vector<Value> &vec);
+
     ValueData data() const {
         return data_;
     }
