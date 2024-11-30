@@ -13,7 +13,7 @@ public:
     HexIntRep();
 
     std::string classKey() const override {
-        return "default_bool";
+        return "hex_int";
     }
 private:
     // Converts an int64_t to its hexadecimal string representation
