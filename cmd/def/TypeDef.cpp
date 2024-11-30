@@ -7,29 +7,27 @@ namespace def {
 
 TypeDef::TypeDef() {}
 
-TypeDef TypeDef::createNullTypedef(const std::string &inputRep, const std::string &outputRep)
+TypeDef TypeDef::createNullTypedef(const NullRep &inputRep, const NullRep &outputRep)
 {
     auto td = TypeDef();
-    td.inputRep_ = inputRep;
-    td.outputRep_ = outputRep;
+    td.inputRep_ = inputRep.classKey();
+    td.outputRep_ = outputRep.classKey();
     return td;
 }
 
-TypeDef TypeDef::createIntTypedef(const std::string &inputRep, const std::string &outputRep)
+TypeDef TypeDef::createIntTypedef(const IntRep &inputRep, const IntRep &outputRep)
 {
     auto td = TypeDef();
-    td.inputRep_ = inputRep;
-    td.outputRep_ = outputRep;
-
+    td.inputRep_ = inputRep.classKey();
+    td.outputRep_ = outputRep.classKey();
     return td;
 }
 
-TypeDef TypeDef::createStringTypedef(const std::string &inputRep, const std::string &outputRep)
+TypeDef TypeDef::createStringTypedef(const StringRep &inputRep, const StringRep &outputRep)
 {
     auto td = TypeDef();
-    td.inputRep_ = inputRep;
-    td.outputRep_ = outputRep;
-
+    td.inputRep_ = inputRep.classKey();
+    td.outputRep_ = outputRep.classKey();
     return td;
 }
 

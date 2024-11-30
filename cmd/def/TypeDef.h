@@ -1,12 +1,10 @@
 #ifndef TYPEDEF_H
 #define TYPEDEF_H
 
-#include "cmd/rep/IntRep.h"
+#include "cmd/rep/DecIntRep.h"
 #include "cmd/rep/NullRep.h"
-#include "App.h"
+#include "cmd/rep/SimpleStringRep.h"
 
-#include <cstddef>
-#include <map>
 #include <string>
 
 namespace turnip {
@@ -18,14 +16,11 @@ using namespace rep;
 class TypeDef
 {
 public:
-    static TypeDef createNullTypedef(const std::string &inputRep = App::DEFAULT_NULL_REPRESENTATION,
-                                     const std::string &outputRep = App::DEFAULT_NULL_REPRESENTATION);
+    static TypeDef createNullTypedef(const NullRep &inputRep = {}, const NullRep &outputRep = {});
 
-    static TypeDef createIntTypedef(const std::string & inputRep = App::DEFAULT_INT_REPRESENTATION,
-                                    const std::string &outputRep = App::DEFAULT_INT_REPRESENTATION);
+    static TypeDef createIntTypedef(const IntRep &inputRep = DecIntRep(), const IntRep &outputRep = DecIntRep());
 
-    static TypeDef createStringTypedef(const std::string & inputRep = App::DEFAULT_STRING_REPRESENTATION,
-                                    const std::string &outputRep = App::DEFAULT_STRING_REPRESENTATION);
+    static TypeDef createStringTypedef(const StringRep &inputRep = SimpleStringRep(), const StringRep &outputRep = SimpleStringRep());
 
     Value convertInput(const std::string &input) const;
 
