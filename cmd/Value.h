@@ -59,29 +59,8 @@ private:
 };
 
 inline std::ostream& operator<<(std::ostream& os, const Value& value) {
-    std::visit([&os](auto&& arg) {
-        using T = std::decay_t<decltype(arg)>;
-
-        if constexpr (std::is_same_v<T, std::monostate>) {
-            os << "invalid";
-        } else if constexpr (std::is_same_v<T, bool>) {
-            os << (arg ? "true" : "false");
-        } else if constexpr (std::is_same_v<T, char>) {
-            os << arg;
-        } else if constexpr (std::is_same_v<T, int64_t>) {
-            os << arg;
-        } else if constexpr (std::is_same_v<T, double>) {
-            os << arg;
-        } else if constexpr (std::is_same_v<T, std::string>) {
-            os << arg;
-        } else if constexpr (std::is_same_v<T, VariantMap>) {
-            os << "{ ";
-            for (const auto& [key, val] : arg) {
-                os << key << ": " << val << ", ";
-            }
-            os << " }";
-        }
-    }, value.data_);
+    std::string stringValue = value;
+    os << stringValue;
     return os;
 }
 
