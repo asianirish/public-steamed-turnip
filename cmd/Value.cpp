@@ -70,7 +70,7 @@ Value::operator std::string() const
             os << arg;
         } else if constexpr (std::is_same_v<T, std::string>) {
             os << arg;
-        } else if constexpr (std::is_same_v<T, common::SharedMap<std::string, Value>>) {
+        } else if constexpr (std::is_same_v<T, VariantMap>) {
             os << "{";
             for (auto it = arg.begin(); it != arg.end(); ++it) {
                 if (it != arg.begin()) {
@@ -104,7 +104,7 @@ Value::operator int64_t() const
             } catch (...) {
                 return 0; // or handle the exception as preferred
             }
-        } else if constexpr (std::is_same_v<T, common::SharedMap<std::string, Value>>) {
+        } else if constexpr (std::is_same_v<T, VariantMap>) {
             return 0; // or throw an exception since a map can't be directly converted to int64_t
         }
     }, data_);
@@ -130,7 +130,7 @@ Value::operator double() const
             } catch (...) {
                 return 0.0;  // Handle conversion failure, default to zero.
             }
-        } else if constexpr (std::is_same_v<T, common::SharedMap<std::string, Value>>) {
+        } else if constexpr (std::is_same_v<T, VariantMap>) {
             return 0.0;  // Maps can't be directly converted to a double, default to zero.
         }
     }, data_);
@@ -158,7 +158,7 @@ Value::operator bool() const
                 return false;
             }
             return !arg.empty();  // Non-empty strings are generally `true`.
-        } else if constexpr (std::is_same_v<T, common::SharedMap<std::string, Value>>) {
+        } else if constexpr (std::is_same_v<T, VariantMap>) {
             return !arg.empty();  // Non-empty maps are `true`.
         }
     }, data_);
@@ -180,7 +180,7 @@ Value::operator char() const
             return static_cast<char>(arg);  // Convert double to char.
         } else if constexpr (std::is_same_v<T, std::string>) {
             return !arg.empty() ? arg.front() : '\0';  // Use first character of non-empty string.
-        } else if constexpr (std::is_same_v<T, common::SharedMap<std::string, Value>>) {
+        } else if constexpr (std::is_same_v<T, VariantMap>) {
             return '\0';  // Maps can't be directly converted to a char, returning null character.
         }
     }, data_);

@@ -1,17 +1,13 @@
 #ifndef VALUE_H
 #define VALUE_H
 
-#include "common/SharedMap.h"
+#include "cmd/Types.h"
 
 #include <iostream>
-#include <variant>
+
 
 namespace turnip {
 namespace cmd {
-
-class Value;
-
-using ValueData = std::variant<std::monostate, bool, char, int64_t, double, std::string, common::SharedMap<std::string, Value>>;
 
 class Value
 {
@@ -78,7 +74,7 @@ inline std::ostream& operator<<(std::ostream& os, const Value& value) {
             os << arg;
         } else if constexpr (std::is_same_v<T, std::string>) {
             os << arg;
-        } else if constexpr (std::is_same_v<T, common::SharedMap<std::string, Value>>) {
+        } else if constexpr (std::is_same_v<T, VariantMap>) {
             os << "{ ";
             for (const auto& [key, val] : arg) {
                 os << key << ": " << val << ", ";
