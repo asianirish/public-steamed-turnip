@@ -13,8 +13,8 @@ public:
     SimpleCharRep();
 
 private:
-    char inputImpl(const std::string &str);
-    std::string outputImpl(char character);
+    char inputImpl(const std::string &str) override;
+    std::string outputImpl(char character) override;
 };
 
 } // namespace rep
