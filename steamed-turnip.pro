@@ -80,6 +80,7 @@ HEADERS += \
     cmd/rep/SimpleStringRep.h \
     cmd/rep/StringRep.h \
     common/Factory.h \
+    common/LazyPointer.h \
     common/LimitedStack.h \
     common/SharedMap.h \
     common/SharedVector.h \
