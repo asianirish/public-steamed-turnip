@@ -8,6 +8,7 @@
 
 #include "test/TestCmdValue.h"
 #include "test/TestSharedVector.h"
+#include "test/TestLazyPointer.h"
 
 using namespace turnip;
 using namespace cmd;
@@ -22,6 +23,7 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, PrintAction);
     REGISTER_TURNIP_CLASS(Action, TestSharedVector);
     REGISTER_TURNIP_CLASS(Action, TestCmdValue);
+    REGISTER_TURNIP_CLASS(Action, TestLazyPointer);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
@@ -40,6 +42,7 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerCommand("print", "PrintAction");
     menu.registerCommand("shv", "TestSharedVector");
     menu.registerCommand("cval", "TestCmdValue");
+    menu.registerCommand("lazy", "TestLazyPointer");
 }
 
 Translator *ThisApp::createTranslator() const

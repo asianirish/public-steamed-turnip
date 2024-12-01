@@ -42,6 +42,7 @@ SOURCES += \
         console/Reader.cpp \
         main.cpp \
         test/TestCmdValue.cpp \
+        test/TestLazyPointer.cpp \
         test/TestSharedVector.cpp
 
 HEADERS += \
@@ -86,4 +87,5 @@ HEADERS += \
     common/SharedVector.h \
     console/Reader.h \
     test/TestCmdValue.h \
+    test/TestLazyPointer.h \
     test/TestSharedVector.h
