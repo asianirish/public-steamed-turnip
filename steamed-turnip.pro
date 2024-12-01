@@ -10,6 +10,7 @@ SOURCES += \
         ThisApp.cpp \
         cmd/Action.cpp \
         cmd/Global.cpp \
+        cmd/HelpAction.cpp \
         cmd/Info.cpp \
         cmd/LineTranslator.cpp \
         cmd/Menu.cpp \
@@ -48,6 +49,7 @@ HEADERS += \
     ThisApp.h \
     cmd/Action.h \
     cmd/Global.h \
+    cmd/HelpAction.h \
     cmd/Info.h \
     cmd/LineTranslator.h \
     cmd/Menu.h \
