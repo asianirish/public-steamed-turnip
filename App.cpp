@@ -11,12 +11,6 @@ namespace turnip {
 
 using namespace cmd::rep;
 
-std::string App::DEFAULT_NULL_REPRESENTATION {"default_null"};
-std::string App::DEFAULT_BOOL_REPRESENTATION {"default_bool"};
-std::string App::DEFAULT_CHAR_REPRESENTATION {"default_char"};
-std::string App::DEFAULT_INT_REPRESENTATION {"default_int"};
-std::string App::DEFAULT_STRING_REPRESENTATION {"default_string"};
-
 App::App() {}
 
 void App::init()

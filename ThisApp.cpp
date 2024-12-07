@@ -15,8 +15,6 @@ using namespace turnip;
 using namespace cmd;
 using namespace rep;
 
-const std::string ThisApp::HEX_INT_REPRESENTATION {"hex_int"};
-
 ThisApp::ThisApp() {}
 
 void ThisApp::registerActions()

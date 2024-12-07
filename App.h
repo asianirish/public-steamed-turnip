@@ -8,13 +8,6 @@ namespace turnip {
 class App
 {
 public:
-
-    static std::string DEFAULT_NULL_REPRESENTATION;
-    static std::string DEFAULT_BOOL_REPRESENTATION;
-    static std::string DEFAULT_CHAR_REPRESENTATION;
-    static std::string DEFAULT_INT_REPRESENTATION;
-    static std::string DEFAULT_STRING_REPRESENTATION;
-
     App();
 
     void init();
