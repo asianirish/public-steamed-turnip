@@ -28,17 +28,6 @@ void ThisApp::registerActions()
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
 {
-    menu.registerCommand("abc", Value());
-    menu.registerCommand("abcdefg", Value());
-    menu.registerCommand("copy", Value());
-    menu.registerCommand("cmp", Value());
-    menu.registerCommand("xyz_abc", Value());
-    menu.registerCommand("test3xyz", Value());
-    menu.registerCommand("test2defg", Value());
-    menu.registerCommand("test1abc", Value());
-    menu.registerCommand("quit", Value());
-    menu.registerCommand("help", Value());
-    menu.registerCommand("exit", Value());
     menu.registerCommand("print", "PrintAction");
     menu.registerCommand("shv", "TestSharedVector");
     menu.registerCommand("cval", "TestCmdValue");
