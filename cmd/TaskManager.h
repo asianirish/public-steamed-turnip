@@ -25,11 +25,7 @@ public:
     void setErrorCallback(const ErrorCallback &newErrorCallback);
 
 private:
-    // Function to execute the action in a separate thread
-    void executeAction(ActionPtr actionPtr, const ArgList& args);
-
-    // Member function to be called upon action completion
-    [[deprecated("use onTaskComplete instead")]] void onActionComplete(const Value &result);
+    // Member function to be called upon task completion
     void onTaskComplete(const Value &result, TaskId taskId);
 
     TaskPtr task(const LazyAction &action, const InputArgList &inputArgs);

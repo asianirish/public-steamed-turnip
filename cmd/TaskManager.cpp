@@ -24,24 +24,6 @@ void TaskManager::execute(const LazyAction &action, const InputArgList &inputArg
     }
 }
 
-void TaskManager::executeAction(ActionPtr action, const ArgList &args)
-{
-    // Set a callback using TaskManager's member function
-    action->setCallback(std::bind(&TaskManager::onActionComplete, this, std::placeholders::_1));
-
-    // Call the act method, which will execute actSpecific
-    action->act(args);
-}
-
-void TaskManager::onActionComplete(const Value &result)
-{
-    // TODO: save the result of pure functions
-
-    if (callback_) {
-        callback_(result);
-    }
-}
-
 void TaskManager::onTaskComplete(const Value &result, TaskId taskId)
 {
     // TODO: check taskId
