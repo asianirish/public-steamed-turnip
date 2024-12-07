@@ -25,6 +25,7 @@ void App::init()
 
     std::shared_ptr<cmd::Translator> trnsl(createTranslator());
     mainMenu_.setTranslator(trnsl);
+    mainMenu_.registerHelpAction();
     registerMenu(mainMenu_);
 
     registerRepresentaions();

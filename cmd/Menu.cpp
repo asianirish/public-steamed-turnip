@@ -1,4 +1,5 @@
 #include "Menu.h"
+#include "cmd/HelpAction.h"
 #include "cmd/TaskManager.h"
 
 namespace turnip {
@@ -6,7 +7,7 @@ namespace cmd {
 
 Menu::Menu() : helpAction_("HelpAction") {
     // TODO: helpAction_->setTaskManager(taskManager_);
-    actions_.insert({"help", helpAction_});
+
 }
 
 void Menu::registerAction(const std::string &commandName, const Value &actionInfo)
@@ -31,6 +32,14 @@ void Menu::registerAction(const std::string &commandName, const Value &actionInf
         auto f = std::bind(&Menu::onTaskError, this, std::placeholders::_1);
         taskManager_.setErrorCallback(f);
     }
+}
+
+void Menu::registerHelpAction()
+{
+    auto actionPtr = helpAction_.ptr();
+    auto helpPtr = std::dynamic_pointer_cast<HelpAction>(actionPtr);
+    helpPtr->setMenu(this);
+    actions_.insert({"help", helpAction_});
 }
 
 const std::list<std::string> &Menu::commandList() const

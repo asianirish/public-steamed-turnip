@@ -24,12 +24,39 @@ def::ActionDef HelpAction::actionDef() const
 
 Value HelpAction::actImpl(const ArgList &args)
 {
-    std::cout << "\nHelp Action" << std::endl;
+    std::cout << std::endl << std::endl;
 
-    // TODO: implement
-    std::cout << args.at(0) << std::endl;
+    if (menu_) {
 
-    return true;
+        std::string commandName = args.at(0);
+        std::cout << "NAME:" << std::endl;
+        std::cout << "\t" << commandName << std::endl;
+        auto def = menu_->actionDef(commandName);
+        std::cout << "DESCRIPTION:" << std::endl;
+        std::cout << "\t" << def.description() << std::endl;
+
+        std::cout << "ARGUMENTS:" << std::endl;
+        auto argList = def.argDefs();
+        int i = 0;
+        for (auto &argDef : argList) {
+            std::cout << "\t[" << i << "] "  << argDef.name() << std::endl; // TODO: output type info
+            ++i;
+        }
+
+        return true;
+    }
+
+    return false; // TODO: logical error
+}
+
+Menu *HelpAction::menu() const
+{
+    return menu_;
+}
+
+void HelpAction::setMenu(Menu *newMenu)
+{
+    menu_ = newMenu;
 }
 
 } // namespace cmd

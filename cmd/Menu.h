@@ -24,6 +24,8 @@ public:
 
     void registerAction(const std::string &commandName, const Value &actionInfo);
 
+    void registerHelpAction();
+
     const std::list<std::string>  &commandList() const;
 
     void processString(const std::string &input);

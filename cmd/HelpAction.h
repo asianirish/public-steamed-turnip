@@ -2,6 +2,7 @@
 #define HELPACTION_H
 
 #include "Action.h"
+#include "cmd/Menu.h"
 
 namespace turnip {
 namespace cmd {
@@ -13,8 +14,13 @@ public:
 
     def::ActionDef actionDef() const;
 
+    Menu *menu() const;
+    void setMenu(Menu *newMenu);
+
 private:
     Value actImpl(const ArgList &args);
+
+    Menu *menu_ {nullptr};
 };
 
 } // namespace cmd
