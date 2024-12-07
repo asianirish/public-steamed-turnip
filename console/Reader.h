@@ -2,7 +2,6 @@
 #define READER_H
 
 #include "common/LimitedStack.h"
-#include "cmd/Types.h"
 
 #include <functional>
 #include <string>
