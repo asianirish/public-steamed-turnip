@@ -6,7 +6,6 @@
 
 #include <mutex>
 #include <functional>
-#include <future>
 
 namespace turnip {
 namespace cmd {
