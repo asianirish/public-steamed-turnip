@@ -17,6 +17,9 @@ void TaskManager::execute(const LazyAction &action, const InputArgList &inputArg
         auto taskId = tsk->taskId();
         tasks_.insert({taskId, tsk});
 
+        auto f = std::bind(&TaskManager::onTaskComplete, this, std::placeholders::_1, std::placeholders::_2);
+        tsk->setResultCallback(f);
+
         tsk->execute();
     }
 }
@@ -37,6 +40,18 @@ void TaskManager::onActionComplete(const Value &result)
     if (callback_) {
         callback_(result);
     }
+}
+
+void TaskManager::onTaskComplete(const Value &result, TaskId taskId)
+{
+    // TODO: check taskId
+    tasks_.erase(taskId);
+
+    if (callback_) {
+        callback_(result);
+    }
+
+    // TODO: save the result of pure functions
 }
 
 TaskPtr TaskManager::task(const LazyAction &action, const InputArgList &inputArgs)

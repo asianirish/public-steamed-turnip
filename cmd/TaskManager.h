@@ -29,7 +29,8 @@ private:
     void executeAction(ActionPtr actionPtr, const ArgList& args);
 
     // Member function to be called upon action completion
-    void onActionComplete(const Value &result);
+    [[deprecated("use onTaskComplete instead")]] void onActionComplete(const Value &result);
+    void onTaskComplete(const Value &result, TaskId taskId);
 
     TaskPtr task(const LazyAction &action, const InputArgList &inputArgs);
 

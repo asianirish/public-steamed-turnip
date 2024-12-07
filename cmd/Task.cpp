@@ -65,6 +65,16 @@ TaskId Task::taskId() const
     return taskId_;
 }
 
+Task::ResultCallback Task::resultCallback() const
+{
+    return resultCallback_;
+}
+
+void Task::setResultCallback(const ResultCallback &newResultCallback)
+{
+    resultCallback_ = newResultCallback;
+}
+
 void Task::executeAction()
 {
     // Set a callback using Task's member function
@@ -79,6 +89,10 @@ void Task::onActionComplete(const Value &result)
 {
     // TODO: notify TaskManager
     std::cout << "TASK RESULT IS: " << result << std::endl;
+
+    if (resultCallback_) {
+        resultCallback_(result, taskId_);
+    }
 }
 
 } // namespace cmd
