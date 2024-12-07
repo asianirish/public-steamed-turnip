@@ -20,6 +20,8 @@ public:
 
     static TypeDef createIntTypedef(const IntRep &inputRep = DecIntRep(), const IntRep &outputRep = DecIntRep());
 
+    static TypeDef createBoolTypedef();
+
     static TypeDef createStringTypedef(const StringRep &inputRep = SimpleStringRep(), const StringRep &outputRep = SimpleStringRep());
 
     Value convertInput(const std::string &input) const;

@@ -1,4 +1,5 @@
 #include "TypeDef.h"
+#include "cmd/rep/BoolRep.h"
 #include "cmd/rep/RepresentationManager.h"
 
 namespace turnip {
@@ -30,6 +31,15 @@ TypeDef TypeDef::createIntTypedef(const IntRep &inputRep, const IntRep &outputRe
     auto td = TypeDef();
     td.inputRep_ = inputRep.classKey();
     td.outputRep_ = outputRep.classKey();
+    return td;
+}
+
+TypeDef TypeDef::createBoolTypedef()
+{
+    BoolRep boolRep;
+    auto td = TypeDef();
+    td.inputRep_ = boolRep.classKey();
+    td.outputRep_ = boolRep.classKey();
     return td;
 }
 
