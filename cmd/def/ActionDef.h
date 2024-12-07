@@ -21,6 +21,8 @@ public:
     std::string description() const;
     void setDescription(const std::string &newDescription);
 
+    operator bool() const;
+
 private:
     std::list<ArgDef> argDefs_;
     std::string description_;

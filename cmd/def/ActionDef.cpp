@@ -32,6 +32,11 @@ void ActionDef::setDescription(const std::string &newDescription)
     description_ = newDescription;
 }
 
+ActionDef::operator bool() const
+{
+    return !description_.empty();
+}
+
 } // namespace def
 } // namespace cmd
 } // namespace turnip

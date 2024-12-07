@@ -51,6 +51,11 @@ Value ArgDef::convertInput(const std::string &input) const
     return type_.convertInput(input);
 }
 
+ArgDef::operator bool() const
+{
+    return static_cast<bool>(type_);
+}
+
 } // namespace def
 } // namespace cmd
 } // namespace turnip

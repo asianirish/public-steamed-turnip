@@ -26,6 +26,8 @@ public:
 
     std::string inputRep() const;
 
+    operator bool() const;
+
 private:
     TypeDef();
 

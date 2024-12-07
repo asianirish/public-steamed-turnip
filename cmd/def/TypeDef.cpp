@@ -12,6 +12,11 @@ std::string TypeDef::inputRep() const
     return inputRep_;
 }
 
+TypeDef::operator bool() const
+{
+    return !inputRep_.empty() && !outputRep_.empty();
+}
+
 TypeDef TypeDef::createNullTypedef(const NullRep &inputRep, const NullRep &outputRep)
 {
     auto td = TypeDef();

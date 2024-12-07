@@ -27,6 +27,8 @@ public:
 
     Value convertInput(const std::string &input) const;
 
+    operator bool() const;
+
 private:
     TypeDef type_;
     std::string name_;
