@@ -1,5 +1,8 @@
 #include "Task.h"
+#include "cmd/Action.h"
 #include "cmd/Value.h"
+#include <functional>
+#include <thread>
 
 namespace turnip {
 namespace cmd {
@@ -35,6 +38,39 @@ void Task::setArgList(const ArgList &newArgList)
 Task::operator bool() const
 {
     return static_cast<bool>(actionPtr_);
+}
+
+void Task::execute()
+{
+    // TEST: alternative for std::thread
+    // auto a = std::async(&TaskManager::executeAction, this, actionPtr, args);
+    // auto b = a.share();
+    // static std::list<decltype(b)> lst;
+    // lst.push_back(b);
+
+    // Create a new thread to execute the action
+    std::thread actionThread(&Task::executeAction, this);
+
+    // actionThread.get_id();
+
+    // Detach the thread if you don't need to join it later
+    actionThread.detach();
+}
+
+void Task::executeAction()
+{
+    // Set a callback using Task's member function
+    actionPtr_->setCallback(std::bind(&Task::onActionComplete, this, std::placeholders::_1));
+
+    // Call the act method, which will execute actSpecific
+
+    actionPtr_->act(argList_);
+}
+
+void Task::onActionComplete(const Value &result)
+{
+    // TODO: notify TaskManager
+    std::cout << "TASK RESULT IS: " << result << std::endl;
 }
 
 } // namespace cmd

@@ -21,9 +21,16 @@ public:
 
     operator bool() const;
 
+    void execute();
+
 private:
     ActionPtr actionPtr_;
     ArgList argList_;
+
+    void executeAction();
+
+    // 'Slot' to be called on action completion
+    void onActionComplete(const Value &result);
 };
 
 } // namespace cmd
