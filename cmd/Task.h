@@ -9,6 +9,8 @@ namespace cmd {
 class Task
 {
 public:
+    static const TaskId FIRST_TASK_ID = 1024;
+
     Task();
 
     Task(ActionPtr actionPtr, const ArgList &argList);
@@ -23,9 +25,14 @@ public:
 
     void execute();
 
+    TaskId taskId() const;
+
 private:
     ActionPtr actionPtr_;
     ArgList argList_;
+
+    TaskId taskId_;
+    static TaskId maxTaskId_;
 
     void executeAction();
 

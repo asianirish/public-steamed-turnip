@@ -7,12 +7,15 @@
 namespace turnip {
 namespace cmd {
 
+TaskId Task::maxTaskId_ = Task::FIRST_TASK_ID;
+
 Task::Task() : Task({}, {}) {}
 
 Task::Task(ActionPtr actionPtr, const ArgList &argList)
-    : actionPtr_(actionPtr), argList_(argList)
+    : actionPtr_(actionPtr), argList_(argList),
+    taskId_(maxTaskId_)
 {
-
+    ++maxTaskId_;
 }
 
 ActionPtr Task::actionPtr() const
@@ -55,6 +58,11 @@ void Task::execute()
 
     // Detach the thread if you don't need to join it later
     actionThread.detach();
+}
+
+TaskId Task::taskId() const
+{
+    return taskId_;
 }
 
 void Task::executeAction()
