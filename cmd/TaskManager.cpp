@@ -14,19 +14,10 @@ void TaskManager::execute(const LazyAction &action, const InputArgList &inputArg
     auto tsk = task(action, inputArgs);
 
     if (tsk) {
-        // TEST: alternative for std::thread
-        // auto a = std::async(&TaskManager::executeAction, this, actionPtr, args);
-        // auto b = a.share();
-        // static std::list<decltype(b)> lst;
-        // lst.push_back(b);
+        auto taskId = tsk->taskId();
+        tasks_.insert({taskId, tsk});
 
-        // Create a new thread to execute the action
-        std::thread actionThread(&TaskManager::executeAction, this, tsk.actionPtr(), tsk.argList());
-
-        // actionThread.get_id();
-
-        // Detach the thread if you don't need to join it later
-        actionThread.detach();
+        tsk->execute();
     }
 }
 
@@ -48,7 +39,7 @@ void TaskManager::onActionComplete(const Value &result)
     }
 }
 
-Task TaskManager::task(const LazyAction &action, const InputArgList &inputArgs)
+TaskPtr TaskManager::task(const LazyAction &action, const InputArgList &inputArgs)
 {
     auto actionPtr = action.ptr();
     ArgList args;
@@ -85,7 +76,7 @@ Task TaskManager::task(const LazyAction &action, const InputArgList &inputArgs)
         ++index;
     }
 
-    return Task(actionPtr, args);
+    return TaskPtr(new Task(actionPtr, args));
 }
 
 void TaskManager::setErrorCallback(const ErrorCallback &newErrorCallback)
