@@ -1,4 +1,5 @@
 #include "ThisApp.h"
+#include "cmd/ConditionalStringAction.h"
 #include "common/Factory.h"
 #include "cmd/PrintAction.h"
 #include "cmd/LineTranslator.h"
@@ -24,6 +25,7 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, TestCmdValue);
     REGISTER_TURNIP_CLASS(Action, TestLazyPointer);
     REGISTER_TURNIP_CLASS(Action, HelpAction);
+    REGISTER_TURNIP_CLASS(Action, ConditionalStringAction);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
@@ -33,6 +35,7 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("shv", "TestSharedVector");
     menu.registerAction("cval", "TestCmdValue");
     menu.registerAction("lazy", "TestLazyPointer");
+    menu.registerAction("conds", "ConditionalStringAction");
 }
 
 Translator *ThisApp::createTranslator() const
