@@ -93,8 +93,9 @@ void Menu::setErrorCallback(const ErrorCallback &newErrorCallback)
 
 def::ActionDef Menu::actionDef(const std::string &command) const
 {
-    auto a = action(command);
-    if (a) {
+    bool ok = false;
+    auto a = action(command, &ok);
+    if (ok) {
         return a->actionDef();
     }
 
@@ -115,8 +116,11 @@ void Menu::onTaskError(const err::Error &error)
     }
 }
 
-LazyAction Menu::action(const std::string &command) const
+LazyAction Menu::action(const std::string &command, bool *ok) const
 {
+    if (ok) {
+        *ok = false;
+    }
 #if __cplusplus >= 202002L
     if (!actions_.contains(command)) {
 #else
@@ -124,6 +128,10 @@ LazyAction Menu::action(const std::string &command) const
 #endif
         errorCallback_("Command '" + command + "' not found.");
         return {};
+    }
+
+    if (ok) {
+        *ok = true;
     }
     return actions_.at(command);
 }

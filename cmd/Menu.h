@@ -63,7 +63,7 @@ private:
 
     void onTaskError(const err::Error &error);
 
-    LazyAction action(const std::string &command) const;
+    LazyAction action(const std::string &command, bool *ok = nullptr) const;
 };
 
 } // namespace cmd
