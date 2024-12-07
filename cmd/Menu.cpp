@@ -62,8 +62,12 @@ void Menu::processString(const std::string &input)
 
 void Menu::executeAction(const std::string &command, const InputArgList &args)
 {
-    auto a = action(command);
-    taskManager_.execute(a, args);
+    bool ok = false;
+    auto a = action(command, &ok);
+
+    if (ok) {
+        taskManager_.execute(a, args);
+    }
 }
 
 std::shared_ptr<Translator> Menu::translator() const
