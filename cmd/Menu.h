@@ -5,6 +5,7 @@
 #include "cmd/Types.h"
 #include "cmd/Value.h"
 #include "cmd/Translator.h"
+#include "cmd/def/ActionDef.h"
 #include "cmd/err/Error.h"
 
 #include <map>
@@ -42,6 +43,8 @@ public:
 
     void setErrorCallback(const ErrorCallback &newErrorCallback);
 
+    def::ActionDef actionDef(const std::string &command) const;
+
 private:
     mutable std::list<std::string> commandList_;
 
@@ -59,6 +62,8 @@ private:
     void onTaskComplete(const Value &result);
 
     void onTaskError(const err::Error &error);
+
+    LazyAction action(const std::string &command) const;
 };
 
 } // namespace cmd

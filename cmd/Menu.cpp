@@ -62,16 +62,8 @@ void Menu::processString(const std::string &input)
 
 void Menu::executeAction(const std::string &command, const InputArgList &args)
 {
-#if __cplusplus >= 202002L
-    if (!actions_.contains(command)) {
-#else
-    if (actions_.find(command) == actions_.end()) {
-#endif
-        errorCallback_("Command '" + command + "' not found.");
-        return;
-    }
-    auto action = actions_.at(command);
-    taskManager_.execute(action, args);
+    auto a = action(command);
+    taskManager_.execute(a, args);
 }
 
 std::shared_ptr<Translator> Menu::translator() const
@@ -99,6 +91,16 @@ void Menu::setErrorCallback(const ErrorCallback &newErrorCallback)
     errorCallback_ = newErrorCallback;
 }
 
+def::ActionDef Menu::actionDef(const std::string &command) const
+{
+    auto a = action(command);
+    if (a) {
+        return a->actionDef();
+    }
+
+    return {};
+}
+
 void Menu::onTaskComplete(const Value &result)
 {
     if (resultCallback_) {
@@ -111,6 +113,19 @@ void Menu::onTaskError(const err::Error &error)
     if (errorCallback_) {
         errorCallback_(error.description());
     }
+}
+
+LazyAction Menu::action(const std::string &command) const
+{
+#if __cplusplus >= 202002L
+    if (!actions_.contains(command)) {
+#else
+    if (actions_.find(command) == actions_.end()) {
+#endif
+        errorCallback_("Command '" + command + "' not found.");
+        return {};
+    }
+    return actions_.at(command);
 }
 
 
