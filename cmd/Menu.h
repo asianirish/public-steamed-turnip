@@ -52,6 +52,8 @@ private:
     ResultCallback resultCallback_;
     ErrorCallback errorCallback_;
 
+    LazyAction helpAction_;
+
     void onTaskComplete(const Value &result);
 
     void onTaskError(const err::Error &error);

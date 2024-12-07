@@ -2,6 +2,7 @@
 #include "common/Factory.h"
 #include "cmd/PrintAction.h"
 #include "cmd/LineTranslator.h"
+#include "cmd/HelpAction.h"
 
 #include "cmd/rep/RepresentationManager.h"
 #include "cmd/rep/HexIntRep.h"
@@ -24,11 +25,13 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, TestSharedVector);
     REGISTER_TURNIP_CLASS(Action, TestCmdValue);
     REGISTER_TURNIP_CLASS(Action, TestLazyPointer);
+    REGISTER_TURNIP_CLASS(Action, HelpAction);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
 {
     menu.registerAction("print", "PrintAction");
+    menu.registerAction("aft", "Aft");
     menu.registerAction("shv", "TestSharedVector");
     menu.registerAction("cval", "TestCmdValue");
     menu.registerAction("lazy", "TestLazyPointer");

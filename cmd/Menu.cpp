@@ -4,7 +4,10 @@
 namespace turnip {
 namespace cmd {
 
-Menu::Menu() {}
+Menu::Menu() : helpAction_("HelpAction") {
+    // TODO: helpAction_->setTaskManager(taskManager_);
+    actions_.insert({"help", helpAction_});
+}
 
 void Menu::registerAction(const std::string &commandName, const Value &actionInfo)
 {
