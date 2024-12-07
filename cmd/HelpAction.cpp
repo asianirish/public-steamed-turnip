@@ -14,6 +14,7 @@ def::ActionDef HelpAction::actionDef() const
     const auto typeDef = TypeDef::createStringTypedef();
     ArgDef argDef;
     argDef.setType(typeDef);
+    argDef.setName("commandName");
     actionDef.addArgDef(argDef);
 
     actionDef.setDescription("Displays information about a specified command");
