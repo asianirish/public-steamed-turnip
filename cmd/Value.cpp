@@ -1,4 +1,5 @@
 #include "Value.h"
+#include "Task.h"
 
 #include <sstream>
 #include <algorithm>
@@ -99,7 +100,7 @@ Value::operator std::string() const
             }
             os << "]";
         } else if constexpr (std::is_same_v<T, TaskPtr>) {
-            os << std::string(); // TODO: convert to map and to string
+            os << std::string("Task: ") << arg->taskId(); // TODO: convert to map and to string
         }
     }, data_);
     return os.str();
