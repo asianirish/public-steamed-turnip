@@ -53,6 +53,11 @@ Value::Value(const std::vector<Value> &vec) : data_(vec)
 
 }
 
+Value::Value(const TaskPtr &taskPtr) : data_(taskPtr)
+{
+
+}
+
 bool Value::isNull() const
 {
     return std::holds_alternative<std::monostate>(data_);
@@ -93,6 +98,8 @@ Value::operator std::string() const
                 os << std::string(*it);  // Assuming Value has a suitable operator std::string()
             }
             os << "]";
+        } else if constexpr (std::is_same_v<T, TaskPtr>) {
+            os << std::string(); // TODO: convert to map and to string
         }
     }, data_);
     return os.str();
@@ -122,6 +129,8 @@ Value::operator int64_t() const
             return 0; // or throw an exception since a map can't be directly converted to int64_t
         } else if constexpr (std::is_same_v<T, VariantList>) {
             return 0; // or throw an exception since a map can't be directly converted to int64_t
+        } else if constexpr (std::is_same_v<T, TaskPtr>) {
+            return 0; // or throw an exception since a TaskPtr can't be directly converted to int64_t
         }
     }, data_);
 }
@@ -150,6 +159,8 @@ Value::operator double() const
             return 0.0;  // Maps can't be directly converted to a double, default to zero.
         } else if constexpr (std::is_same_v<T, VariantList>) {
             return 0.0; // Lists can't be directly converted to a double, default to zero.
+        } else if constexpr (std::is_same_v<T, TaskPtr>) {
+            return 0.0; // or throw an exception since a TaskPtr can't be directly converted to double
         }
     }, data_);
 }
@@ -180,6 +191,8 @@ Value::operator bool() const
             return !arg.empty();  // Non-empty maps are `true`.
         } else if constexpr (std::is_same_v<T, VariantList>) {
             return !arg.empty();  // Non-empty lists are `true`.
+        } else if constexpr (std::is_same_v<T, TaskPtr>) {
+            return static_cast<bool>(arg);
         }
     }, data_);
 }
@@ -204,6 +217,8 @@ Value::operator char() const
             return '\0';  // Maps can't be directly converted to a char, returning null character.
         } else if constexpr (std::is_same_v<T, VariantList>) {
             return '\0';  // Lists can't be directly converted to a char, returning null character.
+        } else if constexpr (std::is_same_v<T, TaskPtr>) {
+            return '\0';  // TaskPtr can't be directly converted to a char, returning null character.
         }
     }, data_);
 }

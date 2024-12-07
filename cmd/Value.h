@@ -32,6 +32,8 @@ public:
 
     Value(const std::vector<Value> &vec);
 
+    Value(const TaskPtr &taskPtr);
+
     ValueData data() const {
         return data_;
     }

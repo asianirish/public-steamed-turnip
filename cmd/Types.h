@@ -27,12 +27,12 @@ using LazyAction = common::LazyPointer<Action>;
 using VariantMap = common::SharedMap<std::string, Value>;
 using VariantList =    common::SharedVector<Value>;
 
-using ValueData = std::variant<std::monostate, bool, char, int64_t, double, std::string, VariantMap, VariantList>;
-
 using TaskId = size_t;
 
 class Task;
 using TaskPtr = std::shared_ptr<Task>;
+
+using ValueData = std::variant<std::monostate, bool, char, int64_t, double, std::string, VariantMap, VariantList, TaskPtr>;
 
 } // namespace cmd
 } // namespace turnip
