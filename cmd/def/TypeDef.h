@@ -24,6 +24,8 @@ public:
 
     Value convertInput(const std::string &input) const;
 
+    std::string inputRep() const;
+
 private:
     TypeDef();
 

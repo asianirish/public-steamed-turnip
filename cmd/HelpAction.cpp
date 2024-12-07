@@ -39,7 +39,7 @@ Value HelpAction::actImpl(const ArgList &args)
         auto argList = def.argDefs();
         int i = 0;
         for (auto &argDef : argList) {
-            std::cout << "\t[" << i << "] "  << argDef.name() << std::endl; // TODO: output type info
+            std::cout << "\t[" << i << "] (" << argDef.type().inputRep() << ") "  << argDef.name() << std::endl; // TODO: output type info
             ++i;
         }
 
