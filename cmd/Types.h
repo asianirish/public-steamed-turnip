@@ -3,6 +3,7 @@
 
 #include "common/SharedMap.h"
 #include "common/SharedVector.h"
+#include "common/LazyPointer.h"
 
 #include <memory>
 #include <vector>
@@ -20,6 +21,7 @@ using InputArgList = std::vector<std::string>;
 
 class Action;
 using ActionPtr = std::shared_ptr<Action>;
+using LazyAction = common::LazyPointer<Action>;
 
 
 using VariantMap = common::SharedMap<std::string, Value>;

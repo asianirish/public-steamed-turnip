@@ -28,10 +28,10 @@ void ThisApp::registerActions()
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
 {
-    menu.registerCommand("print", "PrintAction");
-    menu.registerCommand("shv", "TestSharedVector");
-    menu.registerCommand("cval", "TestCmdValue");
-    menu.registerCommand("lazy", "TestLazyPointer");
+    menu.registerAction("print", "PrintAction");
+    menu.registerAction("shv", "TestSharedVector");
+    menu.registerAction("cval", "TestCmdValue");
+    menu.registerAction("lazy", "TestLazyPointer");
 }
 
 Translator *ThisApp::createTranslator() const

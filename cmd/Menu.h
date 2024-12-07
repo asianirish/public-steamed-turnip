@@ -22,14 +22,14 @@ public:
 
     Menu();
 
-    void registerCommand(const std::string &commandName, const Value &actionInfo);
+    void registerAction(const std::string &commandName, const Value &actionInfo);
 
     const std::list<std::string>  &commandList() const;
 
     void processString(const std::string &input);
 
     // Function to execute the action in a separate thread
-    void execute(const std::string &command, const InputArgList& args);
+    void executeAction(const std::string &command, const InputArgList& args);
 
     std::shared_ptr<Translator> translator() const;
     void setTranslator(const std::shared_ptr<Translator> &newTranslator);
@@ -41,8 +41,9 @@ public:
     void setErrorCallback(const ErrorCallback &newErrorCallback);
 
 private:
-    std::map<std::string, Value> commands_;
     mutable std::list<std::string> commandList_;
+
+    std::map<std::string, LazyAction> actions_;
 
     TaskManager taskManager_;
 

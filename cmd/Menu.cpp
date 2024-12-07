@@ -6,9 +6,18 @@ namespace cmd {
 
 Menu::Menu() {}
 
-void Menu::registerCommand(const std::string &commandName, const Value &actionInfo)
+void Menu::registerAction(const std::string &commandName, const Value &actionInfo)
 {
-    commands_.insert({commandName, actionInfo});
+    auto data = actionInfo.data();
+
+    std::string *pClassName = std::get_if<std::string>(&data);
+
+    if (pClassName) {
+        auto className = *pClassName;
+        LazyAction action(className);
+        actions_.insert({commandName, action});
+
+    } // TODO: handle map
 
     {
         auto f = std::bind(&Menu::onTaskComplete, this, std::placeholders::_1);
@@ -25,7 +34,7 @@ const std::list<std::string> &Menu::commandList() const
 {
     commandList_.clear();
 
-    for (auto &pr : commands_) {
+    for (auto &pr : actions_) {
         commandList_.push_back(pr.first);
     }
     return commandList_;
@@ -35,22 +44,22 @@ void Menu::processString(const std::string &input)
 {
     if (translator_) {
         Info info = translator_->translate(input);
-        execute(info.command(), info.args());
+        executeAction(info.command(), info.args());
     }
 }
 
-void Menu::execute(const std::string &command, const InputArgList &args)
+void Menu::executeAction(const std::string &command, const InputArgList &args)
 {
 #if __cplusplus >= 202002L
-    if (!commands_.contains(command)) {
+    if (!actions_.contains(command)) {
 #else
-    if (commands_.find(command) == commands_.end()) {
+    if (actions_.find(command) == actions_.end()) {
 #endif
         errorCallback_("Command '" + command + "' not found.");
         return;
     }
-    auto actionDesc = commands_.at(command);
-    taskManager_.execute(actionDesc, args);
+    auto action = actions_.at(command);
+    taskManager_.execute(action, args);
 }
 
 std::shared_ptr<Translator> Menu::translator() const

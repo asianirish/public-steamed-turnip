@@ -18,7 +18,7 @@ public:
     using ResultCallback = std::function<void(const Value&)>;
     using ErrorCallback = std::function<void(const err::Error&)>;
 
-    void execute(const Value &actionDesc, const InputArgList& inputArgs);
+    void execute(const LazyAction &action, const InputArgList& inputArgs);
 
     void setCallback(const ResultCallback &newCallback);
 
@@ -31,7 +31,7 @@ private:
     // Member function to be called upon action completion
     void onActionComplete(const Value &result);
 
-    Task task(const std::string &className, const InputArgList &inputArgs);
+    Task task(const LazyAction &action, const InputArgList &inputArgs);
 
     ResultCallback callback_;
     ErrorCallback errorCallback_;
