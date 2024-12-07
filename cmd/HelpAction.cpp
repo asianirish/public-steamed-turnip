@@ -29,18 +29,26 @@ Value HelpAction::actImpl(const ArgList &args)
     if (menu_) {
 
         std::string commandName = args.at(0);
+        auto def = menu_->actionDef(commandName);
+
+        if (!def) {
+            return false;
+        }
+
         std::cout << "NAME:" << std::endl;
         std::cout << "\t" << commandName << std::endl;
-        auto def = menu_->actionDef(commandName);
         std::cout << "DESCRIPTION:" << std::endl;
         std::cout << "\t" << def.description() << std::endl;
 
-        std::cout << "ARGUMENTS:" << std::endl;
         auto argList = def.argDefs();
-        int i = 0;
-        for (auto &argDef : argList) {
-            std::cout << "\t[" << i << "] (" << argDef.type().inputRep() << ") "  << argDef.name() << std::endl; // TODO: output type info
-            ++i;
+
+        if (!argList.empty()) {
+            std::cout << "ARGUMENTS:" << std::endl;
+            int i = 0;
+            for (auto &argDef : argList) {
+                std::cout << "\t[" << i << "] (" << argDef.type().inputRep() << ") "  << argDef.name() << std::endl; // TODO: output type info
+                ++i;
+            }
         }
 
         return true;
