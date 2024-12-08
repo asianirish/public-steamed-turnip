@@ -31,7 +31,6 @@ void ThisApp::registerActions()
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
 {
     menu.registerAction("print", "PrintAction");
-    menu.registerAction("aft", "Aft");
     menu.registerAction("shv", "TestSharedVector");
     menu.registerAction("cval", "TestCmdValue");
     menu.registerAction("lazy", "TestLazyPointer");

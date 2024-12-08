@@ -3,6 +3,7 @@
 
 #include "cmd/Types.h"
 #include "def/ActionDef.h"
+#include "err/Error.h"
 
 #include <mutex>
 #include <functional>
@@ -26,7 +27,7 @@ public:
     virtual def::ActionDef actionDef() const = 0;
 
 private:
-    virtual Value actImpl(const ArgList &args) = 0;
+    virtual Value actImpl(const ArgList &args, err::Error &error) = 0;
 
     // Function to notify via callback
     void notify(const Value &result);

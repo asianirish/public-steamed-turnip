@@ -39,8 +39,9 @@ def::ActionDef ConditionalStringAction::actionDef() const
     return actionDef;
 }
 
-Value ConditionalStringAction::actImpl(const ArgList &args)
+Value ConditionalStringAction::actImpl(const ArgList &args, err::Error &error)
 {
+    (void)error;
     bool yes = args.at(0);
 
     if (yes) {

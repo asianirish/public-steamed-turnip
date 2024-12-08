@@ -18,7 +18,7 @@ public:
     void setMenu(Menu *newMenu);
 
 private:
-    Value actImpl(const ArgList &args);
+    Value actImpl(const ArgList &args, turnip::cmd::err::Error &error) override;
 
     Menu *menu_ {nullptr};
 };

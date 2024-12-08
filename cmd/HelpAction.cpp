@@ -22,7 +22,7 @@ def::ActionDef HelpAction::actionDef() const
     return actionDef;
 }
 
-Value HelpAction::actImpl(const ArgList &args)
+Value HelpAction::actImpl(const ArgList &args, err::Error &error)
 {
     std::cout << std::endl << std::endl;
 
@@ -54,7 +54,8 @@ Value HelpAction::actImpl(const ArgList &args)
         return true;
     }
 
-    return false; // TODO: logical error
+    error.setDescription("menu is not set");
+    return {};
 }
 
 Menu *HelpAction::menu() const

@@ -24,8 +24,9 @@ def::ActionDef PrintAction::actionDef() const
     return actionDef;
 }
 
-Value PrintAction::actImpl(const ArgList &args)
+Value PrintAction::actImpl(const ArgList &args, err::Error &error)
 {
+    (void)error;
     std::cout << "\nPrintAction" << std::endl;
 
     sleep(20);

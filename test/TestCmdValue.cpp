@@ -11,9 +11,10 @@ turnip::cmd::def::ActionDef TestCmdValue::actionDef() const
     return actionDef;
 }
 
-turnip::cmd::Value TestCmdValue::actImpl(const turnip::cmd::ArgList &args)
+turnip::cmd::Value TestCmdValue::actImpl(const turnip::cmd::ArgList &args, err::Error &error)
 {
     (void)args;
+    (void)error;
     std::cout << "TEST CMD VALUE" << std::endl;
     std::cout << "...................." << std::endl;
 

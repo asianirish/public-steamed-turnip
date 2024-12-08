@@ -15,9 +15,10 @@ turnip::cmd::def::ActionDef TestLazyPointer::actionDef() const
     return actionDef;
 }
 
-Value TestLazyPointer::actImpl(const turnip::cmd::ArgList &args)
+Value TestLazyPointer::actImpl(const turnip::cmd::ArgList &args, turnip::cmd::err::Error &error)
 {
     (void)args;
+    (void)error;
     std::cout << "TEST LAZY POINTER" << std::endl;
 
     turnip::common::LazyPointer<Action> lptr("TestCmdValue");

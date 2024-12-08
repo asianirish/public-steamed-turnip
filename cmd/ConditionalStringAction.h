@@ -14,7 +14,7 @@ public:
     def::ActionDef actionDef() const override;
 
 private:
-    Value actImpl(const ArgList &args) override;
+    Value actImpl(const ArgList &args, err::Error &error) override;
 };
 
 } // namespace cmd

@@ -12,9 +12,10 @@ turnip::cmd::def::ActionDef TestSharedVector::actionDef() const
     return actionDef;;
 }
 
-turnip::cmd::Value TestSharedVector::actImpl(const turnip::cmd::ArgList &args)
+turnip::cmd::Value TestSharedVector::actImpl(const turnip::cmd::ArgList &args, turnip::cmd::err::Error &error)
 {
     (void)args;
+    (void)error;
     std::cout << "TEST_SHARED_VECTOR:" << std::endl;
 
     SharedVector<int> v1(std::vector<int>{1,2,3,4});

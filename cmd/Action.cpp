@@ -16,12 +16,16 @@ void Action::act(const ArgList &args)
     // Lock resources if needed
     std::lock_guard<std::mutex> lock(mutex_);
 
+    auto error = err::Error::createCustomError("Unkown error");
     // Call the specific action implementation
-    Value result = actImpl(args);
+    Value result = actImpl(args, error);
 
-     // Notify that actImpl has concluded
+    if (!result.isNull()) {
+    // Notify that actImpl has concluded
     notify(result);
-    // TODO: notify error
+    } else {
+        // TODO: notify error
+    }
 }
 
 void Action::notify(const Value &result)
