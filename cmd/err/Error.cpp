@@ -41,6 +41,24 @@ Error Error::createArgumentConversionError(const std::string &type, const std::s
 Error::Error(ErrorType type, const std::string& description, std::shared_ptr<AdditionalInfo> additionalInfo)
     : type_(type), description_(description), additionalInfo_(additionalInfo) {}
 
+void Error::setAdditionalInfo(const std::shared_ptr<AdditionalInfo> &newAdditionalInfo)
+{
+    if (type_ == ErrorType::Custom) {
+        additionalInfo_ = newAdditionalInfo;
+    }
+    // TODO: else
+    // TODO: throw an exception otherwise
+}
+
+void Error::setDescription(const std::string &newDescription)
+{
+    if (type_ == ErrorType::Custom) {
+        description_ = newDescription;
+    }
+    // TODO: else
+    // TODO: throw an exception otherwise
+}
+
 } // namespace err
 } // namespace cmd
 } // namespace turnip

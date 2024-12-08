@@ -25,11 +25,15 @@ public:
 
     static Error createUndefinedError();
 
-    static Error createCustomError(const std::string& description, std::shared_ptr<AdditionalInfo> additionalInfo = nullptr);
+    static Error createCustomError(const std::string& description = {}, std::shared_ptr<AdditionalInfo> additionalInfo = nullptr);
 
     static Error createMissingRequiredArgumentError(int argIndex, const std::string &argName);
 
     static Error createArgumentConversionError(const std::string& type, const std::string& input, int argIndex, const std::string &argName);
+
+    void setDescription(const std::string &newDescription);
+
+    void setAdditionalInfo(const std::shared_ptr<AdditionalInfo> &newAdditionalInfo);
 
 private:
     // Private constructor to enforce the use of factory functions
