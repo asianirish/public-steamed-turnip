@@ -79,6 +79,7 @@ void Task::executeAction()
 {
     // Set a callback using Task's member function
     actionPtr_->setCallback(std::bind(&Task::onActionComplete, this, std::placeholders::_1));
+    actionPtr_->setErrorCallback(std::bind(&Task::onError, this, std::placeholders::_1));
 
     // Call the act method, which will execute actSpecific
 
@@ -87,12 +88,17 @@ void Task::executeAction()
 
 void Task::onActionComplete(const Value &result)
 {
-    // TODO: notify TaskManager
     std::cout << "TASK RESULT IS: " << result << std::endl;
 
     if (resultCallback_) {
         resultCallback_(result, taskId_);
     }
+}
+
+void Task::onError(const err::Error &error)
+{
+    std::cout << "TASK ERROR IS: " << error.description() << std::endl;
+    // TODO: notify TaskManager
 }
 
 } // namespace cmd

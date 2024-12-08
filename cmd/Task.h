@@ -2,6 +2,7 @@
 #define TASK_H
 
 #include "cmd/Types.h"
+#include "cmd/err/Error.h"
 
 #include <functional>
 
@@ -46,6 +47,7 @@ private:
 
     // 'Slot' to be called on action completion
     void onActionComplete(const Value &result);
+    void onError(const err::Error &error);
 };
 
 } // namespace cmd
