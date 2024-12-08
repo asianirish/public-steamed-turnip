@@ -15,12 +15,16 @@ void Menu::registerAction(const std::string &commandName, const Value &actionInf
     auto data = actionInfo.data();
 
     std::string *pClassName = std::get_if<std::string>(&data);
+    LazyAction *actionPtrPtr = std::get_if<LazyAction>(&data);
 
     if (pClassName) {
         auto className = *pClassName;
         LazyAction action(className);
         actions_.insert({commandName, action});
 
+    } else if (actionPtrPtr) {
+        auto actionPtr = *actionPtrPtr;
+        actions_.insert({commandName, actionPtr});
     } // TODO: handle map
 
     {
