@@ -13,6 +13,7 @@ SOURCES += \
         cmd/Global.cpp \
         cmd/HelpAction.cpp \
         cmd/Info.cpp \
+        cmd/IsEvenAction.cpp \
         cmd/LineTranslator.cpp \
         cmd/Menu.cpp \
         cmd/PrintAction.cpp \
@@ -54,6 +55,7 @@ HEADERS += \
     cmd/Global.h \
     cmd/HelpAction.h \
     cmd/Info.h \
+    cmd/IsEvenAction.h \
     cmd/LineTranslator.h \
     cmd/Menu.h \
     cmd/PrintAction.h \
