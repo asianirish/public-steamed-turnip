@@ -101,6 +101,8 @@ Value::operator std::string() const
             os << "]";
         } else if constexpr (std::is_same_v<T, TaskPtr>) {
             os << std::string("Task: ") << arg->taskId(); // TODO: convert to map and to string
+        } else if constexpr (std::is_same_v<T, ActionPtr>) {
+            os << std::string("[Action]"); // TODO: convert to map and to string
         }
     }, data_);
     return os.str();
@@ -132,6 +134,8 @@ Value::operator int64_t() const
             return 0; // or throw an exception since a map can't be directly converted to int64_t
         } else if constexpr (std::is_same_v<T, TaskPtr>) {
             return 0; // or throw an exception since a TaskPtr can't be directly converted to int64_t
+        } else if constexpr (std::is_same_v<T, ActionPtr>) {
+            return 0; // or throw an exception since a ActionPtr can't be directly converted to int64_t
         }
     }, data_);
 }
@@ -161,6 +165,8 @@ Value::operator double() const
         } else if constexpr (std::is_same_v<T, VariantList>) {
             return 0.0; // Lists can't be directly converted to a double, default to zero.
         } else if constexpr (std::is_same_v<T, TaskPtr>) {
+            return 0.0; // or throw an exception since a TaskPtr can't be directly converted to double
+        } else if constexpr (std::is_same_v<T, ActionPtr>) {
             return 0.0; // or throw an exception since a TaskPtr can't be directly converted to double
         }
     }, data_);
@@ -194,6 +200,8 @@ Value::operator bool() const
             return !arg.empty();  // Non-empty lists are `true`.
         } else if constexpr (std::is_same_v<T, TaskPtr>) {
             return static_cast<bool>(arg);
+        } else if constexpr (std::is_same_v<T, ActionPtr>) {
+            return static_cast<bool>(arg);
         }
     }, data_);
 }
@@ -219,6 +227,8 @@ Value::operator char() const
         } else if constexpr (std::is_same_v<T, VariantList>) {
             return '\0';  // Lists can't be directly converted to a char, returning null character.
         } else if constexpr (std::is_same_v<T, TaskPtr>) {
+            return '\0';  // TaskPtr can't be directly converted to a char, returning null character.
+        } else if constexpr (std::is_same_v<T, ActionPtr>) {
             return '\0';  // TaskPtr can't be directly converted to a char, returning null character.
         }
     }, data_);
