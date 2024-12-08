@@ -32,7 +32,8 @@ Value HelpAction::actImpl(const ArgList &args, err::Error &error)
         auto def = menu_->actionDef(commandName);
 
         if (!def) {
-            return false;
+            error.setDescription("Help error: Definition for command '" + commandName + "' was not found");
+            return {};
         }
 
         std::cout << "NAME:" << std::endl;
