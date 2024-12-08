@@ -75,6 +75,11 @@ void Task::setResultCallback(const ResultCallback &newResultCallback)
     resultCallback_ = newResultCallback;
 }
 
+void Task::setErrorCallback(const ErrorCallback &newErrorCallback)
+{
+    errorCallback_ = newErrorCallback;
+}
+
 void Task::executeAction()
 {
     // Set a callback using Task's member function
@@ -97,8 +102,9 @@ void Task::onActionComplete(const Value &result)
 
 void Task::onError(const err::Error &error)
 {
-    std::cout << "TASK ERROR IS: " << error.description() << std::endl;
-    // TODO: notify TaskManager
+    if (errorCallback_) {
+        errorCallback_(error, taskId_);
+    }
 }
 
 } // namespace cmd

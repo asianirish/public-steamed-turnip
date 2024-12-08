@@ -26,6 +26,7 @@ public:
 private:
     // Member function to be called upon task completion
     void onTaskComplete(const Value &result, TaskId taskId);
+    void onError(const err::Error &error, TaskId taskId);
 
     TaskPtr task(const LazyAction &action, const InputArgList &inputArgs);
 

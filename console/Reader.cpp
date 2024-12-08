@@ -278,7 +278,8 @@ void Reader::onResult(const std::string &resultString)
 
 void Reader::onError(const std::string &errorString)
 {
-    std::cout << "Error: " << errorString << std::endl;
+    std::cout << "\nError: " << errorString << std::endl;
+    displayPrompt();
 }
 
 std::string Reader::findStringWithPrefix(const std::string &prefix) const

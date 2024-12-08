@@ -14,6 +14,7 @@ class Task
 public:
     static const TaskId FIRST_TASK_ID = 1024;
     using ResultCallback = std::function<void(const Value&, TaskId)>;
+    using ErrorCallback = std::function<void(const err::Error&, TaskId)>;
 
     Task();
 
@@ -34,6 +35,8 @@ public:
     ResultCallback resultCallback() const;
     void setResultCallback(const ResultCallback &newResultCallback);
 
+    void setErrorCallback(const ErrorCallback &newErrorCallback);
+
 private:
     ActionPtr actionPtr_;
     ArgList argList_;
@@ -42,6 +45,7 @@ private:
     static TaskId maxTaskId_;
 
     ResultCallback resultCallback_;
+    ErrorCallback errorCallback_;
 
     void executeAction();
 
