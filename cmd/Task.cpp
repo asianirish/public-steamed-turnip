@@ -83,7 +83,7 @@ void Task::setErrorCallback(const ErrorCallback &newErrorCallback)
     errorCallback_ = newErrorCallback;
 }
 
-Status Task::status() const
+Task::Status Task::status() const
 {
     return status_;
 }
