@@ -21,10 +21,10 @@ void Action::act(const ArgList &args)
     Value result = actImpl(args, error);
 
     if (!result.isNull()) {
-    // Notify that actImpl has concluded
-    notify(result);
+        // Notify that actImpl has concluded
+        notify(result);
     } else {
-        // TODO: notify error
+        notifyError(error);
     }
 }
 
@@ -33,6 +33,18 @@ void Action::notify(const Value &result)
     if (callback_) {
         callback_(result);
     }
+}
+
+void Action::notifyError(const err::Error &error)
+{
+    if (errorCallback_) {
+        errorCallback_(error);
+    }
+}
+
+void Action::setErrorCallback(const ErrorCallback &newErrorCallback)
+{
+    errorCallback_ = newErrorCallback;
 }
 
 } // namespace cmd
