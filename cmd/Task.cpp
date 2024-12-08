@@ -13,7 +13,8 @@ Task::Task() : Task({}, {}) {}
 
 Task::Task(ActionPtr actionPtr, const ArgList &argList)
     : actionPtr_(actionPtr), argList_(argList),
-    taskId_(maxTaskId_)
+    taskId_(maxTaskId_),
+    status_(Status::Pending)
 {
     ++maxTaskId_;
 }
@@ -45,6 +46,8 @@ Task::operator bool() const
 
 void Task::execute()
 {
+    status_ = Status::Running;
+
     // TEST: alternative for std::thread
     // auto a = std::async(&TaskManager::executeAction, this, actionPtr, args);
     // auto b = a.share();
@@ -80,6 +83,11 @@ void Task::setErrorCallback(const ErrorCallback &newErrorCallback)
     errorCallback_ = newErrorCallback;
 }
 
+Status Task::status() const
+{
+    return status_;
+}
+
 void Task::executeAction()
 {
     // Set a callback using Task's member function
@@ -94,6 +102,7 @@ void Task::executeAction()
 void Task::onActionComplete(const Value &result)
 {
     std::cout << "TASK RESULT IS: " << result << std::endl;
+    status_ = Status::Completed;
 
     if (resultCallback_) {
         resultCallback_(result, taskId_);
@@ -102,6 +111,8 @@ void Task::onActionComplete(const Value &result)
 
 void Task::onError(const err::Error &error)
 {
+    status_ = Status::Failed;
+
     if (errorCallback_) {
         errorCallback_(error, taskId_);
     }

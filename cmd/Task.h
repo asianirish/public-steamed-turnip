@@ -12,6 +12,13 @@ namespace cmd {
 class Task
 {
 public:
+    enum class Status {
+        Pending,
+        Running,
+        Completed,
+        Failed
+    };
+
     static const TaskId FIRST_TASK_ID = 1024;
     using ResultCallback = std::function<void(const Value&, TaskId)>;
     using ErrorCallback = std::function<void(const err::Error&, TaskId)>;
@@ -37,6 +44,8 @@ public:
 
     void setErrorCallback(const ErrorCallback &newErrorCallback);
 
+    Status status() const;
+
 private:
     ActionPtr actionPtr_;
     ArgList argList_;
@@ -46,6 +55,9 @@ private:
 
     ResultCallback resultCallback_;
     ErrorCallback errorCallback_;
+
+    // Current status of the task
+    Status status_;
 
     void executeAction();
 
