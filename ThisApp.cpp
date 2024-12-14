@@ -6,6 +6,7 @@
 #include "cmd/LineTranslator.h"
 #include "cmd/HelpAction.h"
 
+#include "math/DegreesToRadians.h"
 #include "math/IsEven.h"
 
 #include "cmd/rep/RepresentationManager.h"
@@ -32,6 +33,7 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, ConditionalStringAction);
     REGISTER_TURNIP_CLASS(Action, IsEven);
     REGISTER_TURNIP_CLASS(Action, MenuAction);
+    REGISTER_TURNIP_CLASS(Action, DegreesToRadians);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
@@ -47,6 +49,7 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     mathMenuAction->setTranslator(translator());
     mathMenuAction->setMenuName("math");
     mathMenuAction->addAction("even", "IsEven");
+    mathMenuAction->addAction("d2r", "DegreesToRadians");
     menu.registerAction("math", mathAction);
 }
 
