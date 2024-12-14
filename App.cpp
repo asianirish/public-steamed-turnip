@@ -20,6 +20,7 @@ void App::init()
     std::shared_ptr<cmd::Translator> trnsl(createTranslator());
     mainMenu_.setTranslator(trnsl);
     mainMenu_.registerHelpAction();
+    mainMenu_.setName(appName());
     registerMenu(mainMenu_);
 
     registerRepresentaions();

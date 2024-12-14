@@ -56,5 +56,5 @@ void ThisApp::registerRepresentaions()
 
 std::string ThisApp::appName() const
 {
-    return std::string("steamed-turnip");
+    return std::string(TARGET_NAME);
 }

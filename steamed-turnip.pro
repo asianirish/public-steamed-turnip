@@ -5,6 +5,8 @@ CONFIG -= qt
 
 TARGET = turnip
 
+DEFINES += TARGET_NAME=\\\"$$TARGET\\\"
+
 SOURCES += \
         App.cpp \
         ThisApp.cpp \
