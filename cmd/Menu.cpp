@@ -6,7 +6,6 @@ namespace turnip {
 namespace cmd {
 
 Menu::Menu() : helpAction_("HelpAction") {
-    // TODO: helpAction_->setTaskManager(taskManager_);
 
 }
 
