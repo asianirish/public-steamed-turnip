@@ -48,19 +48,23 @@ void Task::execute()
 {
     status_ = Status::Running;
 
-    // TEST: alternative for std::thread
-    // auto a = std::async(&TaskManager::executeAction, this, actionPtr, args);
-    // auto b = a.share();
-    // static std::list<decltype(b)> lst;
-    // lst.push_back(b);
+    if (actionPtr_->isAsync()) {
+        // TEST: alternative for std::thread
+        // auto a = std::async(&TaskManager::executeAction, this, actionPtr, args);
+        // auto b = a.share();
+        // static std::list<decltype(b)> lst;
+        // lst.push_back(b);
 
-    // Create a new thread to execute the action
-    std::thread actionThread(&Task::executeAction, this);
+        // Create a new thread to execute the action
+        std::thread actionThread(&Task::executeAction, this);
 
-    // actionThread.get_id();
+        // actionThread.get_id();
 
-    // Detach the thread if you don't need to join it later
-    actionThread.detach();
+        // Detach the thread if you don't need to join it later
+        actionThread.detach();
+    } else {
+        executeAction();
+    }
 }
 
 TaskId Task::taskId() const

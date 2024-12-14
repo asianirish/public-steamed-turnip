@@ -29,6 +29,10 @@ public:
 
     void setErrorCallback(const ErrorCallback &newErrorCallback);
 
+    virtual bool isAsync() const {
+        return true;
+    }
+
 private:
     virtual Value actImpl(const ArgList &args, err::Error &error) = 0;
 
