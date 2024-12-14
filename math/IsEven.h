@@ -1,5 +1,5 @@
-#ifndef ISEVENACTION_H
-#define ISEVENACTION_H
+#ifndef ISEVEN_H
+#define ISEVEN_H
 
 #include "cmd/Action.h"
 
@@ -7,10 +7,10 @@ namespace turnip {
 namespace cmd {
 namespace math {
 
-class IsEvenAction : public turnip::cmd::Action
+class IsEven : public turnip::cmd::Action
 {
 public:
-    IsEvenAction();
+    IsEven();
 
     def::ActionDef actionDef() const override;
 
@@ -22,4 +22,4 @@ private:
 } // namespace cmd
 } // namespace turnip
 
-#endif // ISEVENACTION_H
+#endif // ISEVEN_H

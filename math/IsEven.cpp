@@ -1,4 +1,4 @@
-#include "IsEvenAction.h"
+#include "IsEven.h"
 
 namespace turnip {
 namespace cmd {
@@ -6,9 +6,9 @@ namespace math {
 
 using namespace def;
 
-IsEvenAction::IsEvenAction() {}
+IsEven::IsEven() {}
 
-def::ActionDef IsEvenAction::actionDef() const
+def::ActionDef IsEven::actionDef() const
 {
     ActionDef actionDef;
 
@@ -22,7 +22,7 @@ def::ActionDef IsEvenAction::actionDef() const
     return actionDef;
 }
 
-Value IsEvenAction::actImpl(const ArgList &args, err::Error &error)
+Value IsEven::actImpl(const ArgList &args, err::Error &error)
 {
     (void)error;
 

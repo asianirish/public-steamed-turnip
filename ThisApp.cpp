@@ -6,7 +6,7 @@
 #include "cmd/LineTranslator.h"
 #include "cmd/HelpAction.h"
 
-#include "cmd/IsEvenAction.h"
+#include "math/IsEven.h"
 
 #include "cmd/rep/RepresentationManager.h"
 #include "cmd/rep/HexIntRep.h"
@@ -30,7 +30,7 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, TestLazyPointer);
     REGISTER_TURNIP_CLASS(Action, HelpAction);
     REGISTER_TURNIP_CLASS(Action, ConditionalStringAction);
-    REGISTER_TURNIP_CLASS(Action, IsEvenAction);
+    REGISTER_TURNIP_CLASS(Action, IsEven);
     REGISTER_TURNIP_CLASS(Action, MenuAction);
 }
 
@@ -41,11 +41,10 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("cval", "TestCmdValue");
     menu.registerAction("lazy", "TestLazyPointer");
     menu.registerAction("conds", "ConditionalStringAction");
-    menu.registerAction("even", LazyAction("IsEvenAction"));
 
     auto mathAction = LazyAction("MenuAction");
     mathAction.dynamicCast<MenuAction>()->setMenuName("math");
-    mathAction.dynamicCast<MenuAction>()->addAction("even", "IsEvenAction");
+    mathAction.dynamicCast<MenuAction>()->addAction("even", "IsEven");
     menu.registerAction("math", mathAction);
 }
 

@@ -15,7 +15,6 @@ SOURCES += \
         cmd/Global.cpp \
         cmd/HelpAction.cpp \
         cmd/Info.cpp \
-        cmd/IsEvenAction.cpp \
         cmd/LineTranslator.cpp \
         cmd/Menu.cpp \
         cmd/MenuAction.cpp \
@@ -46,6 +45,7 @@ SOURCES += \
         cmd/rep/StringRep.cpp \
         console/Reader.cpp \
         main.cpp \
+        math/IsEven.cpp \
         test/TestCmdValue.cpp \
         test/TestLazyPointer.cpp \
         test/TestSharedVector.cpp
@@ -58,7 +58,6 @@ HEADERS += \
     cmd/Global.h \
     cmd/HelpAction.h \
     cmd/Info.h \
-    cmd/IsEvenAction.h \
     cmd/LineTranslator.h \
     cmd/Menu.h \
     cmd/MenuAction.h \
@@ -94,6 +93,7 @@ HEADERS += \
     common/SharedMap.h \
     common/SharedVector.h \
     console/Reader.h \
+    math/IsEven.h \
     test/TestCmdValue.h \
     test/TestLazyPointer.h \
     test/TestSharedVector.h
