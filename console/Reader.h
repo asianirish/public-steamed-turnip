@@ -28,6 +28,9 @@ public:
     std::string historyFileName() const;
     void setHistoryFileName(const std::string &newHistoryFileName);
 
+    bool isMain() const;
+    void setIsMain(bool newIsMain);
+
 private:
     void onTabKey(std::size_t &cursor_position, std::string &command) const;
     void onEnterKey(std::size_t &cursor_position, std::string &command, bool &stop) const;
@@ -63,6 +66,8 @@ private:
     std::string historyFileName_ {".command_history"};
 
     std::string name_;
+
+    bool isMain_ {true};
 };
 
 } // namespace console

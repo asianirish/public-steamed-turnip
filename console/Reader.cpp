@@ -44,11 +44,13 @@ Reader::Reader(const std::string &readerName, const std::list<std::string> &comm
 
 void Reader::read()
 {
-    // Set the signal handler for SIGINT
-    std::signal(SIGINT, handleSigint);
+    if (isMain()) {
+        // Set the signal handler for SIGINT
+        std::signal(SIGINT, handleSigint);
+        setRawMode(true);
+    }
 
     readHistory();
-    setRawMode(true);
 
     std::string command;
     size_t cursor_position = 0; // Initialize cursor position at the start
@@ -108,8 +110,11 @@ void Reader::read()
         }
     }
 
-    setRawMode(false);
     writeHistory();
+
+    if (isMain()) {
+        setRawMode(false);
+    }
 }
 
 void Reader::onTabKey(std::size_t &cursor_position, std::string &command) const
@@ -361,6 +366,16 @@ void Reader::readHistory()
     historyIndex_ = history_.size(); // the previous one will be size() - 1 (the last one)
 
     return /*true*/;
+}
+
+bool Reader::isMain() const
+{
+    return isMain_;
+}
+
+void Reader::setIsMain(bool newIsMain)
+{
+    isMain_ = newIsMain;
 }
 
 std::string Reader::historyFileName() const
