@@ -46,6 +46,7 @@ SOURCES += \
         cmd/rep/StringRep.cpp \
         console/Reader.cpp \
         main.cpp \
+        math/DegreesToRadians.cpp \
         math/IsEven.cpp \
         test/TestCmdValue.cpp \
         test/TestLazyPointer.cpp \
@@ -95,6 +96,7 @@ HEADERS += \
     common/SharedMap.h \
     common/SharedVector.h \
     console/Reader.h \
+    math/DegreesToRadians.h \
     math/IsEven.h \
     test/TestCmdValue.h \
     test/TestLazyPointer.h \
