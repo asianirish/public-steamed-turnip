@@ -29,6 +29,23 @@ Value HelpAction::actImpl(const ArgList &args, err::Error &error)
     if (menu_) {
 
         std::string commandName = args.at(0);
+
+        if (commandName == "menu") {
+            std::cout << "Display the list of available commands" << std::endl;
+            return true;
+        }
+
+        if (commandName == "quit") {
+            std::cout << "Stop the current command input loop and return control to the previous routine" << std::endl;
+            return true;
+        }
+
+        if (commandName == "exit") {
+            std::cout << "Terminate the application immediately and close the session" << std::endl;
+            return true;
+        }
+
+
         auto def = menu_->actionDef(commandName);
 
         if (!def) {

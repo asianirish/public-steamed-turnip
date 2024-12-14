@@ -333,6 +333,11 @@ void Reader::displayMenu() const
         std::cout << command << std::endl;
     }
 
+    std::cout << std::endl;
+    std::cout << "menu" << std::endl;
+    std::cout << "quit" << std::endl;
+    std::cout << "exit" << std::endl;
+    std::cout << std::endl;
 }
 
 void Reader::writeHistory() const
