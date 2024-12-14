@@ -12,6 +12,8 @@
 #include "cmd/rep/RepresentationManager.h"
 #include "cmd/rep/HexIntRep.h"
 
+#include "math/SineOfRadians.h"
+
 #include "test/TestCmdValue.h"
 #include "test/TestSharedVector.h"
 #include "test/TestLazyPointer.h"
@@ -34,6 +36,7 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, IsEven);
     REGISTER_TURNIP_CLASS(Action, MenuAction);
     REGISTER_TURNIP_CLASS(Action, DegreesToRadians);
+    REGISTER_TURNIP_CLASS(Action, SineOfRadians);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
@@ -50,6 +53,7 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     mathMenuAction->setMenuName("math");
     mathMenuAction->addAction("even", "IsEven");
     mathMenuAction->addAction("d2r", "DegreesToRadians");
+    mathMenuAction->addAction("sinr", "SineOfRadians");
     menu.registerAction("math", mathAction);
 }
 
