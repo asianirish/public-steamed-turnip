@@ -17,6 +17,10 @@ public:
     Menu *menu() const;
     void setMenu(Menu *newMenu);
 
+    virtual bool isAsync() const override {
+        return false;
+    }
+
 private:
     Value actImpl(const ArgList &args, turnip::cmd::err::Error &error) override;
 
