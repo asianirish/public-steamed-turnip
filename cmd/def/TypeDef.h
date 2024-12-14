@@ -2,6 +2,7 @@
 #define TYPEDEF_H
 
 #include "cmd/rep/DecIntRep.h"
+#include "cmd/rep/DoubleRep.h"
 #include "cmd/rep/NullRep.h"
 #include "cmd/rep/SimpleStringRep.h"
 
@@ -19,6 +20,8 @@ public:
     static TypeDef createNullTypedef(const NullRep &inputRep = {}, const NullRep &outputRep = {});
 
     static TypeDef createIntTypedef(const IntRep &inputRep = DecIntRep(), const IntRep &outputRep = DecIntRep());
+
+    static TypeDef createDoubleTypedef(const DoubleRep &inputRep = DoubleRep(), const DoubleRep &outputRep = DoubleRep());
 
     static TypeDef createBoolTypedef();
 

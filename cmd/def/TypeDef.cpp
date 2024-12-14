@@ -34,6 +34,14 @@ TypeDef TypeDef::createIntTypedef(const IntRep &inputRep, const IntRep &outputRe
     return td;
 }
 
+TypeDef TypeDef::createDoubleTypedef(const DoubleRep &inputRep, const DoubleRep &outputRep)
+{
+    auto td = TypeDef();
+    td.inputRep_ = inputRep.classKey();
+    td.outputRep_ = outputRep.classKey();
+    return td;
+}
+
 TypeDef TypeDef::createBoolTypedef()
 {
     BoolRep boolRep;

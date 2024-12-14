@@ -35,6 +35,7 @@ SOURCES += \
         cmd/rep/BoolRep.cpp \
         cmd/rep/CharRep.cpp \
         cmd/rep/DecIntRep.cpp \
+        cmd/rep/DoubleRep.cpp \
         cmd/rep/HexIntRep.cpp \
         cmd/rep/IntRep.cpp \
         cmd/rep/NullRep.cpp \
@@ -79,6 +80,7 @@ HEADERS += \
     cmd/rep/BoolRep.h \
     cmd/rep/CharRep.h \
     cmd/rep/DecIntRep.h \
+    cmd/rep/DoubleRep.h \
     cmd/rep/HexIntRep.h \
     cmd/rep/IntRep.h \
     cmd/rep/NullRep.h \

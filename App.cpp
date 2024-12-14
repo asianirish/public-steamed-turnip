@@ -61,6 +61,8 @@ void App::registerRepresentaions()
 
     RepresentationManager::registerRepresentation<DecIntRep>();
 
+    RepresentationManager::registerRepresentation<DoubleRep>();
+
     RepresentationManager::registerRepresentation<SimpleStringRep>();
 }
 
