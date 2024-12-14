@@ -153,8 +153,6 @@ void Reader::onEnterKey(std::size_t &cursor_position, std::string &command, bool
         return;
     }
 
-    std::cout << "handling: " << command << std::endl << std::flush;
-
     if (command == "exit") {
         stop = true;
 
@@ -169,7 +167,9 @@ void Reader::onEnterKey(std::size_t &cursor_position, std::string &command, bool
     } else if (command == "quit") {
         stop = true;
     }else if (command == "menu") {
-        std::cout << "Menu: " << std::endl;
+        std::cout << "Available commands: " << std::endl;
+        std::cout << "(For more information, enter: `print help <command name>`)" << std::endl << std::endl;
+
         displayMenu();
         displayPrompt();
     } else {
@@ -303,7 +303,7 @@ void Reader::onDownArrowKey(std::size_t &cursor_position, std::string &command)
 
 void Reader::onResult(const std::string &resultString)
 {
-    std::cout << "Result: " << resultString << std::endl;
+    std::cout << "\nResult: " << resultString << std::endl << std::endl;
     displayPrompt();
 }
 
