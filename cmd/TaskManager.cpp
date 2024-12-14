@@ -82,7 +82,6 @@ TaskPtr TaskManager::task(const LazyAction &action, const InputArgList &inputArg
                 return {};
             }
         }
-        std::cout << "DEBUG ARG:" << arg << std::endl;
         args.push_back(arg);
 
         if (inputArgIt != inputArgs.end()) {

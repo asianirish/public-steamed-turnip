@@ -105,7 +105,6 @@ void Task::executeAction()
 
 void Task::onActionComplete(const Value &result)
 {
-    std::cout << "TASK RESULT IS: " << result << std::endl;
     status_ = Status::Completed;
 
     if (resultCallback_) {
