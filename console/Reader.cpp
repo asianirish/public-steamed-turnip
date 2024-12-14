@@ -155,9 +155,20 @@ void Reader::onEnterKey(std::size_t &cursor_position, std::string &command, bool
 
     std::cout << "handling: " << command << std::endl << std::flush;
 
-    if (command == "exit" || command == "quit") {
+    if (command == "exit") {
         stop = true;
-    } else if (command == "menu") {
+
+        writeHistory();
+
+        if (isMain()) {
+            setRawMode(false);
+        }
+
+        exit(0);
+        return;
+    } else if (command == "quit") {
+        stop = true;
+    }else if (command == "menu") {
         std::cout << "Menu: " << std::endl;
         displayMenu();
         displayPrompt();
