@@ -6,10 +6,7 @@ namespace turnip {
 namespace cmd {
 
 MenuAction::MenuAction() {
-    std::shared_ptr<cmd::Translator> trnsl(new LineTranslator()); // TODO: Another type of translator can be used
-    menu_.setTranslator(trnsl);
     menu_.registerHelpAction();
-
 }
 
 def::ActionDef MenuAction::actionDef() const
@@ -33,6 +30,9 @@ Value MenuAction::actImpl(const ArgList &args, err::Error &error)
 {
     (void)args;
     (void)error;
+
+    // TODO: check whether translator is set
+
     console::Reader reader(menu_.name(), menu_.commandList());
     reader.setIsMain(false);
     std::string historyFileName {"." + menu_.name() + ".command-history"};
@@ -55,6 +55,11 @@ Value MenuAction::actImpl(const ArgList &args, err::Error &error)
     reader.read();
 
     return true;
+}
+
+void MenuAction::setTranslator(const std::shared_ptr<cmd::Translator> &newTrnsl)
+{
+    menu_.setTranslator(newTrnsl);
 }
 
 } // namespace cmd

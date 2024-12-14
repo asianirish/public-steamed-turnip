@@ -22,6 +22,8 @@ public:
 
     void addAction(const std::string &commandName, const Value &actionInfo);
 
+    void setTranslator(const std::shared_ptr<cmd::Translator> &newTrnsl);
+
 private:
     Value actImpl(const ArgList &args, turnip::cmd::err::Error &error) override;
 

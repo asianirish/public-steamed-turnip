@@ -17,8 +17,7 @@ void App::init()
 {
     registerActions();
 
-    std::shared_ptr<cmd::Translator> trnsl(createTranslator());
-    mainMenu_.setTranslator(trnsl);
+    mainMenu_.setTranslator(translator());
     mainMenu_.registerHelpAction();
     mainMenu_.setName(appName());
     registerMenu(mainMenu_);
@@ -63,6 +62,15 @@ void App::registerRepresentaions()
     RepresentationManager::registerRepresentation<DecIntRep>();
 
     RepresentationManager::registerRepresentation<SimpleStringRep>();
+}
+
+std::shared_ptr<cmd::Translator> App::translator()
+{
+    if (!trnsl_) {
+        trnsl_ = createTranslator();
+    }
+
+    return trnsl_;
 }
 
 } // namespace turnip

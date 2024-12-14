@@ -43,14 +43,16 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("conds", "ConditionalStringAction");
 
     auto mathAction = LazyAction("MenuAction");
-    mathAction.dynamicCast<MenuAction>()->setMenuName("math");
-    mathAction.dynamicCast<MenuAction>()->addAction("even", "IsEven");
+    auto mathMenuAction = mathAction.dynamicCast<MenuAction>();
+    mathMenuAction->setTranslator(translator());
+    mathMenuAction->setMenuName("math");
+    mathMenuAction->addAction("even", "IsEven");
     menu.registerAction("math", mathAction);
 }
 
-Translator *ThisApp::createTranslator() const
+const std::shared_ptr<cmd::Translator> ThisApp::createTranslator() const
 {
-    return new LineTranslator();
+    return std::shared_ptr<cmd::Translator>(new LineTranslator());
 }
 
 void ThisApp::registerRepresentaions()
