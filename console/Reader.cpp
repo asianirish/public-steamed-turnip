@@ -139,6 +139,7 @@ void Reader::onEnterKey(std::size_t &cursor_position, std::string &command, bool
     } else if (command == "menu") {
         std::cout << "Menu: " << std::endl;
         displayMenu();
+        displayPrompt();
     } else {
         if (history_.empty() || history_.back() != command) {
             history_.push(command);
@@ -154,8 +155,6 @@ void Reader::onEnterKey(std::size_t &cursor_position, std::string &command, bool
     } else {
         historyIndex_ = 0;
     }
-
-    displayPrompt();
 }
 
 void Reader::onBackspaceKey(std::size_t &cursor_position, std::string &command) const
