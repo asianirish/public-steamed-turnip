@@ -34,6 +34,8 @@ public:
 
     Value(const TaskPtr &taskPtr);
 
+    Value(const LazyAction &action);
+
     ValueData data() const {
         return data_;
     }

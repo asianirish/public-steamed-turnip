@@ -59,6 +59,11 @@ Value::Value(const TaskPtr &taskPtr) : data_(taskPtr)
 
 }
 
+Value::Value(const LazyAction &action) : data_(action)
+{
+
+}
+
 bool Value::isNull() const
 {
     return std::holds_alternative<std::monostate>(data_);

@@ -39,7 +39,7 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("cval", "TestCmdValue");
     menu.registerAction("lazy", "TestLazyPointer");
     menu.registerAction("conds", "ConditionalStringAction");
-    menu.registerAction("even", "IsEvenAction");
+    menu.registerAction("even", LazyAction("IsEvenAction"));
 }
 
 Translator *ThisApp::createTranslator() const
