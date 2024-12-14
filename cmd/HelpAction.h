@@ -12,7 +12,7 @@ class HelpAction : public Action
 public:
     HelpAction();
 
-    def::ActionDef actionDef() const;
+    def::ActionDef actionDef() const override;
 
     Menu *menu() const;
     void setMenu(Menu *newMenu);
