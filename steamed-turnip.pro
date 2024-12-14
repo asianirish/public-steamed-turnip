@@ -18,6 +18,7 @@ SOURCES += \
         cmd/IsEvenAction.cpp \
         cmd/LineTranslator.cpp \
         cmd/Menu.cpp \
+        cmd/MenuAction.cpp \
         cmd/PrintAction.cpp \
         cmd/Task.cpp \
         cmd/TaskManager.cpp \
@@ -60,6 +61,7 @@ HEADERS += \
     cmd/IsEvenAction.h \
     cmd/LineTranslator.h \
     cmd/Menu.h \
+    cmd/MenuAction.h \
     cmd/PrintAction.h \
     cmd/Task.h \
     cmd/TaskManager.h \

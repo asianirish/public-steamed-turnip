@@ -1,0 +1,61 @@
+#include "MenuAction.h"
+#include "cmd/LineTranslator.h"
+#include "console/Reader.h"
+
+namespace turnip {
+namespace cmd {
+
+MenuAction::MenuAction() {
+    std::shared_ptr<cmd::Translator> trnsl(new LineTranslator()); // TODO: Another type of translator can be used
+    menu_.setTranslator(trnsl);
+    menu_.registerHelpAction();
+
+}
+
+def::ActionDef MenuAction::actionDef() const
+{
+    def::ActionDef actionDef;
+    actionDef.setDescription(menu_.name() + " menu");
+    return actionDef;
+}
+
+void MenuAction::setMenuName(const std::string &menuName)
+{
+    menu_.setName(menuName);
+}
+
+void MenuAction::addAction(const std::string &commandName, const Value &actionInfo)
+{
+    menu_.registerAction(commandName, actionInfo);
+}
+
+Value MenuAction::actImpl(const ArgList &args, err::Error &error)
+{
+    (void)args;
+    (void)error;
+    console::Reader reader(menu_.name(), menu_.commandList());
+    reader.setIsMain(false);
+    std::string historyFileName {"." + menu_.name() + ".command-history"};
+    reader.setHistoryFileName(historyFileName);
+
+    {
+        auto f = std::bind(&cmd::Menu::processString, &menu_, std::placeholders::_1);
+        reader.setCallback(f);
+    }
+
+    {
+        auto f = std::bind(&console::Reader::onResult, &reader, std::placeholders::_1);
+        menu_.setResultCallback(f);
+    }
+
+    {
+        auto f = std::bind(&console::Reader::onError, &reader, std::placeholders::_1);
+        menu_.setErrorCallback(f);
+    }
+    reader.read();
+
+    return true;
+}
+
+} // namespace cmd
+} // namespace turnip

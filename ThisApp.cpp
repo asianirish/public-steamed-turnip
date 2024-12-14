@@ -1,5 +1,6 @@
 #include "ThisApp.h"
 #include "cmd/ConditionalStringAction.h"
+#include "cmd/MenuAction.h"
 #include "common/Factory.h"
 #include "cmd/PrintAction.h"
 #include "cmd/LineTranslator.h"
@@ -30,6 +31,7 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, HelpAction);
     REGISTER_TURNIP_CLASS(Action, ConditionalStringAction);
     REGISTER_TURNIP_CLASS(Action, IsEvenAction);
+    REGISTER_TURNIP_CLASS(Action, MenuAction);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
@@ -40,6 +42,11 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("lazy", "TestLazyPointer");
     menu.registerAction("conds", "ConditionalStringAction");
     menu.registerAction("even", LazyAction("IsEvenAction"));
+
+    auto mathAction = LazyAction("MenuAction");
+    mathAction.dynamicCast<MenuAction>()->setMenuName("math");
+    mathAction.dynamicCast<MenuAction>()->addAction("even", "IsEvenAction");
+    menu.registerAction("math", mathAction);
 }
 
 Translator *ThisApp::createTranslator() const
