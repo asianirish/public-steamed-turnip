@@ -110,6 +110,16 @@ def::ActionDef Menu::actionDef(const std::string &command) const
     return {};
 }
 
+std::string Menu::name() const
+{
+    return name_;
+}
+
+void Menu::setName(const std::string &newMenuName)
+{
+    name_ = newMenuName;
+}
+
 void Menu::onTaskComplete(const Value &result)
 {
     if (resultCallback_) {

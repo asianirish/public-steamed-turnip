@@ -29,7 +29,7 @@ void App::init()
 
 void App::exec()
 {
-    console::Reader reader(mainMenu_.commandList());
+    console::Reader reader(mainMenu_.name(), mainMenu_.commandList());
 
     std::string historyFileName {"." + appName() + ".command-history"};
     reader.setHistoryFileName(historyFileName);

@@ -36,9 +36,10 @@ void handleSigint(int signal) {
     }
 }
 
-Reader::Reader(const std::list<std::string> &command_list) : history_(1024), // TODO: const or from settings
+Reader::Reader(const std::string &readerName, const std::list<std::string> &command_list) : history_(1024), // TODO: const or from settings
     historyIndex_(0),
-    commandList_(command_list)
+    commandList_(command_list),
+    name_(readerName)
 {}
 
 void Reader::read()

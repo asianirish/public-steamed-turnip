@@ -45,6 +45,9 @@ public:
 
     def::ActionDef actionDef(const std::string &command) const;
 
+    std::string name() const;
+    void setName(const std::string &newMenuName);
+
 private:
     mutable std::list<std::string> commandList_;
 
@@ -58,6 +61,8 @@ private:
     ErrorCallback errorCallback_;
 
     LazyAction helpAction_;
+
+    std::string name_ {"steamed-turnip"};
 
     void onTaskComplete(const Value &result);
 

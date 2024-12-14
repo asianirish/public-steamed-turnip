@@ -16,7 +16,7 @@ public:
     // Define the type for subscriber callable objects
     using Callback = std::function<void(const std::string&)>;
 
-    Reader(const std::list<std::string> &command_list);
+    Reader(const std::string &readerName, const std::list<std::string> &command_list);
 
     void read();
 
@@ -41,7 +41,7 @@ private:
 
     // Function to display the terminal prompt
     void displayPrompt() const {
-        std::cout << "> " << std::flush;
+        std::cout << name_ << " > " << std::flush;
     }
 
     // Method to find a string that starts with the given prefix
@@ -61,6 +61,8 @@ private:
     Callback callback_;
 
     std::string historyFileName_ {".command_history"};
+
+    std::string name_;
 };
 
 } // namespace console
