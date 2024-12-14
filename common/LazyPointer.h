@@ -48,6 +48,11 @@ public:
         return !ptr_;
     }
 
+    template<class Child>
+    std::shared_ptr<Child> dynamicCast() {
+        return std::dynamic_pointer_cast<Child>(ptr());
+    }
+
 private:
     std::string className_;
     mutable std::shared_ptr<Base> ptr_;
