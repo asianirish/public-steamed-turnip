@@ -1,5 +1,6 @@
 #include "Reader.h"
 
+#include <csignal>
 #include <iostream>
 #include <unistd.h>
 #include <termios.h>
@@ -8,7 +9,8 @@
 namespace turnip {
 namespace console {
 
-
+// Declare a volatile sig_atomic_t flag to indicate if the read loop should be interrupted
+volatile sig_atomic_t stopReading = 0;
 
 // Function to set terminal mode to raw
 void setRawMode(bool enable) {
@@ -24,6 +26,16 @@ void setRawMode(bool enable) {
     }
 }
 
+// Signal handler function
+void handleSigint(int signal) {
+    if (signal == SIGINT) {
+        if (stopReading == 0) {
+            std::cout << "\ngoodbye\n";
+        }
+        stopReading = 1; // Set the flag to indicate an interruption request
+    }
+}
+
 Reader::Reader(const std::list<std::string> &command_list) : history_(1024), // TODO: const or from settings
     historyIndex_(0),
     commandList_(command_list)
@@ -31,6 +43,9 @@ Reader::Reader(const std::list<std::string> &command_list) : history_(1024), // 
 
 void Reader::read()
 {
+    // Set the signal handler for SIGINT
+    std::signal(SIGINT, handleSigint);
+
     readHistory();
     setRawMode(true);
 
@@ -39,7 +54,7 @@ void Reader::read()
 
     displayPrompt();
 
-    while (true) {
+    while (!stopReading) {
         char buf[3];
         int n = ::read(STDIN_FILENO, buf, 3);
 
