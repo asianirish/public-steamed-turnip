@@ -17,7 +17,7 @@ public:
     Menu *menu() const;
     void setMenu(Menu *newMenu);
 
-    virtual bool isAsync() const override {
+    bool isAsync() const override {
         return false;
     }
 
