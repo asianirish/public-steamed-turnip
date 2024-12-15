@@ -15,11 +15,15 @@ public:
     Substitutor substitutor() const;
     void setSubstitutor(const Substitutor &newSubstitutor);
 
+    def::ActionDef actionDef() const override;
+    void setActionDef(const def::ActionDef &newActionDef);
+
 private:
     Value actImpl(const ArgList &args, err::Error &error) override;
 
 private:
     Substitutor substitutor_;
+    def::ActionDef actionDef_;
 };
 
 } // namespace cmd

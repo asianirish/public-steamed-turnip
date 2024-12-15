@@ -23,5 +23,15 @@ Value CompositeAction::actImpl(const ArgList &args, err::Error &error)
     return task;
 }
 
+def::ActionDef CompositeAction::actionDef() const
+{
+    return actionDef_;
+}
+
+void CompositeAction::setActionDef(const def::ActionDef &newActionDef)
+{
+    actionDef_ = newActionDef;
+}
+
 } // namespace cmd
 } // namespace turnip
