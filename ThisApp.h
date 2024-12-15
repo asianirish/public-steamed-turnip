@@ -15,6 +15,8 @@ private:
     void registerRepresentaions() override;
 
     std::string appName() const override;
+
+    turnip::cmd::LazyAction sineOfDegrees();
 };
 
 #endif // THISAPP_H

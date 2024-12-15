@@ -12,6 +12,8 @@
 #include "cmd/rep/RepresentationManager.h"
 #include "cmd/rep/HexIntRep.h"
 
+#include "cmd/CompositeAction.h"
+
 #include "math/SineOfRadians.h"
 
 #include "test/TestCmdValue.h"
@@ -37,6 +39,7 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, MenuAction);
     REGISTER_TURNIP_CLASS(Action, DegreesToRadians);
     REGISTER_TURNIP_CLASS(Action, SineOfRadians);
+    REGISTER_TURNIP_CLASS(Action, CompositeAction);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
@@ -51,9 +54,13 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     auto mathMenuAction = mathAction.dynamicCast<MenuAction>();
     mathMenuAction->setTranslator(translator());
     mathMenuAction->setMenuName("math");
+
     mathMenuAction->addAction("even", "IsEven");
     mathMenuAction->addAction("d2r", "DegreesToRadians");
     mathMenuAction->addAction("sinr", "SineOfRadians");
+
+    mathMenuAction->addAction("sind", sineOfDegrees());
+
     menu.registerAction("math", mathAction);
 }
 
@@ -72,4 +79,27 @@ void ThisApp::registerRepresentaions()
 std::string ThisApp::appName() const
 {
     return std::string(TARGET_NAME);
+}
+
+LazyAction ThisApp::sineOfDegrees()
+{
+    // auto sind = make_shared<CompositeAction>(new CompositeAction()); // TODO: enable direct creation
+    auto sind = LazyAction("CompositeAction");
+    auto caSind = sind.dynamicCast<CompositeAction>();
+
+    def::ActionDef actionDef;
+
+    const auto typeDef = def::TypeDef::createDoubleTypedef();
+
+    def::ArgDef argDef;
+    argDef.setType(typeDef);
+    argDef.setName("defrees");
+    actionDef.addArgDef(argDef);
+    actionDef.setDescription("Calculates the sine of a specified angle measured in radians");
+
+    caSind->setActionDef(actionDef);
+
+    // TODO: caSind->setSubstitutor(substitutor);
+
+    return sind;
 }
