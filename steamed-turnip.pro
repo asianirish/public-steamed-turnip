@@ -18,7 +18,9 @@ SOURCES += \
         cmd/LineTranslator.cpp \
         cmd/Menu.cpp \
         cmd/MenuAction.cpp \
+        cmd/Parameter.cpp \
         cmd/PrintAction.cpp \
+        cmd/Substitutor.cpp \
         cmd/Task.cpp \
         cmd/TaskManager.cpp \
         cmd/Translator.cpp \
@@ -64,7 +66,9 @@ HEADERS += \
     cmd/LineTranslator.h \
     cmd/Menu.h \
     cmd/MenuAction.h \
+    cmd/Parameter.h \
     cmd/PrintAction.h \
+    cmd/Substitutor.h \
     cmd/Task.h \
     cmd/TaskManager.h \
     cmd/Translator.h \
