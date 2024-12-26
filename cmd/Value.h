@@ -29,6 +29,7 @@ public:
     Value(const char *str);
 
     Value(const std::map<std::string, Value> &mp);
+    Value(const VariantMap &vmp);
 
     Value(const std::vector<Value> &vec);
 

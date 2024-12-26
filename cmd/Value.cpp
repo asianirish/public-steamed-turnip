@@ -49,6 +49,11 @@ Value::Value(const std::map<std::string, Value> &mp) : data_(mp)
 
 }
 
+Value::Value(const VariantMap &vmp) : data_(vmp)
+{
+
+}
+
 Value::Value(const std::vector<Value> &vec) : data_(vec)
 {
 
