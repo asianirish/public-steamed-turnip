@@ -42,6 +42,20 @@ void Action::notifyError(const err::Error &error)
     }
 }
 
+std::string Action::registeredClassName() const
+{
+    if (registeredClassName_) {
+        return *registeredClassName_;
+    }
+
+    return {};
+}
+
+void Action::setRegisteredClassName(const std::string *newRegisteredClassName)
+{
+    registeredClassName_ = newRegisteredClassName;
+}
+
 void Action::setErrorCallback(const ErrorCallback &newErrorCallback)
 {
     errorCallback_ = newErrorCallback;

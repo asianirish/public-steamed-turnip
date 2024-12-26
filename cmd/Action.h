@@ -43,6 +43,9 @@ public:
         return className;
     }
 
+    std::string registeredClassName() const;
+    void setRegisteredClassName(const std::string *newRegisteredClassName);
+
 private:
     virtual Value actImpl(const ArgList &args, err::Error &error) = 0;
 
@@ -53,6 +56,8 @@ private:
     std::mutex mutex_; // Protect shared resources
     Callback callback_; // Member to hold the callback function
     ErrorCallback errorCallback_;
+
+    const std::string *registeredClassName_ = nullptr;
 };
 
 #define ACTION_CLASS(className) className::checkClassName(#className)

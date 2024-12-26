@@ -29,6 +29,17 @@ public:
     virtual ~AbstractCreator() = default;
 
     virtual BaseClass *create() const = 0;
+
+
+    const std::string *registeredClassName() const {
+        return &registeredClassName_;
+    }
+    void setRegisteredClassName(const std::string &newRegisteredClassName) {
+        registeredClassName_ = newRegisteredClassName;
+    }
+
+private:
+    std::string registeredClassName_;
 };
 
 template <typename BaseClass, typename DerClass>
@@ -61,7 +72,7 @@ public:
         }
 
         AbstractCreator<BaseClass> *creator = new Creator<BaseClass,T>();
-
+        creator->setRegisteredClassName(className);
         creators_.insert({className, creator});
     }
 
@@ -73,11 +84,12 @@ public:
         AbstractCreator<BaseClass>* creator = creators_.at(className);
 
         if (creator) {
-            return creator->create();
+            auto newObject = creator->create();
+            newObject->setRegisteredClassName(creator->registeredClassName());
+            return newObject;
         }
 
         return nullptr;
-
     }
 
     static bool isRegistered(const std::string &className) {
@@ -100,6 +112,7 @@ private:
 
 template <typename BaseClass>
 std::unordered_map<std::string, AbstractCreator<BaseClass>*> Factory<BaseClass>::creators_;
+
 
 } // namespace common
 } // namespace turnip
