@@ -74,7 +74,7 @@ bool Value::isNull() const
     return std::holds_alternative<std::monostate>(data_);
 }
 
-Value::operator std::string() const
+std::string Value::toString() const
 {
     std::ostringstream os;
     std::visit([&os](auto&& arg) {
@@ -118,7 +118,12 @@ Value::operator std::string() const
     return os.str();
 }
 
-Value::operator int64_t() const
+Value::operator std::string() const
+{
+    return toString();
+}
+
+int64_t Value::toInt() const
 {
     return std::visit([](auto&& arg) -> int64_t {
         using T = std::decay_t<decltype(arg)>;
@@ -150,7 +155,12 @@ Value::operator int64_t() const
     }, data_);
 }
 
-Value::operator double() const
+Value::operator int64_t() const
+{
+    return toInt();
+}
+
+double Value::toDouble() const
 {
     return std::visit([](auto&& arg) -> double {
         using T = std::decay_t<decltype(arg)>;
@@ -180,6 +190,11 @@ Value::operator double() const
             return 0.0; // or throw an exception since a TaskPtr can't be directly converted to double
         }
     }, data_);
+}
+
+Value::operator double() const
+{
+    return toDouble();
 }
 
 Value::operator bool() const

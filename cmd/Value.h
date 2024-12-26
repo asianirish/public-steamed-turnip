@@ -44,12 +44,15 @@ public:
     bool isNull() const;
 
     // Conversion operator to std::string
+    std::string toString() const;
     operator std::string() const;
 
     // Conversion operator to int
+    int64_t toInt() const;
     operator int64_t() const;
 
     // Conversion operator to double
+    double toDouble() const;
     operator double() const;
 
 

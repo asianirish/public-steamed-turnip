@@ -57,9 +57,9 @@ Value TestActionMap::actImpl(const turnip::cmd::ArgList &args, turnip::cmd::err:
 {
     (void)error;
 
-    name_ = static_cast<std::string>(args.at(0)); // TODO: .toString()
-    age_ = static_cast<int64_t>(args.at(1)); // TODO: .toInt()
-    height_ = static_cast<double>(args.at(2)); // TODO: .toDouble()
+    name_ = args.at(0).toString();
+    age_ = args.at(1).toInt();
+    height_ = args.at(2).toDouble();
     // TODO: .toChar()
 
     Value mp = this->toMap();
