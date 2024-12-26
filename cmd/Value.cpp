@@ -140,7 +140,7 @@ Value::operator int64_t() const
         } else if constexpr (std::is_same_v<T, TaskPtr>) {
             return 0; // or throw an exception since a TaskPtr can't be directly converted to int64_t
         } else if constexpr (std::is_same_v<T, LazyAction>) {
-            return 0; // or throw an exception since a ActionPtr can't be directly converted to int64_t
+            return 0; // or throw an exception since a LazyAction can't be directly converted to int64_t
         }
     }, data_);
 }
