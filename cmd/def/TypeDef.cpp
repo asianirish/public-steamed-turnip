@@ -59,6 +59,14 @@ TypeDef TypeDef::createStringTypedef(const StringRep &inputRep, const StringRep 
     return td;
 }
 
+TypeDef TypeDef::createCharTypedef(const CharRep &inputRep, const CharRep &outputRep)
+{
+    auto td = TypeDef();
+    td.inputRep_ = inputRep.classKey();
+    td.outputRep_ = outputRep.classKey();
+    return td;
+}
+
 Value TypeDef::convertInput(const std::string &input) const
 {
     auto inRep = rep::RepresentationManager::representation(inputRep_);

@@ -5,6 +5,8 @@
 #include "cmd/rep/DoubleRep.h"
 #include "cmd/rep/NullRep.h"
 #include "cmd/rep/SimpleStringRep.h"
+#include "cmd/rep/SimpleCharRep.h"
+
 
 #include <string>
 
@@ -26,6 +28,8 @@ public:
     static TypeDef createBoolTypedef();
 
     static TypeDef createStringTypedef(const StringRep &inputRep = SimpleStringRep(), const StringRep &outputRep = SimpleStringRep());
+
+    static TypeDef createCharTypedef(const CharRep &inputRep = SimpleCharRep(), const CharRep &outputRep = SimpleCharRep());
 
     Value convertInput(const std::string &input) const;
 
