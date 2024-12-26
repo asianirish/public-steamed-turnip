@@ -15,6 +15,9 @@ namespace cmd {
 class Action
 {
 public:
+    static const std::string CLASS_NAME_KEY;
+    static const std::string DATA_KEY;
+
     Action();
     virtual ~Action() = default;
 
@@ -45,6 +48,8 @@ public:
 
     std::string registeredClassName() const;
     void setRegisteredClassName(const std::string *newRegisteredClassName);
+
+    VariantMap toMap() const;
 
 private:
     virtual Value actImpl(const ArgList &args, err::Error &error) = 0;

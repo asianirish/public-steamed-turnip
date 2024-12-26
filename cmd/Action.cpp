@@ -4,6 +4,9 @@
 namespace turnip {
 namespace cmd {
 
+const std::string Action::CLASS_NAME_KEY {"className"};
+const std::string Action::DATA_KEY {"data"};
+
 Action::Action() {}
 
 void Action::setCallback(Callback callback)
@@ -54,6 +57,20 @@ std::string Action::registeredClassName() const
 void Action::setRegisteredClassName(const std::string *newRegisteredClassName)
 {
     registeredClassName_ = newRegisteredClassName;
+}
+
+VariantMap Action::toMap() const
+{
+    VariantMap mp;
+    if (registeredClassName_) {
+        mp.set(CLASS_NAME_KEY, *registeredClassName_);
+    }
+
+    if (!data().empty()) {
+        mp.set(DATA_KEY, data());
+    }
+
+    return mp;
 }
 
 void Action::setErrorCallback(const ErrorCallback &newErrorCallback)
