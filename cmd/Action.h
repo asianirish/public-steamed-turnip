@@ -37,10 +37,6 @@ public:
         return true;
     }
 
-    virtual VariantMap data() const {
-        return {};
-    }
-
     // should not be used directly
     static std::string checkClassName(const std::string &className) {
         return className;
@@ -57,6 +53,10 @@ private:
     // Function to notify via callback
     void notify(const Value &result);
     void notifyError(const err::Error &error);
+
+    virtual VariantMap data() const {
+        return {};
+    }
 
     std::mutex mutex_; // Protect shared resources
     Callback callback_; // Member to hold the callback function
