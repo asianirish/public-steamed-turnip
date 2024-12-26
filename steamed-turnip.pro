@@ -52,6 +52,7 @@ SOURCES += \
         math/DegreesToRadians.cpp \
         math/IsEven.cpp \
         math/SineOfRadians.cpp \
+        test/TestActionMap.cpp \
         test/TestCmdValue.cpp \
         test/TestLazyPointer.cpp \
         test/TestSharedVector.cpp
@@ -106,6 +107,7 @@ HEADERS += \
     math/DegreesToRadians.h \
     math/IsEven.h \
     math/SineOfRadians.h \
+    test/TestActionMap.h \
     test/TestCmdValue.h \
     test/TestLazyPointer.h \
     test/TestSharedVector.h

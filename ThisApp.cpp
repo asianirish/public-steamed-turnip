@@ -16,6 +16,7 @@
 
 #include "math/SineOfRadians.h"
 
+#include "test/TestActionMap.h"
 #include "test/TestCmdValue.h"
 #include "test/TestSharedVector.h"
 #include "test/TestLazyPointer.h"
@@ -40,6 +41,7 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, DegreesToRadians);
     REGISTER_TURNIP_CLASS(Action, SineOfRadians);
     REGISTER_TURNIP_CLASS(Action, CompositeAction);
+    REGISTER_TURNIP_CLASS(Action, TestActionMap);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
@@ -62,6 +64,8 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     mathMenuAction->addAction("sind", sineOfDegrees());
 
     menu.registerAction("math", mathAction);
+
+    menu.registerAction("amap", ACTION_CLASS(TestActionMap));
 }
 
 const std::shared_ptr<cmd::Translator> ThisApp::createTranslator() const
