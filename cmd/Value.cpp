@@ -197,7 +197,7 @@ Value::operator double() const
     return toDouble();
 }
 
-Value::operator bool() const
+bool Value::toBool() const
 {
     return std::visit([](auto&& arg) -> bool {
         using T = std::decay_t<decltype(arg)>;
@@ -231,7 +231,12 @@ Value::operator bool() const
     }, data_);
 }
 
-Value::operator char() const
+Value::operator bool() const
+{
+    return toBool();
+}
+
+char Value::toChar() const
 {
     return std::visit([](auto&& arg) -> char {
         using T = std::decay_t<decltype(arg)>;
@@ -257,6 +262,11 @@ Value::operator char() const
             return '\0';  // TaskPtr can't be directly converted to a char, returning null character.
         }
     }, data_);
+}
+
+Value::operator char() const
+{
+    return toChar();
 }
 
 } // namespace cmd

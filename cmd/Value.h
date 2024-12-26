@@ -57,9 +57,11 @@ public:
 
 
     // Conversion operator to bool
+    bool toBool() const;
     operator bool() const;
 
     // Conversion operator to char
+    char toChar() const;
     operator char() const;
 
 private:
