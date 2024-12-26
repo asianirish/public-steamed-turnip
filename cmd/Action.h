@@ -34,6 +34,9 @@ public:
         return true;
     }
 
+    virtual VariantMap data() const {
+        return {};
+    }
 private:
     virtual Value actImpl(const ArgList &args, err::Error &error) = 0;
 
