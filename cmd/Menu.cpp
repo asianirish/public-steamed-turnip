@@ -5,13 +5,15 @@
 namespace turnip {
 namespace cmd {
 
-Menu::Menu() : helpAction_("HelpAction") {
+Menu::Menu() : helpAction_(ACTION_CLASS(HelpAction)) {
 
 }
 
-void Menu::registerAction(const std::string &commandName, const Value &actionInfo)
+LazyAction Menu::registerAction(const std::string &commandName, const Value &actionInfo)
 {
     auto data = actionInfo.data();
+
+    LazyAction retAction;
 
     std::string *pClassName = std::get_if<std::string>(&data);
     LazyAction *actionPtrPtr = std::get_if<LazyAction>(&data);
@@ -20,10 +22,12 @@ void Menu::registerAction(const std::string &commandName, const Value &actionInf
         auto className = *pClassName;
         LazyAction action(className);
         actions_.insert({commandName, action});
+        retAction = action;
 
     } else if (actionPtrPtr) {
         auto actionPtr = *actionPtrPtr;
         actions_.insert({commandName, actionPtr});
+        retAction = actionPtr;
     } // TODO: handle map
 
     {
@@ -35,6 +39,8 @@ void Menu::registerAction(const std::string &commandName, const Value &actionInf
         auto f = std::bind(&Menu::onTaskError, this, std::placeholders::_1);
         taskManager_.setErrorCallback(f);
     }
+
+    return retAction;
 }
 
 void Menu::registerHelpAction()

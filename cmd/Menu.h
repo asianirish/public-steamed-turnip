@@ -23,7 +23,7 @@ public:
 
     Menu();
 
-    void registerAction(const std::string &commandName, const Value &actionInfo);
+    LazyAction registerAction(const std::string &commandName, const Value &actionInfo);
 
     void registerHelpAction();
 
