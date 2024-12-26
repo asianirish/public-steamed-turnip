@@ -39,6 +39,16 @@ turnip::cmd::def::ActionDef TestActionMap::actionDef() const
         actionDef.addArgDef(argDef);
     }
 
+    {
+        const auto typeDef = def::TypeDef::createCharTypedef();
+        def::ArgDef argDef;
+        argDef.setType(typeDef);
+        argDef.setName("gender");
+        argDef.setDefaultValue('f');
+
+        actionDef.addArgDef(argDef);
+    }
+
     return actionDef;
 }
 
@@ -60,7 +70,7 @@ Value TestActionMap::actImpl(const turnip::cmd::ArgList &args, turnip::cmd::err:
     name_ = args.at(0).toString();
     age_ = args.at(1).toInt();
     height_ = args.at(2).toDouble();
-    // TODO: .toChar()
+    gender_ = args.at(3).toChar();
 
     Value mp = this->toMap();
 
