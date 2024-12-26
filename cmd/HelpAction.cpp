@@ -64,7 +64,11 @@ Value HelpAction::actImpl(const ArgList &args, err::Error &error)
             std::cout << "ARGUMENTS:" << std::endl;
             int i = 0;
             for (auto &argDef : argList) {
-                std::cout << "\t[" << i << "] (" << argDef.type().inputRep() << ") "  << argDef.name() << std::endl; // TODO: output type info
+                std::cout << "\t[" << i << "] (" << argDef.type().inputRep() << ") "  << argDef.name();
+                if (argDef.defaultValue()) {
+                    std::cout << " = " << argDef.defaultValue();
+                }
+                std::cout << std::endl; // TODO: output type info
                 ++i;
             }
         }
