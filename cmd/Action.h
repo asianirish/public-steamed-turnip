@@ -37,6 +37,12 @@ public:
     virtual VariantMap data() const {
         return {};
     }
+
+    // should not be used directly
+    static std::string checkClassName(const std::string &className) {
+        return className;
+    }
+
 private:
     virtual Value actImpl(const ArgList &args, err::Error &error) = 0;
 
@@ -48,6 +54,8 @@ private:
     Callback callback_; // Member to hold the callback function
     ErrorCallback errorCallback_;
 };
+
+#define ACTION_CLASS(className) className::checkClassName(#className)
 
 } // namespace cmd
 } // namespace turnip

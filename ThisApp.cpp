@@ -44,20 +44,20 @@ void ThisApp::registerActions()
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
 {
-    menu.registerAction("print", "PrintAction");
-    menu.registerAction("shv", "TestSharedVector");
-    menu.registerAction("cval", "TestCmdValue");
-    menu.registerAction("lazy", "TestLazyPointer");
-    menu.registerAction("conds", "ConditionalStringAction");
+    menu.registerAction("print", ACTION_CLASS(PrintAction));
+    menu.registerAction("shv", ACTION_CLASS(TestSharedVector));
+    menu.registerAction("cval", ACTION_CLASS(TestCmdValue));
+    menu.registerAction("lazy", ACTION_CLASS(TestLazyPointer));
+    menu.registerAction("conds", ACTION_CLASS(ConditionalStringAction));
 
-    auto mathAction = LazyAction("MenuAction");
+    auto mathAction = LazyAction(ACTION_CLASS(MenuAction));
     auto mathMenuAction = mathAction.dynamicCast<MenuAction>();
     mathMenuAction->setTranslator(translator());
     mathMenuAction->setMenuName("math");
 
-    mathMenuAction->addAction("even", "IsEven");
-    mathMenuAction->addAction("d2r", "DegreesToRadians");
-    mathMenuAction->addAction("sinr", "SineOfRadians");
+    mathMenuAction->addAction("even", ACTION_CLASS(IsEven));
+    mathMenuAction->addAction("d2r", ACTION_CLASS(DegreesToRadians));
+    mathMenuAction->addAction("sinr", ACTION_CLASS(SineOfRadians));
 
     mathMenuAction->addAction("sind", sineOfDegrees());
 
@@ -84,7 +84,7 @@ std::string ThisApp::appName() const
 LazyAction ThisApp::sineOfDegrees()
 {
     // auto sind = make_shared<CompositeAction>(new CompositeAction()); // TODO: enable direct creation
-    auto sind = LazyAction("CompositeAction");
+    auto sind = LazyAction(ACTION_CLASS(CompositeAction));
     auto caSind = sind.dynamicCast<CompositeAction>();
 
     def::ActionDef actionDef;
