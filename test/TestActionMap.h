@@ -19,6 +19,7 @@ private:
     int age_ {18};
     double height_ {1.58};
     char gender_ {'f'};
+    bool student_ {true};
 };
 
 #endif // TESTACTIONMAP_H

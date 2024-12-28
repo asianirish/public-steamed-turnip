@@ -49,6 +49,16 @@ turnip::cmd::def::ActionDef TestActionMap::actionDef() const
         actionDef.addArgDef(argDef);
     }
 
+    {
+        const auto typeDef = def::TypeDef::createBoolTypedef();
+        def::ArgDef argDef;
+        argDef.setType(typeDef);
+        argDef.setName("student");
+        argDef.setDefaultValue(false);
+
+        actionDef.addArgDef(argDef);
+    }
+
     return actionDef;
 }
 
@@ -59,6 +69,7 @@ VariantMap TestActionMap::data() const
     mp.set("age", age_);
     mp.set("height", height_);
     mp.set("gender", gender_);
+    mp.set("student", student_);
 
     return mp;
 }
@@ -71,6 +82,7 @@ Value TestActionMap::actImpl(const turnip::cmd::ArgList &args, turnip::cmd::err:
     age_ = args.at(1).toInt();
     height_ = args.at(2).toDouble();
     gender_ = args.at(3).toChar();
+    student_ = args.at(4).toBool();
 
     Value mp = this->toMap();
 
