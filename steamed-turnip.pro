@@ -16,6 +16,7 @@ SOURCES += \
         cmd/Global.cpp \
         cmd/HelpAction.cpp \
         cmd/Info.cpp \
+        cmd/InstanceSafeAction.cpp \
         cmd/LineTranslator.cpp \
         cmd/Menu.cpp \
         cmd/MenuAction.cpp \
@@ -67,6 +68,7 @@ HEADERS += \
     cmd/Global.h \
     cmd/HelpAction.h \
     cmd/Info.h \
+    cmd/InstanceSafeAction.h \
     cmd/LineTranslator.h \
     cmd/Menu.h \
     cmd/MenuAction.h \
