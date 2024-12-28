@@ -16,7 +16,7 @@ def::ActionDef DegreesToRadians::actionDef() const
     const auto typeDef = TypeDef::createDoubleTypedef();
     ArgDef argDef;
     argDef.setType(typeDef);
-    argDef.setName("defrees");
+    argDef.setName("degrees");
     actionDef.addArgDef(argDef);
 
     actionDef.setDescription("Converts the degree representation of an angle to radians");
