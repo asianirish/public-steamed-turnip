@@ -58,7 +58,6 @@ private:
         return {};
     }
 
-    std::mutex mutex_; // Protect shared resources
     Callback callback_; // Member to hold the callback function
     ErrorCallback errorCallback_;
 
