@@ -20,6 +20,7 @@ class Menu
 public:
     using ResultCallback = std::function<void(const std::string&)>;
     using ErrorCallback = std::function<void(const std::string&)>;
+    using StartCallback = std::function<void(const TaskId &)>;
 
     Menu();
 
@@ -48,6 +49,8 @@ public:
     std::string name() const;
     void setName(const std::string &newMenuName);
 
+    void setStartCallback(const StartCallback &newStartCallback);
+
 private:
     mutable std::list<std::string> commandList_;
 
@@ -59,6 +62,7 @@ private:
 
     ResultCallback resultCallback_;
     ErrorCallback errorCallback_;
+    StartCallback startCallback_;
 
     LazyAction helpAction_;
 
@@ -67,6 +71,8 @@ private:
     void onTaskComplete(const Value &result);
 
     void onTaskError(const err::Error &error);
+
+    void onTaskStart(const TaskId &taskId);
 
     LazyAction action(const std::string &command, bool *ok = nullptr) const;
 };

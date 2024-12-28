@@ -40,6 +40,11 @@ LazyAction Menu::registerAction(const std::string &commandName, const Value &act
         taskManager_.setErrorCallback(f);
     }
 
+    {
+        auto f = std::bind(&Menu::onTaskStart, this, std::placeholders::_1);
+        taskManager_.setStartCallback(f);
+    }
+
     return retAction;
 }
 
@@ -125,6 +130,11 @@ void Menu::setName(const std::string &newMenuName)
     name_ = newMenuName;
 }
 
+void Menu::setStartCallback(const StartCallback &newStartCallback)
+{
+    startCallback_ = newStartCallback;
+}
+
 void Menu::onTaskComplete(const Value &result)
 {
     if (resultCallback_) {
@@ -136,6 +146,13 @@ void Menu::onTaskError(const err::Error &error)
 {
     if (errorCallback_) {
         errorCallback_(error.description());
+    }
+}
+
+void Menu::onTaskStart(const TaskId &taskId)
+{
+    if (startCallback_) {
+        startCallback_(taskId);
     }
 }
 
