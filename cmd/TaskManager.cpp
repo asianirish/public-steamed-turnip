@@ -28,6 +28,10 @@ void TaskManager::execute(const LazyAction &action, const InputArgList &inputArg
             tsk->setErrorCallback(f);
         }
 
+        if (startCallback_) {
+            startCallback_(taskId);
+        }
+
         tsk->execute();
     }
 }
@@ -91,6 +95,11 @@ TaskPtr TaskManager::task(const LazyAction &action, const InputArgList &inputArg
     }
 
     return TaskPtr(new Task(actionPtr, args));
+}
+
+void TaskManager::setStartCallback(const StartCallback &newStartCallback)
+{
+    startCallback_ = newStartCallback;
 }
 
 void TaskManager::setErrorCallback(const ErrorCallback &newErrorCallback)

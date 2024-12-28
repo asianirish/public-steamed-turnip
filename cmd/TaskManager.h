@@ -16,12 +16,15 @@ public:
 
     using ResultCallback = std::function<void(const Value&)>;
     using ErrorCallback = std::function<void(const err::Error&)>;
+    using StartCallback = std::function<void(const TaskId&)>;
 
     void execute(const LazyAction &action, const InputArgList& inputArgs);
 
     void setCallback(const ResultCallback &newCallback);
 
     void setErrorCallback(const ErrorCallback &newErrorCallback);
+
+    void setStartCallback(const StartCallback &newStartCallback);
 
 private:
     // Member function to be called upon task completion
@@ -32,6 +35,7 @@ private:
 
     ResultCallback callback_;
     ErrorCallback errorCallback_;
+    StartCallback startCallback_;
 
     std::map<TaskId, TaskPtr> tasks_;
 };
