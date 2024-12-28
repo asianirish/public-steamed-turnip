@@ -313,6 +313,12 @@ void Reader::onError(const std::string &errorString)
     displayPrompt();
 }
 
+void Reader::onTaskStart(const cmd::TaskId &taskId)
+{
+    std::cout << "\nStart: " << taskId << std::endl;
+    displayPrompt();
+}
+
 std::string Reader::findStringWithPrefix(const std::string &prefix) const
 {
     if (prefix.empty()) {

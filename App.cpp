@@ -48,6 +48,12 @@ void App::exec()
         auto f = std::bind(&console::Reader::onError, &reader, std::placeholders::_1);
         mainMenu_.setErrorCallback(f);
     }
+
+    {
+        auto f = std::bind(&console::Reader::onTaskStart, &reader, std::placeholders::_1);
+        mainMenu_.setStartCallback(f);
+    }
+
     reader.read();
 }
 

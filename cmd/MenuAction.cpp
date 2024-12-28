@@ -52,6 +52,12 @@ Value MenuAction::actImpl(const ArgList &args, err::Error &error)
         auto f = std::bind(&console::Reader::onError, &reader, std::placeholders::_1);
         menu_.setErrorCallback(f);
     }
+
+    {
+        auto f = std::bind(&console::Reader::onTaskStart, &reader, std::placeholders::_1);
+        menu_.setStartCallback(f);
+    }
+
     reader.read();
 
     return true;
