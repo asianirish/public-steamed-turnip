@@ -27,7 +27,6 @@ def::ActionDef PrintAction::actionDef() const
 Value PrintAction::actImpl(const ArgList &args, err::Error &error)
 {
     (void)error;
-    std::cout << "\nPrintAction" << std::endl;
 
     sleep(20);
     // using namespace std::chrono_literals;
