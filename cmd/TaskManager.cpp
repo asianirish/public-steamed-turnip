@@ -3,8 +3,6 @@
 #include "cmd/Task.h"
 #include "cmd/err/ConversionException.h"
 
-#include <iostream>
-
 namespace turnip {
 namespace cmd {
 
@@ -16,7 +14,6 @@ void TaskManager::execute(const LazyAction &action, const InputArgList &inputArg
 
     if (tsk) {
         auto taskId = tsk->taskId();
-        std::cout << "inserting taskId: " << taskId << std::endl;
         tasks_.insert({taskId, tsk});
 
         {
