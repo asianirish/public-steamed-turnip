@@ -22,9 +22,6 @@ int64_t IntRep::inputImpl(const std::string &str)
     try {
         std::size_t pos;
         int64_t number = std::stoll(str, &pos, base());
-        if (pos != str.length()) {
-            throw err::ConversionException("int", str);
-        }
         return number;
     } catch (const std::exception &e) {
         throw err::ConversionException("int", str);
