@@ -156,7 +156,7 @@ void Menu::onTaskStart(const TaskId &taskId)
     }
 }
 
-LazyAction Menu::action(const std::string &command, bool *ok) const
+ActionPtr Menu::action(const std::string &command, bool *ok) const
 {
     if (ok) {
         *ok = false;
@@ -167,13 +167,13 @@ LazyAction Menu::action(const std::string &command, bool *ok) const
     if (actions_.find(command) == actions_.end()) {
 #endif
         errorCallback_("Menu error: Command '" + command + "' was not found.");
-        return {};
+        return nullptr;
     }
 
     if (ok) {
         *ok = true;
     }
-    return actions_.at(command);
+    return actions_.at(command).ptr();
 }
 
 

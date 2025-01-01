@@ -8,9 +8,9 @@ namespace cmd {
 
 TaskManager::TaskManager() {}
 
-void TaskManager::execute(const LazyAction &action, const InputArgList &inputArgs)
+void TaskManager::execute(const ActionPtr &actionPtr, const InputArgList &inputArgs)
 {
-    auto tsk = task(action, inputArgs);
+    auto tsk = task(actionPtr, inputArgs);
 
     if (tsk) {
         auto taskId = tsk->taskId();
@@ -18,12 +18,12 @@ void TaskManager::execute(const LazyAction &action, const InputArgList &inputArg
 
         {
             auto f = std::bind(&TaskManager::onTaskComplete, this, std::placeholders::_1);
-            action->setCallback(f);
+            actionPtr->setCallback(f);
         }
 
         {
             auto f = std::bind(&TaskManager::onError, this, std::placeholders::_1, std::placeholders::_2);
-            action->setErrorCallback(f);
+            actionPtr->setErrorCallback(f);
         }
 
         if (startCallback_) {
@@ -69,9 +69,8 @@ void TaskManager::onError(const TaskId &taskId, const err::Error &error)
     }
 }
 
-TaskPtr TaskManager::task(const LazyAction &action, const InputArgList &inputArgs)
+TaskPtr TaskManager::task(const ActionPtr &actionPtr, const InputArgList &inputArgs)
 {
-    auto actionPtr = action.ptr();
     ArgList args;
     auto actionDef = actionPtr->actionDef();
     auto argDefs = actionDef.argDefs();

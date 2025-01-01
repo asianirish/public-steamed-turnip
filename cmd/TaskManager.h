@@ -19,7 +19,7 @@ public:
     using ErrorCallback = std::function<void(const err::Error&)>;
     using StartCallback = std::function<void(const TaskId&)>;
 
-    void execute(const LazyAction &action, const InputArgList& inputArgs);
+    void execute(const ActionPtr &actionPtr, const InputArgList& inputArgs);
 
     void setCallback(const ResultCallback &newCallback);
 
@@ -32,7 +32,7 @@ private:
     void onTaskComplete(const Result &result);
     void onError(const TaskId &taskId, const err::Error &error);
 
-    TaskPtr task(const LazyAction &action, const InputArgList &inputArgs);
+    TaskPtr task(const ActionPtr &actionPtr, const InputArgList &inputArgs);
 
     ResultCallback callback_;
     ErrorCallback errorCallback_;
