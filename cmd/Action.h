@@ -48,6 +48,8 @@ public:
 
     VariantMap toMap() const;
 
+    ActionPtr clone() const;
+
 private:
     virtual Value actImpl(const ArgList &args, err::Error &error) = 0;
 
@@ -57,6 +59,10 @@ private:
 
     virtual VariantMap data() const {
         return {};
+    }
+
+    virtual void setData(const VariantMap &data) {
+        (void)data;
     }
 
     Callback callback_; // Member to hold the callback function

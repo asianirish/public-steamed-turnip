@@ -62,6 +62,16 @@ turnip::cmd::def::ActionDef TestActionMap::actionDef() const
     return actionDef;
 }
 
+void TestActionMap::setData(const turnip::cmd::VariantMap &data)
+{
+    name_ = data.get("name").toString();
+    age_ = data.get("age").toInt();
+    height_ = data.get("height").toDouble();
+    gender_ = data.get("gender").toChar();
+    student_ = data.get("student").toBool();
+
+}
+
 VariantMap TestActionMap::data() const
 {
     VariantMap mp;
@@ -86,5 +96,17 @@ Value TestActionMap::actImpl(const turnip::cmd::ArgList &args, turnip::cmd::err:
 
     Value mp = this->toMap();
 
-    return mp;
+    std::cout << "\nMY MAP: " << mp << std::endl;
+
+    VariantMap newMap ({{"name","Margarita"}, {"age", 19}, {"height", 1.685}, {"gender", 'f'}, {"student", true}});
+    setData(newMap);
+
+    std::cout << "NEW MAP: " << newMap << std::endl;
+
+    auto cln = this->clone();
+
+    Value clnMp = cln->toMap();
+
+    std::cout << "CLONE MAP: " << newMap << std::endl;
+    return true;
 }

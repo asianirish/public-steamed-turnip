@@ -73,6 +73,13 @@ VariantMap Action::toMap() const
     return mp;
 }
 
+ActionPtr Action::clone() const
+{
+    LazyAction cln(registeredClassName());
+    cln->setData(data());
+    return cln.ptr();
+}
+
 void Action::setErrorCallback(const ErrorCallback &newErrorCallback)
 {
     errorCallback_ = newErrorCallback;

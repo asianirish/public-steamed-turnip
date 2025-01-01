@@ -15,6 +15,8 @@ private:
 
     turnip::cmd::VariantMap data() const override;
 
+    void setData(const turnip::cmd::VariantMap &data) override;
+
     std::string name_ {"Maria"};
     int age_ {18};
     double height_ {1.58};
