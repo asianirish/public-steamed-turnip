@@ -1,5 +1,6 @@
 #include "Value.h"
 #include "Task.h"
+#include "Action.h"
 
 #include <sstream>
 #include <algorithm>
@@ -72,6 +73,26 @@ Value::Value(const LazyAction &action) : data_(action)
 bool Value::isNull() const
 {
     return std::holds_alternative<std::monostate>(data_);
+}
+
+bool Value::isTask() const
+{
+    return std::holds_alternative<TaskPtr>(data_);
+}
+
+bool Value::isMap() const
+{
+    return std::holds_alternative<VariantMap>(data_);
+}
+
+bool Value::isString() const
+{
+    return std::holds_alternative<std::string>(data_);
+}
+
+bool Value::isAction() const
+{
+    return std::holds_alternative<LazyAction>(data_);
 }
 
 std::string Value::toString() const
@@ -267,6 +288,56 @@ char Value::toChar() const
 Value::operator char() const
 {
     return toChar();
+}
+
+VariantMap Value::toMap() const
+{
+    if (isMap()) {
+        return std::get<VariantMap>(data_);
+    }
+
+    return {};
+}
+
+Value::operator VariantMap() const
+{
+    return toMap();
+}
+
+ActionPtr Value::toActionPtr() const
+{
+    if (isAction()) {
+        return std::get<LazyAction>(data_).ptr();
+    }
+
+    if (isMap()) {
+        auto mp = toMap();
+        auto action = Action::fromMap(mp);
+        return action;
+    }
+
+    return nullptr;
+}
+
+Value::operator ActionPtr() const
+{
+    return toActionPtr();
+}
+
+TaskPtr Value::toTaskPtr() const
+{
+    if (isTask()) {
+        return std::get<TaskPtr>(data_);
+    }
+
+    // TODO: from map (?)
+
+    return nullptr;
+}
+
+Value::operator TaskPtr() const
+{
+    return toTaskPtr();
 }
 
 } // namespace cmd

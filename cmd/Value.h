@@ -43,6 +43,14 @@ public:
 
     bool isNull() const;
 
+    bool isTask() const;
+
+    bool isMap() const;
+
+    bool isString() const;
+
+    bool isAction() const;
+
     // Conversion operator to std::string
     std::string toString() const;
     operator std::string() const;
@@ -63,6 +71,15 @@ public:
     // Conversion operator to char
     char toChar() const;
     operator char() const;
+
+    VariantMap toMap() const;
+    operator VariantMap() const;
+
+    ActionPtr toActionPtr() const;
+    operator ActionPtr() const;
+
+    TaskPtr toTaskPtr() const;
+    operator TaskPtr() const;
 
 private:
     ValueData data_;
