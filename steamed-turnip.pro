@@ -22,6 +22,7 @@ SOURCES += \
         cmd/MenuAction.cpp \
         cmd/Parameter.cpp \
         cmd/PrintAction.cpp \
+        cmd/Result.cpp \
         cmd/SafeAction.cpp \
         cmd/Substitutor.cpp \
         cmd/Task.cpp \
@@ -74,6 +75,7 @@ HEADERS += \
     cmd/MenuAction.h \
     cmd/Parameter.h \
     cmd/PrintAction.h \
+    cmd/Result.h \
     cmd/SafeAction.h \
     cmd/Substitutor.h \
     cmd/Task.h \
