@@ -16,6 +16,7 @@ public:
     void setActionParam(const Parameter &newActionParam);
 
     ParamList params() const;
+    void addParam(const Parameter &param);
 
     TaskPtr substitue(const ArgList &args);
 private:

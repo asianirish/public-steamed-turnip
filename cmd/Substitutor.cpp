@@ -21,6 +21,11 @@ ParamList Substitutor::params() const
     return params_;
 }
 
+void Substitutor::addParam(const Parameter &param)
+{
+    params_.push_back(param);
+}
+
 TaskPtr Substitutor::substitue(const ArgList &args)
 {
     (void)args;
