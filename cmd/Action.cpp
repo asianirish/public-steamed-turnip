@@ -73,6 +73,19 @@ VariantMap Action::toMap() const
     return mp;
 }
 
+ActionPtr Action::fromMap(const VariantMap &mp)
+{
+    auto className = mp.get(CLASS_NAME_KEY).toString();
+    auto lazyAction = LazyAction(className);
+
+    if (mp.contains(DATA_KEY)) {
+        auto data = mp.get(DATA_KEY).toMap();
+        lazyAction->setData(data);
+    }
+
+    return lazyAction.ptr();
+}
+
 ActionPtr Action::clone() const
 {
     LazyAction cln(registeredClassName());

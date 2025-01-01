@@ -48,6 +48,8 @@ public:
 
     VariantMap toMap() const;
 
+    static ActionPtr fromMap(const VariantMap &mp);
+
     ActionPtr clone() const;
 
 private:
