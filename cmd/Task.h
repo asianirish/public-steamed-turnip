@@ -2,9 +2,6 @@
 #define TASK_H
 
 #include "cmd/Types.h"
-#include "cmd/err/Error.h"
-
-#include <functional>
 
 namespace turnip {
 namespace cmd {
@@ -20,8 +17,6 @@ public:
     };
 
     static const TaskId FIRST_TASK_ID = 1024;
-    using ResultCallback = std::function<void(const Value&, TaskId)>;
-    using ErrorCallback = std::function<void(const err::Error&, TaskId)>;
 
     Task();
 
@@ -39,11 +34,6 @@ public:
 
     TaskId taskId() const;
 
-    ResultCallback resultCallback() const;
-    void setResultCallback(const ResultCallback &newResultCallback);
-
-    void setErrorCallback(const ErrorCallback &newErrorCallback);
-
     Status status() const;
 
 private:
@@ -53,17 +43,11 @@ private:
     TaskId taskId_;
     static TaskId maxTaskId_;
 
-    ResultCallback resultCallback_;
-    ErrorCallback errorCallback_;
-
     // Current status of the task
     Status status_;
 
     void executeAction();
 
-    // 'Slot' to be called on action completion
-    void onActionComplete(const Value &result);
-    void onError(const err::Error &error);
 };
 
 } // namespace cmd

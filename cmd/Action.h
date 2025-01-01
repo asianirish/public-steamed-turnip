@@ -1,6 +1,7 @@
 #ifndef ACTION_H
 #define ACTION_H
 
+#include "cmd/Result.h"
 #include "cmd/Types.h"
 #include "def/ActionDef.h"
 #include "err/Error.h"
@@ -22,12 +23,12 @@ public:
     virtual ~Action() = default;
 
     // Define a type for the callback function
-    using Callback = std::function<void(const Value&)>;
-    using ErrorCallback = std::function<void(const err::Error&)>;
+    using Callback = std::function<void(const Result&)>;
+    using ErrorCallback = std::function<void(const TaskId&, const err::Error&)>;
 
     void setCallback(Callback callback);
 
-    void act(const ArgList &args);
+    void act(const TaskId &taskId, const ArgList &args);
 
     virtual def::ActionDef actionDef() const = 0;
 
@@ -51,8 +52,8 @@ private:
     virtual Value actImpl(const ArgList &args, err::Error &error) = 0;
 
     // Function to notify via callback
-    void notify(const Value &result);
-    void notifyError(const err::Error &error);
+    void notify(const Result &result);
+    void notifyError(const TaskId &taskId, const err::Error &error);
 
     virtual VariantMap data() const {
         return {};

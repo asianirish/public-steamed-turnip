@@ -1,6 +1,7 @@
 #ifndef TASKMANAGER_H
 #define TASKMANAGER_H
 
+#include "cmd/Result.h"
 #include "cmd/Types.h"
 #include "cmd/err/Error.h"
 
@@ -28,8 +29,8 @@ public:
 
 private:
     // Member function to be called upon task completion
-    void onTaskComplete(const Value &result, TaskId taskId);
-    void onError(const err::Error &error, TaskId taskId);
+    void onTaskComplete(const Result &result);
+    void onError(const TaskId &taskId, const err::Error &error);
 
     TaskPtr task(const LazyAction &action, const InputArgList &inputArgs);
 

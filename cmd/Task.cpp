@@ -1,7 +1,6 @@
 #include "Task.h"
 #include "cmd/Action.h"
-#include "cmd/Value.h"
-#include <functional>
+
 #include <thread>
 
 namespace turnip {
@@ -72,21 +71,6 @@ TaskId Task::taskId() const
     return taskId_;
 }
 
-Task::ResultCallback Task::resultCallback() const
-{
-    return resultCallback_;
-}
-
-void Task::setResultCallback(const ResultCallback &newResultCallback)
-{
-    resultCallback_ = newResultCallback;
-}
-
-void Task::setErrorCallback(const ErrorCallback &newErrorCallback)
-{
-    errorCallback_ = newErrorCallback;
-}
-
 Task::Status Task::status() const
 {
     return status_;
@@ -94,31 +78,8 @@ Task::Status Task::status() const
 
 void Task::executeAction()
 {
-    // Set a callback using Task's member function
-    actionPtr_->setCallback(std::bind(&Task::onActionComplete, this, std::placeholders::_1));
-    actionPtr_->setErrorCallback(std::bind(&Task::onError, this, std::placeholders::_1));
-
     // Call the act method, which will execute actSpecific
-
-    actionPtr_->act(argList_);
-}
-
-void Task::onActionComplete(const Value &result)
-{
-    status_ = Status::Completed;
-
-    if (resultCallback_) {
-        resultCallback_(result, taskId_);
-    }
-}
-
-void Task::onError(const err::Error &error)
-{
-    status_ = Status::Failed;
-
-    if (errorCallback_) {
-        errorCallback_(error, taskId_);
-    }
+    actionPtr_->act(taskId_, argList_);
 }
 
 } // namespace cmd

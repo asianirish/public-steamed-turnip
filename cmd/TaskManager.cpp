@@ -16,16 +16,17 @@ void TaskManager::execute(const LazyAction &action, const InputArgList &inputArg
 
     if (tsk) {
         auto taskId = tsk->taskId();
+        std::cout << "inserting taskId: " << taskId << std::endl;
         tasks_.insert({taskId, tsk});
 
         {
-            auto f = std::bind(&TaskManager::onTaskComplete, this, std::placeholders::_1, std::placeholders::_2);
-            tsk->setResultCallback(f);
+            auto f = std::bind(&TaskManager::onTaskComplete, this, std::placeholders::_1);
+            action->setCallback(f);
         }
 
         {
             auto f = std::bind(&TaskManager::onError, this, std::placeholders::_1, std::placeholders::_2);
-            tsk->setErrorCallback(f);
+            action->setErrorCallback(f);
         }
 
         if (startCallback_) {
@@ -36,25 +37,38 @@ void TaskManager::execute(const LazyAction &action, const InputArgList &inputArg
     }
 }
 
-void TaskManager::onTaskComplete(const Value &result, TaskId taskId)
+void TaskManager::onTaskComplete(const Result &result)
 {
-    // TODO: check taskId
-    tasks_.erase(taskId);
+    auto taskId = result.taskId();
 
-    if (callback_) {
-        callback_(result);
+#if __cplusplus >= 202002L
+    if (tasks_.contains(taskId)) {
+#else
+    if (tasks_.find(taskId) != tasks_.end()) {
+#endif
+        // TODO: do not delete the task immediately (when?) and set Completed status (?)
+        tasks_.erase(taskId);
+
+        if (callback_) {
+            callback_(result.value());
+        }
     }
-
     // TODO: save the result of pure functions
 }
 
-void TaskManager::onError(const err::Error &error, TaskId taskId)
+void TaskManager::onError(const TaskId &taskId, const err::Error &error)
 {
-    // TODO: check taskId
-    tasks_.erase(taskId);
+#if __cplusplus >= 202002L
+    if (tasks_.contains(taskId)) {
+#else
+    if (tasks_.find(taskId) != tasks_.end()) {
+#endif
+        // TODO: do not delete the task immediately (when?) and set Failed status (?)
+        tasks_.erase(taskId);
 
-    if (errorCallback_) {
-        errorCallback_(error);
+        if (errorCallback_) {
+            errorCallback_(error);
+        }
     }
 }
 

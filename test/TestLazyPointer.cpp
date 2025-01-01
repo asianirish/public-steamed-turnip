@@ -22,14 +22,14 @@ Value TestLazyPointer::actImpl(const turnip::cmd::ArgList &args, turnip::cmd::er
     std::cout << "TEST LAZY POINTER" << std::endl;
 
     turnip::common::LazyPointer<Action> lptr("TestCmdValue");
-    lptr->act({});
+    lptr->act(0, {});
     std::cout << "*****************************" << std::endl;
-    lptr->act({});
+    lptr->act(0, {});
 
     turnip::common::LazyPointer<Action> lptr1("TestSharedVector");
-    lptr1->act({});
+    lptr1->act(0, {});
     std::cout << "*****************************" << std::endl;
-    lptr1->act({});
+    lptr1->act(0, {});
 
     return true;
 }

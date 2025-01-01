@@ -1,4 +1,5 @@
 #include "Action.h"
+#include "cmd/Result.h"
 #include "cmd/Value.h"
 
 namespace turnip {
@@ -14,31 +15,33 @@ void Action::setCallback(Callback callback)
     callback_ = callback;
 }
 
-void Action::act(const ArgList &args)
+void Action::act(const TaskId &taskId, const ArgList &args)
 {
     auto error = err::Error::createCustomError("Unkown error");
     // Call the specific action implementation
-    Value result = actImpl(args, error);
+    Value value = actImpl(args, error);
 
-    if (!result.isNull()) {
+
+    if (!value.isNull()) {
         // Notify that actImpl has concluded
+        Result result(taskId, value);
         notify(result);
     } else {
-        notifyError(error);
+        notifyError(taskId, error);
     }
 }
 
-void Action::notify(const Value &result)
+void Action::notify(const Result &result)
 {
     if (callback_) {
         callback_(result);
     }
 }
 
-void Action::notifyError(const err::Error &error)
+void Action::notifyError(const TaskId &taskId, const err::Error &error)
 {
     if (errorCallback_) {
-        errorCallback_(error);
+        errorCallback_(taskId, error);
     }
 }
 
