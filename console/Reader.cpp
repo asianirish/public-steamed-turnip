@@ -168,7 +168,7 @@ void Reader::onEnterKey(std::size_t &cursor_position, std::string &command, bool
         stop = true;
     }else if (command == "menu") {
         std::cout << "Available commands: " << std::endl;
-        std::cout << "(For more information, enter: `print help <command name>`)" << std::endl << std::endl;
+        std::cout << "(For more information, enter: `help <command name>`)" << std::endl << std::endl;
 
         displayMenu();
         displayPrompt();
