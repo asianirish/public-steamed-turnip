@@ -15,6 +15,8 @@ public:
 
 private:
     Value actImpl(const ArgList &args, err::Error &error) override;
+
+    std::mutex mutex_;
 };
 
 } // namespace cmd

@@ -32,9 +32,14 @@ Value PrintAction::actImpl(const ArgList &args, err::Error &error)
     // using namespace std::chrono_literals;
     // std::this_thread::sleep_for(20s);
 
-    for (int i = 0; i < 100000000; ++i) {
+    for (int i = 0; i < 100000; ++i) {
         for (auto &arg : args) {
-            std::cout << arg;
+            mutex_.lock();
+            for (int j = 0; j < 20; ++j) {
+                std::cout << arg;
+            }
+            std::cout << std::endl;
+            mutex_.unlock();
         }
     }
 
