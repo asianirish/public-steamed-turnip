@@ -51,6 +51,7 @@ SOURCES += \
         cmd/rep/SimpleStringRep.cpp \
         cmd/rep/StringRep.cpp \
         console/Reader.cpp \
+        example/MakeSentence.cpp \
         main.cpp \
         math/DegreesToRadians.cpp \
         math/IsEven.cpp \
@@ -110,6 +111,7 @@ HEADERS += \
     common/SharedMap.h \
     common/SharedVector.h \
     console/Reader.h \
+    example/MakeSentence.h \
     math/DegreesToRadians.h \
     math/IsEven.h \
     math/SineOfRadians.h \

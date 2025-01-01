@@ -6,6 +6,7 @@
 #include "cmd/LineTranslator.h"
 #include "cmd/HelpAction.h"
 
+#include "example/MakeSentence.h"
 #include "math/DegreesToRadians.h"
 #include "math/IsEven.h"
 
@@ -25,6 +26,7 @@ using namespace turnip;
 using namespace cmd;
 using namespace rep;
 using namespace math;
+using namespace example;
 
 ThisApp::ThisApp() {}
 
@@ -42,6 +44,7 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, SineOfRadians);
     REGISTER_TURNIP_CLASS(Action, CompositeAction);
     REGISTER_TURNIP_CLASS(Action, TestActionMap);
+    REGISTER_TURNIP_CLASS(Action, MakeSentence);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
@@ -66,6 +69,8 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("math", mathAction);
 
     menu.registerAction("amap", ACTION_CLASS(TestActionMap));
+
+    menu.registerAction("snt", ACTION_CLASS(MakeSentence));
 }
 
 const std::shared_ptr<cmd::Translator> ThisApp::createTranslator() const
