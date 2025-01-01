@@ -30,7 +30,7 @@ Value HelpAction::actImpl(const ArgList &args, err::Error &error)
 
         std::string commandName = args.at(0);
 
-        if (commandName == "menu") {
+        if (commandName == "menu" || commandName == "ls") {
             std::cout << "Display the list of available commands" << std::endl;
             return true;
         }

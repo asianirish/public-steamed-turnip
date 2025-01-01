@@ -166,7 +166,7 @@ void Reader::onEnterKey(std::size_t &cursor_position, std::string &command, bool
         return;
     } else if (command == "quit") {
         stop = true;
-    }else if (command == "menu") {
+    }else if (command == "menu" || command == "ls") {
         std::cout << "Available commands: " << std::endl;
         std::cout << "(For more information, enter: `help <command name>`)" << std::endl << std::endl;
 
