@@ -17,6 +17,8 @@ private:
     std::string appName() const override;
 
     turnip::cmd::LazyAction sineOfDegrees();
+    turnip::cmd::LazyAction reverseSentence();
+
 };
 
 #endif // THISAPP_H

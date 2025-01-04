@@ -71,6 +71,8 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("amap", ACTION_CLASS(TestActionMap));
 
     menu.registerAction("snt", ACTION_CLASS(MakeSentence));
+
+    menu.registerAction("rvrs", reverseSentence());
 }
 
 const std::shared_ptr<cmd::Translator> ThisApp::createTranslator() const
@@ -88,6 +90,54 @@ void ThisApp::registerRepresentaions()
 std::string ThisApp::appName() const
 {
     return std::string(TARGET_NAME);
+}
+
+LazyAction ThisApp::reverseSentence()
+{
+    auto rvrs = LazyAction(ACTION_CLASS(CompositeAction));
+    auto caRvrs = rvrs.dynamicCast<CompositeAction>();
+
+    def::ActionDef actionDef;
+
+    const auto typeDef = def::TypeDef::createStringTypedef();
+
+    {
+        def::ArgDef argDef;
+        argDef.setType(typeDef);
+        argDef.setName("subject");
+        actionDef.addArgDef(argDef);
+    }
+
+    {
+        def::ArgDef argDef;
+        argDef.setType(typeDef);
+        argDef.setName("verb");
+        actionDef.addArgDef(argDef);
+    }
+
+    {
+        def::ArgDef argDef;
+        argDef.setType(typeDef);
+        argDef.setName("object");
+        actionDef.addArgDef(argDef);
+    }
+
+    actionDef.setDescription("Reverses a sentence");
+    caRvrs->setActionDef(actionDef);
+
+    Substitutor sbst;
+    Parameter actionParam;
+    auto sntAction = LazyAction(ACTION_CLASS(MakeSentence));
+    actionParam.setValue(sntAction);
+
+    sbst.setActionParam(actionParam);
+    sbst.addParam(Parameter(2));
+    sbst.addParam(Parameter(1));
+    sbst.addParam(Parameter(0));
+
+    caRvrs->setSubstitutor(sbst);
+
+    return rvrs;
 }
 
 LazyAction ThisApp::sineOfDegrees()
