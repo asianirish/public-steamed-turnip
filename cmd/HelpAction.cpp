@@ -18,6 +18,7 @@ def::ActionDef HelpAction::actionDef() const
     actionDef.addArgDef(argDef);
 
     actionDef.setDescription("Displays information about a specified command");
+    actionDef.setResultRepresentation(NullRep().classKey());
 
     return actionDef;
 }
