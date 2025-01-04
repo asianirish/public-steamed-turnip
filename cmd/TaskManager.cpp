@@ -27,6 +27,15 @@ void TaskManager::onTaskComplete(const Result &result)
     if (tasks_.find(taskId) != tasks_.end()) {
 #endif
 
+        if (result.isTask()) {
+            auto rep = result.representation();
+            if (!rep || rep->metaType().type() != def::MetaType::Task) {
+                // TODO: execute the subtask of the task
+                std::cout << "THIS IS A TASK: " << result.taskId() << std::endl; // TEST
+                return;
+            }
+        }
+
         // TODO: do not delete the task immediately (when?) and set Completed status (?)
         tasks_.erase(taskId);
 
