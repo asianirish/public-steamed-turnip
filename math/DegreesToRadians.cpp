@@ -20,6 +20,7 @@ def::ActionDef DegreesToRadians::actionDef() const
     actionDef.addArgDef(argDef);
 
     actionDef.setDescription("Converts the degree representation of an angle to radians");
+    actionDef.setResultRepresentation(DoubleRep().classKey());
 
     return actionDef;
 }
