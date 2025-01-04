@@ -18,7 +18,7 @@ namespace cmd {
 class Menu
 {
 public:
-    using ResultCallback = std::function<void(const std::string&)>;
+    using ResultCallback = std::function<void(const Result&)>;
     using ErrorCallback = std::function<void(const std::string&)>;
     using StartCallback = std::function<void(const TaskId &)>;
 
@@ -68,7 +68,7 @@ private:
 
     std::string name_ {"steamed-turnip"};
 
-    void onTaskComplete(const Value &result);
+    void onTaskComplete(const Result &result);
 
     void onTaskError(const err::Error &error);
 

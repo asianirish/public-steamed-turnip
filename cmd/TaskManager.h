@@ -15,7 +15,7 @@ class TaskManager
 public:
     TaskManager();
 
-    using ResultCallback = std::function<void(const Value&)>;
+    using ResultCallback = std::function<void(const Result&)>;
     using ErrorCallback = std::function<void(const err::Error&)>;
     using StartCallback = std::function<void(const TaskId&)>;
 

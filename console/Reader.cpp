@@ -301,9 +301,17 @@ void Reader::onDownArrowKey(std::size_t &cursor_position, std::string &command)
     }
 }
 
-void Reader::onResult(const std::string &resultString)
+void Reader::onResult(const cmd::Result &result)
 {
-    std::cout << "\nResult: " << resultString << std::endl << std::endl;
+    std::cout << "\nTaskId: " << result.taskId() << std::endl;
+
+    auto rep = result.representation();
+
+    if (rep) {
+        std::cout << "Result: " << rep->output(result.value())<< std::endl << std::endl;
+    } else {
+        std::cout << "Result: " << result.value() << std::endl << std::endl;
+    }
     displayPrompt();
 }
 

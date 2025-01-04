@@ -26,11 +26,12 @@ void TaskManager::onTaskComplete(const Result &result)
 #else
     if (tasks_.find(taskId) != tasks_.end()) {
 #endif
+
         // TODO: do not delete the task immediately (when?) and set Completed status (?)
         tasks_.erase(taskId);
 
         if (callback_) {
-            callback_(result.value());
+            callback_(result);
         }
     }
     // TODO: save the result of pure functions

@@ -1,6 +1,7 @@
 #ifndef READER_H
 #define READER_H
 
+#include "cmd/Result.h"
 #include "cmd/Types.h"
 #include "common/LimitedStack.h"
 
@@ -23,7 +24,7 @@ public:
 
     void setCallback(const Callback &newCallback);
 
-    void onResult(const std::string &resultString);
+    void onResult(const cmd::Result &result);
     void onError(const std::string &errorString);
     void onTaskStart(const cmd::TaskId &taskId);
 

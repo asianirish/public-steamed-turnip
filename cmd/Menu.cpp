@@ -135,7 +135,7 @@ void Menu::setStartCallback(const StartCallback &newStartCallback)
     startCallback_ = newStartCallback;
 }
 
-void Menu::onTaskComplete(const Value &result)
+void Menu::onTaskComplete(const Result &result)
 {
     if (resultCallback_) {
         resultCallback_(result);
