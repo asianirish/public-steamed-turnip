@@ -34,6 +34,8 @@ private:
 
     TaskPtr task(const ActionPtr &actionPtr, const InputArgList &inputArgs);
 
+    void execute(const TaskPtr &taskPtr);
+
     ResultCallback callback_;
     ErrorCallback errorCallback_;
     StartCallback startCallback_;

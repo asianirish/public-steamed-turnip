@@ -10,27 +10,10 @@ TaskManager::TaskManager() {}
 
 void TaskManager::execute(const ActionPtr &actionPtr, const InputArgList &inputArgs)
 {
-    auto tsk = task(actionPtr, inputArgs);
+    auto taskPtr = task(actionPtr, inputArgs);
 
-    if (tsk) {
-        auto taskId = tsk->taskId();
-        tasks_.insert({taskId, tsk});
-
-        {
-            auto f = std::bind(&TaskManager::onTaskComplete, this, std::placeholders::_1);
-            actionPtr->setCallback(f);
-        }
-
-        {
-            auto f = std::bind(&TaskManager::onError, this, std::placeholders::_1, std::placeholders::_2);
-            actionPtr->setErrorCallback(f);
-        }
-
-        if (startCallback_) {
-            startCallback_(taskId);
-        }
-
-        tsk->execute();
+    if (taskPtr) {
+        execute(taskPtr);
     }
 }
 
@@ -105,6 +88,29 @@ TaskPtr TaskManager::task(const ActionPtr &actionPtr, const InputArgList &inputA
     }
 
     return TaskPtr(new Task(actionPtr, args));
+}
+
+void TaskManager::execute(const TaskPtr &taskPtr)
+{
+    auto taskId = taskPtr->taskId();
+    auto actionPtr = taskPtr->actionPtr();
+    tasks_.insert({taskId, taskPtr});
+
+    {
+        auto f = std::bind(&TaskManager::onTaskComplete, this, std::placeholders::_1);
+        actionPtr->setCallback(f);
+    }
+
+    {
+        auto f = std::bind(&TaskManager::onError, this, std::placeholders::_1, std::placeholders::_2);
+        actionPtr->setErrorCallback(f);
+    }
+
+    if (startCallback_) {
+        startCallback_(taskId);
+    }
+
+    taskPtr->execute();
 }
 
 void TaskManager::setStartCallback(const StartCallback &newStartCallback)
