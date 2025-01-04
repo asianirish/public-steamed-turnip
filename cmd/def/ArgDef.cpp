@@ -56,6 +56,16 @@ ArgDef::operator bool() const
     return static_cast<bool>(type_);
 }
 
+bool ArgDef::mustBeCalculated() const
+{
+    return mustBeCalculated_;
+}
+
+void ArgDef::setMustBeCalculated(bool newMustBeCalculated)
+{
+    mustBeCalculated_ = newMustBeCalculated;
+}
+
 } // namespace def
 } // namespace cmd
 } // namespace turnip

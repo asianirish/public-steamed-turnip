@@ -29,12 +29,17 @@ public:
 
     operator bool() const;
 
+    bool mustBeCalculated() const;
+    void setMustBeCalculated(bool newMustBeCalculated);
+
 private:
     TypeDef type_;
     std::string name_;
     std::string desc_;
 
     Value defaultValue_;
+
+    bool mustBeCalculated_ {true};
 };
 
 } // namespace def
