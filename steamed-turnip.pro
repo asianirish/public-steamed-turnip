@@ -31,6 +31,7 @@ SOURCES += \
         cmd/Value.cpp \
         cmd/def/ActionDef.cpp \
         cmd/def/ArgDef.cpp \
+        cmd/def/MetaType.cpp \
         cmd/def/TypeDef.cpp \
         cmd/err/AdditionalInfo.cpp \
         cmd/err/ArgumentConversionInfo.cpp \
@@ -86,6 +87,7 @@ HEADERS += \
     cmd/Value.h \
     cmd/def/ActionDef.h \
     cmd/def/ArgDef.h \
+    cmd/def/MetaType.h \
     cmd/def/TypeDef.h \
     cmd/err/AdditionalInfo.h \
     cmd/err/ArgumentConversionInfo.h \
