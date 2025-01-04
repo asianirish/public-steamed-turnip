@@ -23,6 +23,8 @@ public:
     void setRepresentation(const std::string &repKey);
     const rep::Representation *representation() const;
 
+    bool isTask() const;
+
 private:
     TaskId taskId_;
     Value value_;

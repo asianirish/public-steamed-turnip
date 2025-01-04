@@ -44,5 +44,10 @@ const rep::Representation *Result::representation() const
     return representation_;
 }
 
+bool Result::isTask() const
+{
+    return value_.isTask();
+}
+
 } // namespace cmd
 } // namespace turnip
