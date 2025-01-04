@@ -12,8 +12,8 @@ class NullRep : public Representation
 public:
     NullRep();
 
-    Value input(const std::string &str) override;
-    std::string output(const Value &value) override;
+    Value input(const std::string &str) const override;
+    std::string output(const Value &value) const override;
 
     std::string nullString() const;
     void setNullString(const std::string &newNull_string);

@@ -6,7 +6,7 @@ namespace rep {
 
 SimpleCharRep::SimpleCharRep() {}
 
-char SimpleCharRep::inputImpl(const std::string &str)
+char SimpleCharRep::inputImpl(const std::string &str) const
 {
     if (str.empty()) {
         return '\0';
@@ -15,7 +15,7 @@ char SimpleCharRep::inputImpl(const std::string &str)
     return str.at(0);
 }
 
-std::string SimpleCharRep::outputImpl(char character)
+std::string SimpleCharRep::outputImpl(char character) const
 {
     return std::string(1, character);
 }

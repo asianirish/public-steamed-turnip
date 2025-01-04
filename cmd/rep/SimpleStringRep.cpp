@@ -6,12 +6,12 @@ namespace rep {
 
 SimpleStringRep::SimpleStringRep() {}
 
-std::string SimpleStringRep::inputImpl(const std::string &str)
+std::string SimpleStringRep::inputImpl(const std::string &str) const
 {
     return str;
 }
 
-std::string SimpleStringRep::outputImpl(const std::string &stringValue)
+std::string SimpleStringRep::outputImpl(const std::string &stringValue) const
 {
     return stringValue;
 }

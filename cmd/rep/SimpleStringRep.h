@@ -12,8 +12,8 @@ class SimpleStringRep : public StringRep
 public:
     SimpleStringRep();
 
-    std::string inputImpl(const std::string &str) override;
-    std::string outputImpl(const std::string &stringValue) override;
+    std::string inputImpl(const std::string &str) const override;
+    std::string outputImpl(const std::string &stringValue) const override;
 
     std::string classKey() const override {
         return "default_string";

@@ -23,8 +23,8 @@ public:
 
     BoolRep(Kind kind = Kind::TrueFalse);
 
-    virtual Value input(const std::string &str) override;
-    virtual std::string output(const Value &value) override;
+    virtual Value input(const std::string &str) const override;
+    virtual std::string output(const Value &value) const override;
 
     std::string represent(bool yes) const;
 

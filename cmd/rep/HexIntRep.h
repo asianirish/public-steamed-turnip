@@ -17,7 +17,7 @@ public:
     }
 private:
     // Converts an int64_t to its hexadecimal string representation
-    std::string outputImpl(int64_t number) override;
+    std::string outputImpl(int64_t number) const override;
 
     int base() const override {
         return 16;

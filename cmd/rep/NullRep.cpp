@@ -6,13 +6,13 @@ namespace rep {
 
 NullRep::NullRep() {}
 
-Value NullRep::input(const std::string &str)
+Value NullRep::input(const std::string &str) const
 {
     (void)str;
     return Value();
 }
 
-std::string NullRep::output(const Value &value)
+std::string NullRep::output(const Value &value) const
 {
     (void)value;
     return nullString_;

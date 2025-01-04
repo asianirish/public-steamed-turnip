@@ -8,7 +8,7 @@ namespace rep {
 
 HexIntRep::HexIntRep() {}
 
-std::string HexIntRep::outputImpl(int64_t number)
+std::string HexIntRep::outputImpl(int64_t number) const
 {
     std::stringstream ss;
     ss << std::hex << number;

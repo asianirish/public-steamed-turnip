@@ -12,12 +12,12 @@ class CharRep : public Representation
 public:
     CharRep();
 
-    Value input(const std::string &str) override;
-    std::string output(const Value &value) override;
+    Value input(const std::string &str) const override;
+    std::string output(const Value &value) const override;
 
 private:
-    virtual char inputImpl(const std::string &str) = 0;
-    virtual std::string outputImpl(char character) = 0;
+    virtual char inputImpl(const std::string &str) const = 0;
+    virtual std::string outputImpl(char character) const = 0;
 };
 
 } // namespace rep

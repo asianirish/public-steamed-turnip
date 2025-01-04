@@ -13,7 +13,7 @@ const std::map<BoolRep::Kind, std::pair<std::string, std::string> > BoolRep::KIN
 
 BoolRep::BoolRep(Kind kind) : kind_(kind) {}
 
-Value BoolRep::input(const std::string &str)
+Value BoolRep::input(const std::string &str) const
 {
     if (str == represent(true)) {
         return true;
@@ -24,7 +24,7 @@ Value BoolRep::input(const std::string &str)
     return {};
 }
 
-std::string BoolRep::output(const Value &value)
+std::string BoolRep::output(const Value &value) const
 {
     bool yes = value;
     return represent(yes);

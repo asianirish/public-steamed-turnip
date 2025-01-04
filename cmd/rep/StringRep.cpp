@@ -6,12 +6,12 @@ namespace rep {
 
 StringRep::StringRep() {}
 
-Value StringRep::input(const std::string &str)
+Value StringRep::input(const std::string &str) const
 {
     return inputImpl(str);
 }
 
-std::string StringRep::output(const Value &value)
+std::string StringRep::output(const Value &value) const
 {
     return outputImpl(value);
 }

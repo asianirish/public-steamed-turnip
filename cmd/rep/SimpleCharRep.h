@@ -17,8 +17,8 @@ public:
     }
 
 private:
-    char inputImpl(const std::string &str) override;
-    std::string outputImpl(char character) override;
+    char inputImpl(const std::string &str) const override;
+    std::string outputImpl(char character) const override;
 };
 
 } // namespace rep

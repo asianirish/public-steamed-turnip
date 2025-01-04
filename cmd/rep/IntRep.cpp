@@ -7,17 +7,17 @@ namespace rep {
 
 IntRep::IntRep() {}
 
-Value IntRep::input(const std::string &str)
+Value IntRep::input(const std::string &str) const
 {
     return inputImpl(str);
 }
 
-std::string IntRep::output(const Value &value)
+std::string IntRep::output(const Value &value) const
 {
     return outputImpl(value);
 }
 
-int64_t IntRep::inputImpl(const std::string &str)
+int64_t IntRep::inputImpl(const std::string &str) const
 {
     try {
         std::size_t pos;

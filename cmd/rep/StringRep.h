@@ -12,11 +12,11 @@ class StringRep : public Representation
 public:
     StringRep();
 
-    Value input(const std::string &str);
-    std::string output(const Value &value);
+    Value input(const std::string &str) const override;
+    std::string output(const Value &value) const override;
 private:
-    virtual std::string inputImpl(const std::string &str) = 0;
-    virtual std::string outputImpl(const std::string &stringValue) = 0;
+    virtual std::string inputImpl(const std::string &str) const = 0;
+    virtual std::string outputImpl(const std::string &stringValue) const = 0;
 };
 
 } // namespace rep

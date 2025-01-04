@@ -12,8 +12,8 @@ class Representation
 public:
     Representation();
 
-    virtual Value input(const std::string &str) = 0;
-    virtual std::string output(const Value &value) = 0;
+    virtual Value input(const std::string &str) const = 0;
+    virtual std::string output(const Value &value) const = 0;
 
     virtual std::string classKey() const = 0;
 };

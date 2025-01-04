@@ -8,12 +8,12 @@ namespace rep {
 
 DoubleRep::DoubleRep() {}
 
-Value DoubleRep::input(const std::string &str)
+Value DoubleRep::input(const std::string &str) const
 {
     return inputImpl(str);
 }
 
-std::string DoubleRep::output(const Value &value)
+std::string DoubleRep::output(const Value &value) const
 {
     return outputImpl(value);
 }
@@ -23,12 +23,12 @@ std::string DoubleRep::classKey() const
     return "default_double";
 }
 
-double DoubleRep::inputImpl(const std::string &str)
+double DoubleRep::inputImpl(const std::string &str) const
 {
     return std::stod(str);
 }
 
-std::string DoubleRep::outputImpl(double number)
+std::string DoubleRep::outputImpl(double number) const
 {
     std::ostringstream oss;
     oss.precision(precision()); // Sets the precision to precision() significant digits

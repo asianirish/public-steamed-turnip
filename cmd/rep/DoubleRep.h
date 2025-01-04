@@ -12,16 +12,16 @@ class DoubleRep : public Representation
 public:
     DoubleRep();
 
-    Value input(const std::string &str) override;
-    std::string output(const Value &value) override;
+    Value input(const std::string &str) const override;
+    std::string output(const Value &value) const override;
 
     std::string classKey() const override;
 private:
-    double inputImpl(const std::string &str);
+    double inputImpl(const std::string &str) const;
 
     // Converts a double to a string in fixed precision format, avoiding scientific notation.
     // Can be overridden in derived classes for custom representation.
-    virtual std::string outputImpl(double number);
+    virtual std::string outputImpl(double number) const;
 
     // Returns the default precision for double representation.
     // Can be overridden in derived classes for custom precision levels.
