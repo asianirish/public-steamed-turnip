@@ -23,6 +23,11 @@ std::string DoubleRep::classKey() const
     return "default_double";
 }
 
+def::MetaType DoubleRep::metaType() const
+{
+    return def::MetaType::Double;
+}
+
 double DoubleRep::inputImpl(const std::string &str) const
 {
     return std::stod(str);

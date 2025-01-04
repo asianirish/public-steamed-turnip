@@ -37,6 +37,8 @@ public:
     std::string classKey() const override {
         return "default_bool";
     }
+
+    def::MetaType metaType() const override;
 private:
     Kind kind_ {Kind::TrueFalse};
 

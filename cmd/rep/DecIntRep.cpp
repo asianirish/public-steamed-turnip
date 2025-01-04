@@ -7,7 +7,6 @@ namespace rep {
 
 DecIntRep::DecIntRep() {}
 
-
 std::string DecIntRep::outputImpl(int64_t number) const
 {
     return std::to_string(number);

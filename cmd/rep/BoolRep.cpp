@@ -59,6 +59,11 @@ void BoolRep::setCustomFalse(const std::string &newCustomFalse)
     customFalse_ = newCustomFalse;
 }
 
+def::MetaType BoolRep::metaType() const
+{
+    return def::MetaType::Bool;
+}
+
 } // namespace rep
 } // namespace cmd
 } // namespace turnip

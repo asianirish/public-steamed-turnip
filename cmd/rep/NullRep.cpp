@@ -28,6 +28,11 @@ void NullRep::setNullString(const std::string &newNull_string)
     nullString_ = newNull_string;
 }
 
+def::MetaType NullRep::metaType() const
+{
+    return def::MetaType::Invalid;
+}
+
 } // namespace rep
 } // namespace cmd
 } // namespace turnip

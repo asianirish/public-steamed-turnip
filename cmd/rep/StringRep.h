@@ -14,6 +14,8 @@ public:
 
     Value input(const std::string &str) const override;
     std::string output(const Value &value) const override;
+
+    def::MetaType metaType() const override;
 private:
     virtual std::string inputImpl(const std::string &str) const = 0;
     virtual std::string outputImpl(const std::string &stringValue) const = 0;

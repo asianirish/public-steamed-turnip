@@ -16,6 +16,11 @@ std::string StringRep::output(const Value &value) const
     return outputImpl(value);
 }
 
+def::MetaType StringRep::metaType() const
+{
+    return def::MetaType::String;
+}
+
 } // namespace rep
 } // namespace cmd
 } // namespace turnip

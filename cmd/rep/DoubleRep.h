@@ -16,6 +16,9 @@ public:
     std::string output(const Value &value) const override;
 
     std::string classKey() const override;
+
+    def::MetaType metaType() const override;
+
 private:
     double inputImpl(const std::string &str) const;
 

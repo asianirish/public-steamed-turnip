@@ -17,6 +17,11 @@ std::string IntRep::output(const Value &value) const
     return outputImpl(value);
 }
 
+def::MetaType IntRep::metaType() const
+{
+    return def::MetaType::Int;
+}
+
 int64_t IntRep::inputImpl(const std::string &str) const
 {
     try {
@@ -24,7 +29,7 @@ int64_t IntRep::inputImpl(const std::string &str) const
         int64_t number = std::stoll(str, &pos, base());
         return number;
     } catch (const std::exception &e) {
-        throw err::ConversionException("int", str);
+        throw err::ConversionException(metaType().name(), str);
     }
 }
 

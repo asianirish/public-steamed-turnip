@@ -2,6 +2,7 @@
 #define REPRESENTATION_H
 
 #include "cmd/Value.h"
+#include "cmd/def/MetaType.h"
 
 namespace turnip {
 namespace cmd {
@@ -16,6 +17,8 @@ public:
     virtual std::string output(const Value &value) const = 0;
 
     virtual std::string classKey() const = 0;
+
+    virtual def::MetaType metaType() const = 0;
 };
 
 } // namespace rep

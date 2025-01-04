@@ -22,6 +22,8 @@ public:
         return "default_null";
     }
 
+    def::MetaType metaType() const override;
+
 private:
     std::string nullString_ {"null"};
 

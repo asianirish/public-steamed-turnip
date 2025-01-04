@@ -15,6 +15,8 @@ public:
     Value input(const std::string &str) const override;
     std::string output(const Value &value) const override;
 
+    def::MetaType metaType() const override;
+
 private:
     int64_t inputImpl(const std::string &str) const;
     virtual std::string outputImpl(int64_t number) const = 0;
