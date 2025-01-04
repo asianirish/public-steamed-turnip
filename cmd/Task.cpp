@@ -43,16 +43,16 @@ Task::operator bool() const
     return static_cast<bool>(actionPtr_);
 }
 
-void Task::execute()
+void Task::execute(ExecType execType)
 {
     status_ = Status::Running;
 
-    if (actionPtr_->isAsync()) {
-        // TEST: alternative for std::thread
-        // auto a = std::async(&TaskManager::executeAction, this, actionPtr, args);
-        // auto b = a.share();
-        // static std::list<decltype(b)> lst;
-        // lst.push_back(b);
+    if (execType == ExecType::Direct) {
+        executeAction();
+        return;
+    }
+
+    if (actionPtr_->isAsync() || execType == ExecType::Thread) {
 
         // Create a new thread to execute the action
         std::thread actionThread(&Task::executeAction, this);
