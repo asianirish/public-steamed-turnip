@@ -23,8 +23,10 @@ void Action::act(const TaskId &taskId, const ArgList &args)
 
 
     if (!value.isNull()) {
+        auto rep = actionDef().resultRepresentation();
+
         // Notify that actImpl has concluded
-        Result result(taskId, value);
+        Result result(taskId, value, rep);
         notify(result);
     } else {
         notifyError(taskId, error);
