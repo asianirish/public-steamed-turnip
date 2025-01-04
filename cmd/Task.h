@@ -46,8 +46,9 @@ private:
     // Current status of the task
     Status status_;
 
-    void executeAction();
+    std::map<TaskId, TaskPtr> argTasks_;
 
+    void executeAction();
 };
 
 } // namespace cmd
