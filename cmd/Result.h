@@ -3,6 +3,7 @@
 
 #include "cmd/Types.h"
 #include "cmd/Value.h"
+#include "cmd/rep/Representation.h"
 
 namespace turnip {
 namespace cmd {
@@ -11,7 +12,7 @@ class Result
 {
 public:
     Result();
-    Result(const TaskId &taskId, const Value &value);
+    Result(const TaskId &taskId, const Value &value, const rep::Representation *representation);
 
     TaskId taskId() const;
     void setTaskId(TaskId newTaskId);
@@ -19,9 +20,13 @@ public:
     Value value() const;
     void setValue(const Value &newValue);
 
+    void setRepresentation(const std::string &repKey);
+    const rep::Representation *representation() const;
+
 private:
     TaskId taskId_;
     Value value_;
+    const rep::Representation *representation_ = 0;
 };
 
 } // namespace cmd
