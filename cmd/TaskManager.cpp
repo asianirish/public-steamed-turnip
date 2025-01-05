@@ -28,13 +28,12 @@ void TaskManager::onTaskComplete(const Result &result)
 #endif
 
         if (result.isTask()) {
-            auto rep = result.representation();
-            if (!rep || rep->metaType().type() != def::MetaType::Task) {
-                // TODO: execute the subtask of the task
-                std::cout << "THIS IS A TASK: " << result.taskId() << std::endl; // TEST
+            if (handleTaskResult(result)) {
                 return;
             }
         }
+
+        // TODO: handle a list of tasks
 
         // TODO: do not delete the task immediately (when?) and set Completed status (?)
         tasks_.erase(taskId);
@@ -98,6 +97,31 @@ TaskPtr TaskManager::task(const ActionPtr &actionPtr, const InputArgList &inputA
     }
 
     return TaskPtr(new Task(actionPtr, args));
+}
+
+bool TaskManager::handleTaskResult(const Result &result)
+{
+    auto rep = result.representation();
+    if (!rep || rep->metaType().type() != def::MetaType::Task) {
+        auto taskId = result.taskId();
+        auto task = tasks_.at(taskId);
+        auto subTask = result.value().toTaskPtr();
+
+        {
+            auto f = std::bind(&TaskManager::onTaskComplete, this, std::placeholders::_1);
+            task->setSubTaskCallback(f);
+        }
+
+        {
+            auto f = std::bind(&TaskManager::onError, this, std::placeholders::_1, std::placeholders::_2);
+            task->setErrorSubTaskCallback(f);
+        }
+
+        task->executeSubTask(subTask);
+        return true;
+    }
+
+    return false;
 }
 
 void TaskManager::execute(const TaskPtr &taskPtr, ExecType execType)

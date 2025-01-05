@@ -1,5 +1,6 @@
 #include "Task.h"
 #include "cmd/Action.h"
+#include "cmd/TaskManager.h"
 
 #include <thread>
 
@@ -71,6 +72,33 @@ TaskId Task::taskId() const
     return taskId_;
 }
 
+void Task::executeSubTask(const TaskPtr &subTask)
+{
+    subTaskManager_ = std::make_shared<TaskManager>();
+
+    {
+        auto f = std::bind(&Task::onSubTaskComplete, this, std::placeholders::_1);
+        subTaskManager_->setCallback(f);
+    }
+
+    {
+        auto f = std::bind(&Task::onSubTaskError, this, std::placeholders::_1);
+        subTaskManager_->setErrorCallback(f);
+    }
+
+    subTaskManager_->execute(subTask, ExecType::Direct);
+}
+
+void Task::setSubTaskCallback(const Callback &newSubTaskCallback)
+{
+    subTaskCallback_ = newSubTaskCallback;
+}
+
+void Task::setErrorSubTaskCallback(const ErrorCallback &newErrorSubTaskCallback)
+{
+    errorSubTaskCallback_ = newErrorSubTaskCallback;
+}
+
 Task::Status Task::status() const
 {
     return status_;
@@ -80,6 +108,28 @@ void Task::executeAction()
 {
     // Call the act method, which will execute actSpecific
     actionPtr_->act(taskId_, argList_);
+}
+
+void Task::onSubTaskComplete(const Result &result)
+{
+    if (subTaskCallback_) {
+        Result subResult;
+        subResult.setValue(result.value());
+
+        auto rep = actionPtr()->actionDef().resultRepresentation();
+        if (rep) {
+            subResult.setRepresentation(rep->classKey()); // TODO: actionPtr->repClass()
+        }
+
+        subResult.setTaskId(taskId());
+        subTaskCallback_(subResult);
+    }
+
+}
+
+void Task::onSubTaskError(const err::Error &error)
+{
+    // TODO: implement
 }
 
 } // namespace cmd

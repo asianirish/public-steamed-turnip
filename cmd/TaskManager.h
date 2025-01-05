@@ -27,6 +27,9 @@ public:
 
     void setStartCallback(const StartCallback &newStartCallback);
 
+    // make public to call in Task
+    void execute(const TaskPtr &taskPtr, ExecType execType = ExecType::Auto);
+
 private:
     // Member function to be called upon task completion
     void onTaskComplete(const Result &result);
@@ -34,7 +37,7 @@ private:
 
     TaskPtr task(const ActionPtr &actionPtr, const InputArgList &inputArgs);
 
-    void execute(const TaskPtr &taskPtr, ExecType execType = ExecType::Auto);
+    bool handleTaskResult(const Result &result);
 
     ResultCallback callback_;
     ErrorCallback errorCallback_;
