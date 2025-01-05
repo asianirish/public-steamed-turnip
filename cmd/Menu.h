@@ -70,7 +70,7 @@ private:
 
     void onTaskComplete(const Result &result);
 
-    void onTaskError(const err::Error &error);
+    void onTaskError(const err::Error &error); // TODO: use taskId here
 
     void onTaskStart(const TaskId &taskId);
 
