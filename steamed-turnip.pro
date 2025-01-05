@@ -26,6 +26,7 @@ SOURCES += \
         cmd/SafeAction.cpp \
         cmd/Substitutor.cpp \
         cmd/Task.cpp \
+        cmd/TaskIdGenerator.cpp \
         cmd/TaskManager.cpp \
         cmd/Translator.cpp \
         cmd/Value.cpp \
@@ -81,6 +82,7 @@ HEADERS += \
     cmd/SafeAction.h \
     cmd/Substitutor.h \
     cmd/Task.h \
+    cmd/TaskIdGenerator.h \
     cmd/TaskManager.h \
     cmd/Translator.h \
     cmd/Types.h \
