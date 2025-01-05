@@ -7,6 +7,8 @@
 #include "cmd/rep/DecIntRep.h"
 #include "cmd/rep/SimpleStringRep.h"
 
+#include "cmd/Task.h"
+
 namespace turnip {
 
 using namespace cmd::rep;
@@ -23,8 +25,11 @@ void App::init()
     registerMenu(mainMenu_);
 
     registerRepresentaions();
-    // TODO: Add your initialization code here.
 
+    auto taskIdGen = taskIdGenenerator();
+    cmd::Task::setTaskIdGen(taskIdGen);
+
+    // TODO: Add your initialization code here.
 }
 
 void App::exec()
@@ -79,6 +84,16 @@ std::shared_ptr<cmd::Translator> App::translator()
     }
 
     return trnsl_;
+}
+
+std::shared_ptr<cmd::TaskIdGenerator> App::taskIdGenenerator()
+{
+    if (!taskIdGen_) {
+        taskIdGen_ = createTaskIdGenenerator();
+        taskIdGen_->init();
+    }
+
+    return taskIdGen_;
 }
 
 } // namespace turnip

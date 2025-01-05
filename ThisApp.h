@@ -14,6 +14,8 @@ private:
     const std::shared_ptr<turnip::cmd::Translator> createTranslator() const override;
     void registerRepresentaions() override;
 
+    const std::shared_ptr<turnip::cmd::TaskIdGenerator> createTaskIdGenenerator() const override;
+
     std::string appName() const override;
 
     turnip::cmd::LazyAction sineOfDegrees();

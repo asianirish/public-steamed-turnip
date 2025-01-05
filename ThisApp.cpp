@@ -15,6 +15,8 @@
 
 #include "cmd/CompositeAction.h"
 
+#include "cmd/TaskIdIncGenerator.h"
+
 #include "math/SineOfRadians.h"
 
 #include "test/TestActionMap.h"
@@ -86,6 +88,12 @@ void ThisApp::registerRepresentaions()
     App::registerRepresentaions();
 
     RepresentationManager::registerRepresentation<HexIntRep>();
+}
+
+const std::shared_ptr<TaskIdGenerator> ThisApp::createTaskIdGenenerator() const
+{
+    auto gen = std::make_shared<TaskIdIncGenerator>();
+    return gen;
 }
 
 std::string ThisApp::appName() const
