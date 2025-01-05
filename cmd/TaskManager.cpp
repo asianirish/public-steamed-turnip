@@ -100,7 +100,7 @@ TaskPtr TaskManager::task(const ActionPtr &actionPtr, const InputArgList &inputA
     return TaskPtr(new Task(actionPtr, args));
 }
 
-void TaskManager::execute(const TaskPtr &taskPtr)
+void TaskManager::execute(const TaskPtr &taskPtr, ExecType execType)
 {
     auto taskId = taskPtr->taskId();
     auto actionPtr = taskPtr->actionPtr();
@@ -120,7 +120,7 @@ void TaskManager::execute(const TaskPtr &taskPtr)
         startCallback_(taskId);
     }
 
-    taskPtr->execute();
+    taskPtr->execute(execType);
 }
 
 void TaskManager::setStartCallback(const StartCallback &newStartCallback)
