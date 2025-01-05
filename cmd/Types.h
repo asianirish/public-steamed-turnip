@@ -37,6 +37,14 @@ using ValueData = std::variant<std::monostate, bool, char, int64_t, double, std:
 class Parameter;
 using ParamList = common::SharedVector<Parameter>;
 
+
+enum class ExecType {
+    Auto,
+    Direct,
+    Thread,
+    // Async, // for future use
+};
+
 } // namespace cmd
 } // namespace turnip
 

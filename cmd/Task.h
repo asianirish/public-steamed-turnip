@@ -16,13 +16,6 @@ public:
         Failed
     };
 
-    enum class ExecType {
-        Auto,
-        Direct,
-        Thread,
-        // Async, // for future use
-    };
-
     static const TaskId FIRST_TASK_ID = 1024;
 
     Task();
