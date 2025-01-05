@@ -7,16 +7,17 @@
 namespace turnip {
 namespace cmd {
 
-TaskId Task::maxTaskId_ = Task::FIRST_TASK_ID;
+std::shared_ptr<TaskIdGenerator> Task::taskIdGen_;
 
 Task::Task() : Task({}, {}) {}
 
 Task::Task(ActionPtr actionPtr, const ArgList &argList)
     : actionPtr_(actionPtr), argList_(argList),
-    taskId_(maxTaskId_),
     status_(Status::Pending)
 {
-    ++maxTaskId_;
+    if (taskIdGen_) {
+        taskId_ = taskIdGen_->next();
+    }
 }
 
 ActionPtr Task::actionPtr() const
@@ -97,6 +98,11 @@ void Task::setSubTaskCallback(const Callback &newSubTaskCallback)
 void Task::setErrorSubTaskCallback(const ErrorCallback &newErrorSubTaskCallback)
 {
     errorSubTaskCallback_ = newErrorSubTaskCallback;
+}
+
+void Task::setTaskIdGen(const std::shared_ptr<TaskIdGenerator> &newTaskIdGen)
+{
+    taskIdGen_ = newTaskIdGen;
 }
 
 Task::Status Task::status() const

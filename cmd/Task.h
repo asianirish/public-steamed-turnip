@@ -4,6 +4,7 @@
 #include "cmd/Result.h"
 #include "cmd/Types.h"
 #include "cmd/err/Error.h"
+#include "cmd/TaskIdGenerator.h"
 
 #include <functional>
 
@@ -21,8 +22,6 @@ public:
         Completed,
         Failed
     };
-
-    static const TaskId FIRST_TASK_ID = 1024;
 
     // Define a type for the callback function
     using Callback = std::function<void(const Result&)>;
@@ -52,12 +51,14 @@ public:
 
     void setErrorSubTaskCallback(const ErrorCallback &newErrorSubTaskCallback);
 
+    static void setTaskIdGen(const std::shared_ptr<TaskIdGenerator> &newTaskIdGen);
+
 private:
     ActionPtr actionPtr_;
     ArgList argList_;
 
     TaskId taskId_;
-    static TaskId maxTaskId_;
+    static std::shared_ptr<TaskIdGenerator> taskIdGen_;
 
     // Current status of the task
     Status status_;
