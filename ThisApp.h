@@ -18,6 +18,7 @@ private:
 
     turnip::cmd::LazyAction sineOfDegrees();
     turnip::cmd::LazyAction reverseSentence();
+    turnip::cmd::LazyAction doubleReverseSentence();
 
 };
 
