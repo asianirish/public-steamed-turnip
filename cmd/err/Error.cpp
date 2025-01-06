@@ -41,22 +41,24 @@ Error Error::createArgumentConversionError(const std::string &type, const std::s
 Error::Error(ErrorType type, const std::string& description, std::shared_ptr<AdditionalInfo> additionalInfo)
     : type_(type), description_(description), additionalInfo_(additionalInfo) {}
 
-void Error::setAdditionalInfo(const std::shared_ptr<AdditionalInfo> &newAdditionalInfo)
+bool Error::maybeSetAdditionalInfo(const std::shared_ptr<AdditionalInfo> &newAdditionalInfo)
 {
     if (type_ == ErrorType::Custom) {
         additionalInfo_ = newAdditionalInfo;
+        return true;
     }
-    // TODO: else
-    // TODO: throw an exception otherwise
+
+    return false;
 }
 
-void Error::setDescription(const std::string &newDescription)
+bool Error::maybeSetDescription(const std::string &newDescription)
 {
     if (type_ == ErrorType::Custom) {
         description_ = newDescription;
+        return true;
     }
-    // TODO: else
-    // TODO: throw an exception otherwise
+
+    return false;
 }
 
 } // namespace err

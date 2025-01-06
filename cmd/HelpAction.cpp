@@ -50,7 +50,7 @@ Value HelpAction::actImpl(const ArgList &args, err::Error &error)
         auto def = menu_->actionDef(commandName);
 
         if (!def) {
-            error.setDescription("Help error: Definition for command '" + commandName + "' was not found");
+            error.maybeSetDescription("Help error: Definition for command '" + commandName + "' was not found");
             return {};
         }
 
@@ -77,7 +77,7 @@ Value HelpAction::actImpl(const ArgList &args, err::Error &error)
         return true;
     }
 
-    error.setDescription("menu is not set");
+    error.maybeSetDescription("menu is not set");
     return {};
 }
 

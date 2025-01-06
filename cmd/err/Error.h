@@ -31,9 +31,9 @@ public:
 
     static Error createArgumentConversionError(const std::string& type, const std::string& input, int argIndex, const std::string &argName);
 
-    void setDescription(const std::string &newDescription);
+    bool maybeSetDescription(const std::string &newDescription);
 
-    void setAdditionalInfo(const std::shared_ptr<AdditionalInfo> &newAdditionalInfo);
+    bool maybeSetAdditionalInfo(const std::shared_ptr<AdditionalInfo> &newAdditionalInfo);
 
 private:
     // Private constructor to enforce the use of factory functions
