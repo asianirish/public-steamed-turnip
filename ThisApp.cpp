@@ -9,6 +9,7 @@
 #include "example/MakeSentence.h"
 #include "math/DegreesToRadians.h"
 #include "math/IsEven.h"
+#include "math/Divide.h"
 
 #include "cmd/rep/RepresentationManager.h"
 #include "cmd/rep/HexIntRep.h"
@@ -47,6 +48,7 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, CompositeAction);
     REGISTER_TURNIP_CLASS(Action, TestActionMap);
     REGISTER_TURNIP_CLASS(Action, MakeSentence);
+    REGISTER_TURNIP_CLASS(Action, Divide);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
@@ -65,8 +67,8 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     mathMenuAction->addAction("even", ACTION_CLASS(IsEven));
     mathMenuAction->addAction("d2r", ACTION_CLASS(DegreesToRadians));
     mathMenuAction->addAction("sinr", ACTION_CLASS(SineOfRadians));
-
     mathMenuAction->addAction("sind", sineOfDegrees());
+    mathMenuAction->addAction("div", ACTION_CLASS(Divide));
 
     menu.registerAction("math", mathAction);
 
@@ -76,6 +78,8 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
 
     menu.registerAction("rvrs", reverseSentence());
     menu.registerAction("drvrs", doubleReverseSentence());
+
+
 }
 
 const std::shared_ptr<cmd::Translator> ThisApp::createTranslator() const

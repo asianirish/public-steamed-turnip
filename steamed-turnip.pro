@@ -57,6 +57,7 @@ SOURCES += \
         example/MakeSentence.cpp \
         main.cpp \
         math/DegreesToRadians.cpp \
+        math/Divide.cpp \
         math/IsEven.cpp \
         math/SineOfRadians.cpp \
         test/TestActionMap.cpp \
@@ -119,6 +120,7 @@ HEADERS += \
     console/Reader.h \
     example/MakeSentence.h \
     math/DegreesToRadians.h \
+    math/Divide.h \
     math/IsEven.h \
     math/SineOfRadians.h \
     test/TestActionMap.h \
