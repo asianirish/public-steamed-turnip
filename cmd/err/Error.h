@@ -1,8 +1,11 @@
 #ifndef ERROR_H
 #define ERROR_H
 
+#include "cmd/Types.h"
+
 #include <memory>
 #include <string>
+#include <optional>
 
 namespace turnip {
 namespace cmd {
@@ -35,6 +38,9 @@ public:
 
     bool maybeSetAdditionalInfo(const std::shared_ptr<AdditionalInfo> &newAdditionalInfo);
 
+    std::optional<TaskId> maybeTaskId() const;
+    bool maybeSetTaskId(const TaskId &taskId);
+
 private:
     // Private constructor to enforce the use of factory functions
     Error(ErrorType type, const std::string& description, std::shared_ptr<AdditionalInfo> additionalInfo = nullptr);
@@ -42,6 +48,9 @@ private:
     ErrorType type_;
     std::string description_;
     std::shared_ptr<AdditionalInfo> additionalInfo_;
+
+    TaskId taskId_ {0};
+
 };
 
 } // namespace err

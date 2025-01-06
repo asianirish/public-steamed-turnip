@@ -51,6 +51,25 @@ bool Error::maybeSetAdditionalInfo(const std::shared_ptr<AdditionalInfo> &newAdd
     return false;
 }
 
+std::optional<TaskId> Error::maybeTaskId() const
+{
+    if (type_ == ErrorType::Custom) {
+        return taskId_;
+    }
+
+    return {};
+}
+
+bool Error::maybeSetTaskId(const TaskId &taskId)
+{
+    if (type_ == ErrorType::Custom) {
+        taskId_ = taskId;
+        return true;
+    }
+
+    return false;
+}
+
 bool Error::maybeSetDescription(const std::string &newDescription)
 {
     if (type_ == ErrorType::Custom) {
