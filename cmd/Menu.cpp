@@ -45,13 +45,15 @@ LazyAction Menu::registerAction(const std::string &commandName, const Value &act
         retAction = actionPtr;
     } // TODO: handle map
 
-
-
     return retAction;
 }
 
 void Menu::registerHelpAction()
 {
+    if (!common::Factory<Action>::isRegistered(ACTION_CLASS(HelpAction))) {
+        return;
+    }
+
     auto actionPtr = helpAction_.ptr();
     auto helpPtr = std::dynamic_pointer_cast<HelpAction>(actionPtr);
     helpPtr->setMenu(this);
