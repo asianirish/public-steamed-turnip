@@ -11,7 +11,7 @@ class ArgManager
 public:
     ArgManager();
 
-    bool execArgs(const ArgList &args);
+    bool execArgs(const ArgInfoList &argInfos);
 
     void onArgResult(const cmd::Result &result);
     void onArgError(const cmd::err::Error &error);

@@ -77,6 +77,8 @@ private:
 
     void onSubTaskComplete(const Result &result);
     void onSubTaskError(const err::Error &error);
+
+    ArgInfoList argInfos() const;
 };
 
 } // namespace cmd

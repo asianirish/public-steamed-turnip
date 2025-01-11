@@ -45,6 +45,9 @@ enum class ExecType {
     // Async, // for future use
 };
 
+class ArgInfo;
+using ArgInfoList = std::vector<ArgInfo>;
+
 } // namespace cmd
 } // namespace turnip
 

@@ -1,6 +1,7 @@
 #include "Task.h"
 #include "cmd/Action.h"
 #include "cmd/TaskManager.h"
+#include "cmd/ArgInfo.h"
 
 #include <thread>
 
@@ -112,7 +113,7 @@ Task::Status Task::status() const
 
 void Task::executeAction()
 {
-    if (argManager_.execArgs(argList_)) {
+    if (argManager_.execArgs(argInfos())) {
         return;
     }
     // Call the act method, which will execute actSpecific
@@ -144,6 +145,26 @@ void Task::onSubTaskError(const err::Error &error)
             errorSubTaskCallback_(errorCopy);
         }
     }
+}
+
+ArgInfoList Task::argInfos() const
+{
+    ArgInfoList lst;
+
+    auto argIt = argList_.begin();
+    auto actionDef = actionPtr_->actionDef();
+    auto argDefs = actionDef.argDefs();
+
+    for (auto &argDef : argDefs) {
+        if (argIt  != argList_.end()) {
+            lst.push_back(ArgInfo(*argIt, argDef));
+            ++argIt;
+        } else {
+            lst.push_back(ArgInfo(argDef.defaultValue(),argDef));
+        }
+    }
+
+    return lst;
 }
 
 } // namespace cmd

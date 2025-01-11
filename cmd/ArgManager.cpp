@@ -1,4 +1,8 @@
 #include "ArgManager.h"
+#include "cmd/ArgInfo.h"
+#include "cmd/Task.h"
+
+#include <list>
 
 namespace turnip {
 namespace cmd {
@@ -16,11 +20,39 @@ ArgManager::ArgManager() {
     }
 }
 
-bool ArgManager::execArgs(const ArgList &args)
+bool ArgManager::execArgs(const ArgInfoList &argInfos)
 {
-    // TODO: implement
-    (void)args;
-    return false; // returns `true` if at least one task is executed in a separate thread.
+    size_t i = 0;
+    std::list<TaskPtr> tasks;
+
+    for (auto &argInfo : argInfos) {
+        auto argDef = argInfo.argDef();
+        Value value = argInfo;
+        if (argDef.mustBeCalculated() && value.isTask()) {
+            auto taskPtr = value.toTaskPtr();
+            auto taskId = taskPtr->taskId();
+            std::cout << "DEBUG: FOUND TASK_ID: " << taskId;
+            taskToArgNum_.insert({taskId, i});
+            tasks.push_back(taskPtr);
+        }
+        ++i;
+    }
+
+    if (tasks.size() == 0) {
+        return false;
+    }
+
+    if (tasks.size() == 1) {
+        auto task = tasks.front();
+        taskManager_.execute(task, ExecType::Direct);
+        return false;
+    }
+
+    for (auto task : tasks) {
+        taskManager_.execute(task);
+    }
+
+    return true;
 }
 
 void ArgManager::onArgResult(const Result &result)
