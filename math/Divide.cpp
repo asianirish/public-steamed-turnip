@@ -37,7 +37,7 @@ def::ActionDef Divide::actionDef() const
 Value Divide::actImpl(const ArgList &args, err::Error &error)
 {
     if (args.at(1).toDouble() == 0) {
-        error = cmd::err::Error::createCustomError("Division by zero");
+        error.maybeSetDescription("Division by zero");
         return {};
     }
 
