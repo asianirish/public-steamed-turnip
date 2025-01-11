@@ -69,6 +69,7 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     mathMenuAction->addAction("sinr", ACTION_CLASS(SineOfRadians));
     mathMenuAction->addAction("sind", sineOfDegrees());
     mathMenuAction->addAction("div", ACTION_CLASS(Divide));
+    mathMenuAction->addAction("rdiv", reverseDivide());
 
     menu.registerAction("math", mathAction);
 
@@ -103,6 +104,46 @@ const std::shared_ptr<TaskIdGenerator> ThisApp::createTaskIdGenenerator() const
 std::string ThisApp::appName() const
 {
     return std::string(TARGET_NAME);
+}
+
+LazyAction ThisApp::reverseDivide()
+{
+    auto rvrs = LazyAction(ACTION_CLASS(CompositeAction));
+    auto caRvrs = rvrs.dynamicCast<CompositeAction>();
+
+    def::ActionDef actionDef;
+
+    const auto typeDef = def::TypeDef::createDoubleTypedef();
+
+    {
+        def::ArgDef argDef;
+        argDef.setType(typeDef);
+        argDef.setName("left number");
+        actionDef.addArgDef(argDef);
+    }
+
+    {
+        def::ArgDef argDef;
+        argDef.setType(typeDef);
+        argDef.setName("right number");
+        actionDef.addArgDef(argDef);
+    }
+
+    actionDef.setDescription("Reverse Divide");
+    caRvrs->setActionDef(actionDef);
+
+    Substitutor sbst;
+    Parameter actionParam;
+    auto sntAction = LazyAction(ACTION_CLASS(Divide));
+    actionParam.setValue(sntAction);
+
+    sbst.setActionParam(actionParam);
+    sbst.addParam(Parameter(1));
+    sbst.addParam(Parameter(0));
+
+    caRvrs->setSubstitutor(sbst);
+
+    return rvrs;
 }
 
 LazyAction ThisApp::doubleReverseSentence()

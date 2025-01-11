@@ -22,6 +22,8 @@ private:
     turnip::cmd::LazyAction reverseSentence();
     turnip::cmd::LazyAction doubleReverseSentence();
 
+    turnip::cmd::LazyAction reverseDivide();
+
 };
 
 #endif // THISAPP_H
