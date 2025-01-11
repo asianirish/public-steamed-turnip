@@ -135,7 +135,12 @@ void Task::onSubTaskComplete(const Result &result)
 
 void Task::onSubTaskError(const err::Error &error)
 {
-    // TODO: implement
+    if (errorSubTaskCallback_) {
+        auto errorCopy = error;
+        if (errorCopy.maybeSetTaskId(taskId_)) {
+            errorSubTaskCallback_(errorCopy);
+        }
+    }
 }
 
 } // namespace cmd
