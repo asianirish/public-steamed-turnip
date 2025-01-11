@@ -77,5 +77,10 @@ void ArgManager::onArgError(const err::Error &error)
     std::cout << "ARG ERROR: " << error.description() << std::endl;
 }
 
+void ArgManager::setArgResultsCallback(const ArgResultsCallback &newArgResultsCallback)
+{
+    argResultsCallback_ = newArgResultsCallback;
+}
+
 } // namespace cmd
 } // namespace turnip
