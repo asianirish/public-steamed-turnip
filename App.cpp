@@ -19,12 +19,14 @@ void App::init()
 {
     registerActions();
 
+    // This approach is fragile because it relies on specific initialization order.
+    // TODO: Consider refactoring for greater stability.
+    registerRepresentaions();
+
     mainMenu_.setTranslator(translator());
     mainMenu_.registerHelpAction();
     mainMenu_.setName(appName());
     registerMenu(mainMenu_);
-
-    registerRepresentaions();
 
     auto taskIdGen = taskIdGenenerator();
     cmd::Task::setTaskIdGen(taskIdGen);
