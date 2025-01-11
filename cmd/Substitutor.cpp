@@ -35,7 +35,10 @@ TaskPtr Substitutor::substitue(const ArgList &args)
     for (auto arg : args) {
         for (auto &param : params_) {
             if (param.position() == i) {
-                param.setValue(arg); // TODO: set recursively
+                param.setValue(arg);
+            } else {
+                auto subTask = param.substitutor()->substitue(args);
+                param.setValue(subTask);
             }
         }
         ++i;
