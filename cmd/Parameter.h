@@ -14,8 +14,10 @@ class Parameter
 public:
     static const int INVALID_POSITION;
     Parameter();
-
     Parameter(int position);
+    Parameter(const Value &value);
+    Parameter(const LazyAction &action);
+    Parameter(const SubstPtr &substPtr);
 
     int position() const;
     void setPosition(int newPosition);

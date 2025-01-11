@@ -13,6 +13,21 @@ Parameter::Parameter(int position) : position_(position)
 
 }
 
+Parameter::Parameter(const Value &value) : value_(value)
+{
+
+}
+
+Parameter::Parameter(const LazyAction &action) : value_(action)
+{
+
+}
+
+Parameter::Parameter(const SubstPtr &substPtr) : substitutor_(substPtr)
+{
+
+}
+
 int Parameter::position() const
 {
     return position_;
