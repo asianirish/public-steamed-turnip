@@ -31,7 +31,6 @@ bool ArgManager::execArgs(const ArgInfoList &argInfos)
         if (argDef.mustBeCalculated() && value.isTask()) {
             auto taskPtr = value.toTaskPtr();
             auto taskId = taskPtr->taskId();
-            std::cout << "DEBUG: FOUND TASK_ID: " << taskId << std::endl;
             taskToArgNum_.insert({taskId, i});
             tasks.push_back(taskPtr);
         }
@@ -57,7 +56,6 @@ bool ArgManager::execArgs(const ArgInfoList &argInfos)
 
 void ArgManager::onArgResult(const Result &result)
 {
-    std::cout << "ARG RESULT: " << result.value() << std::endl;
     auto argTaskId = result.taskId();
     auto argNum = taskToArgNum_.at(argTaskId);
     calculatedArgs_.insert({argNum, result.value()});
