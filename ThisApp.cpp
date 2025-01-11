@@ -256,7 +256,7 @@ LazyAction ThisApp::sineOfDegrees()
     argDef.setType(typeDef);
     argDef.setName("degrees");
     actionDef.addArgDef(argDef);
-    actionDef.setDescription("Calculates the sine of a specified angle measured in radians");
+    actionDef.setDescription("Calculates the sine of a specified angle measured in degrees");
 
     caSind->setActionDef(actionDef);
 
