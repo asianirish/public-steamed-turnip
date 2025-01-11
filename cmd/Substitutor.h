@@ -20,7 +20,7 @@ public:
 
     TaskPtr substitue(const ArgList &args);
 private:
-    Parameter actionParam_;
+    Parameter actionParam_; // TODO: special type for Action and List-Of-Actions params
     ParamList params_;
 };
 
