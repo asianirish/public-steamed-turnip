@@ -7,6 +7,21 @@ namespace cmd {
 
 Menu::Menu() : helpAction_(ACTION_CLASS(HelpAction)) {
 
+    {
+        auto f = std::bind(&Menu::onTaskComplete, this, std::placeholders::_1);
+        taskManager_.setCallback(f);
+    }
+
+    {
+        auto f = std::bind(&Menu::onTaskError, this, std::placeholders::_1);
+        taskManager_.setErrorCallback(f);
+    }
+
+    {
+        auto f = std::bind(&Menu::onTaskStart, this, std::placeholders::_1);
+        taskManager_.setStartCallback(f);
+    }
+
 }
 
 LazyAction Menu::registerAction(const std::string &commandName, const Value &actionInfo)
@@ -30,20 +45,7 @@ LazyAction Menu::registerAction(const std::string &commandName, const Value &act
         retAction = actionPtr;
     } // TODO: handle map
 
-    {
-        auto f = std::bind(&Menu::onTaskComplete, this, std::placeholders::_1);
-        taskManager_.setCallback(f);
-    }
 
-    {
-        auto f = std::bind(&Menu::onTaskError, this, std::placeholders::_1);
-        taskManager_.setErrorCallback(f);
-    }
-
-    {
-        auto f = std::bind(&Menu::onTaskStart, this, std::placeholders::_1);
-        taskManager_.setStartCallback(f);
-    }
 
     return retAction;
 }
