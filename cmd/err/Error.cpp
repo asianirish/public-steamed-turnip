@@ -26,6 +26,11 @@ Error Error::createCustomError(const std::string &description, std::shared_ptr<A
     return Error(ErrorType::Custom, description, additionalInfo);
 }
 
+Error Error::createTaskError(const TaskId &taskId, const std::string &description, std::shared_ptr<AdditionalInfo> additionalInfo)
+{
+    return Error(ErrorType::Custom, description, additionalInfo, taskId);
+}
+
 Error Error::createMissingRequiredArgumentError(int argIndex, const std::string &argName)
 {
     return Error(ErrorType::MissingRequiredArgument, {},
