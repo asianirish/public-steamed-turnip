@@ -260,7 +260,15 @@ LazyAction ThisApp::sineOfDegrees()
 
     caSind->setActionDef(actionDef);
 
-    // TODO: caSind->setSubstitutor(substitutor);
+    Substitutor sbst;
+    Parameter actionParam;
+    auto sntAction = LazyAction(ACTION_CLASS(SineOfRadians));
+    actionParam.setValue(sntAction);
+
+    sbst.setActionParam(actionParam);
+    sbst.addParam(Parameter(0)); // TODO: implement DegreesToRadians conversion and ensure calculation is mandatory
+
+    caSind->setSubstitutor(sbst);
 
     return sind;
 }
