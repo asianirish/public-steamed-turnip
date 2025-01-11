@@ -1,4 +1,5 @@
 #include "Reader.h"
+#include "cmd/err/Error.h"
 
 #include <csignal>
 #include <iostream>
@@ -315,9 +316,13 @@ void Reader::onResult(const cmd::Result &result)
     displayPrompt();
 }
 
-void Reader::onError(const std::string &errorString)
+void Reader::onError(const cmd::err::Error &error)
 {
-    std::cout << "\nError: " << errorString << std::endl;
+    auto maybeTaskId = error.maybeTaskId();
+    if (maybeTaskId) {
+        std::cout << "\nTaskId: " << *maybeTaskId;
+    }
+    std::cout << "\nError: " << error.description() << std::endl;
     displayPrompt();
 }
 

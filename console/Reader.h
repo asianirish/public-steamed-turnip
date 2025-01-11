@@ -3,6 +3,7 @@
 
 #include "cmd/Result.h"
 #include "cmd/Types.h"
+#include "cmd/err/Error.h"
 #include "common/LimitedStack.h"
 
 #include <functional>
@@ -25,7 +26,7 @@ public:
     void setCallback(const Callback &newCallback);
 
     void onResult(const cmd::Result &result);
-    void onError(const std::string &errorString);
+    void onError(const cmd::err::Error &error);
     void onTaskStart(const cmd::TaskId &taskId);
 
     std::string historyFileName() const;

@@ -145,7 +145,7 @@ void Menu::onTaskComplete(const Result &result)
 void Menu::onTaskError(const err::Error &error)
 {
     if (errorCallback_) {
-        errorCallback_(error.description());
+        errorCallback_(error);
     }
 }
 
@@ -166,7 +166,7 @@ ActionPtr Menu::action(const std::string &command, bool *ok) const
 #else
     if (actions_.find(command) == actions_.end()) {
 #endif
-        errorCallback_("Menu error: Command '" + command + "' was not found.");
+        errorCallback_(err::Error::createCustomError("Menu error: Command '" + command + "' was not found."));
         return nullptr;
     }
 

@@ -19,7 +19,7 @@ class Menu
 {
 public:
     using ResultCallback = std::function<void(const Result&)>;
-    using ErrorCallback = std::function<void(const std::string&)>;
+    using ErrorCallback = std::function<void(const err::Error&)>;
     using StartCallback = std::function<void(const TaskId &)>;
 
     Menu();
