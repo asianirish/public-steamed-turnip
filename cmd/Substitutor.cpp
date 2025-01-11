@@ -44,8 +44,11 @@ TaskPtr Substitutor::substitue(const ArgList &args)
             if (param.position() == i) {
                 param.setValue(arg);
             } else {
-                auto subTask = param.substitutor()->substitue(args);
-                param.setValue(subTask);
+                auto sbst = param.substitutor();
+                if (sbst) {
+                    auto subTask = sbst->substitue(args);
+                    param.setValue(subTask);
+                }
             }
         }
         ++i;
