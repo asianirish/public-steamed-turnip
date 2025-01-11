@@ -19,6 +19,13 @@ Task::Task(ActionPtr actionPtr, const ArgList &argList)
     if (taskIdGen_) {
         taskId_ = taskIdGen_->next();
     }
+
+    {
+        auto f = std::bind(&Task::onArgResults, this, std::placeholders::_1);
+        argManager_.setArgResultsCallback(f);
+    }
+
+    // TODO: connect the error callback
 }
 
 ActionPtr Task::actionPtr() const
@@ -145,6 +152,15 @@ void Task::onSubTaskError(const err::Error &error)
             errorSubTaskCallback_(errorCopy);
         }
     }
+}
+
+void Task::onArgResults(const ArgResults &argResults)
+{
+    for (auto pr : argResults) {
+        argList_[pr.first] = pr.second;
+    }
+
+    executeAction();
 }
 
 ArgInfoList Task::argInfos() const

@@ -77,6 +77,7 @@ private:
 
     void onSubTaskComplete(const Result &result);
     void onSubTaskError(const err::Error &error);
+    void onArgResults(const ArgResults &argResults);
 
     ArgInfoList argInfos() const;
 };
