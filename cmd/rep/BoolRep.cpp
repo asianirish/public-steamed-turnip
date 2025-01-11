@@ -8,7 +8,8 @@ const std::map<BoolRep::Kind, std::pair<std::string, std::string> > BoolRep::KIN
     {BoolRep::Kind::TrueFalse, {"true", "false"}},
     {BoolRep::Kind::OnOff, {"on", "of"}},
     {BoolRep::Kind::OneZero, {"1", "0"}},
-    {BoolRep::Kind::YesNo, {"yes", "no"}}
+    {BoolRep::Kind::YesNo, {"yes", "no"}},
+    {BoolRep::Kind::SuccessFailure, {"success", "failure"}}
 };
 
 BoolRep::BoolRep(Kind kind) : kind_(kind) {}

@@ -16,6 +16,7 @@ public:
         OnOff,
         OneZero,
         YesNo,
+        SuccessFailure,
         Custom
     };
 
