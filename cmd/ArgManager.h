@@ -19,6 +19,7 @@ public:
 private:
     TaskManager taskManager_;
     std::map<TaskId, std::size_t> taskToArgNum_;
+    ArgResults calculatedArgs_;
 };
 
 } // namespace cmd

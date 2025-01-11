@@ -48,6 +48,9 @@ enum class ExecType {
 class ArgInfo;
 using ArgInfoList = std::vector<ArgInfo>;
 
+
+using ArgResults = std::map<std::size_t, Value>;
+
 } // namespace cmd
 } // namespace turnip
 

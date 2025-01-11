@@ -57,8 +57,18 @@ bool ArgManager::execArgs(const ArgInfoList &argInfos)
 
 void ArgManager::onArgResult(const Result &result)
 {
-    // TODO: implement
     std::cout << "ARG RESULT: " << result.value() << std::endl;
+    auto argTaskId = result.taskId();
+    auto argNum = taskToArgNum_.at(argTaskId);
+    calculatedArgs_.insert({argNum, result.value()});
+
+    if (calculatedArgs_.size() == taskToArgNum_.size()) {
+
+        if (argResultsCallback_) {
+            argResultsCallback_(calculatedArgs_);
+        }
+
+    }
 }
 
 void ArgManager::onArgError(const err::Error &error)
