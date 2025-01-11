@@ -258,6 +258,8 @@ LazyAction ThisApp::sineOfDegrees()
     actionDef.addArgDef(argDef);
     actionDef.setDescription("Calculates the sine of a specified angle measured in degrees");
 
+    actionDef.setResultRepresentation(DoubleRep().classKey());
+
     caSind->setActionDef(actionDef);
 
     Substitutor sbst;
