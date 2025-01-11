@@ -21,6 +21,7 @@ public:
         Undefined,
         MissingRequiredArgument,
         ArgumentConversion,
+        CommandNotFound,
         Custom = 65635
     };
 
@@ -35,6 +36,8 @@ public:
     static Error createMissingRequiredArgumentError(int argIndex, const std::string &argName);
 
     static Error createArgumentConversionError(const std::string& type, const std::string& input, int argIndex, const std::string &argName);
+
+    static Error createCommandNotFoundError(const std::string &commandName);
 
     bool maybeSetDescription(const std::string &newDescription);
 

@@ -166,7 +166,7 @@ ActionPtr Menu::action(const std::string &command, bool *ok) const
 #else
     if (actions_.find(command) == actions_.end()) {
 #endif
-        errorCallback_(err::Error::createCustomError("Menu error: Command '" + command + "' was not found."));
+        errorCallback_(err::Error::createCommandNotFoundError(command));
         return nullptr;
     }
 

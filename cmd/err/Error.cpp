@@ -1,6 +1,7 @@
 #include "Error.h"
 #include "AdditionalInfo.h"
 #include "cmd/err/ArgumentConversionInfo.h"
+#include "cmd/err/CommandNotFoundInfo.h"
 #include "cmd/err/MissingRequiredArgumentInfo.h"
 
 namespace turnip {
@@ -41,6 +42,12 @@ Error Error::createArgumentConversionError(const std::string &type, const std::s
 {
     return Error(ErrorType::ArgumentConversion, {},
                  std::shared_ptr<ArgumentConversionInfo>(new ArgumentConversionInfo(type, input, argIndex, argName)));
+}
+
+Error Error::createCommandNotFoundError(const std::string &commandName)
+{
+    return Error(ErrorType::CommandNotFound, {},
+                 std::shared_ptr<AdditionalInfo>(new CommandNotFoundInfo(commandName)));
 }
 
 Error::Error(ErrorType type, const std::string& description, std::shared_ptr<AdditionalInfo> additionalInfo, const TaskId &taskId)
