@@ -17,7 +17,7 @@ void Action::setCallback(Callback callback)
 
 void Action::act(const TaskId &taskId, const ArgList &args)
 {
-    auto error = err::Error::createCustomError("Unkown error");
+    auto error = err::Error::createTaskError(taskId, "Unkown task error");
     // Call the specific action implementation
     Value value = actImpl(args, error);
 
