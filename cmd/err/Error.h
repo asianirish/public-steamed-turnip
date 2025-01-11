@@ -43,7 +43,7 @@ public:
 
 private:
     // Private constructor to enforce the use of factory functions
-    Error(ErrorType type, const std::string& description, std::shared_ptr<AdditionalInfo> additionalInfo = nullptr);
+    Error(ErrorType type, const std::string& description, std::shared_ptr<AdditionalInfo> additionalInfo = nullptr, const TaskId &taskId = 0);
 
     ErrorType type_;
     std::string description_;

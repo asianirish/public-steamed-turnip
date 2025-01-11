@@ -38,8 +38,8 @@ Error Error::createArgumentConversionError(const std::string &type, const std::s
                  std::shared_ptr<ArgumentConversionInfo>(new ArgumentConversionInfo(type, input, argIndex, argName)));
 }
 
-Error::Error(ErrorType type, const std::string& description, std::shared_ptr<AdditionalInfo> additionalInfo)
-    : type_(type), description_(description), additionalInfo_(additionalInfo) {}
+Error::Error(ErrorType type, const std::string& description, std::shared_ptr<AdditionalInfo> additionalInfo, const TaskId &taskId)
+    : type_(type), description_(description), additionalInfo_(additionalInfo), taskId_(taskId) {}
 
 bool Error::maybeSetAdditionalInfo(const std::shared_ptr<AdditionalInfo> &newAdditionalInfo)
 {
