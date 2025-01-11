@@ -38,6 +38,7 @@ SOURCES += \
         cmd/err/AdditionalInfo.cpp \
         cmd/err/ArgumentConversionInfo.cpp \
         cmd/err/ArgumentInfo.cpp \
+        cmd/err/CommandNotFoundInfo.cpp \
         cmd/err/ConversionException.cpp \
         cmd/err/Error.cpp \
         cmd/err/MissingRequiredArgumentInfo.cpp \
@@ -97,6 +98,7 @@ HEADERS += \
     cmd/err/AdditionalInfo.h \
     cmd/err/ArgumentConversionInfo.h \
     cmd/err/ArgumentInfo.h \
+    cmd/err/CommandNotFoundInfo.h \
     cmd/err/ConversionException.h \
     cmd/err/Error.h \
     cmd/err/MissingRequiredArgumentInfo.h \
