@@ -1,6 +1,7 @@
 #ifndef TASK_H
 #define TASK_H
 
+#include "cmd/ArgManager.h"
 #include "cmd/Result.h"
 #include "cmd/Types.h"
 #include "cmd/err/Error.h"
@@ -69,6 +70,8 @@ private:
 
     Callback subTaskCallback_; // Member to hold the callback function
     ErrorCallback errorSubTaskCallback_;
+
+    ArgManager argManager_;
 
     void executeAction();
 

@@ -11,6 +11,7 @@ SOURCES += \
         App.cpp \
         ThisApp.cpp \
         cmd/Action.cpp \
+        cmd/ArgManager.cpp \
         cmd/CompositeAction.cpp \
         cmd/ConditionalStringAction.cpp \
         cmd/Global.cpp \
@@ -70,6 +71,7 @@ HEADERS += \
     App.h \
     ThisApp.h \
     cmd/Action.h \
+    cmd/ArgManager.h \
     cmd/CompositeAction.h \
     cmd/ConditionalStringAction.h \
     cmd/Global.h \

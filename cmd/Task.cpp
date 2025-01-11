@@ -112,6 +112,9 @@ Task::Status Task::status() const
 
 void Task::executeAction()
 {
+    if (argManager_.execArgs(argList_)) {
+        return;
+    }
     // Call the act method, which will execute actSpecific
     actionPtr_->act(taskId_, argList_);
 }
