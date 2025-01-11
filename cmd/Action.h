@@ -24,7 +24,7 @@ public:
 
     // Define a type for the callback function
     using Callback = std::function<void(const Result&)>;
-    using ErrorCallback = std::function<void(const TaskId&, const err::Error&)>;
+    using ErrorCallback = std::function<void(const err::Error&)>;
 
     void setCallback(Callback callback);
 
@@ -57,7 +57,7 @@ private:
 
     // Function to notify via callback
     void notify(const Result &result);
-    void notifyError(const TaskId &taskId, const err::Error &error);
+    void notifyError(const err::Error &error);
 
     virtual VariantMap data() const {
         return {};

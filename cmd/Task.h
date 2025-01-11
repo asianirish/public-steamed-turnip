@@ -25,7 +25,7 @@ public:
 
     // Define a type for the callback function
     using Callback = std::function<void(const Result&)>;
-    using ErrorCallback = std::function<void(const TaskId&, const err::Error&)>;
+    using ErrorCallback = std::function<void(const err::Error&)>;
 
     Task();
 

@@ -29,7 +29,7 @@ void Action::act(const TaskId &taskId, const ArgList &args)
         Result result(taskId, value, rep);
         notify(result);
     } else {
-        notifyError(taskId, error);
+        notifyError(error);
     }
 }
 
@@ -40,10 +40,10 @@ void Action::notify(const Result &result)
     }
 }
 
-void Action::notifyError(const TaskId &taskId, const err::Error &error)
+void Action::notifyError(const err::Error &error)
 {
     if (errorCallback_) {
-        errorCallback_(taskId, error);
+        errorCallback_(error);
     }
 }
 

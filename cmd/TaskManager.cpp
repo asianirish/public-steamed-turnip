@@ -45,8 +45,16 @@ void TaskManager::onTaskComplete(const Result &result)
     // TODO: save the result of pure functions
 }
 
-void TaskManager::onError(const TaskId &taskId, const err::Error &error)
+void TaskManager::onError(const err::Error &error)
 {
+    auto maybeTaskId = error.maybeTaskId();
+
+    if (!maybeTaskId) {
+        throw "no taskId in error"; // TODO: exception class
+    }
+
+    auto taskId = *maybeTaskId;
+
 #if __cplusplus >= 202002L
     if (tasks_.contains(taskId)) {
 #else
@@ -113,7 +121,7 @@ bool TaskManager::handleTaskResult(const Result &result)
         }
 
         {
-            auto f = std::bind(&TaskManager::onError, this, std::placeholders::_1, std::placeholders::_2);
+            auto f = std::bind(&TaskManager::onError, this, std::placeholders::_1);
             task->setErrorSubTaskCallback(f);
         }
 
@@ -136,7 +144,7 @@ void TaskManager::execute(const TaskPtr &taskPtr, ExecType execType)
     }
 
     {
-        auto f = std::bind(&TaskManager::onError, this, std::placeholders::_1, std::placeholders::_2);
+        auto f = std::bind(&TaskManager::onError, this, std::placeholders::_1);
         actionPtr->setErrorCallback(f);
     }
 

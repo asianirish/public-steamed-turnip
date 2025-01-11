@@ -33,7 +33,7 @@ public:
 private:
     // Member function to be called upon task completion
     void onTaskComplete(const Result &result);
-    void onError(const TaskId &taskId, const err::Error &error);
+    void onError(const err::Error &error);
 
     TaskPtr task(const ActionPtr &actionPtr, const InputArgList &inputArgs);
 
