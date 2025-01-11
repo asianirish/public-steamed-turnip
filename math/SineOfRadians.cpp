@@ -20,6 +20,7 @@ def::ActionDef SineOfRadians::actionDef() const
     actionDef.addArgDef(argDef);
 
     actionDef.setDescription("Calculates the sine of a specified angle measured in radians");
+    actionDef.setResultRepresentation(DoubleRep().classKey());
 
     return actionDef;
 }
