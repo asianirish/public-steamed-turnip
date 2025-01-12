@@ -18,7 +18,8 @@ def::ActionDef HelpAction::actionDef() const
     actionDef.addArgDef(argDef);
 
     actionDef.setDescription("Displays information about a specified command");
-    actionDef.setResultRepresentation(NullRep().classKey());
+    auto boolRep = std::make_shared<BoolRep>(BoolRep::Kind::SuccessFailure);
+    actionDef.setResultRepresentation(boolRep);
 
     return actionDef;
 }
@@ -65,13 +66,18 @@ Value HelpAction::actImpl(const ArgList &args, err::Error &error)
             std::cout << "ARGUMENTS:" << std::endl;
             int i = 0;
             for (auto &argDef : argList) {
-                std::cout << "\t[" << i << "] (" << argDef.type().inputRep() << ") "  << argDef.name();
+                std::cout << "\t[" << i << "] (" << argDef.type().inputRep()->info() << ") "  << argDef.name();
                 if (!argDef.defaultValue().isNull()) {
                     std::cout << " = " << argDef.defaultValue();
                 }
                 std::cout << std::endl; // TODO: output type info
                 ++i;
             }
+        }
+
+        if (def.resultRepresentation()) {
+            std::cout << "REUTRN:" << std::endl;
+            std::cout << "\t" << def.resultRepresentation()->info() << std::endl;
         }
 
         return true;

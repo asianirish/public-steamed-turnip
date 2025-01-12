@@ -12,8 +12,8 @@ class SimpleCharRep : public CharRep
 public:
     SimpleCharRep();
 
-    std::string classKey() const override {
-        return "default_char";
+    std::string repKey() const override {
+        return "symbol";
     }
 
 private:

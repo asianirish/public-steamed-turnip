@@ -1,6 +1,5 @@
 #include "TypeDef.h"
 #include "cmd/rep/BoolRep.h"
-#include "cmd/rep/RepresentationManager.h"
 
 namespace turnip {
 namespace cmd {
@@ -8,71 +7,68 @@ namespace def {
 
 TypeDef::TypeDef() {}
 
-std::string TypeDef::inputRep() const
+RepPtr TypeDef::inputRep() const
 {
     return inputRep_;
 }
 
 TypeDef::operator bool() const
 {
-    return !inputRep_.empty() && !outputRep_.empty();
+    return !inputRep_ && !outputRep_;
 }
 
-TypeDef TypeDef::createNullTypedef(const NullRep &inputRep, const NullRep &outputRep)
+TypeDef TypeDef::createNullTypedef(const Ptr<NullRep> &inputRep, const Ptr<NullRep> &outputRep)
 {
     auto td = TypeDef();
-    td.inputRep_ = inputRep.classKey();
-    td.outputRep_ = outputRep.classKey();
+    td.inputRep_ = inputRep;
+    td.outputRep_ = outputRep;
     return td;
 }
 
-TypeDef TypeDef::createIntTypedef(const IntRep &inputRep, const IntRep &outputRep)
+TypeDef TypeDef::createIntTypedef(const Ptr<IntRep> &inputRep, const Ptr<IntRep> &outputRep)
 {
     auto td = TypeDef();
-    td.inputRep_ = inputRep.classKey();
-    td.outputRep_ = outputRep.classKey();
+    td.inputRep_ = inputRep;
+    td.outputRep_ = outputRep;
     return td;
 }
 
-TypeDef TypeDef::createDoubleTypedef(const DoubleRep &inputRep, const DoubleRep &outputRep)
+TypeDef TypeDef::createDoubleTypedef(const Ptr<DoubleRep> &inputRep, const Ptr<DoubleRep> &outputRep)
 {
     auto td = TypeDef();
-    td.inputRep_ = inputRep.classKey();
-    td.outputRep_ = outputRep.classKey();
+    td.inputRep_ = inputRep;
+    td.outputRep_ = outputRep;
     return td;
 }
 
-TypeDef TypeDef::createBoolTypedef()
+TypeDef TypeDef::createBoolTypedef(BoolRep::Kind inputKind, BoolRep::Kind outputKind)
 {
-    BoolRep boolRep;
     auto td = TypeDef();
-    td.inputRep_ = boolRep.classKey();
-    td.outputRep_ = boolRep.classKey();
+    td.inputRep_ = std::make_shared<BoolRep>(inputKind);
+    td.outputRep_ = std::make_shared<BoolRep>(outputKind);
     return td;
 }
 
-TypeDef TypeDef::createStringTypedef(const StringRep &inputRep, const StringRep &outputRep)
+TypeDef TypeDef::createStringTypedef(const Ptr<StringRep> &inputRep, const Ptr<StringRep> &outputRep)
 {
     auto td = TypeDef();
-    td.inputRep_ = inputRep.classKey();
-    td.outputRep_ = outputRep.classKey();
+    td.inputRep_ = inputRep;
+    td.outputRep_ = outputRep;
     return td;
 }
 
-TypeDef TypeDef::createCharTypedef(const CharRep &inputRep, const CharRep &outputRep)
+TypeDef TypeDef::createCharTypedef(const Ptr<CharRep> &inputRep, const Ptr<CharRep> &outputRep)
 {
     auto td = TypeDef();
-    td.inputRep_ = inputRep.classKey();
-    td.outputRep_ = outputRep.classKey();
+    td.inputRep_ = inputRep;
+    td.outputRep_ = outputRep;
     return td;
 }
 
 Value TypeDef::convertInput(const std::string &input) const
 {
-    auto inRep = rep::RepresentationManager::representation(inputRep_);
-
-    if (inRep) {
-        return inRep->input(input);
+    if (inputRep_) {
+        return inputRep_->input(input);
     }
 
     // TODO: else { copy error information to the returning value

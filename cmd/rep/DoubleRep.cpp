@@ -18,9 +18,9 @@ std::string DoubleRep::output(const Value &value) const
     return outputImpl(value);
 }
 
-std::string DoubleRep::classKey() const
+std::string DoubleRep::repKey() const
 {
-    return "default_double";
+    return "fixed";
 }
 
 def::MetaType DoubleRep::metaType() const

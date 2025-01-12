@@ -20,7 +20,8 @@ def::ActionDef DegreesToRadians::actionDef() const
     actionDef.addArgDef(argDef);
 
     actionDef.setDescription("Converts the degree representation of an angle to radians");
-    actionDef.setResultRepresentation(DoubleRep().classKey());
+    auto doubleRep = std::make_shared<DoubleRep>();
+    actionDef.setResultRepresentation(doubleRep);
 
     return actionDef;
 }

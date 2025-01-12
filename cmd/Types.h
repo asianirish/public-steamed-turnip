@@ -12,6 +12,14 @@
 namespace turnip {
 namespace cmd {
 
+template<typename T>
+using Ptr = std::shared_ptr<T>;
+
+template <typename T, typename... Args>
+inline std::shared_ptr<T> mkPtr(Args&&... args) {
+    return std::make_shared<T>(std::forward<Args>(args)...);
+}
+
 class Value;
 
 using ArgList = std::vector<Value>;
@@ -50,6 +58,11 @@ using ArgInfoList = std::vector<ArgInfo>;
 
 
 using ArgResults = std::map<std::size_t, Value>;
+
+namespace rep {
+class Representation;
+using RepPtr = std::shared_ptr<Representation>;
+}
 
 } // namespace cmd
 } // namespace turnip

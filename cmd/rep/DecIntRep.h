@@ -12,8 +12,8 @@ class DecIntRep : public IntRep
 public:
     DecIntRep();
 
-    std::string classKey() const override {
-        return "default_int";
+    std::string repKey() const override {
+        return "dec";
     }
 
 private:

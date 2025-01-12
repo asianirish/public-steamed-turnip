@@ -12,8 +12,8 @@ class HexIntRep : public IntRep
 public:
     HexIntRep();
 
-    std::string classKey() const override {
-        return "hex_int";
+    std::string repKey() const override {
+        return "hex";
     }
 private:
     // Converts an int64_t to its hexadecimal string representation

@@ -29,7 +29,8 @@ def::ActionDef Divide::actionDef() const
     }
 
     actionDef.setDescription("Divides two numbers");
-    actionDef.setResultRepresentation(DoubleRep().classKey());
+    auto doubleRep = std::make_shared<DoubleRep>();
+    actionDef.setResultRepresentation(doubleRep);
 
     return actionDef;
 }

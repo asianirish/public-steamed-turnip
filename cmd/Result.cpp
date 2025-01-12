@@ -1,12 +1,11 @@
 #include "Result.h"
-#include "cmd/rep/RepresentationManager.h"
 
 namespace turnip {
 namespace cmd {
 
 Result::Result() {}
 
-Result::Result(const TaskId &taskId, const Value &value, const rep::Representation *representation) :
+Result::Result(const TaskId &taskId, const Value &value, const rep::RepPtr &representation) :
     taskId_(taskId),
     value_(value),
     representation_(representation)
@@ -34,19 +33,19 @@ void Result::setValue(const Value &newValue)
     value_ = newValue;
 }
 
-void Result::setRepresentation(const std::string &repKey)
+bool Result::isTask() const
 {
-    representation_ = rep::RepresentationManager::representation(repKey);
+    return value_.isTask();
 }
 
-const rep::Representation *Result::representation() const
+rep::RepPtr Result::representation() const
 {
     return representation_;
 }
 
-bool Result::isTask() const
+void Result::setRepresentation(const rep::RepPtr &newRepresentation)
 {
-    return value_.isTask();
+    representation_ = newRepresentation;
 }
 
 } // namespace cmd

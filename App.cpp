@@ -1,6 +1,5 @@
 #include "App.h"
 #include "console/Reader.h"
-#include "cmd/rep/RepresentationManager.h"
 #include "cmd/rep/NullRep.h"
 #include "cmd/rep/BoolRep.h"
 #include "cmd/rep/SimpleCharRep.h"
@@ -66,17 +65,12 @@ void App::exec()
 
 void App::registerRepresentaions()
 {
-    RepresentationManager::registerRepresentation<NullRep>();
-
-    RepresentationManager::registerRepresentation<BoolRep>();
-
-    RepresentationManager::registerRepresentation<SimpleCharRep>();
-
-    RepresentationManager::registerRepresentation<DecIntRep>();
-
-    RepresentationManager::registerRepresentation<DoubleRep>();
-
-    RepresentationManager::registerRepresentation<SimpleStringRep>();
+    REGISTER_TURNIP_CLASS(Representation, NullRep);
+    REGISTER_TURNIP_CLASS(Representation, BoolRep);
+    REGISTER_TURNIP_CLASS(Representation, SimpleCharRep);
+    REGISTER_TURNIP_CLASS(Representation, DecIntRep);
+    REGISTER_TURNIP_CLASS(Representation, DoubleRep);
+    REGISTER_TURNIP_CLASS(Representation, SimpleStringRep);
 }
 
 std::shared_ptr<cmd::Translator> App::translator()

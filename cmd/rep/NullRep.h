@@ -18,8 +18,8 @@ public:
     std::string nullString() const;
     void setNullString(const std::string &newNull_string);
 
-    std::string classKey() const override {
-        return "default_null";
+    std::string repKey() const override {
+        return "default";
     }
 
     def::MetaType metaType() const override;

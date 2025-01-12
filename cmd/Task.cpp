@@ -135,7 +135,7 @@ void Task::onSubTaskComplete(const Result &result)
 
         auto rep = actionPtr()->actionDef().resultRepresentation();
         if (rep) {
-            subResult.setRepresentation(rep->classKey()); // TODO: actionPtr->repClass()
+            subResult.setRepresentation(rep); // TODO: actionPtr->repClass()
         }
 
         subResult.setTaskId(taskId());

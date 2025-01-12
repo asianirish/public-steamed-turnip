@@ -11,7 +11,6 @@
 #include "math/IsEven.h"
 #include "math/Divide.h"
 
-#include "cmd/rep/RepresentationManager.h"
 #include "cmd/rep/HexIntRep.h"
 
 #include "cmd/CompositeAction.h"
@@ -91,8 +90,7 @@ const std::shared_ptr<cmd::Translator> ThisApp::createTranslator() const
 void ThisApp::registerRepresentaions()
 {
     App::registerRepresentaions();
-
-    RepresentationManager::registerRepresentation<HexIntRep>();
+    REGISTER_TURNIP_CLASS(Representation, NullRep);
 }
 
 const std::shared_ptr<TaskIdGenerator> ThisApp::createTaskIdGenenerator() const
@@ -130,7 +128,7 @@ LazyAction ThisApp::reverseDivide()
     }
 
     actionDef.setDescription("Reverse Divide");
-    actionDef.setResultRepresentation(DoubleRep().classKey());
+    actionDef.setResultRepresentation(mkPtr<DoubleRep>());
     caRvrs->setActionDef(actionDef);
 
     Substitutor sbst;
@@ -259,7 +257,8 @@ LazyAction ThisApp::sineOfDegrees()
     actionDef.addArgDef(argDef);
     actionDef.setDescription("Calculates the sine of a specified angle measured in degrees");
 
-    actionDef.setResultRepresentation(DoubleRep().classKey());
+    auto doubleRep = std::make_shared<DoubleRep>();
+    actionDef.setResultRepresentation(doubleRep);
 
     caSind->setActionDef(actionDef);
 

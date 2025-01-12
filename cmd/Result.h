@@ -12,7 +12,7 @@ class Result
 {
 public:
     Result();
-    Result(const TaskId &taskId, const Value &value, const rep::Representation *representation);
+    Result(const TaskId &taskId, const Value &value, const rep::RepPtr &representation);
 
     TaskId taskId() const;
     void setTaskId(TaskId newTaskId);
@@ -20,15 +20,15 @@ public:
     Value value() const;
     void setValue(const Value &newValue);
 
-    void setRepresentation(const std::string &repKey);
-    const rep::Representation *representation() const;
-
     bool isTask() const;
+
+    rep::RepPtr representation() const;
+    void setRepresentation(const rep::RepPtr &newRepresentation);
 
 private:
     TaskId taskId_;
     Value value_;
-    const rep::Representation *representation_ = 0;
+    rep::RepPtr representation_;
 };
 
 } // namespace cmd

@@ -15,8 +15,8 @@ public:
     std::string inputImpl(const std::string &str) const override;
     std::string outputImpl(const std::string &stringValue) const override;
 
-    std::string classKey() const override {
-        return "default_string";
+    std::string repKey() const override {
+        return "default";
     }
 };
 

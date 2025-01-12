@@ -23,14 +23,14 @@ public:
 
     operator bool() const;
 
-    void setResultRepresentation(const std::string &repKey);
 
-    const Representation *resultRepresentation() const;
+    RepPtr resultRepresentation() const;
+    void setResultRepresentation(const RepPtr &newResultRepresentation);
 
 private:
     std::list<ArgDef> argDefs_;
     std::string description_;
-    Representation *resultRepresentation_ = 0;
+    RepPtr resultRepresentation_ = 0;
 };
 
 } // namespace def

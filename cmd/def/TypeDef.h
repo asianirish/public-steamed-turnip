@@ -6,7 +6,7 @@
 #include "cmd/rep/NullRep.h"
 #include "cmd/rep/SimpleStringRep.h"
 #include "cmd/rep/SimpleCharRep.h"
-
+#include "cmd/rep/BoolRep.h"
 
 #include <string>
 
@@ -19,21 +19,21 @@ using namespace rep;
 class TypeDef
 {
 public:
-    static TypeDef createNullTypedef(const NullRep &inputRep = {}, const NullRep &outputRep = {});
+    static TypeDef createNullTypedef(const Ptr<NullRep> &inputRep = {}, const Ptr<NullRep> &outputRep = {});
 
-    static TypeDef createIntTypedef(const IntRep &inputRep = DecIntRep(), const IntRep &outputRep = DecIntRep());
+    static TypeDef createIntTypedef(const Ptr<IntRep> &inputRep = mkPtr<DecIntRep>(), const Ptr<IntRep> &outputRep = mkPtr<DecIntRep>());
 
-    static TypeDef createDoubleTypedef(const DoubleRep &inputRep = DoubleRep(), const DoubleRep &outputRep = DoubleRep());
+    static TypeDef createDoubleTypedef(const Ptr<DoubleRep> &inputRep = mkPtr<DoubleRep>(), const Ptr<DoubleRep> &outputRep = mkPtr<DoubleRep>());
 
-    static TypeDef createBoolTypedef();
+    static TypeDef createBoolTypedef(BoolRep::Kind inputKind = BoolRep::Kind::TrueFalse, BoolRep::Kind outputKind = BoolRep::Kind::TrueFalse);
 
-    static TypeDef createStringTypedef(const StringRep &inputRep = SimpleStringRep(), const StringRep &outputRep = SimpleStringRep());
+    static TypeDef createStringTypedef(const Ptr<StringRep> &inputRep = mkPtr<SimpleStringRep>(), const Ptr<StringRep> &outputRep = mkPtr<SimpleStringRep>());
 
-    static TypeDef createCharTypedef(const CharRep &inputRep = SimpleCharRep(), const CharRep &outputRep = SimpleCharRep());
+    static TypeDef createCharTypedef(const Ptr<CharRep> &inputRep = mkPtr<SimpleCharRep>(), const Ptr<CharRep> &outputRep = mkPtr<SimpleCharRep>());
 
     Value convertInput(const std::string &input) const;
 
-    std::string inputRep() const;
+    RepPtr inputRep() const;
 
     operator bool() const;
 
@@ -41,8 +41,8 @@ private:
     TypeDef();
 
 private:
-    std::string inputRep_;
-    std::string outputRep_;
+    RepPtr inputRep_;
+    RepPtr outputRep_;
 };
 
 } // namespace def

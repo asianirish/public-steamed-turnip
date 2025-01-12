@@ -35,8 +35,13 @@ public:
     std::string customFalse() const;
     void setCustomFalse(const std::string &newCustomFalse);
 
-    std::string classKey() const override {
-        return "default_bool";
+    std::string repKey() const override {
+        if (kind_ == Kind::Custom) {
+            return customTrue() + "/" + customFalse();
+        }
+
+        auto pr = KIND_TO_STRING.at(kind_);
+        return pr.first + "/" + pr.second;
     }
 
     def::MetaType metaType() const override;

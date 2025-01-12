@@ -20,7 +20,8 @@ def::ActionDef SineOfRadians::actionDef() const
     actionDef.addArgDef(argDef);
 
     actionDef.setDescription("Calculates the sine of a specified angle measured in radians");
-    actionDef.setResultRepresentation(DoubleRep().classKey());
+    auto doubleRep = std::make_shared<DoubleRep>();
+    actionDef.setResultRepresentation(doubleRep);
 
     return actionDef;
 }

@@ -52,7 +52,6 @@ SOURCES += \
         cmd/rep/IntRep.cpp \
         cmd/rep/NullRep.cpp \
         cmd/rep/Representation.cpp \
-        cmd/rep/RepresentationManager.cpp \
         cmd/rep/SimpleCharRep.cpp \
         cmd/rep/SimpleStringRep.cpp \
         cmd/rep/StringRep.cpp \
@@ -114,7 +113,6 @@ HEADERS += \
     cmd/rep/IntRep.h \
     cmd/rep/NullRep.h \
     cmd/rep/Representation.h \
-    cmd/rep/RepresentationManager.h \
     cmd/rep/SimpleCharRep.h \
     cmd/rep/SimpleStringRep.h \
     cmd/rep/StringRep.h \

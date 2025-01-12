@@ -1,5 +1,4 @@
 #include "ActionDef.h"
-#include "cmd/rep/RepresentationManager.h"
 
 namespace turnip {
 namespace cmd {
@@ -38,15 +37,16 @@ ActionDef::operator bool() const
     return !description_.empty();
 }
 
-void ActionDef::setResultRepresentation(const std::string &repKey)
-{
-    resultRepresentation_ = RepresentationManager::representation(repKey);
-}
-
-const Representation *ActionDef::resultRepresentation() const
+RepPtr ActionDef::resultRepresentation() const
 {
     return resultRepresentation_;
 }
+
+void ActionDef::setResultRepresentation(const RepPtr &newResultRepresentation)
+{
+    resultRepresentation_ = newResultRepresentation;
+}
+
 
 } // namespace def
 } // namespace cmd
