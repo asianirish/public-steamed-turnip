@@ -177,7 +177,7 @@ LazyAction ThisApp::doubleReverseSentence()
         actionDef.addArgDef(argDef);
     }
 
-    actionDef.setDescription("Reverses a sentence");
+    actionDef.setDescription("Double reverses a sentence");
     caRvrs->setActionDef(actionDef);
 
     Substitutor sbst;
