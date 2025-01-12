@@ -130,6 +130,7 @@ LazyAction ThisApp::reverseDivide()
     }
 
     actionDef.setDescription("Reverse Divide");
+    actionDef.setResultRepresentation(DoubleRep().classKey());
     caRvrs->setActionDef(actionDef);
 
     Substitutor sbst;
