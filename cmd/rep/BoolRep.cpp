@@ -6,7 +6,7 @@ namespace rep {
 
 const std::map<BoolRep::Kind, std::pair<std::string, std::string> > BoolRep::KIND_TO_STRING {
     {BoolRep::Kind::TrueFalse, {"true", "false"}},
-    {BoolRep::Kind::OnOff, {"on", "of"}},
+    {BoolRep::Kind::OnOff, {"on", "off"}},
     {BoolRep::Kind::OneZero, {"1", "0"}},
     {BoolRep::Kind::YesNo, {"yes", "no"}},
     {BoolRep::Kind::SuccessFailure, {"success", "failure"}}
