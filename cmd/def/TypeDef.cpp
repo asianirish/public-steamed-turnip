@@ -50,7 +50,10 @@ TypeDef TypeDef::createBoolTypedef(BoolRep::Kind inputKind, BoolRep::Kind output
 {
     auto td = TypeDef();
     td.inputRep_ = std::make_shared<BoolRep>(inputKind);
-    td.outputRep_ = std::make_shared<BoolRep>(outputKind);
+
+    if (inputKind != outputKind) {
+        td.outputRep_ = std::make_shared<BoolRep>(outputKind);
+    }
     return td;
 }
 

@@ -22,17 +22,17 @@ class TypeDef
 public:
     static TypeDef createNullTypedef(const Ptr<NullRep> &inputRep = {}, const Ptr<NullRep> &outputRep = {});
 
-    static TypeDef createIntTypedef(const Ptr<IntRep> &inputRep = mkPtr<DecIntRep>(), const Ptr<IntRep> &outputRep = mkPtr<DecIntRep>());
+    static TypeDef createIntTypedef(const Ptr<IntRep> &inputRep = mkPtr<DecIntRep>(), const Ptr<IntRep> &outputRep = {});
 
-    static TypeDef createDoubleTypedef(const Ptr<DoubleRep> &inputRep = mkPtr<DoubleRep>(), const Ptr<DoubleRep> &outputRep = mkPtr<DoubleRep>());
+    static TypeDef createDoubleTypedef(const Ptr<DoubleRep> &inputRep = mkPtr<DoubleRep>(), const Ptr<DoubleRep> &outputRep = {});
 
     static TypeDef createBoolTypedef(BoolRep::Kind inputKind = BoolRep::Kind::TrueFalse, BoolRep::Kind outputKind = BoolRep::Kind::TrueFalse);
 
-    static TypeDef createStringTypedef(const Ptr<StringRep> &inputRep = mkPtr<SimpleStringRep>(), const Ptr<StringRep> &outputRep = mkPtr<SimpleStringRep>());
+    static TypeDef createStringTypedef(const Ptr<StringRep> &inputRep = mkPtr<SimpleStringRep>(), const Ptr<StringRep> &outputRep = {});
 
-    static TypeDef createCharTypedef(const Ptr<CharRep> &inputRep = mkPtr<SimpleCharRep>(), const Ptr<CharRep> &outputRep = mkPtr<SimpleCharRep>());
+    static TypeDef createCharTypedef(const Ptr<CharRep> &inputRep = mkPtr<SimpleCharRep>(), const Ptr<CharRep> &outputRep = {});
 
-    static TypeDef createTaskTypedef(const Ptr<TaskRep> &inputRep = mkPtr<TaskRep>(), const Ptr<TaskRep> &outputRep = mkPtr<TaskRep>());
+    static TypeDef createTaskTypedef(const Ptr<TaskRep> &inputRep = mkPtr<TaskRep>(), const Ptr<TaskRep> &outputRep = {});
 
     Value convertInput(const std::string &input) const;
     std::string convertOutput(const Value &value) const;
