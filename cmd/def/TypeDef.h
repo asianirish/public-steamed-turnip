@@ -34,6 +34,8 @@ public:
 
     static TypeDef createTaskTypedef(const Ptr<TaskRep> &inputRep = mkPtr<TaskRep>(), const Ptr<TaskRep> &outputRep = {});
 
+    static TypeDef createTypedef(const RepPtr rep);
+
     Value convertInput(const std::string &input) const;
     std::string convertOutput(const Value &value) const;
 
