@@ -12,6 +12,11 @@ RepPtr TypeDef::inputRep() const
     return inputRep_;
 }
 
+RepPtr TypeDef::outputRep() const
+{
+    return outputRep_ ? outputRep_ : inputRep_;
+}
+
 TypeDef::operator bool() const
 {
     return !inputRep_ && !outputRep_;
@@ -81,6 +86,16 @@ Value TypeDef::convertInput(const std::string &input) const
 
     // TODO: else { copy error information to the returning value
     return Value();
+}
+
+std::string TypeDef::convertOutput(const Value &value) const
+{
+    if (outputRep()) {
+        return outputRep()->output(value);
+    }
+
+    // TODO: else { copy error information to the returning value
+    return {};
 }
 
 } // namespace def
