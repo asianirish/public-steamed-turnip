@@ -19,7 +19,7 @@ RepPtr TypeDef::outputRep() const
 
 TypeDef::operator bool() const
 {
-    return !inputRep_ && !outputRep_;
+    return static_cast<bool>(inputRep_);
 }
 
 TypeDef TypeDef::createNullTypedef(const Ptr<NullRep> &inputRep, const Ptr<NullRep> &outputRep)
