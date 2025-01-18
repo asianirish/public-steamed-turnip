@@ -25,6 +25,8 @@ private:
     turnip::cmd::LazyAction reverseDivide();
 
     turnip::cmd::LazyAction multiPrint();
+
+    turnip::cmd::LazyAction yesNoPrint();
 };
 
 #endif // THISAPP_H

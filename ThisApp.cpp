@@ -1,6 +1,7 @@
 #include "ThisApp.h"
 #include "cmd/ConditionalStringAction.h"
 #include "cmd/DoNothing.h"
+#include "cmd/IfAction.h"
 #include "cmd/MenuAction.h"
 #include "common/Factory.h"
 #include "cmd/PrintAction.h"
@@ -17,6 +18,8 @@
 #include "cmd/CompositeAction.h"
 
 #include "cmd/TaskIdIncGenerator.h"
+
+#include "cmd/Task.h"
 
 #include "math/SineOfRadians.h"
 
@@ -50,6 +53,7 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, MakeSentence);
     REGISTER_TURNIP_CLASS(Action, Divide);
     REGISTER_TURNIP_CLASS(Action, DoNothing);
+    REGISTER_TURNIP_CLASS(Action, IfAction);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
@@ -84,6 +88,7 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("nothing", ACTION_CLASS(DoNothing));
     menu.registerAction("multi", multiPrint());
 
+    menu.registerAction("yesno", yesNoPrint());
 }
 
 const std::shared_ptr<cmd::Translator> ThisApp::createTranslator() const
@@ -94,7 +99,7 @@ const std::shared_ptr<cmd::Translator> ThisApp::createTranslator() const
 void ThisApp::registerRepresentaions()
 {
     App::registerRepresentaions();
-    REGISTER_TURNIP_CLASS(Representation, NullRep);
+    REGISTER_TURNIP_CLASS(Representation, HexIntRep);
 }
 
 const std::shared_ptr<TaskIdGenerator> ThisApp::createTaskIdGenenerator() const
@@ -106,6 +111,33 @@ const std::shared_ptr<TaskIdGenerator> ThisApp::createTaskIdGenenerator() const
 std::string ThisApp::appName() const
 {
     return std::string(TARGET_NAME);
+}
+
+LazyAction ThisApp::yesNoPrint()
+{
+    auto action = LazyAction(ACTION_CLASS(CompositeAction));
+    auto caAction = action.dynamicCast<CompositeAction>();
+
+    def::ActionDef actionDef;
+    actionDef.setDescription("Yes-No Print");
+    actionDef.setResultRepresentation(mkPtr<SimpleStringRep>());
+
+    const auto boolDef = def::TypeDef::createBoolTypedef(BoolRep::Kind::YesNo);
+
+    def::ArgDef argDef;
+    argDef.setType(boolDef);
+    actionDef.addArgDef(argDef);
+
+    caAction->setActionDef(actionDef);
+
+    Substitutor sbst;
+    sbst.setActionParam(LazyAction(ACTION_CLASS(IfAction)));
+    sbst.addParam(Parameter(0));
+    sbst.addParam(Parameter(mkPtr<Task>(LazyAction(ACTION_CLASS(PrintAction)).ptr(), ArgList{"yes"})));
+    sbst.addParam(Parameter(mkPtr<Task>(LazyAction(ACTION_CLASS(PrintAction)).ptr(), ArgList{"no"})));
+
+    caAction->setSubstitutor(sbst);
+    return action;
 }
 
 LazyAction ThisApp::multiPrint()

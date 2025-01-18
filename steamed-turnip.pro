@@ -18,6 +18,7 @@ SOURCES += \
         cmd/DoNothing.cpp \
         cmd/Global.cpp \
         cmd/HelpAction.cpp \
+        cmd/IfAction.cpp \
         cmd/Info.cpp \
         cmd/InstanceSafeAction.cpp \
         cmd/LineTranslator.cpp \
@@ -79,6 +80,7 @@ HEADERS += \
     cmd/DoNothing.h \
     cmd/Global.h \
     cmd/HelpAction.h \
+    cmd/IfAction.h \
     cmd/Info.h \
     cmd/InstanceSafeAction.h \
     cmd/LineTranslator.h \
