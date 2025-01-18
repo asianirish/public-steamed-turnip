@@ -8,6 +8,8 @@ namespace cmd {
 
 using namespace def;
 
+std::mutex PrintAction::mutex_;
+
 PrintAction::PrintAction() {}
 
 def::ActionDef PrintAction::actionDef() const
@@ -28,19 +30,22 @@ Value PrintAction::actImpl(const ArgList &args, err::Error &error)
 {
     (void)error;
 
-    sleep(20);
-    // using namespace std::chrono_literals;
-    // std::this_thread::sleep_for(20s);
+    auto firstStr = args.at(0).toString();
+    if (firstStr.empty()) {
+        return false;
+    }
 
+    sleep(1);
+
+    auto arg = args.at(0);
     for (int i = 0; i < 100000; ++i) {
-        for (auto &arg : args) {
-            mutex_.lock();
-            for (int j = 0; j < 20; ++j) {
-                std::cout << arg;
-            }
-            std::cout << std::endl;
-            mutex_.unlock();
+        mutex_.lock();
+        for (int j = 0; j < 20; ++j) {
+            std::cout << arg;
         }
+        std::cout << std::endl;
+        mutex_.unlock();
+
     }
 
     return true;
