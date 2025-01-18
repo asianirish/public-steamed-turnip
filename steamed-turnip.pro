@@ -57,6 +57,7 @@ SOURCES += \
         cmd/rep/SimpleCharRep.cpp \
         cmd/rep/SimpleStringRep.cpp \
         cmd/rep/StringRep.cpp \
+        cmd/rep/TaskRep.cpp \
         console/Reader.cpp \
         example/MakeSentence.cpp \
         main.cpp \
@@ -120,6 +121,7 @@ HEADERS += \
     cmd/rep/SimpleCharRep.h \
     cmd/rep/SimpleStringRep.h \
     cmd/rep/StringRep.h \
+    cmd/rep/TaskRep.h \
     common/Factory.h \
     common/LazyPointer.h \
     common/LimitedStack.h \
