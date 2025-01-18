@@ -15,6 +15,7 @@ SOURCES += \
         cmd/ArgManager.cpp \
         cmd/CompositeAction.cpp \
         cmd/ConditionalStringAction.cpp \
+        cmd/DoNothing.cpp \
         cmd/Global.cpp \
         cmd/HelpAction.cpp \
         cmd/Info.cpp \
@@ -75,6 +76,7 @@ HEADERS += \
     cmd/ArgManager.h \
     cmd/CompositeAction.h \
     cmd/ConditionalStringAction.h \
+    cmd/DoNothing.h \
     cmd/Global.h \
     cmd/HelpAction.h \
     cmd/Info.h \

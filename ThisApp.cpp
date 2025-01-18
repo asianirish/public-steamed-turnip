@@ -1,5 +1,6 @@
 #include "ThisApp.h"
 #include "cmd/ConditionalStringAction.h"
+#include "cmd/DoNothing.h"
 #include "cmd/MenuAction.h"
 #include "common/Factory.h"
 #include "cmd/PrintAction.h"
@@ -48,6 +49,7 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, TestActionMap);
     REGISTER_TURNIP_CLASS(Action, MakeSentence);
     REGISTER_TURNIP_CLASS(Action, Divide);
+    REGISTER_TURNIP_CLASS(Action, DoNothing);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
@@ -79,6 +81,7 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("rvrs", reverseSentence());
     menu.registerAction("drvrs", doubleReverseSentence());
 
+    menu.registerAction("nothing", ACTION_CLASS(DoNothing));
 
 }
 
