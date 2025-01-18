@@ -82,6 +82,7 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("drvrs", doubleReverseSentence());
 
     menu.registerAction("nothing", ACTION_CLASS(DoNothing));
+    menu.registerAction("multi", multiPrint());
 
 }
 
@@ -105,6 +106,46 @@ const std::shared_ptr<TaskIdGenerator> ThisApp::createTaskIdGenenerator() const
 std::string ThisApp::appName() const
 {
     return std::string(TARGET_NAME);
+}
+
+LazyAction ThisApp::multiPrint()
+{
+    auto action = LazyAction(ACTION_CLASS(CompositeAction));
+    auto caAction = action.dynamicCast<CompositeAction>();
+
+    def::ActionDef actionDef;
+
+    const auto typeDef = def::TypeDef::createStringTypedef();
+
+    for (int i = 0; i < 4; ++i) {
+        def::ArgDef argDef;
+        argDef.setType(typeDef);
+        argDef.setDefaultValue(std::string());
+        actionDef.addArgDef(argDef);
+    }
+
+    actionDef.setDescription("Multiple Print");
+    actionDef.setResultRepresentation(mkPtr<BoolRep>(BoolRep::Kind::OnOff));
+    caAction->setActionDef(actionDef);
+
+    Substitutor sbst;
+    sbst.setActionParam(LazyAction(ACTION_CLASS(DoNothing)));
+
+    for (int i = 0; i < 4; ++i) {
+        Substitutor actionSbst;
+        Parameter actionParam;
+        auto printAction = LazyAction(ACTION_CLASS(PrintAction));
+        actionParam.setValue(printAction);
+
+        actionSbst.setActionParam(actionParam);
+        actionSbst.addParam(Parameter(i));
+
+        sbst.addParam(Parameter(mkPtr<Substitutor>(actionSbst)));
+    }
+
+    caAction->setSubstitutor(sbst);
+
+    return action;
 }
 
 LazyAction ThisApp::reverseDivide()
