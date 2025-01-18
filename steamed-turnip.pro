@@ -76,6 +76,7 @@ HEADERS += \
     cmd/Action.h \
     cmd/ArgInfo.h \
     cmd/ArgManager.h \
+    cmd/BinaryAction.h \
     cmd/CompositeAction.h \
     cmd/ConditionalStringAction.h \
     cmd/DoNothing.h \
