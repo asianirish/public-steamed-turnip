@@ -95,6 +95,23 @@ void Task::executeSubTask(const TaskPtr &subTask)
         subTaskManager_->setErrorCallback(f);
     }
 
+    auto argInfos = subTask->argInfos();
+
+    int index = 0;
+    for (auto &argInfo : argInfos) {
+        if (argInfo.argDef().defaultValue().isNull()) {
+            if (argInfo.value().isNull()) {
+                auto error = err::Error::createTaskError(subTask->taskId(),
+                    std::string("Missing subtask ") + std::to_string(subTask->taskId()) + " argument [" + std::to_string(index) + "] " +
+                    (!argInfo.argDef().name().empty() ? ("('" + argInfo.argDef().name() + "')") : "") );
+                onSubTaskError(error);
+                return;
+            }
+        }
+
+        ++index;
+    }
+
     subTaskManager_->execute(subTask, ExecType::Direct);
 }
 
@@ -123,6 +140,7 @@ void Task::executeAction()
     if (argManager_.execArgs(argInfos())) {
         return;
     }
+
     // Call the act method, which will execute actSpecific
     actionPtr_->act(taskId_, argList_);
 }
@@ -150,6 +168,8 @@ void Task::onSubTaskError(const err::Error &error)
         auto errorCopy = error;
         if (errorCopy.maybeSetTaskId(taskId_)) {
             errorSubTaskCallback_(errorCopy);
+        } else {
+            errorSubTaskCallback_(error);
         }
     }
 }
