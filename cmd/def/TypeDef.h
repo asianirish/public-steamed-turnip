@@ -7,6 +7,7 @@
 #include "cmd/rep/SimpleStringRep.h"
 #include "cmd/rep/SimpleCharRep.h"
 #include "cmd/rep/BoolRep.h"
+#include "cmd/rep/TaskRep.h"
 
 #include <string>
 
@@ -30,6 +31,8 @@ public:
     static TypeDef createStringTypedef(const Ptr<StringRep> &inputRep = mkPtr<SimpleStringRep>(), const Ptr<StringRep> &outputRep = mkPtr<SimpleStringRep>());
 
     static TypeDef createCharTypedef(const Ptr<CharRep> &inputRep = mkPtr<SimpleCharRep>(), const Ptr<CharRep> &outputRep = mkPtr<SimpleCharRep>());
+
+    static TypeDef createTaskTypedef(const Ptr<TaskRep> &inputRep = mkPtr<TaskRep>(), const Ptr<TaskRep> &outputRep = mkPtr<TaskRep>());
 
     Value convertInput(const std::string &input) const;
 

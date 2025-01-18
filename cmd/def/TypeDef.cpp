@@ -65,6 +65,14 @@ TypeDef TypeDef::createCharTypedef(const Ptr<CharRep> &inputRep, const Ptr<CharR
     return td;
 }
 
+TypeDef TypeDef::createTaskTypedef(const Ptr<TaskRep> &inputRep, const Ptr<TaskRep> &outputRep)
+{
+    auto td = TypeDef();
+    td.inputRep_ = inputRep;
+    td.outputRep_ = outputRep;
+    return td;
+}
+
 Value TypeDef::convertInput(const std::string &input) const
 {
     if (inputRep_) {
