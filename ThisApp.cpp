@@ -1,26 +1,29 @@
 #include "ThisApp.h"
+
+#include "common/Factory.h"
+
 #include "cmd/ConditionalStringAction.h"
 #include "cmd/DoNothing.h"
 #include "cmd/IfAction.h"
 #include "cmd/MenuAction.h"
-#include "common/Factory.h"
 #include "cmd/PrintAction.h"
 #include "cmd/LineTranslator.h"
 #include "cmd/HelpAction.h"
+#include "cmd/rep/HexIntRep.h"
+#include "cmd/CompositeAction.h"
+#include "cmd/TaskIdIncGenerator.h"
+#include "cmd/Task.h"
 
 #include "example/MakeSentence.h"
+
 #include "math/DegreesToRadians.h"
 #include "math/IsEven.h"
 #include "math/Divide.h"
-
-#include "cmd/rep/HexIntRep.h"
-
-#include "cmd/CompositeAction.h"
-
-#include "cmd/TaskIdIncGenerator.h"
-
-#include "cmd/Task.h"
-
+#include "math/MultAction.h"
+#include "math/AddAction.h"
+#include "math/DivAction.h"
+#include "math/RemAction.h"
+#include "math/SubAction.h"
 #include "math/SineOfRadians.h"
 
 #include "test/TestActionMap.h"
@@ -54,6 +57,16 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, Divide);
     REGISTER_TURNIP_CLASS(Action, DoNothing);
     REGISTER_TURNIP_CLASS(Action, IfAction);
+    REGISTER_TURNIP_CLASS(Action, AddInt);
+    REGISTER_TURNIP_CLASS(Action, AddFloat);
+    REGISTER_TURNIP_CLASS(Action, Concat);
+    REGISTER_TURNIP_CLASS(Action, MultInt);
+    REGISTER_TURNIP_CLASS(Action, MultFloat);
+    REGISTER_TURNIP_CLASS(Action, SubInt);
+    REGISTER_TURNIP_CLASS(Action, SubFloat);
+    REGISTER_TURNIP_CLASS(Action, DivInt);
+    REGISTER_TURNIP_CLASS(Action, DivFloat);
+    REGISTER_TURNIP_CLASS(Action, RemAction);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
@@ -63,6 +76,7 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("cval", ACTION_CLASS(TestCmdValue));
     menu.registerAction("lazy", ACTION_CLASS(TestLazyPointer));
     menu.registerAction("conds", ACTION_CLASS(ConditionalStringAction));
+    menu.registerAction("concat", ACTION_CLASS(Concat));
 
     auto mathAction = LazyAction(ACTION_CLASS(MenuAction));
     auto mathMenuAction = mathAction.dynamicCast<MenuAction>();
@@ -76,6 +90,16 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     mathMenuAction->addAction("div", ACTION_CLASS(Divide));
     mathMenuAction->addAction("rdiv", reverseDivide());
 
+    mathMenuAction->addAction("addi", ACTION_CLASS(AddInt));
+    mathMenuAction->addAction("addf", ACTION_CLASS(AddFloat));
+    mathMenuAction->addAction("multi", ACTION_CLASS(MultInt));
+    mathMenuAction->addAction("multf", ACTION_CLASS(MultFloat));
+    mathMenuAction->addAction("subi", ACTION_CLASS(SubInt));
+    mathMenuAction->addAction("subf", ACTION_CLASS(SubFloat));
+    mathMenuAction->addAction("divi", ACTION_CLASS(DivInt));
+    mathMenuAction->addAction("divf", ACTION_CLASS(DivFloat));
+    mathMenuAction->addAction("rem", ACTION_CLASS(RemAction));
+
     menu.registerAction("math", mathAction);
 
     menu.registerAction("amap", ACTION_CLASS(TestActionMap));
@@ -86,7 +110,7 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("drvrs", doubleReverseSentence());
 
     menu.registerAction("nothing", ACTION_CLASS(DoNothing));
-    menu.registerAction("multi", multiPrint());
+    menu.registerAction("multiprint", multiPrint());
 
     menu.registerAction("yesno", yesNoPrint());
 }

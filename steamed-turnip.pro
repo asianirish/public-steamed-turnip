@@ -64,6 +64,7 @@ SOURCES += \
         math/DegreesToRadians.cpp \
         math/Divide.cpp \
         math/IsEven.cpp \
+        math/RemAction.cpp \
         math/SineOfRadians.cpp \
         test/TestActionMap.cpp \
         test/TestCmdValue.cpp \
@@ -130,10 +131,15 @@ HEADERS += \
     common/SharedVector.h \
     console/Reader.h \
     example/MakeSentence.h \
+    math/AddAction.h \
     math/DegreesToRadians.h \
+    math/DivAction.h \
     math/Divide.h \
     math/IsEven.h \
+    math/MultAction.h \
+    math/RemAction.h \
     math/SineOfRadians.h \
+    math/SubAction.h \
     test/TestActionMap.h \
     test/TestCmdValue.h \
     test/TestLazyPointer.h \
