@@ -18,15 +18,15 @@ private:
 
     std::string appName() const override;
 
-    turnip::cmd::LazyAction sineOfDegrees();
-    turnip::cmd::LazyAction reverseSentence();
-    turnip::cmd::LazyAction doubleReverseSentence();
+    turnip::cmd::ActionPtr sineOfDegrees();
+    turnip::cmd::ActionPtr reverseSentence();
+    turnip::cmd::ActionPtr doubleReverseSentence();
 
-    turnip::cmd::LazyAction reverseDivide();
+    turnip::cmd::ActionPtr reverseDivide();
 
-    turnip::cmd::LazyAction multiPrint();
+    turnip::cmd::ActionPtr multiPrint();
 
-    turnip::cmd::LazyAction yesNoPrint();
+    turnip::cmd::ActionPtr yesNoPrint();
 };
 
 #endif // THISAPP_H

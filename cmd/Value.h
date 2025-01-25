@@ -35,7 +35,21 @@ public:
 
     Value(const TaskPtr &taskPtr);
 
-    Value(const LazyAction &action);
+    Value(const ActionPtr &action);
+
+    template<typename T>
+    Value(const std::shared_ptr<T>& action)
+        : data_(std::static_pointer_cast<Action>(action))
+    {
+        // Ensure that T is derived from Action
+        static_assert(std::is_base_of<Action, T>::value, "T must be a derived class of Action");
+    }
+    // // TODO: or use a SFINAE approach
+    // template<typename T>
+    // Value(const std::shared_ptr<T>& action, typename std::enable_if<std::is_base_of<Action, T>::value>::type* = 0)
+    //     : data_(std::static_pointer_cast<Action>(action)) {}
+
+
 
     ValueData data() const {
         return data_;

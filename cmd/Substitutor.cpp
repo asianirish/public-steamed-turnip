@@ -7,7 +7,7 @@ namespace cmd {
 
 Substitutor::Substitutor() {}
 
-Substitutor::Substitutor(const LazyAction &action, const ParamList &paramList) :
+Substitutor::Substitutor(const ActionPtr &action, const ParamList &paramList) :
     actionParam_(action),
     params_(paramList)
 {

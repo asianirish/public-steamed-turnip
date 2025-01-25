@@ -37,6 +37,8 @@ using namespace rep;
 using namespace math;
 using namespace example;
 
+using namespace common;
+
 ThisApp::ThisApp() {}
 
 void ThisApp::registerActions()
@@ -78,8 +80,8 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("conds", ACTION_CLASS(ConditionalStringAction));
     menu.registerAction("concat", ACTION_CLASS(Concat));
 
-    auto mathAction = LazyAction(ACTION_CLASS(MenuAction));
-    auto mathMenuAction = mathAction.dynamicCast<MenuAction>();
+    auto mathAction = ActionPtr(Factory<Action>::create(ACTION_CLASS(MenuAction)));
+    auto mathMenuAction = std::dynamic_pointer_cast<MenuAction>(mathAction);
     mathMenuAction->setTranslator(translator());
     mathMenuAction->setMenuName("math");
 
@@ -137,10 +139,9 @@ std::string ThisApp::appName() const
     return std::string(TARGET_NAME);
 }
 
-LazyAction ThisApp::yesNoPrint()
+ActionPtr ThisApp::yesNoPrint()
 {
-    auto action = LazyAction(ACTION_CLASS(CompositeAction));
-    auto caAction = action.dynamicCast<CompositeAction>();
+    auto caAction = mkPtr<CompositeAction>();
 
     def::ActionDef actionDef;
     actionDef.setDescription("Yes-No Print");
@@ -155,19 +156,19 @@ LazyAction ThisApp::yesNoPrint()
     caAction->setActionDef(actionDef);
 
     Substitutor sbst;
-    sbst.setActionParam(LazyAction(ACTION_CLASS(IfAction)));
+    ActionPtr ifa = mkPtr<IfAction>();
+    sbst.setActionParam(ifa);  // TODO: sbst.setActionParam(mkPtr<IfAction>());
     sbst.addParam(Parameter(0));
-    sbst.addParam(Parameter(mkPtr<Task>(LazyAction(ACTION_CLASS(PrintAction)).ptr(), ArgList{"yes"})));
-    sbst.addParam(Parameter(mkPtr<Task>(LazyAction(ACTION_CLASS(PrintAction)).ptr(), ArgList{"no"})));
+    sbst.addParam(Parameter(mkPtr<Task>(mkPtr<PrintAction>(), ArgList{"yes"})));
+    sbst.addParam(Parameter(mkPtr<Task>(mkPtr<PrintAction>(), ArgList{"no"})));
 
     caAction->setSubstitutor(sbst);
-    return action;
+    return caAction;
 }
 
-LazyAction ThisApp::multiPrint()
+ActionPtr ThisApp::multiPrint()
 {
-    auto action = LazyAction(ACTION_CLASS(CompositeAction));
-    auto caAction = action.dynamicCast<CompositeAction>();
+    auto caAction = mkPtr<CompositeAction>();
 
     def::ActionDef actionDef;
 
@@ -185,13 +186,13 @@ LazyAction ThisApp::multiPrint()
     caAction->setActionDef(actionDef);
 
     Substitutor sbst;
-    sbst.setActionParam(LazyAction(ACTION_CLASS(DoNothing)));
+    ActionPtr dn = mkPtr<DoNothing>(); // TODO: template Param?
+    sbst.setActionParam(dn); // TODO: sbst.setActionParam(mkPtr<DoNothing>());
 
     for (int i = 0; i < 4; ++i) {
         Substitutor actionSbst;
         Parameter actionParam;
-        auto printAction = LazyAction(ACTION_CLASS(PrintAction));
-        actionParam.setValue(printAction);
+        actionParam.setValue(mkPtr<PrintAction>());
 
         actionSbst.setActionParam(actionParam);
         actionSbst.addParam(Parameter(i));
@@ -201,13 +202,12 @@ LazyAction ThisApp::multiPrint()
 
     caAction->setSubstitutor(sbst);
 
-    return action;
+    return caAction;
 }
 
-LazyAction ThisApp::reverseDivide()
+ActionPtr ThisApp::reverseDivide()
 {
-    auto rvrs = LazyAction(ACTION_CLASS(CompositeAction));
-    auto caRvrs = rvrs.dynamicCast<CompositeAction>();
+    auto caRvrs = mkPtr<CompositeAction>();
 
     def::ActionDef actionDef;
 
@@ -233,8 +233,7 @@ LazyAction ThisApp::reverseDivide()
 
     Substitutor sbst;
     Parameter actionParam;
-    auto sntAction = LazyAction(ACTION_CLASS(Divide));
-    actionParam.setValue(sntAction);
+    actionParam.setValue(mkPtr<Divide>());
 
     sbst.setActionParam(actionParam);
     sbst.addParam(Parameter(1));
@@ -242,13 +241,12 @@ LazyAction ThisApp::reverseDivide()
 
     caRvrs->setSubstitutor(sbst);
 
-    return rvrs;
+    return caRvrs;
 }
 
-LazyAction ThisApp::doubleReverseSentence()
+ActionPtr ThisApp::doubleReverseSentence()
 {
-    auto rvrs = LazyAction(ACTION_CLASS(CompositeAction));
-    auto caRvrs = rvrs.dynamicCast<CompositeAction>();
+    auto caRvrs = mkPtr<CompositeAction>();
 
     def::ActionDef actionDef;
 
@@ -290,13 +288,12 @@ LazyAction ThisApp::doubleReverseSentence()
 
     caRvrs->setSubstitutor(sbst);
 
-    return rvrs;
+    return caRvrs;
 }
 
-LazyAction ThisApp::reverseSentence()
+ActionPtr ThisApp::reverseSentence()
 {
-    auto rvrs = LazyAction(ACTION_CLASS(CompositeAction));
-    auto caRvrs = rvrs.dynamicCast<CompositeAction>();
+    auto caRvrs = mkPtr<CompositeAction>();
 
     def::ActionDef actionDef;
 
@@ -328,8 +325,7 @@ LazyAction ThisApp::reverseSentence()
 
     Substitutor sbst;
     Parameter actionParam;
-    auto sntAction = LazyAction(ACTION_CLASS(MakeSentence));
-    actionParam.setValue(sntAction);
+    actionParam.setValue(mkPtr<MakeSentence>());
 
     sbst.setActionParam(actionParam);
     sbst.addParam(Parameter(2));
@@ -338,14 +334,12 @@ LazyAction ThisApp::reverseSentence()
 
     caRvrs->setSubstitutor(sbst);
 
-    return rvrs;
+    return caRvrs;
 }
 
-LazyAction ThisApp::sineOfDegrees()
+ActionPtr ThisApp::sineOfDegrees()
 {
-    // auto sind = make_shared<CompositeAction>(new CompositeAction()); // TODO: enable direct creation
-    auto sind = LazyAction(ACTION_CLASS(CompositeAction));
-    auto caSind = sind.dynamicCast<CompositeAction>();
+    auto caSind = mkPtr<CompositeAction>();
 
     def::ActionDef actionDef;
 
@@ -364,15 +358,14 @@ LazyAction ThisApp::sineOfDegrees()
 
     Substitutor sbst;
     Parameter actionParam;
-    auto sntAction = LazyAction(ACTION_CLASS(SineOfRadians));
-    actionParam.setValue(sntAction);
+    actionParam.setValue(mkPtr<SineOfRadians>());
 
-    auto ssbstPtr = std::make_shared<Substitutor>(ACTION_CLASS(DegreesToRadians), ParamList({Parameter(0)}));
+    auto ssbstPtr = std::make_shared<Substitutor>(mkPtr<DegreesToRadians>(), ParamList({Parameter(0)}));
 
     sbst.setActionParam(actionParam);
     sbst.addParam(Parameter(ssbstPtr));
 
     caSind->setSubstitutor(sbst);
 
-    return sind;
+    return caSind;
 }

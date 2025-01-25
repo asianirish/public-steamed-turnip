@@ -16,7 +16,9 @@ public:
     Parameter();
     Parameter(int position);
     Parameter(const Value &value);
-    Parameter(const LazyAction &action);
+
+    Parameter(const ActionPtr &action);
+
     Parameter(const SubstPtr &substPtr);
 
     int position() const;

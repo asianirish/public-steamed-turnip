@@ -24,7 +24,7 @@ public:
 
     Menu();
 
-    LazyAction registerAction(const std::string &commandName, const Value &actionInfo);
+    ActionPtr registerAction(const std::string &commandName, const Value &actionInfo);
 
     void registerHelpAction();
 
@@ -54,7 +54,7 @@ public:
 private:
     mutable std::list<std::string> commandList_;
 
-    std::map<std::string, LazyAction> actions_;
+    std::map<std::string, ActionPtr> actions_;
 
     TaskManager taskManager_;
 
@@ -64,7 +64,7 @@ private:
     ErrorCallback errorCallback_;
     StartCallback startCallback_;
 
-    LazyAction helpAction_;
+    ActionPtr helpAction_;
 
     std::string name_ {"steamed-turnip"};
 

@@ -18,7 +18,7 @@ Parameter::Parameter(const Value &value) : value_(value)
 
 }
 
-Parameter::Parameter(const LazyAction &action) : value_(action)
+Parameter::Parameter(const ActionPtr &action) : value_(action)
 {
 
 }

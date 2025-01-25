@@ -5,7 +5,9 @@
 namespace turnip {
 namespace cmd {
 
-Menu::Menu() : helpAction_(ACTION_CLASS(HelpAction)) {
+Menu::Menu()
+{
+    // TODO: helpAction_->setTaskManager(taskManager_);
 
     {
         auto f = std::bind(&Menu::onTaskComplete, this, std::placeholders::_1);
@@ -24,18 +26,18 @@ Menu::Menu() : helpAction_(ACTION_CLASS(HelpAction)) {
 
 }
 
-LazyAction Menu::registerAction(const std::string &commandName, const Value &actionInfo)
+ActionPtr Menu::registerAction(const std::string &commandName, const Value &actionInfo)
 {
     auto data = actionInfo.data();
 
-    LazyAction retAction;
+    ActionPtr retAction;
 
     std::string *pClassName = std::get_if<std::string>(&data);
-    LazyAction *actionPtrPtr = std::get_if<LazyAction>(&data);
+    ActionPtr *actionPtrPtr = std::get_if<ActionPtr>(&data);
 
     if (pClassName) {
         auto className = *pClassName;
-        LazyAction action(className);
+        ActionPtr action = ActionPtr(common::Factory<Action>::create(className));
         actions_.insert({commandName, action});
         retAction = action;
 
@@ -54,8 +56,8 @@ void Menu::registerHelpAction()
         return;
     }
 
-    auto actionPtr = helpAction_.ptr();
-    auto helpPtr = std::dynamic_pointer_cast<HelpAction>(actionPtr);
+    helpAction_ = ActionPtr(common::Factory<Action>::create(ACTION_CLASS(HelpAction)));
+    auto helpPtr = std::dynamic_pointer_cast<HelpAction>(helpAction_);
     helpPtr->setMenu(this);
     actions_.insert({"help", helpAction_});
 }
@@ -177,7 +179,7 @@ ActionPtr Menu::action(const std::string &command, bool *ok) const
     if (ok) {
         *ok = true;
     }
-    return actions_.at(command).ptr();
+    return actions_.at(command);
 }
 
 

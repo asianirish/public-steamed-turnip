@@ -12,7 +12,7 @@ class Substitutor
 public:
     Substitutor();
 
-    Substitutor(const LazyAction &action, const ParamList &paramList);
+    Substitutor(const ActionPtr &action, const ParamList &paramList);
 
     Parameter actionParam() const;
     void setActionParam(const Parameter &newActionParam);
