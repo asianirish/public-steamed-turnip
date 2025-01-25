@@ -14,12 +14,12 @@ class BinaryAction : public Action
 public:
     BinaryAction() {};
 
-    def::ActionDef actionDef() const override;
+    def::ActionDef actionDef() const final;
 
 private:
-    Value actImpl(const ArgList &args, err::Error &error) override;
+    Value actImpl(const ArgList &args, err::Error &error) final;
 
-    virtual T binAct(T left, T right, err::Error &error) = 0;
+    virtual T binAct(const T &left, const T &right, err::Error &error) = 0;
     virtual std::string description() const = 0;
 };
 
