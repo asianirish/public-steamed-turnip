@@ -294,6 +294,9 @@ VariantMap Value::toMap() const
 {
     if (isMap()) {
         return std::get<VariantMap>(data_);
+    } else if (isAction()) {
+        auto action = toActionPtr();
+        return action->toMap();
     }
 
     return {};
