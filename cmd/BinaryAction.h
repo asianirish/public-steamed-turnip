@@ -5,7 +5,6 @@
 
 namespace turnip {
 namespace cmd {
-namespace math {
 
 using namespace def;
 
@@ -62,7 +61,6 @@ Value BinaryAction<T, Rep>::actImpl(const ArgList &args, err::Error &error)
     return binAct(static_cast<T>(args.at(0)), static_cast<T>(args.at(1)), error);
 }
 
-} // namespace math
 } // namespace cmd
 } // namespace turnip
 
