@@ -3,6 +3,8 @@
 
 #include "Action.h"
 
+#include <mutex>
+
 namespace turnip {
 namespace cmd {
 

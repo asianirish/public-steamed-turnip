@@ -6,7 +6,6 @@
 #include "def/ActionDef.h"
 #include "err/Error.h"
 
-#include <mutex>
 #include <functional>
 
 namespace turnip {
