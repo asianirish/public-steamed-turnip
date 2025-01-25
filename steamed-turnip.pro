@@ -61,8 +61,10 @@ SOURCES += \
         console/Reader.cpp \
         example/MakeSentence.cpp \
         main.cpp \
+        math/Decr.cpp \
         math/DegreesToRadians.cpp \
         math/Divide.cpp \
+        math/Inc.cpp \
         math/IsEven.cpp \
         math/RemAction.cpp \
         math/SineOfRadians.cpp \
@@ -133,9 +135,11 @@ HEADERS += \
     console/Reader.h \
     example/MakeSentence.h \
     math/AddAction.h \
+    math/Decr.h \
     math/DegreesToRadians.h \
     math/DivAction.h \
     math/Divide.h \
+    math/Inc.h \
     math/IsEven.h \
     math/MultAction.h \
     math/RemAction.h \

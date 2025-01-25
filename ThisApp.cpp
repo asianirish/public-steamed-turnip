@@ -16,7 +16,9 @@
 
 #include "example/MakeSentence.h"
 
+#include "math/Decr.h"
 #include "math/DegreesToRadians.h"
+#include "math/Inc.h"
 #include "math/IsEven.h"
 #include "math/Divide.h"
 #include "math/MultAction.h"
@@ -69,6 +71,8 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, DivInt);
     REGISTER_TURNIP_CLASS(Action, DivFloat);
     REGISTER_TURNIP_CLASS(Action, RemAction);
+    REGISTER_TURNIP_CLASS(Action, Inc);
+    REGISTER_TURNIP_CLASS(Action, Decr);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
@@ -101,6 +105,8 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     mathMenuAction->addAction("divi", ACTION_CLASS(DivInt));
     mathMenuAction->addAction("divf", ACTION_CLASS(DivFloat));
     mathMenuAction->addAction("rem", ACTION_CLASS(RemAction));
+    mathMenuAction->addAction("++", ACTION_CLASS(Inc));
+    mathMenuAction->addAction("--", ACTION_CLASS(Decr));
 
     menu.registerAction("math", mathAction);
 
