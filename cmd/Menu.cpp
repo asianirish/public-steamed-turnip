@@ -83,7 +83,7 @@ void Menu::processString(const std::string &input)
 void Menu::executeAction(const std::string &command, const InputArgList &args)
 {
     bool ok = false;
-    auto a = action(command, &ok);
+    auto a = findAction(command, &ok);
 
     if (ok) {
         taskManager_.execute(a, args);
@@ -118,7 +118,7 @@ void Menu::setErrorCallback(const ErrorCallback &newErrorCallback)
 def::ActionDef Menu::actionDef(const std::string &command) const
 {
     bool ok = false;
-    auto a = action(command, &ok);
+    auto a = findAction(command, &ok);
     if (ok) {
         return a->actionDef();
     }
@@ -162,7 +162,7 @@ void Menu::onTaskStart(const TaskId &taskId)
     }
 }
 
-ActionPtr Menu::action(const std::string &command, bool *ok) const
+ActionPtr Menu::findAction(const std::string &command, bool *ok) const
 {
     if (ok) {
         *ok = false;

@@ -74,7 +74,7 @@ private:
 
     void onTaskStart(const TaskId &taskId);
 
-    ActionPtr action(const std::string &command, bool *ok = nullptr) const;
+    ActionPtr findAction(const std::string &command, bool *ok = nullptr) const;
 };
 
 } // namespace cmd
