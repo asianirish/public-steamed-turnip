@@ -80,6 +80,14 @@ Value HelpAction::actImpl(const ArgList &args, err::Error &error)
             std::cout << "\t" << def.resultRepresentation()->info() << std::endl;
         }
 
+        auto action = menu_->action(commandName);
+        auto actionMap = action->toMap();
+
+        if (!actionMap.empty()) {
+            std::cout << "AS_MAP:" << std::endl;
+            std::cout << "\t" << actionMap;
+        }
+
         return true;
     }
 
