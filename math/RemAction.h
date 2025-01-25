@@ -13,7 +13,7 @@ public:
     RemAction();
 
 private:
-    int64_t binAct(int64_t left, int64_t right, err::Error &error) override;
+    int64_t binAct(const int64_t &left, const int64_t &right, err::Error &error) override;
     std::string description() const override;
 };
 

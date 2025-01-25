@@ -6,7 +6,7 @@ namespace math {
 
 RemAction::RemAction() {}
 
-int64_t RemAction::binAct(int64_t left, int64_t right, err::Error &error)
+int64_t RemAction::binAct(const int64_t &left, const int64_t &right, err::Error &error)
 {
     (void)error;
     return left % right;

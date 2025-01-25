@@ -16,12 +16,12 @@ public:
     AddAction() {};
 
 private:
-    virtual T binAct(T left, T right, err::Error &error) override;
+    virtual T binAct(const T &left, const T &right, err::Error &error) override;
     std::string description() const override;
 };
 
 template<typename T, typename Rep>
-T AddAction<T, Rep>::binAct(T left, T right, err::Error &error)
+T AddAction<T, Rep>::binAct(const T &left, const T &right, err::Error &error)
 {
     (void)error;
     return left + right;
