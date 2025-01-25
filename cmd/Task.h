@@ -64,8 +64,6 @@ private:
     // Current status of the task
     Status status_;
 
-    std::map<TaskId, TaskPtr> argTasks_;
-
     std::shared_ptr<TaskManager> subTaskManager_;
 
     Callback subTaskCallback_; // Member to hold the callback function
