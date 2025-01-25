@@ -100,6 +100,7 @@ HEADERS += \
     cmd/TaskManager.h \
     cmd/Translator.h \
     cmd/Types.h \
+    cmd/UnaryAction.h \
     cmd/Value.h \
     cmd/def/ActionDef.h \
     cmd/def/ArgDef.h \
