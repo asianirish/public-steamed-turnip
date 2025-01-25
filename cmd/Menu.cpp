@@ -141,6 +141,11 @@ void Menu::setStartCallback(const StartCallback &newStartCallback)
     startCallback_ = newStartCallback;
 }
 
+ActionPtr Menu::action(const std::string &command) const
+{
+    return actions_.at(command);
+}
+
 void Menu::onTaskComplete(const Result &result)
 {
     if (resultCallback_) {

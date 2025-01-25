@@ -51,6 +51,8 @@ public:
 
     void setStartCallback(const StartCallback &newStartCallback);
 
+    ActionPtr action(const std::string &command) const;
+
 private:
     mutable std::list<std::string> commandList_;
 
