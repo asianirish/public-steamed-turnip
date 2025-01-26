@@ -23,6 +23,16 @@ Value CompositeAction::actImpl(const ArgList &args, err::Error &error)
     return task;
 }
 
+VariantMap CompositeAction::data() const
+{
+    VariantMap mp;
+
+    mp.set("def", actionDef_.toMap());
+    mp.set("substitutor", substitutor_.toMap());
+
+    return mp;
+}
+
 def::ActionDef CompositeAction::actionDef() const
 {
     return actionDef_;

@@ -47,6 +47,27 @@ void ActionDef::setResultRepresentation(const RepPtr &newResultRepresentation)
     resultRepresentation_ = newResultRepresentation;
 }
 
+VariantMap ActionDef::toMap() const
+{
+    VariantMap mp;
+    mp.set("desc", description_);
+
+    if (resultRepresentation_) {
+        mp.set("result", resultRepresentation_->toMap());
+    }
+
+    VariantList lst;
+
+    for (auto argDef : argDefs_) {
+        auto argDefMap = argDef.toMap();
+        lst.push_back(argDefMap);
+    }
+
+    mp.set("argDefs", lst);
+
+    return mp;
+}
+
 
 } // namespace def
 } // namespace cmd

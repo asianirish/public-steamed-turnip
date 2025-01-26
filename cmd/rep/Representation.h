@@ -11,6 +11,8 @@ namespace rep {
 class Representation
 {
 public:
+    static const std::string CLASS_NAME_KEY;
+
     Representation();
 
     virtual Value input(const std::string &str) const = 0;
@@ -29,6 +31,8 @@ public:
     static std::string checkClassName(const std::string &className) {
         return className;
     }
+
+    VariantMap toMap() const;
 
 private:
     const std::string *registeredClassName_ = nullptr;

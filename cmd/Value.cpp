@@ -55,6 +55,11 @@ Value::Value(const VariantMap &vmp) : data_(vmp)
 
 }
 
+Value::Value(const VariantList &lst) : data_(lst)
+{
+
+}
+
 Value::Value(const std::vector<Value> &vec) : data_(vec)
 {
 
@@ -131,9 +136,19 @@ std::string Value::toString() const
             }
             os << "]";
         } else if constexpr (std::is_same_v<T, TaskPtr>) {
-            os << std::string("Task: ") << arg->taskId(); // TODO: convert to map and to string
+            Value taskMapValue = arg->toMap();
+            VariantMap mp;
+            mp.set("type", "Task");
+            mp.set("data", taskMapValue);
+            Value taskValue(mp);
+            os << taskValue.toString();
         } else if constexpr (std::is_same_v<T, ActionPtr>) {
-            os << std::string("[Action]"); // TODO: convert to map and to string
+            Value actionMapValue = arg->toMap();
+            VariantMap mp;
+            mp.set("type", "Action");
+            mp.set("data", actionMapValue);
+            Value actionValue(mp);
+            os << actionValue.toString();
         }
     }, data_);
     return os.str();

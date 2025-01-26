@@ -45,6 +45,9 @@ public:
     }
 
     def::MetaType metaType() const override;
+    Kind kind() const;
+    void setKind(Kind newKind);
+
 private:
     Kind kind_ {Kind::TrueFalse};
 

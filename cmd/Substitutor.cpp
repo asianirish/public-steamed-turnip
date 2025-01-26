@@ -71,6 +71,21 @@ TaskPtr Substitutor::substitue(const ArgList &args)
     return taskPtr;
 }
 
+VariantMap Substitutor::toMap() const
+{
+    VariantMap mp;
+
+    mp.set("actionParam", actionParam_.toMap());
+
+    VariantList lst;
+    for (auto param : params_) {
+        lst.push_back(param.toMap());
+    }
+    mp.set("params", lst);
+
+    return mp;
+}
+
 
 } // namespace cmd
 } // namespace turnip

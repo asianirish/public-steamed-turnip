@@ -30,6 +30,8 @@ public:
     SubstPtr substitutor() const;
     void setSubstitutor(const SubstPtr &newSubstitutor);
 
+    VariantMap toMap() const;
+
 private:
     int position_ {INVALID_POSITION};
     Value value_;

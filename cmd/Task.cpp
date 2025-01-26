@@ -130,6 +130,23 @@ void Task::setTaskIdGen(const std::shared_ptr<TaskIdGenerator> &newTaskIdGen)
     taskIdGen_ = newTaskIdGen;
 }
 
+VariantMap Task::toMap() const
+{
+    VariantMap mp;
+
+    mp.set("action", actionPtr_);
+
+    VariantList lst;
+    for (auto arg : argList_) {
+        lst.push_back(arg);
+    }
+    mp.set("args", lst);
+
+    mp.set("taskId", static_cast<int64_t>(taskId_));
+
+    return mp;
+}
+
 Task::Status Task::status() const
 {
     return status_;

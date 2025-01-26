@@ -31,6 +31,8 @@ public:
     Value(const std::map<std::string, Value> &mp);
     Value(const VariantMap &vmp);
 
+    Value(const VariantList &lst);
+
     Value(const std::vector<Value> &vec);
 
     Value(const TaskPtr &taskPtr);

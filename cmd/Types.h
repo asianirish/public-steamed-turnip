@@ -31,6 +31,9 @@ class Action;
 using ActionPtr = std::shared_ptr<Action>;
 using LazyAction = common::LazyPointer<Action>;
 
+#define mkActionPtr(A) ActionPtr(common::Factory<Action>::create(ACTION_CLASS(A)))
+#define mkDynActionPtr(A) std::dynamic_pointer_cast<A>(mkActionPtr(A))
+
 
 using VariantMap = common::SharedMap<std::string, Value>;
 using VariantList =    common::SharedVector<Value>;
@@ -62,6 +65,10 @@ using ArgResults = std::map<std::size_t, Value>;
 namespace rep {
 class Representation;
 using RepPtr = std::shared_ptr<Representation>;
+
+#define mkRepPtr(R) RepPtr(common::Factory<Representation>::create(REPRESENTATION_CLASS(R)))
+#define mkDynRepPtr(R) std::dynamic_pointer_cast<R>(mkRepPtr(R))
+
 }
 
 } // namespace cmd

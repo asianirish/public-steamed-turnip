@@ -54,6 +54,8 @@ public:
 
     static void setTaskIdGen(const std::shared_ptr<TaskIdGenerator> &newTaskIdGen);
 
+    VariantMap toMap() const;
+
 private:
     ActionPtr actionPtr_;
     ArgList argList_;

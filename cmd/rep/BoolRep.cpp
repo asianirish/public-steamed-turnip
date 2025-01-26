@@ -65,6 +65,16 @@ def::MetaType BoolRep::metaType() const
     return def::MetaType::Bool;
 }
 
+BoolRep::Kind BoolRep::kind() const
+{
+    return kind_;
+}
+
+void BoolRep::setKind(BoolRep::Kind newKind)
+{
+    kind_ = newKind;
+}
+
 } // namespace rep
 } // namespace cmd
 } // namespace turnip

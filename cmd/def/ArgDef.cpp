@@ -66,6 +66,37 @@ void ArgDef::setMustBeCalculated(bool newMustBeCalculated)
     mustBeCalculated_ = newMustBeCalculated;
 }
 
+VariantMap ArgDef::toMap() const
+{
+    VariantMap mp;
+
+    if (!name_.empty()) {
+        mp.set("name", name_);
+    }
+
+    if (!desc_.empty()) {
+        mp.set("desc", desc_);
+    }
+
+    if (!defaultValue_.isNull()) {
+        mp.set("defaultValue", defaultValue_);
+    }
+
+    mp.set("mustBeCalculated", mustBeCalculated_);
+
+    auto input = type_.inputRep();
+    if (input) {
+        mp.set("input", input->toMap());
+    }
+
+    auto output = type_.outputRep();
+    if (output && output != input) {
+        mp.set("output", output->toMap());
+    }
+
+    return mp;
+}
+
 } // namespace def
 } // namespace cmd
 } // namespace turnip

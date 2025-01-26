@@ -147,11 +147,11 @@ std::string ThisApp::appName() const
 
 ActionPtr ThisApp::yesNoPrint()
 {
-    auto caAction = mkPtr<CompositeAction>();
+    auto caAction = mkDynActionPtr(CompositeAction);
 
     def::ActionDef actionDef;
     actionDef.setDescription("Yes-No Print");
-    actionDef.setResultRepresentation(mkPtr<SimpleStringRep>());
+    actionDef.setResultRepresentation(mkRepPtr(SimpleStringRep));
 
     const auto boolDef = def::TypeDef::createBoolTypedef(BoolRep::Kind::YesNo);
 
@@ -162,11 +162,10 @@ ActionPtr ThisApp::yesNoPrint()
     caAction->setActionDef(actionDef);
 
     Substitutor sbst;
-    ActionPtr ifa = mkPtr<IfAction>();
-    sbst.setActionParam(ifa);  // TODO: sbst.setActionParam(mkPtr<IfAction>());
+    sbst.setActionParam(mkActionPtr(IfAction));
     sbst.addParam(Parameter(0));
-    sbst.addParam(Parameter(mkPtr<Task>(mkPtr<PrintAction>(), ArgList{"yes"})));
-    sbst.addParam(Parameter(mkPtr<Task>(mkPtr<PrintAction>(), ArgList{"no"})));
+    sbst.addParam(Parameter(mkPtr<Task>(mkActionPtr(PrintAction), ArgList{"yes"})));
+    sbst.addParam(Parameter(mkPtr<Task>(mkActionPtr(PrintAction), ArgList{"no"})));
 
     caAction->setSubstitutor(sbst);
     return caAction;
@@ -174,7 +173,7 @@ ActionPtr ThisApp::yesNoPrint()
 
 ActionPtr ThisApp::multiPrint()
 {
-    auto caAction = mkPtr<CompositeAction>();
+    auto caAction = mkDynActionPtr(CompositeAction);
 
     def::ActionDef actionDef;
 
@@ -188,17 +187,19 @@ ActionPtr ThisApp::multiPrint()
     }
 
     actionDef.setDescription("Multiple Print");
-    actionDef.setResultRepresentation(mkPtr<BoolRep>(BoolRep::Kind::OnOff));
+    // TODO: support constructor arguments in Factory
+    auto boolRep = mkDynRepPtr(BoolRep);
+    boolRep->setKind(BoolRep::Kind::OnOff);
+    actionDef.setResultRepresentation(boolRep);
     caAction->setActionDef(actionDef);
 
     Substitutor sbst;
-    ActionPtr dn = mkPtr<DoNothing>(); // TODO: template Param?
-    sbst.setActionParam(dn); // TODO: sbst.setActionParam(mkPtr<DoNothing>());
+    sbst.setActionParam(mkActionPtr(DoNothing));
 
     for (int i = 0; i < 4; ++i) {
         Substitutor actionSbst;
         Parameter actionParam;
-        actionParam.setValue(mkPtr<PrintAction>());
+        actionParam.setValue(mkActionPtr(PrintAction));
 
         actionSbst.setActionParam(actionParam);
         actionSbst.addParam(Parameter(i));
@@ -213,7 +214,7 @@ ActionPtr ThisApp::multiPrint()
 
 ActionPtr ThisApp::reverseDivide()
 {
-    auto caRvrs = mkPtr<CompositeAction>();
+    auto caRvrs = mkDynActionPtr(CompositeAction);
 
     def::ActionDef actionDef;
 
@@ -234,12 +235,12 @@ ActionPtr ThisApp::reverseDivide()
     }
 
     actionDef.setDescription("Reverse Divide");
-    actionDef.setResultRepresentation(mkPtr<DoubleRep>());
+    actionDef.setResultRepresentation(mkRepPtr(DoubleRep));
     caRvrs->setActionDef(actionDef);
 
     Substitutor sbst;
     Parameter actionParam;
-    actionParam.setValue(mkPtr<Divide>());
+    actionParam.setValue(mkActionPtr(Divide));
 
     sbst.setActionParam(actionParam);
     sbst.addParam(Parameter(1));
@@ -252,7 +253,7 @@ ActionPtr ThisApp::reverseDivide()
 
 ActionPtr ThisApp::doubleReverseSentence()
 {
-    auto caRvrs = mkPtr<CompositeAction>();
+    auto caRvrs = mkDynActionPtr(CompositeAction);
 
     def::ActionDef actionDef;
 
@@ -299,7 +300,7 @@ ActionPtr ThisApp::doubleReverseSentence()
 
 ActionPtr ThisApp::reverseSentence()
 {
-    auto caRvrs = mkPtr<CompositeAction>();
+    auto caRvrs = mkDynActionPtr(CompositeAction);
 
     def::ActionDef actionDef;
 
@@ -331,7 +332,7 @@ ActionPtr ThisApp::reverseSentence()
 
     Substitutor sbst;
     Parameter actionParam;
-    actionParam.setValue(mkPtr<MakeSentence>());
+    actionParam.setValue(mkActionPtr(MakeSentence));
 
     sbst.setActionParam(actionParam);
     sbst.addParam(Parameter(2));
@@ -345,7 +346,7 @@ ActionPtr ThisApp::reverseSentence()
 
 ActionPtr ThisApp::sineOfDegrees()
 {
-    auto caSind = mkPtr<CompositeAction>();
+    auto caSind = mkDynActionPtr(CompositeAction);
 
     def::ActionDef actionDef;
 
@@ -357,16 +358,15 @@ ActionPtr ThisApp::sineOfDegrees()
     actionDef.addArgDef(argDef);
     actionDef.setDescription("Calculates the sine of a specified angle measured in degrees");
 
-    auto doubleRep = std::make_shared<DoubleRep>();
-    actionDef.setResultRepresentation(doubleRep);
+    actionDef.setResultRepresentation(mkRepPtr(DoubleRep));
 
     caSind->setActionDef(actionDef);
 
     Substitutor sbst;
     Parameter actionParam;
-    actionParam.setValue(mkPtr<SineOfRadians>());
+    actionParam.setValue(mkActionPtr(SineOfRadians));
 
-    auto ssbstPtr = std::make_shared<Substitutor>(mkPtr<DegreesToRadians>(), ParamList({Parameter(0)}));
+    auto ssbstPtr = std::make_shared<Substitutor>(mkActionPtr(DegreesToRadians), ParamList({Parameter(0)}));
 
     sbst.setActionParam(actionParam);
     sbst.addParam(Parameter(ssbstPtr));

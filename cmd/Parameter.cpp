@@ -1,4 +1,6 @@
 #include "Parameter.h"
+#include "cmd/Substitutor.h"
+
 #include <climits>
 
 namespace turnip {
@@ -56,6 +58,23 @@ SubstPtr Parameter::substitutor() const
 void Parameter::setSubstitutor(const SubstPtr &newSubstitutor)
 {
     substitutor_ = newSubstitutor;
+}
+
+VariantMap Parameter::toMap() const
+{
+    VariantMap mp;
+    if (position_ != INVALID_POSITION) {
+        mp.set("position", position_);
+    }
+
+    if (!value_.isNull()) {
+        mp.set("value", value_);
+    }
+
+    if (substitutor_) {
+        mp.set("sub", substitutor_->toMap());
+    }
+    return mp;
 }
 
 } // namespace cmd

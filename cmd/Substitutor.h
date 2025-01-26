@@ -21,6 +21,9 @@ public:
     void addParam(const Parameter &param);
 
     TaskPtr substitue(const ArgList &args);
+
+    VariantMap toMap() const;
+
 private:
     Parameter actionParam_; // TODO: special type for Action and List-Of-Actions params
     ParamList params_;

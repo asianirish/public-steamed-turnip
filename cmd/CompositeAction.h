@@ -21,6 +21,8 @@ public:
 private:
     Value actImpl(const ArgList &args, err::Error &error) override;
 
+    VariantMap data() const override;
+
 private:
     Substitutor substitutor_;
     def::ActionDef actionDef_;

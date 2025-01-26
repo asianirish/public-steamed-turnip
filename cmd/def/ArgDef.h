@@ -32,6 +32,8 @@ public:
     bool mustBeCalculated() const;
     void setMustBeCalculated(bool newMustBeCalculated);
 
+    VariantMap toMap() const;
+
 private:
     TypeDef type_;
     std::string name_;

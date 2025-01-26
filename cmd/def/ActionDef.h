@@ -27,6 +27,8 @@ public:
     RepPtr resultRepresentation() const;
     void setResultRepresentation(const RepPtr &newResultRepresentation);
 
+    VariantMap toMap() const;
+
 private:
     std::list<ArgDef> argDefs_;
     std::string description_;
