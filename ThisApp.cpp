@@ -32,6 +32,7 @@
 #include "test/TestCmdValue.h"
 #include "test/TestSharedVector.h"
 #include "test/TestLazyPointer.h"
+#include "test/TestStringGen.h"
 
 using namespace turnip;
 using namespace cmd;
@@ -73,6 +74,8 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, RemAction);
     REGISTER_TURNIP_CLASS(Action, Inc);
     REGISTER_TURNIP_CLASS(Action, Decr);
+    REGISTER_TURNIP_CLASS(Action, TestStringGen);
+
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
@@ -121,6 +124,8 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("multiprint", multiPrint());
 
     menu.registerAction("yesno", yesNoPrint());
+
+    menu.registerAction("strgen", ACTION_CLASS(TestStringGen));
 }
 
 const std::shared_ptr<cmd::Translator> ThisApp::createTranslator() const

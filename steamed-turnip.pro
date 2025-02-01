@@ -58,6 +58,8 @@ SOURCES += \
         cmd/rep/SimpleStringRep.cpp \
         cmd/rep/StringRep.cpp \
         cmd/rep/TaskRep.cpp \
+        common/HumanStringGenerator.cpp \
+        common/StringGenerator.cpp \
         console/Reader.cpp \
         example/MakeSentence.cpp \
         main.cpp \
@@ -71,7 +73,8 @@ SOURCES += \
         test/TestActionMap.cpp \
         test/TestCmdValue.cpp \
         test/TestLazyPointer.cpp \
-        test/TestSharedVector.cpp
+        test/TestSharedVector.cpp \
+        test/TestStringGen.cpp
 
 HEADERS += \
     App.h \
@@ -128,10 +131,12 @@ HEADERS += \
     cmd/rep/StringRep.h \
     cmd/rep/TaskRep.h \
     common/Factory.h \
+    common/HumanStringGenerator.h \
     common/LazyPointer.h \
     common/LimitedStack.h \
     common/SharedMap.h \
     common/SharedVector.h \
+    common/StringGenerator.h \
     console/Reader.h \
     example/MakeSentence.h \
     math/AddAction.h \
@@ -148,4 +153,5 @@ HEADERS += \
     test/TestActionMap.h \
     test/TestCmdValue.h \
     test/TestLazyPointer.h \
-    test/TestSharedVector.h
+    test/TestSharedVector.h \
+    test/TestStringGen.h
