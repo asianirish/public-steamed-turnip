@@ -83,6 +83,10 @@ public:
     void showDataAddress() const {
         std::cout << data_.get() << std::endl;
     }
+
+    void reserve(size_t n) {
+        data_->reserve(n);
+    }
 private:
     std::shared_ptr<std::vector<T>> data_;
 };
