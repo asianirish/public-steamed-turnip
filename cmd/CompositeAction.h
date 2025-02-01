@@ -13,10 +13,18 @@ public:
     CompositeAction();
 
     Substitutor substitutor() const;
-    void setSubstitutor(const Substitutor &newSubstitutor);
 
     def::ActionDef actionDef() const override;
     void setActionDef(const def::ActionDef &newActionDef);
+
+    void setAction(const ActionPtr &action);
+    void addParam(int position);
+    void addParam(const Value &value);
+    void addParam(const ActionPtr &action);
+    void addParam(const ActionPtr &action, const ParamList &paramList);
+    // TODO: use action param for action
+
+    void addParams(const ParamList &paramList);
 
 private:
     Value actImpl(const ArgList &args, err::Error &error) override;

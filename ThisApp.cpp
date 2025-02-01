@@ -161,13 +161,12 @@ ActionPtr ThisApp::yesNoPrint()
 
     caAction->setActionDef(actionDef);
 
-    Substitutor sbst;
-    sbst.setActionParam(mkActionPtr(IfAction));
-    sbst.addParam(Parameter(0));
-    sbst.addParam(Parameter(mkPtr<Task>(mkActionPtr(PrintAction), ArgList{"yes"})));
-    sbst.addParam(Parameter(mkPtr<Task>(mkActionPtr(PrintAction), ArgList{"no"})));
+    //---
 
-    caAction->setSubstitutor(sbst);
+    caAction->setAction(mkActionPtr(IfAction));
+    caAction->addParams(ParamList({0,
+                                 mkPtr<Task>(mkActionPtr(PrintAction), ArgList{"yes"}),
+                                 mkPtr<Task>(mkActionPtr(PrintAction), ArgList{"no"})}));
     return caAction;
 }
 
@@ -193,21 +192,13 @@ ActionPtr ThisApp::multiPrint()
     actionDef.setResultRepresentation(boolRep);
     caAction->setActionDef(actionDef);
 
-    Substitutor sbst;
-    sbst.setActionParam(mkActionPtr(DoNothing));
+    //---
+
+    caAction->setAction(mkActionPtr(DoNothing));
 
     for (int i = 0; i < 4; ++i) {
-        Substitutor actionSbst;
-        Parameter actionParam;
-        actionParam.setValue(mkActionPtr(PrintAction));
-
-        actionSbst.setActionParam(actionParam);
-        actionSbst.addParam(Parameter(i));
-
-        sbst.addParam(Parameter(mkPtr<Substitutor>(actionSbst)));
+        caAction->addParam(mkActionPtr(PrintAction), ParamList({i}));
     }
-
-    caAction->setSubstitutor(sbst);
 
     return caAction;
 }
@@ -238,15 +229,10 @@ ActionPtr ThisApp::reverseDivide()
     actionDef.setResultRepresentation(mkRepPtr(DoubleRep));
     caRvrs->setActionDef(actionDef);
 
-    Substitutor sbst;
-    Parameter actionParam;
-    actionParam.setValue(mkActionPtr(Divide));
+    //---
 
-    sbst.setActionParam(actionParam);
-    sbst.addParam(Parameter(1));
-    sbst.addParam(Parameter(0));
-
-    caRvrs->setSubstitutor(sbst);
+    caRvrs->setAction(mkActionPtr(Divide));
+    caRvrs->addParams(ParamList({1, 0}));
 
     return caRvrs;
 }
@@ -283,17 +269,10 @@ ActionPtr ThisApp::doubleReverseSentence()
     actionDef.setDescription("Double reverses a sentence");
     caRvrs->setActionDef(actionDef);
 
-    Substitutor sbst;
-    Parameter actionParam;
-    auto sntAction = reverseSentence();
-    actionParam.setValue(sntAction);
+    //---
 
-    sbst.setActionParam(actionParam);
-    sbst.addParam(Parameter(2));
-    sbst.addParam(Parameter(1));
-    sbst.addParam(Parameter(0));
-
-    caRvrs->setSubstitutor(sbst);
+    caRvrs->setAction(reverseSentence());
+    caRvrs->addParams(ParamList({2, 1, 0}));
 
     return caRvrs;
 }
@@ -330,16 +309,11 @@ ActionPtr ThisApp::reverseSentence()
     actionDef.setDescription("Reverses a sentence");
     caRvrs->setActionDef(actionDef);
 
-    Substitutor sbst;
-    Parameter actionParam;
-    actionParam.setValue(mkActionPtr(MakeSentence));
+    //---
 
-    sbst.setActionParam(actionParam);
-    sbst.addParam(Parameter(2));
-    sbst.addParam(Parameter(1));
-    sbst.addParam(Parameter(0));
+    caRvrs->setAction(mkActionPtr(MakeSentence));
+    caRvrs->addParams(ParamList({2, 1, 0}));
 
-    caRvrs->setSubstitutor(sbst);
 
     return caRvrs;
 }
@@ -362,16 +336,11 @@ ActionPtr ThisApp::sineOfDegrees()
 
     caSind->setActionDef(actionDef);
 
-    Substitutor sbst;
-    Parameter actionParam;
-    actionParam.setValue(mkActionPtr(SineOfRadians));
+    //---
 
-    auto ssbstPtr = std::make_shared<Substitutor>(mkActionPtr(DegreesToRadians), ParamList({Parameter(0)}));
-
-    sbst.setActionParam(actionParam);
-    sbst.addParam(Parameter(ssbstPtr));
-
-    caSind->setSubstitutor(sbst);
+    // caSind->setSubstitutor(sbst);
+    caSind->setAction(mkActionPtr(SineOfRadians));
+    caSind->addParam(mkActionPtr(DegreesToRadians), ParamList({0}));
 
     return caSind;
 }
