@@ -21,6 +21,8 @@ public:
 
     Parameter(const SubstPtr &substPtr);
 
+    Parameter(const ActionPtr &action, const ParamList &paramList);
+
     int position() const;
     void setPosition(int newPosition);
 

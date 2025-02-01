@@ -30,6 +30,11 @@ Parameter::Parameter(const SubstPtr &substPtr) : substitutor_(substPtr)
 
 }
 
+Parameter::Parameter(const ActionPtr &action, const ParamList &paramList)
+{
+    substitutor_ = mkPtr<Substitutor>(action, paramList);
+}
+
 int Parameter::position() const
 {
     return position_;
