@@ -25,6 +25,11 @@ Parameter::Parameter(const ActionPtr &action) : value_(action)
 
 }
 
+Parameter::Parameter(const TaskPtr &task) : value_(task)
+{
+
+}
+
 Parameter::Parameter(const SubstPtr &substPtr) : substitutor_(substPtr)
 {
 

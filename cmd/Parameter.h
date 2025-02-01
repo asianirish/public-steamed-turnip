@@ -19,6 +19,8 @@ public:
 
     Parameter(const ActionPtr &action);
 
+    Parameter(const TaskPtr &task);
+
     Parameter(const SubstPtr &substPtr);
 
     Parameter(const ActionPtr &action, const ParamList &paramList);
