@@ -10,7 +10,10 @@ namespace cmd {
 
 std::shared_ptr<TaskIdGenerator> Task::taskIdGen_;
 
-Task::Task() : Task({}, {}) {}
+Task::Task() : Task({}, {}) {
+    // to disable the annoying "Included header Action.h is not used directly" warning
+    (void) sizeof(Action);
+}
 
 Task::Task(ActionPtr actionPtr, const ArgList &argList)
     : actionPtr_(actionPtr), argList_(argList),
