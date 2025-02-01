@@ -39,7 +39,7 @@ TaskPtr Substitutor::substitue(const ArgList &args)
     // TODO: substitue actionParam_ as well
 
     int i = 0;
-    for (auto arg : args) {
+    for (auto &arg : args) {
         for (auto &param : params_) {
             if (param.position() == i) {
                 param.setValue(arg);
@@ -63,7 +63,7 @@ TaskPtr Substitutor::substitue(const ArgList &args)
 
     ArgList argList;
 
-    for (auto param : params_) {
+    for (const auto &param : params_) {
         argList.push_back(param.value());
     }
     taskPtr->setArgList(argList);
@@ -78,7 +78,7 @@ VariantMap Substitutor::toMap() const
     mp.set("actionParam", actionParam_.toMap());
 
     VariantList lst;
-    for (auto param : params_) {
+    for (const auto &param : params_) {
         lst.push_back(param.toMap());
     }
     mp.set("params", lst);

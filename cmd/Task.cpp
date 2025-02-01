@@ -137,7 +137,7 @@ VariantMap Task::toMap() const
     mp.set("action", actionPtr_);
 
     VariantList lst;
-    for (auto arg : argList_) {
+    for (auto &arg : argList_) {
         lst.push_back(arg);
     }
     mp.set("args", lst);
@@ -193,7 +193,7 @@ void Task::onSubTaskError(const err::Error &error)
 
 void Task::onArgResults(const ArgResults &argResults)
 {
-    for (auto pr : argResults) {
+    for (auto &pr : argResults) {
         argList_[pr.first] = pr.second;
     }
 
