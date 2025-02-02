@@ -4,6 +4,7 @@
 
 #include "cmd/ConditionalStringAction.h"
 #include "cmd/DoNothing.h"
+#include "cmd/CountingAction.h"
 #include "cmd/IfAction.h"
 #include "cmd/MenuAction.h"
 #include "cmd/PrintAction.h"
@@ -75,6 +76,7 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, Inc);
     REGISTER_TURNIP_CLASS(Action, Decr);
     REGISTER_TURNIP_CLASS(Action, TestStringGen);
+    REGISTER_TURNIP_CLASS(Action, CountingAction);
 
 }
 
@@ -126,6 +128,8 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("yesno", yesNoPrint());
 
     menu.registerAction("strgen", ACTION_CLASS(TestStringGen));
+
+    menu.registerAction("count", ACTION_CLASS(CountingAction));
 }
 
 const std::shared_ptr<cmd::Translator> ThisApp::createTranslator() const
