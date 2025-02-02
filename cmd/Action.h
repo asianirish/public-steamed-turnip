@@ -11,7 +11,6 @@
 namespace turnip {
 namespace cmd {
 
-// TODO: Specify the return type (representation of the expected value)
 class Action
 {
 public:

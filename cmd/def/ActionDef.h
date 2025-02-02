@@ -23,7 +23,7 @@ public:
 
     operator bool() const;
 
-
+    // the return type of the Action (representation of the expected result)
     RepPtr resultRepresentation() const;
     void setResultRepresentation(const RepPtr &newResultRepresentation);
 
