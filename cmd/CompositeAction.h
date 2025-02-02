@@ -7,8 +7,11 @@
 namespace turnip {
 namespace cmd {
 
+class ContextualAction;
+
 class CompositeAction : public Action
 {
+    friend class ContextualAction;
 public:
     CompositeAction();
 
@@ -18,11 +21,14 @@ public:
     void setActionDef(const def::ActionDef &newActionDef);
 
     void setAction(const ActionPtr &action);
+    void setAction(const Alias &alias);
+
     void addParam(int position);
     void addParam(const Value &value);
     void addParam(const ActionPtr &action);
     void addParam(const ActionPtr &action, const ParamList &paramList);
-    // TODO: use action param for action
+
+    void addParam(const Alias &alias, const ParamList &paramList);
 
     void addParams(const ParamList &paramList);
 

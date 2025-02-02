@@ -11,11 +11,14 @@ SOURCES += \
         App.cpp \
         ThisApp.cpp \
         cmd/Action.cpp \
+        cmd/Alias.cpp \
         cmd/ArgInfo.cpp \
         cmd/ArgManager.cpp \
         cmd/CompositeAction.cpp \
         cmd/ConditionalStringAction.cpp \
+        cmd/ContextualAction.cpp \
         cmd/CountingAction.cpp \
+        cmd/Context.cpp \
         cmd/DoNothing.cpp \
         cmd/Global.cpp \
         cmd/HelpAction.cpp \
@@ -81,12 +84,15 @@ HEADERS += \
     App.h \
     ThisApp.h \
     cmd/Action.h \
+    cmd/Alias.h \
     cmd/ArgInfo.h \
     cmd/ArgManager.h \
     cmd/BinaryAction.h \
     cmd/CompositeAction.h \
     cmd/ConditionalStringAction.h \
+    cmd/ContextualAction.h \
     cmd/CountingAction.h \
+    cmd/Context.h \
     cmd/DoNothing.h \
     cmd/Global.h \
     cmd/HelpAction.h \

@@ -43,6 +43,11 @@ void CompositeAction::setAction(const ActionPtr &action)
     substitutor_.setActionParam(action);
 }
 
+void CompositeAction::setAction(const Alias &alias)
+{
+    substitutor_.setActionParam(alias);
+}
+
 void CompositeAction::addParam(int position)
 {
     substitutor_.addParam(Parameter(position));
@@ -61,6 +66,11 @@ void CompositeAction::addParam(const ActionPtr &action)
 void CompositeAction::addParam(const ActionPtr &action, const ParamList &paramList)
 {
     substitutor_.addParam(Parameter(action, paramList));
+}
+
+void CompositeAction::addParam(const Alias &alias, const ParamList &paramList)
+{
+    substitutor_.addParam(Parameter(alias, paramList));
 }
 
 void CompositeAction::addParams(const ParamList &paramList)

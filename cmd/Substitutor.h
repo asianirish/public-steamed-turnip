@@ -14,6 +14,8 @@ public:
 
     Substitutor(const ActionPtr &action, const ParamList &paramList);
 
+    Substitutor(const Alias &alias, const ParamList &paramList);
+
     Parameter actionParam() const;
     void setActionParam(const Parameter &newActionParam);
 
@@ -25,7 +27,7 @@ public:
     VariantMap toMap() const;
 
 private:
-    Parameter actionParam_; // TODO: special type for Action and List-Of-Actions params
+    Parameter actionParam_; // TODO: special type for Action, List-Of-Actions params and Alias
     ParamList params_;
 };
 

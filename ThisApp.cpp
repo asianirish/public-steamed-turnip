@@ -1,9 +1,12 @@
 #include "ThisApp.h"
 
+#include "cmd/Context.h"
 #include "common/Factory.h"
+#include "common/HumanStringGenerator.h"
 
 #include "cmd/ConditionalStringAction.h"
 #include "cmd/DoNothing.h"
+#include "cmd/ContextualAction.h"
 #include "cmd/CountingAction.h"
 #include "cmd/IfAction.h"
 #include "cmd/MenuAction.h"
@@ -77,6 +80,7 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, Decr);
     REGISTER_TURNIP_CLASS(Action, TestStringGen);
     REGISTER_TURNIP_CLASS(Action, CountingAction);
+    REGISTER_TURNIP_CLASS(Action, ContextualAction);
 
 }
 
@@ -130,6 +134,7 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("strgen", ACTION_CLASS(TestStringGen));
 
     menu.registerAction("count", ACTION_CLASS(CountingAction));
+    menu.registerAction("rprint", recursivePrint());
 }
 
 const std::shared_ptr<cmd::Translator> ThisApp::createTranslator() const
@@ -152,6 +157,43 @@ const std::shared_ptr<TaskIdGenerator> ThisApp::createTaskIdGenenerator() const
 std::string ThisApp::appName() const
 {
     return std::string(TARGET_NAME);
+}
+
+ActionPtr ThisApp::recursivePrint()
+{
+    auto caAction = mkDynActionPtr(CompositeAction);
+
+
+    def::ActionDef actionDef;
+    actionDef.setDescription("Recursive Print");
+
+    auto boolRep = mkDynRepPtr(BoolRep);
+    boolRep->setKind(BoolRep::Kind::OnOff);
+    actionDef.setResultRepresentation(boolRep);
+
+    def::ArgDef argDef;
+
+    const auto strTypeDef = def::TypeDef::createStringTypedef();
+    argDef.setType(strTypeDef);
+    actionDef.addArgDef(argDef);
+
+    caAction->setActionDef(actionDef);
+
+    // ---
+
+    auto context = Context::create();
+    context->setStringGen(mkPtr<common::HumanStringGenerator>());
+    auto selfAlias = context->registerValue(caAction, "self");
+    auto printAlias = context->registerValue(mkActionPtr(CountingAction), "print");
+
+    caAction->setAction(selfAlias);
+    caAction->addParam(printAlias, ParamList({0}));
+
+    auto cntxAction = mkDynActionPtr(ContextualAction);
+    cntxAction->setCompositeAction(caAction);
+    cntxAction->setContext(context);
+
+    return cntxAction;
 }
 
 ActionPtr ThisApp::yesNoPrint()
@@ -203,10 +245,15 @@ ActionPtr ThisApp::multiPrint()
 
     //---
 
-    caAction->setAction(mkActionPtr(DoNothing));
+    auto context = Context::create();
+    context->setStringGen(mkPtr<common::HumanStringGenerator>());
+    auto doNothingAlias = context->registerValue(mkActionPtr(DoNothing));
+    auto printAlias = context->registerValue(mkActionPtr(PrintAction));
+
+    caAction->setAction(doNothingAlias);
 
     for (int i = 0; i < 4; ++i) {
-        caAction->addParam(mkActionPtr(PrintAction), ParamList({i}));
+        caAction->addParam(printAlias, ParamList({i}));
     }
 
     return caAction;

@@ -1,6 +1,7 @@
 #ifndef PARAMETER_H
 #define PARAMETER_H
 
+#include "cmd/Alias.h"
 #include "cmd/Value.h"
 
 namespace turnip {
@@ -25,6 +26,10 @@ public:
 
     Parameter(const ActionPtr &action, const ParamList &paramList);
 
+    Parameter(const Alias &alias);
+
+    Parameter(const Alias &alias, const ParamList &paramList);
+
     int position() const;
     void setPosition(int newPosition);
 
@@ -36,9 +41,13 @@ public:
 
     VariantMap toMap() const;
 
+    Alias alias() const;
+    void setAlias(const Alias &newAlias);
+
 private:
     int position_ {INVALID_POSITION};
     Value value_;
+    std::shared_ptr<Alias> alias_;
     SubstPtr substitutor_;
 };
 

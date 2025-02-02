@@ -40,6 +40,16 @@ Parameter::Parameter(const ActionPtr &action, const ParamList &paramList)
     substitutor_ = mkPtr<Substitutor>(action, paramList);
 }
 
+Parameter::Parameter(const Alias &alias) : alias_(mkPtr<Alias>(alias))
+{
+
+}
+
+Parameter::Parameter(const Alias &alias, const ParamList &paramList)
+{
+    substitutor_ = mkPtr<Substitutor>(alias, paramList);
+}
+
 int Parameter::position() const
 {
     return position_;
@@ -52,6 +62,10 @@ void Parameter::setPosition(int newPosition)
 
 Value Parameter::value() const
 {
+    if (alias_) {
+        return alias_->value();
+    }
+
     return value_;
 }
 
@@ -77,6 +91,10 @@ VariantMap Parameter::toMap() const
         mp.set("position", position_);
     }
 
+    if (alias_) {
+        mp.set("alias", alias_->key());
+    }
+
     if (!value_.isNull()) {
         mp.set("value", value_);
     }
@@ -85,6 +103,16 @@ VariantMap Parameter::toMap() const
         mp.set("sub", substitutor_->toMap());
     }
     return mp;
+}
+
+Alias Parameter::alias() const
+{
+    return *alias_;
+}
+
+void Parameter::setAlias(const Alias &newAlias)
+{
+    alias_ = mkPtr<Alias>(newAlias);
 }
 
 } // namespace cmd

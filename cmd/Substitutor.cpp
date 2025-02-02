@@ -14,6 +14,13 @@ Substitutor::Substitutor(const ActionPtr &action, const ParamList &paramList) :
 
 }
 
+Substitutor::Substitutor(const Alias &alias, const ParamList &paramList) :
+    actionParam_(alias),
+    params_(paramList)
+{
+
+}
+
 Parameter Substitutor::actionParam() const
 {
     return actionParam_;
