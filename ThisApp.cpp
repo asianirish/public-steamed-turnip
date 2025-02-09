@@ -22,6 +22,7 @@
 
 #include "math/Decr.h"
 #include "math/DegreesToRadians.h"
+#include "math/Eq.h"
 #include "math/Inc.h"
 #include "math/IsEven.h"
 #include "math/Divide.h"
@@ -81,6 +82,7 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, TestStringGen);
     REGISTER_TURNIP_CLASS(Action, CountingAction);
     REGISTER_TURNIP_CLASS(Action, ContextualAction);
+    REGISTER_TURNIP_CLASS(Action, EqInt);
 
 }
 
@@ -116,6 +118,7 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     mathMenuAction->addAction("rem", ACTION_CLASS(RemAction));
     mathMenuAction->addAction("++", ACTION_CLASS(Inc));
     mathMenuAction->addAction("--", ACTION_CLASS(Decr));
+    mathMenuAction->addAction("eqi", ACTION_CLASS(EqInt));
 
     menu.registerAction("math", mathAction);
 
@@ -135,6 +138,7 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
 
     menu.registerAction("count", ACTION_CLASS(CountingAction));
     menu.registerAction("rprint", recursivePrint());
+
 }
 
 const std::shared_ptr<cmd::Translator> ThisApp::createTranslator() const
@@ -214,10 +218,17 @@ ActionPtr ThisApp::yesNoPrint()
 
     //---
 
+    auto context = Context::create();
+    context->setStringGen(mkPtr<common::HumanStringGenerator>());
+    auto printAlias = context->registerValue(mkActionPtr(CountingAction), "print");
+
     caAction->setAction(mkActionPtr(IfAction));
     caAction->addParams(ParamList({0,
-                                 mkPtr<Task>(mkActionPtr(PrintAction), ArgList{"yes"}),
-                                 mkPtr<Task>(mkActionPtr(PrintAction), ArgList{"no"})}));
+                                {printAlias, {{Value("yes")}}},
+                                {printAlias, {{Value("no")}}}
+                                  }
+                                 )
+                        );
     return caAction;
 }
 

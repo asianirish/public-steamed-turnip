@@ -88,6 +88,7 @@ HEADERS += \
     cmd/ArgInfo.h \
     cmd/ArgManager.h \
     cmd/BinaryAction.h \
+    cmd/CmpAction.h \
     cmd/CompositeAction.h \
     cmd/ConditionalStringAction.h \
     cmd/ContextualAction.h \
@@ -152,6 +153,7 @@ HEADERS += \
     math/DegreesToRadians.h \
     math/DivAction.h \
     math/Divide.h \
+    math/Eq.h \
     math/Inc.h \
     math/IsEven.h \
     math/MultAction.h \
