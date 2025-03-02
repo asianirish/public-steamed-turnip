@@ -15,7 +15,7 @@ public:
 
     void act(const TaskId &taskId, const ArgList &args) override;
 
-    bool startInThread() const override {
+    bool doStartInThread() const override {
         return true;
     }
 

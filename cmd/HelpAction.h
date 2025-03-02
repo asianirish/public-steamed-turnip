@@ -17,7 +17,7 @@ public:
     Menu *menu() const;
     void setMenu(Menu *newMenu);
 
-    bool startInThread() const override {
+    bool doStartInThread() const override {
         return false;
     }
 

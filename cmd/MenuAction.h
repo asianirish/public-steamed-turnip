@@ -14,7 +14,7 @@ public:
 
     def::ActionDef actionDef() const override;
 
-    bool startInThread() const override {
+    bool doStartInThread() const override {
         return false;
     }
 

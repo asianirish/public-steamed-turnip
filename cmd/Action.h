@@ -51,7 +51,7 @@ public:
 
     virtual def::ActionDef actionDef() const = 0;
 
-    virtual bool startInThread() const = 0;
+    virtual bool doStartInThread() const = 0;
 
 protected:
     // Function to notify via callback
