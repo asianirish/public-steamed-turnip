@@ -58,7 +58,7 @@ VariantMap ActionDef::toMap() const
 
     VariantList lst;
 
-    for (auto argDef : argDefs_) {
+    for (const auto &argDef : argDefs_) {
         auto argDefMap = argDef.toMap();
         lst.push_back(argDefMap);
     }

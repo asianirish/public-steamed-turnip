@@ -58,7 +58,7 @@ class Factory
 public:
 
     static void clear() {
-        for (auto pr : creators_) {
+        for (const auto &pr : creators_) {
             delete pr.second;
         }
 
@@ -99,7 +99,7 @@ public:
     static std::vector<std::string> registeredClasses() {
         std::vector<std::string> vct;
 
-        for (auto pr : creators_) {
+        for (const auto &pr : creators_) {
             vct.push_back(pr.first);
         }
 

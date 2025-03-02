@@ -25,7 +25,7 @@ bool ArgManager::execArgs(const ArgInfoList &argInfos)
     size_t i = 0;
     std::list<TaskPtr> tasks;
 
-    for (auto &argInfo : argInfos) {
+    for (const auto &argInfo : argInfos) {
         auto argDef = argInfo.argDef();
         Value value = argInfo;
         if (argDef.mustBeCalculated() && value.isTask()) {
@@ -47,7 +47,7 @@ bool ArgManager::execArgs(const ArgInfoList &argInfos)
         return false;
     }
 
-    for (auto task : tasks) {
+    for (const auto &task : tasks) {
         taskManager_.execute(task);
     }
 

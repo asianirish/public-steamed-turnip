@@ -348,7 +348,7 @@ std::string Reader::findStringWithPrefix(const std::string &prefix) const
 
 void Reader::displayMenu() const
 {
-    for (auto &command : commandList_) {
+    for (const auto &command : commandList_) {
         std::cout << command << std::endl;
     }
 

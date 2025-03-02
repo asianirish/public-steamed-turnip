@@ -75,7 +75,7 @@ void CompositeAction::addParam(const Alias &alias, const ParamList &paramList)
 
 void CompositeAction::addParams(const ParamList &paramList)
 {
-    for (auto &param : paramList) {
+    for (const auto &param : paramList) {
         substitutor_.addParam(param);
     }
 }

@@ -77,7 +77,7 @@ TaskPtr TaskManager::task(const ActionPtr &actionPtr, const InputArgList &inputA
     auto inputArgIt = inputArgs.begin();
 
     int index = 0;
-    for (auto &argDef : argDefs) {
+    for (const auto &argDef : argDefs) {
         Value arg;
         if (inputArgIt != inputArgs.end()) {
             try {

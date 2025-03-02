@@ -101,7 +101,7 @@ void Task::executeSubTask(const TaskPtr &subTask)
     auto argInfos = subTask->argInfos();
 
     int index = 0;
-    for (auto &argInfo : argInfos) {
+    for (const auto &argInfo : argInfos) {
         if (argInfo.argDef().defaultValue().isNull()) {
             if (argInfo.value().isNull()) {
                 auto error = err::Error::createTaskError(subTask->taskId(),
@@ -140,7 +140,7 @@ VariantMap Task::toMap() const
     mp.set("action", actionPtr_);
 
     VariantList lst;
-    for (auto &arg : argList_) {
+    for (const auto &arg : argList_) {
         lst.push_back(arg);
     }
     mp.set("args", lst);
@@ -196,7 +196,7 @@ void Task::onSubTaskError(const err::Error &error)
 
 void Task::onArgResults(const ArgResults &argResults)
 {
-    for (auto &pr : argResults) {
+    for (const auto &pr : argResults) {
         argList_[pr.first] = pr.second;
     }
 
@@ -211,7 +211,7 @@ ArgInfoList Task::argInfos() const
     auto actionDef = actionPtr_->actionDef();
     auto argDefs = actionDef.argDefs();
 
-    for (auto &argDef : argDefs) {
+    for (const auto &argDef : argDefs) {
         if (argIt  != argList_.end()) {
             lst.push_back(ArgInfo(*argIt, argDef));
             ++argIt;

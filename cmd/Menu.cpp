@@ -66,7 +66,7 @@ const std::list<std::string> &Menu::commandList() const
 {
     commandList_.clear();
 
-    for (auto &pr : actions_) {
+    for (const auto &pr : actions_) {
         commandList_.push_back(pr.first);
     }
     return commandList_;
