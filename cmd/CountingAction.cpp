@@ -34,7 +34,7 @@ Value CountingAction::actImpl(const ArgList &args, err::Error &error)
     std::cout << counter << ". " << str << std::endl;
     ++counter;
 
-    return str;
+    return counter;
 }
 
 } // namespace cmd

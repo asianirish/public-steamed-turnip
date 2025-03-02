@@ -27,6 +27,7 @@ private:
     turnip::cmd::ActionPtr multiPrint();
 
     turnip::cmd::ActionPtr yesNoPrint();
+    turnip::cmd::ActionPtr recursiveYesNo();
 
     turnip::cmd::ActionPtr recursivePrint();
 };

@@ -138,6 +138,7 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
 
     menu.registerAction("count", ACTION_CLASS(CountingAction));
     menu.registerAction("rprint", recursivePrint());
+    menu.registerAction("ryn", recursiveYesNo());
 
 }
 
@@ -161,6 +162,46 @@ const std::shared_ptr<TaskIdGenerator> ThisApp::createTaskIdGenenerator() const
 std::string ThisApp::appName() const
 {
     return std::string(TARGET_NAME);
+}
+
+ActionPtr ThisApp::recursiveYesNo()
+{
+    auto caAction = mkDynActionPtr(CompositeAction);
+
+    def::ActionDef actionDef;
+    actionDef.setDescription("Recursive Yes-No");
+    actionDef.setResultRepresentation(mkRepPtr(SimpleStringRep));
+
+    const auto intDef = def::TypeDef::createIntTypedef();
+
+    def::ArgDef argDef;
+    argDef.setType(intDef);
+    actionDef.addArgDef(argDef);
+
+    caAction->setActionDef(actionDef);
+
+    //---
+
+    auto context = Context::create();
+    context->setStringGen(mkPtr<common::HumanStringGenerator>());
+    auto printAlias = context->registerValue(mkActionPtr(CountingAction), "print");
+    auto selfAlias = context->registerValue(caAction, "self");
+    auto eqAlias = context->registerValue(mkActionPtr(EqInt), "eq");
+    auto incAlias = context->registerValue(mkActionPtr(Inc), "inc");
+
+    caAction->setAction(mkActionPtr(IfAction));
+    caAction->addParams(ParamList({
+        {
+            eqAlias, ParamList ({
+                Parameter{Value(1337)}, Parameter({incAlias, ParamList({0})})
+            })
+        },
+        {printAlias, {{Value("yes")}}},
+        {printAlias, {{Value("no")}}}
+    }
+    )
+    );
+    return caAction;
 }
 
 ActionPtr ThisApp::recursivePrint()
