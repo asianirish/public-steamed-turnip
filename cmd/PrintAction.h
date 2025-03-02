@@ -1,14 +1,14 @@
 #ifndef PRINTACTION_H
 #define PRINTACTION_H
 
-#include "Action.h"
+#include "SyncAction.h"
 
 #include <mutex>
 
 namespace turnip {
 namespace cmd {
 
-class PrintAction : public Action
+class PrintAction : public SyncAction
 {
 public:
     PrintAction();

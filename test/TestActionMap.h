@@ -1,9 +1,9 @@
 #ifndef TESTACTIONMAP_H
 #define TESTACTIONMAP_H
 
-#include "cmd/Action.h"
+#include "cmd/SyncAction.h"
 
-class TestActionMap : public turnip::cmd::Action
+class TestActionMap : public turnip::cmd::SyncAction
 {
 public:
     TestActionMap();

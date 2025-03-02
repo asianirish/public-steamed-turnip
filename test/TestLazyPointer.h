@@ -1,9 +1,9 @@
 #ifndef TESTLAZYPOINTER_H
 #define TESTLAZYPOINTER_H
 
-#include "cmd/Action.h"
+#include "cmd/SyncAction.h"
 
-class TestLazyPointer : public turnip::cmd::Action
+class TestLazyPointer : public turnip::cmd::SyncAction
 {
 public:
     TestLazyPointer();

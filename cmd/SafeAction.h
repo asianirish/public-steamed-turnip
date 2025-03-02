@@ -1,14 +1,14 @@
 #ifndef SAFEACTION_H
 #define SAFEACTION_H
 
-#include "Action.h"
+#include "SyncAction.h"
 
 #include <mutex>
 
 namespace turnip {
 namespace cmd {
 
-class SafeAction : public Action
+class SafeAction : public SyncAction
 {
 public:
     SafeAction();

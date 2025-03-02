@@ -1,9 +1,9 @@
 #ifndef TESTCMDVALUE_H
 #define TESTCMDVALUE_H
 
-#include "cmd/Action.h"
+#include "cmd/SyncAction.h"
 
-class TestCmdValue : public turnip::cmd::Action
+class TestCmdValue : public turnip::cmd::SyncAction
 {
 public:
     TestCmdValue();

@@ -1,5 +1,5 @@
 #include "Task.h"
-#include "cmd/Action.h"
+#include "cmd/SyncAction.h"
 #include "cmd/TaskManager.h"
 #include "cmd/ArgInfo.h"
 
@@ -12,7 +12,7 @@ std::shared_ptr<TaskIdGenerator> Task::taskIdGen_;
 
 Task::Task() : Task({}, {}) {
     // to disable the annoying "Included header Action.h is not used directly" warning
-    (void) sizeof(Action);
+    (void) sizeof(SyncAction);
 }
 
 Task::Task(ActionPtr actionPtr, const ArgList &argList)

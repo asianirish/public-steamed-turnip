@@ -1,12 +1,12 @@
 #ifndef COUNTINGACTION_H
 #define COUNTINGACTION_H
 
-#include "Action.h"
+#include "SyncAction.h"
 
 namespace turnip {
 namespace cmd {
 
-class CountingAction : public Action
+class CountingAction : public SyncAction
 {
 public:
     CountingAction();

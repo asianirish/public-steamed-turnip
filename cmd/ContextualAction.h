@@ -9,7 +9,7 @@
 namespace turnip {
 namespace cmd {
 
-class ContextualAction : public Action
+class ContextualAction : public SyncAction
 {
 public:
     ContextualAction();

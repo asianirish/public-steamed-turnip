@@ -1,13 +1,13 @@
 #ifndef ISEVEN_H
 #define ISEVEN_H
 
-#include "cmd/Action.h"
+#include "cmd/SyncAction.h"
 
 namespace turnip {
 namespace cmd {
 namespace math {
 
-class IsEven : public turnip::cmd::Action
+class IsEven : public turnip::cmd::SyncAction
 {
 public:
     IsEven();

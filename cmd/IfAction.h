@@ -1,12 +1,12 @@
 #ifndef IFACTION_H
 #define IFACTION_H
 
-#include "Action.h"
+#include "SyncAction.h"
 
 namespace turnip {
 namespace cmd {
 
-class IfAction : public Action
+class IfAction : public SyncAction
 {
 public:
     IfAction();

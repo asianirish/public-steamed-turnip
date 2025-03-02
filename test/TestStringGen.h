@@ -1,9 +1,9 @@
 #ifndef TESTSTRINGGEN_H
 #define TESTSTRINGGEN_H
 
-#include "cmd/Action.h"
+#include "cmd/SyncAction.h"
 
-class TestStringGen : public turnip::cmd::Action
+class TestStringGen : public turnip::cmd::SyncAction
 {
 public:
     TestStringGen();

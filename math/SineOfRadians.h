@@ -1,13 +1,13 @@
 #ifndef SINEOFRADIANS_H
 #define SINEOFRADIANS_H
 
-#include "cmd/Action.h"
+#include "cmd/SyncAction.h"
 
 namespace turnip {
 namespace cmd {
 namespace math {
 
-class SineOfRadians : public turnip::cmd::Action
+class SineOfRadians : public turnip::cmd::SyncAction
 {
 public:
     SineOfRadians();

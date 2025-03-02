@@ -33,6 +33,7 @@ SOURCES += \
         cmd/Result.cpp \
         cmd/SafeAction.cpp \
         cmd/Substitutor.cpp \
+        cmd/SyncAction.cpp \
         cmd/Task.cpp \
         cmd/TaskIdGenerator.cpp \
         cmd/TaskIdIncGenerator.cpp \
@@ -108,6 +109,7 @@ HEADERS += \
     cmd/Result.h \
     cmd/SafeAction.h \
     cmd/Substitutor.h \
+    cmd/SyncAction.h \
     cmd/Task.h \
     cmd/TaskIdGenerator.h \
     cmd/TaskIdIncGenerator.h \

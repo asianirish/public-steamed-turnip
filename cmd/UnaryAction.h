@@ -1,7 +1,7 @@
 #ifndef UNARYACTION_H
 #define UNARYACTION_H
 
-#include "cmd/Action.h"
+#include "cmd/SyncAction.h"
 
 namespace turnip {
 namespace cmd {
@@ -9,7 +9,7 @@ namespace cmd {
 using namespace def;
 
 template<typename T, typename Rep>
-class UnaryAction : public Action
+class UnaryAction : public SyncAction
 {
 public:
     UnaryAction() {};

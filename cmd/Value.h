@@ -43,7 +43,7 @@ public:
     Value(const std::shared_ptr<T>& action)
         : data_(std::static_pointer_cast<Action>(action))
     {
-        // Ensure that T is derived from Action
+        // Ensure that T is derived from SyncAction
         static_assert(std::is_base_of<Action, T>::value, "T must be a derived class of Action");
     }
     // // TODO: or use a SFINAE approach

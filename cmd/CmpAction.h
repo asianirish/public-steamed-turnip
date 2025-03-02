@@ -1,7 +1,7 @@
 #ifndef CMPACTION_H
 #define CMPACTION_H
 
-#include "Action.h"
+#include "SyncAction.h"
 
 namespace turnip {
 namespace cmd {
@@ -9,7 +9,7 @@ namespace cmd {
 using namespace def;
 
 template<typename T, typename Rep>
-class CmpAction : public Action
+class CmpAction : public SyncAction
 {
 public:
     CmpAction() {}

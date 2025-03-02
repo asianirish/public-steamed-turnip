@@ -1,12 +1,12 @@
 #ifndef MAKESENTENCE_H
 #define MAKESENTENCE_H
 
-#include "cmd/Action.h"
+#include "cmd/SyncAction.h"
 
 namespace turnip {
 namespace example {
 
-class MakeSentence : public cmd::Action
+class MakeSentence : public cmd::SyncAction
 {
 public:
     MakeSentence();

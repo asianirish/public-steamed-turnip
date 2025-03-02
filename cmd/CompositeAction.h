@@ -1,7 +1,7 @@
 #ifndef COMPOSITEACTION_H
 #define COMPOSITEACTION_H
 
-#include "Action.h"
+#include "SyncAction.h"
 #include "cmd/Substitutor.h"
 
 namespace turnip {
@@ -9,7 +9,7 @@ namespace cmd {
 
 class ContextualAction;
 
-class CompositeAction : public Action
+class CompositeAction : public SyncAction
 {
     friend class ContextualAction;
 public:

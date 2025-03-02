@@ -1,13 +1,13 @@
 #ifndef DEGREESTORADIANS_H
 #define DEGREESTORADIANS_H
 
-#include "cmd/Action.h"
+#include "cmd/SyncAction.h"
 
 namespace turnip {
 namespace cmd {
 namespace math {
 
-class DegreesToRadians : public turnip::cmd::Action
+class DegreesToRadians : public turnip::cmd::SyncAction
 {
 public:
     DegreesToRadians();

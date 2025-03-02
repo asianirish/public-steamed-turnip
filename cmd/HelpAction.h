@@ -1,13 +1,13 @@
 #ifndef HELPACTION_H
 #define HELPACTION_H
 
-#include "Action.h"
+#include "SyncAction.h"
 #include "cmd/Menu.h"
 
 namespace turnip {
 namespace cmd {
 
-class HelpAction : public Action
+class HelpAction : public SyncAction
 {
 public:
     HelpAction();

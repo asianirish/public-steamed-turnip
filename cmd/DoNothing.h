@@ -1,12 +1,12 @@
 #ifndef DONOTHING_H
 #define DONOTHING_H
 
-#include "Action.h"
+#include "SyncAction.h"
 
 namespace turnip {
 namespace cmd {
 
-class DoNothing : public Action
+class DoNothing : public SyncAction
 {
 public:
     static const int MAX_DEFAULT_ARGUMENTS;

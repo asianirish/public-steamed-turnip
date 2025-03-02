@@ -1,5 +1,5 @@
 #include "TaskManager.h"
-#include "cmd/Action.h"
+#include "cmd/SyncAction.h"
 #include "cmd/Task.h"
 #include "cmd/err/ConversionException.h"
 

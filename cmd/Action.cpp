@@ -1,6 +1,4 @@
 #include "Action.h"
-#include "cmd/Result.h"
-#include "cmd/Value.h"
 
 namespace turnip {
 namespace cmd {
@@ -8,29 +6,14 @@ namespace cmd {
 const std::string Action::CLASS_NAME_KEY {"className"};
 const std::string Action::DATA_KEY {"data"};
 
-Action::Action() {}
-
 void Action::setCallback(Callback callback)
 {
     callback_ = callback;
 }
 
-void Action::act(const TaskId &taskId, const ArgList &args)
+void Action::setErrorCallback(const ErrorCallback &newErrorCallback)
 {
-    auto error = err::Error::createTaskError(taskId, "Unkown task error");
-    // Call the specific action implementation
-    Value value = actImpl(args, error);
-
-
-    if (!value.isNull()) {
-        auto rep = actionDef().resultRepresentation();
-
-        // Notify that actImpl has concluded
-        Result result(taskId, value, rep);
-        notify(result);
-    } else {
-        notifyError(error);
-    }
+    errorCallback_ = newErrorCallback;
 }
 
 void Action::notify(const Result &result)
@@ -93,11 +76,6 @@ ActionPtr Action::clone() const
     auto cln = ActionPtr(common::Factory<Action>::create(registeredClassName()));
     cln->setData(data());
     return cln;
-}
-
-void Action::setErrorCallback(const ErrorCallback &newErrorCallback)
-{
-    errorCallback_ = newErrorCallback;
 }
 
 } // namespace cmd

@@ -1,9 +1,9 @@
 #ifndef TESTSHAREDVECTOR_H
 #define TESTSHAREDVECTOR_H
 
-#include "cmd/Action.h"
+#include "cmd/SyncAction.h"
 
-class TestSharedVector : public turnip::cmd::Action
+class TestSharedVector : public turnip::cmd::SyncAction
 {
 public:
     TestSharedVector();

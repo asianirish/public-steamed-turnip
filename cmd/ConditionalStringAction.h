@@ -1,12 +1,12 @@
 #ifndef CONDITIONALSTRINGACTION_H
 #define CONDITIONALSTRINGACTION_H
 
-#include "Action.h"
+#include "SyncAction.h"
 
 namespace turnip {
 namespace cmd {
 
-class ConditionalStringAction : public Action
+class ConditionalStringAction : public SyncAction
 {
 public:
     ConditionalStringAction();

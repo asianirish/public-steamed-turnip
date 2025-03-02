@@ -1,13 +1,13 @@
 #ifndef MENUACTION_H
 #define MENUACTION_H
 
-#include "Action.h"
+#include "SyncAction.h"
 #include "cmd/Menu.h"
 
 namespace turnip {
 namespace cmd {
 
-class MenuAction : public Action
+class MenuAction : public SyncAction
 {
 public:
     MenuAction();

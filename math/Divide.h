@@ -1,13 +1,13 @@
 #ifndef DIVIDE_H
 #define DIVIDE_H
 
-#include "cmd/Action.h"
+#include "cmd/SyncAction.h"
 
 namespace turnip {
 namespace cmd {
 namespace math {
 
-class Divide : public turnip::cmd::Action
+class Divide : public turnip::cmd::SyncAction
 {
 public:
     Divide();
