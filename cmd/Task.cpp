@@ -65,7 +65,7 @@ void Task::execute(ExecType execType)
         return;
     }
 
-    if (actionPtr_->isAsync() || execType == ExecType::Thread) {
+    if (actionPtr_->startInThread() || execType == ExecType::Thread) {
 
         // Create a new thread to execute the action
         std::thread actionThread(&Task::executeAction, this);

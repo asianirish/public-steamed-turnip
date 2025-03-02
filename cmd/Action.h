@@ -32,7 +32,7 @@ public:
 
     void setErrorCallback(const ErrorCallback &newErrorCallback);
 
-    virtual bool isAsync() const {
+    virtual bool startInThread() const {
         return true;
     }
 

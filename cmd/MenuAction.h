@@ -14,7 +14,7 @@ public:
 
     def::ActionDef actionDef() const override;
 
-    bool isAsync() const override {
+    bool startInThread() const override {
         return false;
     }
 
