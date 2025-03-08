@@ -11,7 +11,6 @@ class SyncAction : public Action
 {
 public:
     SyncAction();
-    virtual ~SyncAction() = default;
 
     void act(const TaskId &taskId, const ArgList &args) override;
 
