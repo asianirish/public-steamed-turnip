@@ -59,8 +59,8 @@ void Reader::read()
     displayPrompt();
 
     while (!stopReading) {
-        char buf[3];
-        int n = ::read(STDIN_FILENO, buf, 3);
+        char buf[1024];
+        int n = ::read(STDIN_FILENO, buf, sizeof(buf));
 
         if (n == 1) {
             // Single character input
@@ -108,6 +108,13 @@ void Reader::read()
                     }
                 }
             }
+        } else {
+            buf[n] = '\0';
+            command.insert(cursor_position, buf, n);
+            std::cout << buf << std::flush;
+            // Update the cursor position
+            cursor_position += n;
+
         }
     }
 
