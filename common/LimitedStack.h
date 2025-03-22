@@ -54,6 +54,16 @@ public:
         return stack_.back();
     }
 
+    // Remove and return the last element in the stack
+    T take() {
+        if (stack_.empty()) {
+            throw std::out_of_range("Stack is empty");  // Throw an exception if the stack is empty
+        }
+        T value = stack_.back();  // Get the last element
+        stack_.pop_back();        // Remove the last element
+        return value;             // Return the removed element
+    }
+
     // Provide begin iterator for range-based for loop
     typename std::deque<T>::iterator begin() {
         return stack_.begin();
