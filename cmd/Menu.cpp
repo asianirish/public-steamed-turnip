@@ -90,6 +90,16 @@ void Menu::executeAction(const std::string &command, const InputArgList &args)
     }
 }
 
+void Menu::executeAction(const std::string &command, const ArgList &args)
+{
+    bool ok = false;
+    auto a = findAction(command, &ok);
+
+    if (ok) {
+        taskManager_.execute(a, args);
+    }
+}
+
 std::shared_ptr<Translator> Menu::translator() const
 {
     return translator_;
