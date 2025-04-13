@@ -41,11 +41,12 @@ bool ArgManager::execArgs(const ArgInfoList &argInfos)
         return false;
     }
 
-    if (tasks.size() == 1) {
-        auto task = tasks.front();
-        taskManager_.execute(task, ExecType::Direct);
-        return false;
-    }
+    // This code snippet is incompatible with asynchronous actions:
+    // if (tasks.size() == 1) {
+    //     auto task = tasks.front();
+    //     taskManager_.execute(task, ExecType::Direct);
+    //     return false;
+    // }
 
     for (const auto &task : tasks) {
         taskManager_.execute(task);
