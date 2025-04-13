@@ -20,6 +20,7 @@ public:
     using StartCallback = std::function<void(const TaskId&)>;
 
     void execute(const ActionPtr &actionPtr, const InputArgList& inputArgs);
+    void execute(const ActionPtr &actionPtr, const ArgList& args);
 
     void setCallback(const ResultCallback &newCallback);
 
@@ -36,6 +37,7 @@ private:
     void onError(const err::Error &error);
 
     TaskPtr task(const ActionPtr &actionPtr, const InputArgList &inputArgs);
+    TaskPtr task(const ActionPtr &actionPtr, const ArgList &args);
 
     bool handleTaskResult(const Result &result);
 

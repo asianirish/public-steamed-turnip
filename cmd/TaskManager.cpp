@@ -17,6 +17,15 @@ void TaskManager::execute(const ActionPtr &actionPtr, const InputArgList &inputA
     }
 }
 
+void TaskManager::execute(const ActionPtr &actionPtr, const ArgList &args)
+{
+    auto taskPtr = task(actionPtr, args);
+
+    if (taskPtr) {
+        execute(taskPtr);
+    }
+}
+
 void TaskManager::onTaskComplete(const Result &result)
 {
     auto taskId = result.taskId();
@@ -104,6 +113,11 @@ TaskPtr TaskManager::task(const ActionPtr &actionPtr, const InputArgList &inputA
         ++index;
     }
 
+    return task(actionPtr, args);
+}
+
+TaskPtr TaskManager::task(const ActionPtr &actionPtr, const ArgList &args)
+{
     return TaskPtr(new Task(actionPtr, args));
 }
 
