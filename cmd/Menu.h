@@ -34,7 +34,7 @@ public:
 
     // Function to execute the action in a separate thread
     void executeAction(const std::string &command, const InputArgList& args);
-    void executeAction(const std::string &command, const ArgList& args);
+    TaskPtr executeAction(const std::string &command, const ArgList& args);
 
     std::shared_ptr<Translator> translator() const;
     void setTranslator(const std::shared_ptr<Translator> &newTranslator);
