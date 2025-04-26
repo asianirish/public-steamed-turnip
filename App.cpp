@@ -63,6 +63,11 @@ void App::exec()
     reader.read();
 }
 
+cmd::TaskPtr App::executeCommand(const std::string &command, const cmd::ArgList &args)
+{
+    return mainMenu_.executeAction(command, args);
+}
+
 void App::registerRepresentaions()
 {
     REGISTER_TURNIP_CLASS(Representation, NullRep);

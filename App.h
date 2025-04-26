@@ -15,6 +15,8 @@ public:
 
     void exec();
 
+    cmd::TaskPtr executeCommand(const std::string &command, const cmd::ArgList& args);
+
 protected:
     virtual void registerRepresentaions();
 
