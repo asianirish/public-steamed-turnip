@@ -9,6 +9,7 @@ public:
     ThisApp();
 
 private:
+    void specificInit() override;
     void registerActions() override;
     void registerMenu(turnip::cmd::Menu &menu) override;
     const std::shared_ptr<turnip::cmd::Translator> createTranslator() const override;

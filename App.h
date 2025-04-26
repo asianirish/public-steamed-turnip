@@ -27,6 +27,7 @@ protected:
     cmd::Menu *mainMenu();
 
 private:
+    virtual void specificInit() = 0;
     virtual void registerActions() = 0;
     virtual void registerMenu(cmd::Menu &menu) = 0;
     virtual const std::shared_ptr<cmd::Translator> createTranslator() const = 0;

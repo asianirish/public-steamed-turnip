@@ -31,6 +31,8 @@ void App::init()
     cmd::Task::setTaskIdGen(taskIdGen);
 
     // TODO: Add your initialization code here.
+
+    specificInit();
 }
 
 void App::exec()

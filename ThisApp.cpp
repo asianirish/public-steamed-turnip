@@ -49,6 +49,11 @@ using namespace common;
 
 ThisApp::ThisApp() {}
 
+void ThisApp::specificInit()
+{
+    // do nothing
+}
+
 void ThisApp::registerActions()
 {
     REGISTER_TURNIP_CLASS(Action, PrintAction);
