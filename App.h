@@ -22,6 +22,8 @@ protected:
 
     std::shared_ptr<cmd::TaskIdGenerator> taskIdGenenerator();
 
+    cmd::Menu *mainMenu();
+
 private:
     virtual void registerActions() = 0;
     virtual void registerMenu(cmd::Menu &menu) = 0;

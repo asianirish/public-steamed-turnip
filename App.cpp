@@ -92,4 +92,9 @@ std::shared_ptr<cmd::TaskIdGenerator> App::taskIdGenenerator()
     return taskIdGen_;
 }
 
+cmd::Menu *App::mainMenu()
+{
+    return &mainMenu_;
+}
+
 } // namespace turnip
