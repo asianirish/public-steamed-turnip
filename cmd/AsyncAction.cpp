@@ -18,9 +18,11 @@ void AsyncAction::onComplete(const Value &reslutValue, const TaskId &taskId)
         // Notify that the action has concluded
         Result result(taskId, reslutValue, rep);
         notify(result);
+        emitComplete(reslutValue, taskId);
     } else {
         auto error = err::Error::createTaskError(taskId, "Unkown task error");
         notifyError(error);
+        // TODO: emitError(error);
     }
 }
 
