@@ -19,6 +19,8 @@ public:
 
 private:
     virtual void emitRequest(const TaskId &taskId, const ArgList &args, const err::Error &error) = 0;
+    virtual void emitComplete(const Value &reslutValue, const TaskId &taskId) = 0;
+    // TODO: emitError(const err::Error &error);
 };
 
 } // namespace cmd
