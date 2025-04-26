@@ -42,6 +42,9 @@ public:
     RepPtr inputRep() const;
     RepPtr outputRep() const;
 
+    MetaType inputMetaType() const;
+    MetaType outputMetaType() const;
+
     operator bool() const;
 
 private:

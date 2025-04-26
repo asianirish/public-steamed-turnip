@@ -97,6 +97,16 @@ VariantMap ArgDef::toMap() const
     return mp;
 }
 
+MetaType ArgDef::inputMetaType() const
+{
+    return type().inputMetaType();
+}
+
+MetaType ArgDef::outputMetaType() const
+{
+    return type().outputMetaType();
+}
+
 } // namespace def
 } // namespace cmd
 } // namespace turnip

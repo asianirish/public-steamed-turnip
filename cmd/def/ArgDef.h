@@ -34,6 +34,9 @@ public:
 
     VariantMap toMap() const;
 
+    MetaType inputMetaType() const;
+    MetaType outputMetaType() const;
+
 private:
     TypeDef type_;
     std::string name_;

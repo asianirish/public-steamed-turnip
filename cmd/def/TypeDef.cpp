@@ -17,6 +17,16 @@ RepPtr TypeDef::outputRep() const
     return outputRep_ ? outputRep_ : inputRep_;
 }
 
+MetaType TypeDef::inputMetaType() const
+{
+    return inputRep()->metaType();
+}
+
+MetaType TypeDef::outputMetaType() const
+{
+    return outputRep()->metaType();
+}
+
 TypeDef::operator bool() const
 {
     return static_cast<bool>(inputRep_);
