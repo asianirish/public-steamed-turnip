@@ -11,6 +11,8 @@ class App
 public:
     App();
 
+    virtual ~App() = default;
+
     void init();
 
     void exec();
