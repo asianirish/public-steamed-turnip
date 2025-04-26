@@ -7,8 +7,7 @@ AsyncAction::AsyncAction() {}
 
 void AsyncAction::act(const TaskId &taskId, const ArgList &args)
 {
-    auto error = err::Error::createTaskError(taskId, "Unkown task error");
-    emitRequest(taskId, args, error);
+    emitRequest(taskId, args);
 }
 
 void AsyncAction::onComplete(const Value &reslutValue, const TaskId &taskId)
