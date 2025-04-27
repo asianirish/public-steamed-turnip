@@ -8,17 +8,12 @@ const std::string Action::DATA_KEY {"data"};
 
 void Action::act(const TaskId &taskId, const ArgList &args)
 {
-    // TODO: handleArgs(args);
-    // auto argDefs = this->actionDef().argDefs();
+    bool ok = false;
+    auto handledArgs = handleArgs(args, &ok);
 
-    // if (argDefs.size() == 1) {
-    //     auto argDef0 = argDefs.front();
-
-    //     auto arg0 = args.at(0);
-    //     arg0-
-    // }
-
-    specificAct(taskId, args);
+    if (ok) {
+        specificAct(taskId, handledArgs);
+    }
 }
 
 void Action::setCallback(Callback callback)
@@ -43,6 +38,24 @@ void Action::notifyError(const err::Error &error)
     if (errorCallback_) {
         errorCallback_(error);
     }
+}
+
+ArgList Action::handleArgs(const ArgList &args, bool *ok)
+{
+    if (ok) {
+        *ok = true;
+    }
+
+    // TODO: implement
+    // auto argDefs = this->actionDef().argDefs();
+
+    // if (argDefs.size() == 1) {
+    //     auto argDef0 = argDefs.front();
+
+    //     auto arg0 = args.at(0);
+    //     arg0-
+    // }
+    return args;
 }
 
 std::string Action::registeredClassName() const

@@ -61,6 +61,9 @@ protected:
     void notifyError(const err::Error &error);
 
 private:
+    ArgList handleArgs(const ArgList &args, bool *ok);
+
+private:
     const std::string *registeredClassName_ = nullptr;
 
     Callback callback_; // Member to hold the callback function
