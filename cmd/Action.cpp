@@ -6,6 +6,21 @@ namespace cmd {
 const std::string Action::CLASS_NAME_KEY {"className"};
 const std::string Action::DATA_KEY {"data"};
 
+void Action::act(const TaskId &taskId, const ArgList &args)
+{
+    // TODO: handleArgs(args);
+    // auto argDefs = this->actionDef().argDefs();
+
+    // if (argDefs.size() == 1) {
+    //     auto argDef0 = argDefs.front();
+
+    //     auto arg0 = args.at(0);
+    //     arg0-
+    // }
+
+    specificAct(taskId, args);
+}
+
 void Action::setCallback(Callback callback)
 {
     callback_ = callback;

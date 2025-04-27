@@ -7,7 +7,7 @@ namespace cmd {
 
 SyncAction::SyncAction() {}
 
-void SyncAction::act(const TaskId &taskId, const ArgList &args)
+void SyncAction::specificAct(const TaskId &taskId, const ArgList &args)
 {
     auto error = err::Error::createTaskError(taskId, "Unkown task error");
     // Call the specific action implementation

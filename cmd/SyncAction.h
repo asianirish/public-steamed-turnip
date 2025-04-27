@@ -12,12 +12,12 @@ class SyncAction : public Action
 public:
     SyncAction();
 
-    void act(const TaskId &taskId, const ArgList &args) override;
-
     bool doStartInThread() const override {
         return true;
     }
 
+protected:
+    void specificAct(const TaskId &taskId, const ArgList &args) override;
 private:
     virtual Value actImpl(const ArgList &args, err::Error &error) = 0;
 

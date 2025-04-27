@@ -5,7 +5,7 @@ namespace cmd {
 
 AsyncAction::AsyncAction() {}
 
-void AsyncAction::act(const TaskId &taskId, const ArgList &args)
+void AsyncAction::specificAct(const TaskId &taskId, const ArgList &args)
 {
     emitRequest(taskId, args);
 }

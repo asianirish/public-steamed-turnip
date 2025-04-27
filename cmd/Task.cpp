@@ -161,7 +161,6 @@ void Task::executeAction()
         return;
     }
 
-    // Call the act method, which will execute actSpecific
     actionPtr_->act(taskId_, argList_);
 }
 

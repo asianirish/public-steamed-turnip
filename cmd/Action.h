@@ -23,7 +23,7 @@ public:
 
     virtual ~Action() = default;
 
-    virtual void act(const TaskId &taskId, const ArgList &args) = 0;
+    void act(const TaskId &taskId, const ArgList &args);
 
     void setCallback(Callback callback);
     void setErrorCallback(const ErrorCallback &newErrorCallback);
@@ -54,6 +54,8 @@ public:
     virtual bool doStartInThread() const = 0;
 
 protected:
+    virtual void specificAct(const TaskId &taskId, const ArgList &args) = 0;
+
     // Function to notify via callback
     void notify(const Result &result);
     void notifyError(const err::Error &error);

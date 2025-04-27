@@ -11,11 +11,11 @@ class AsyncAction : public Action
 public:
     AsyncAction();
 
-    void act(const TaskId &taskId, const ArgList &args) override;
-
     void onComplete(const Value &reslutValue, const TaskId &taskId);
     void onError(const err::Error &error);
 
+protected:
+    void specificAct(const TaskId &taskId, const ArgList &args) override;
 
 private:
     virtual void emitRequest(const TaskId &taskId, const ArgList &args) = 0;
