@@ -12,8 +12,6 @@ public:
     static const int MAX_DEFAULT_ARGUMENTS;
     DoNothing();
 
-    // Action interface
-public:
     def::ActionDef actionDef() const override;
 
 private:
