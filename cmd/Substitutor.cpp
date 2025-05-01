@@ -43,10 +43,15 @@ void Substitutor::addParam(const Parameter &param)
 
 TaskPtr Substitutor::substitue(const ArgList &args)
 {
-    // TODO: substitue actionParam_ as well
-
     int i = 0;
     for (const auto &arg : args) {
+
+        if (actionParam_.position() == i) {
+            if (arg.isAction()) {
+                actionParam_.setValue(arg);
+            }
+        }
+
         for (auto &param : params_) {
             if (param.position() == i) {
                 param.setValue(arg);
