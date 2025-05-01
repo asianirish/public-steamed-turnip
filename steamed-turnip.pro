@@ -27,10 +27,13 @@ SOURCES += \
         cmd/Info.cpp \
         cmd/InstanceSafeAction.cpp \
         cmd/LineTranslator.cpp \
+        cmd/MapToArgsAction.cpp \
         cmd/Menu.cpp \
         cmd/MenuAction.cpp \
         cmd/Parameter.cpp \
+        cmd/PersonArgToMapAction.cpp \
         cmd/PrintAction.cpp \
+        cmd/PrintPersonAction.cpp \
         cmd/Result.cpp \
         cmd/SafeAction.cpp \
         cmd/Substitutor.cpp \
@@ -104,10 +107,13 @@ HEADERS += \
     cmd/Info.h \
     cmd/InstanceSafeAction.h \
     cmd/LineTranslator.h \
+    cmd/MapToArgsAction.h \
     cmd/Menu.h \
     cmd/MenuAction.h \
     cmd/Parameter.h \
+    cmd/PersonArgToMapAction.h \
     cmd/PrintAction.h \
+    cmd/PrintPersonAction.h \
     cmd/Result.h \
     cmd/SafeAction.h \
     cmd/Substitutor.h \

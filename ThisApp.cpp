@@ -1,6 +1,9 @@
 #include "ThisApp.h"
 
+#include "cmd/MapToArgsAction.h"
+#include "cmd/PersonArgToMapAction.h"
 #include "cmd/Context.h"
+#include "cmd/PrintPersonAction.h"
 #include "common/Factory.h"
 #include "common/HumanStringGenerator.h"
 
@@ -88,7 +91,9 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, CountingAction);
     REGISTER_TURNIP_CLASS(Action, ContextualAction);
     REGISTER_TURNIP_CLASS(Action, EqInt);
-
+    REGISTER_TURNIP_CLASS(Action, PersonArgToMapAction);
+    REGISTER_TURNIP_CLASS(Action, PrintPersonAction);
+    REGISTER_TURNIP_CLASS(Action, MapToArgsAction);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
@@ -145,6 +150,9 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("rprint", recursivePrint());
     menu.registerAction("ryn", recursiveYesNo());
 
+    menu.registerAction("pam", ACTION_CLASS(PersonArgToMapAction));
+    menu.registerAction("pp", ACTION_CLASS(PrintPersonAction));
+    menu.registerAction("cpp", compositePrintPerson());
 }
 
 const std::shared_ptr<cmd::Translator> ThisApp::createTranslator() const
@@ -454,6 +462,56 @@ ActionPtr ThisApp::sineOfDegrees()
     // caSind->setSubstitutor(sbst);
     caSind->setAction(mkActionPtr(SineOfRadians));
     caSind->addParam(mkActionPtr(DegreesToRadians), ParamList({0}));
+
+    return caSind;
+}
+
+ActionPtr ThisApp::compositePrintPerson()
+{
+    auto caSind = mkDynActionPtr(CompositeAction);
+
+    ActionDef actionDef;
+
+    const auto stringTypeDef = TypeDef::createStringTypedef();
+    const auto intTypeDef = TypeDef::createIntTypedef();
+    const auto charTypeDef = TypeDef::createCharTypedef();
+
+    // defs:
+    {
+        ArgDef argDef;
+        argDef.setType(stringTypeDef);
+        argDef.setName("name");
+        argDef.setDesc("Person's Name");
+        actionDef.addArgDef(argDef);
+    }
+
+    {
+        ArgDef argDef;
+        argDef.setType(intTypeDef);
+        argDef.setName("year");
+        argDef.setDesc("Year of birth");
+        actionDef.addArgDef(argDef);
+    }
+
+    {
+        ArgDef argDef;
+        argDef.setType(charTypeDef); // TODO: constraint: 'm' or 'f'
+        argDef.setName("gender");
+        argDef.setDesc("Person's Gender");
+        actionDef.addArgDef(argDef);
+    }
+
+
+    actionDef.setDescription("Print Person");
+
+    caSind->setActionDef(actionDef);
+
+    // /defs
+
+    caSind->setAction(mkActionPtr(MapToArgsAction));
+    caSind->addParams(ParamList({mkActionPtr(PrintPersonAction),
+                                Parameter(mkActionPtr(PersonArgToMapAction), ParamList({0, 1, 2}))
+                                }));
 
     return caSind;
 }

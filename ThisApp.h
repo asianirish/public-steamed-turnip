@@ -31,6 +31,9 @@ private:
     turnip::cmd::ActionPtr recursiveYesNo();
 
     turnip::cmd::ActionPtr recursivePrint();
+
+    turnip::cmd::ActionPtr compositePrintPerson();
+
 };
 
 #endif // THISAPP_H
