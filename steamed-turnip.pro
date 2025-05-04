@@ -23,6 +23,7 @@ SOURCES += \
         cmd/DoNothing.cpp \
         cmd/Global.cpp \
         cmd/HelpAction.cpp \
+        cmd/HowLongSince.cpp \
         cmd/IfAction.cpp \
         cmd/Info.cpp \
         cmd/InstanceSafeAction.cpp \
@@ -103,6 +104,7 @@ HEADERS += \
     cmd/DoNothing.h \
     cmd/Global.h \
     cmd/HelpAction.h \
+    cmd/HowLongSince.h \
     cmd/IfAction.h \
     cmd/Info.h \
     cmd/InstanceSafeAction.h \

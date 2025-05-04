@@ -34,6 +34,7 @@ private:
 
     turnip::cmd::ActionPtr compositePrintPerson();
 
+    turnip::cmd::ActionPtr compositeHowLong();
 };
 
 #endif // THISAPP_H
