@@ -28,7 +28,17 @@ bool ArgManager::execArgs(const ArgInfoList &argInfos)
     for (const auto &argInfo : argInfos) {
         auto argDef = argInfo.argDef();
         Value value = argInfo;
+#ifdef DEBUG_ACTION_ARGS
+        std::cout << "FOUND ARGUMENT: " << value.toString() << std::endl;
+        std::cout << "MUST BE CALCULATED: " << argDef.mustBeCalculated() << std::endl;
+        std::cout << "IS ACTION: " << value.isAction() << std::endl;
+        std::cout << "IS TASK: " << value.isTask() << std::endl;
+#endif
+
         if (argDef.mustBeCalculated() && value.isTask()) {
+#ifdef DEBUG_ACTION_ARGS
+            std::cout << "THE ARGUMENT MUST BE CALCULATED" << std::endl;
+#endif
             auto taskPtr = value.toTaskPtr();
             auto taskId = taskPtr->taskId();
             taskToArgNum_.insert({taskId, i});
