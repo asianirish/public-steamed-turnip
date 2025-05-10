@@ -174,7 +174,14 @@ void Task::onSubTaskComplete(const Result &result)
         if (rep) {
             subResult.setRepresentation(rep); // TODO: actionPtr->repClass()
         }
-
+#ifdef DEBUG_ACTION_TASKS
+        std::cout << "ON_SUBTASK_COMPLETE TASK_ID: " << taskId() << std::endl;
+        std::cout << "ON_SUBTASK_COMPLETE ACTION CLASS: " << actionPtr()->registeredClassName() << std::endl;
+        auto args = argList();
+        for (auto &arg : args) {
+            std::cout << "ON_SUBTASK_COMPLETE ARG: " << arg.toString() << std::endl;
+        }
+#endif
         subResult.setTaskId(taskId());
         subTaskCallback_(subResult);
     }
