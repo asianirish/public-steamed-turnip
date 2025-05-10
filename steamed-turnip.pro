@@ -7,6 +7,9 @@ TARGET = turnip
 
 DEFINES += TARGET_NAME=\\\"$$TARGET\\\"
 
+DEFINES += DEBUG_ACTION_ARGS
+DEFINES += DEBUG_ACTION_TASKS
+
 SOURCES += \
         App.cpp \
         ThisApp.cpp \
