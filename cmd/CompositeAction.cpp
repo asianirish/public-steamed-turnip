@@ -1,4 +1,5 @@
 #include "CompositeAction.h"
+#include "cmd/Task.h"
 
 namespace turnip {
 namespace cmd {
@@ -13,8 +14,15 @@ Substitutor CompositeAction::substitutor() const
 Value CompositeAction::actImpl(const ArgList &args, err::Error &error)
 {
     auto task = substitutor_.substitue(args);
+
+#ifdef DEBUG_ACTION_TASKS
+    std::cout << std::endl << "INNER TASK:" << task->taskId() << std::endl;
+    std::cout << "THIS TASK:" << error.maybeTaskId().value() << std::endl;
+#else
     // TODO: use error
     (void)error;
+#endif
+
     return task;
 }
 

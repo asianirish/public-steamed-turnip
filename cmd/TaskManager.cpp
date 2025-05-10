@@ -39,6 +39,10 @@ void TaskManager::onTaskComplete(const Result &result)
 #endif
 
         if (result.isTask()) {
+#ifdef DEBUG_ACTION_TASKS
+            std::cout << "THE RESULT IS A TASK " << taskId << std::endl;
+#endif
+
             if (handleTaskResult(result)) {
                 return;
             }
