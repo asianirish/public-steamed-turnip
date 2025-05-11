@@ -1,5 +1,7 @@
 #include "ThisApp.h"
 
+#include "cmd/AsyncCompositeAction.h"
+#include "cmd/AsyncPrintAction.h"
 #include "cmd/HowLongSince.h"
 #include "cmd/MapToArgsAction.h"
 #include "cmd/PersonArgToMapAction.h"
@@ -96,6 +98,8 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, PrintPersonAction);
     REGISTER_TURNIP_CLASS(Action, MapToArgsAction);
     REGISTER_TURNIP_CLASS(Action, HowLongSince);
+    REGISTER_TURNIP_CLASS(Action, AsyncPrintAction);
+    REGISTER_TURNIP_CLASS(Action, AsyncCompositeAction);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
@@ -157,6 +161,8 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("cpp", compositePrintPerson());
     menu.registerAction("hl", ACTION_CLASS(HowLongSince));
     menu.registerAction("chl",compositeHowLong());
+
+    menu.registerAction("aprint", ACTION_CLASS(AsyncPrintAction));
 }
 
 const std::shared_ptr<cmd::Translator> ThisApp::createTranslator() const
@@ -364,7 +370,7 @@ ActionPtr ThisApp::reverseDivide()
 
 ActionPtr ThisApp::doubleReverseSentence()
 {
-    auto caRvrs = mkDynActionPtr(CompositeAction);
+    auto caRvrs = mkDynActionPtr(AsyncCompositeAction);
 
     def::ActionDef actionDef;
 
@@ -404,7 +410,7 @@ ActionPtr ThisApp::doubleReverseSentence()
 
 ActionPtr ThisApp::reverseSentence()
 {
-    auto caRvrs = mkDynActionPtr(CompositeAction);
+    auto caRvrs = mkDynActionPtr(AsyncCompositeAction);
 
     def::ActionDef actionDef;
 

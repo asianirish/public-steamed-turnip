@@ -18,6 +18,8 @@ SOURCES += \
         cmd/ArgInfo.cpp \
         cmd/ArgManager.cpp \
         cmd/AsyncAction.cpp \
+        cmd/AsyncCompositeAction.cpp \
+        cmd/AsyncPrintAction.cpp \
         cmd/CompositeAction.cpp \
         cmd/ConditionalStringAction.cpp \
         cmd/ContextualAction.cpp \
@@ -97,6 +99,8 @@ HEADERS += \
     cmd/ArgInfo.h \
     cmd/ArgManager.h \
     cmd/AsyncAction.h \
+    cmd/AsyncCompositeAction.h \
+    cmd/AsyncPrintAction.h \
     cmd/BinaryAction.h \
     cmd/CmpAction.h \
     cmd/CompositeAction.h \

@@ -1,4 +1,5 @@
 #include "Task.h"
+#include "cmd/AsyncAction.h"
 #include "cmd/SyncAction.h"
 #include "cmd/TaskManager.h"
 #include "cmd/ArgInfo.h"
@@ -184,6 +185,12 @@ void Task::onSubTaskComplete(const Result &result)
 #endif
         subResult.setTaskId(taskId());
         subTaskCallback_(subResult);
+    }
+
+    auto asyncAction = std::dynamic_pointer_cast<AsyncAction>(actionPtr());
+
+    if (asyncAction) {
+        asyncAction->onComplete(result.value(), result.taskId());
     }
 
 }
