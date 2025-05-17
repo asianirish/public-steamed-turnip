@@ -17,11 +17,6 @@ void AsyncCompositeAction::setActionDef(const def::ActionDef &newActionDef)
     actionDef_ = newActionDef;
 }
 
-bool AsyncCompositeAction::doStartInThread() const
-{
-    return false; // TODO: ?
-}
-
 Substitutor AsyncCompositeAction::substitutor() const
 {
     return substitutor_;

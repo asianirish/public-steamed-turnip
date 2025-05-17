@@ -14,11 +14,6 @@ def::ActionDef AsyncPrintAction::actionDef() const
     return _printAction->actionDef();
 }
 
-bool AsyncPrintAction::doStartInThread() const
-{
-    return false;
-}
-
 void AsyncPrintAction::emitRequest(const TaskId &taskId, const ArgList &args)
 {
     TaskPtr taskPtr(new Task());

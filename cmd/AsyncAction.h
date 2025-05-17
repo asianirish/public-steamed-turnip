@@ -17,6 +17,10 @@ public:
 protected:
     void specificAct(const TaskId &taskId, const ArgList &args) override;
 
+    bool doStartInThread() const final {
+        return false;
+    }
+
 private:
     virtual void emitRequest(const TaskId &taskId, const ArgList &args) = 0;
     virtual void emitComplete(const Value &reslutValue, const TaskId &taskId) = 0;

@@ -15,8 +15,6 @@ public:
     def::ActionDef actionDef() const override;
     void setActionDef(const def::ActionDef &newActionDef);
 
-    bool doStartInThread() const override;
-
     Substitutor substitutor() const;
 
     void onSubTaskComplete(const Value &reslutValue, const TaskId &taskId);

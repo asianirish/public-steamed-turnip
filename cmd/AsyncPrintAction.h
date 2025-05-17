@@ -13,7 +13,6 @@ public:
 
 public:
     def::ActionDef actionDef() const override;
-    bool doStartInThread() const override;
 
 private:
     void emitRequest(const TaskId &taskId, const ArgList &args) override;
