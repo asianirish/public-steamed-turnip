@@ -3,6 +3,8 @@
 #include "cmd/Task.h"
 #include "cmd/err/ConversionException.h"
 
+#include "cmd/AsyncAction.h"
+
 namespace turnip {
 namespace cmd {
 
@@ -49,9 +51,23 @@ void TaskManager::onTaskComplete(const Result &result)
         }
 
         // TODO: handle a list of tasks
+        auto tsk = tasks_.at(taskId);
 
         // TODO: do not delete the task immediately (when?) and set Completed status (?)
-        tasks_.erase(taskId);
+        tasks_.erase(taskId); // here
+
+        auto asyncAction = std::dynamic_pointer_cast<AsyncAction>(tsk->actionPtr());
+
+        if (asyncAction) {
+#ifdef DEBUG_ASYNC_ACTIONS
+            std::cout << std::endl << "async action ON_SUB_TASK_COMPLETE" << std::endl;
+#endif
+            asyncAction->onSubTaskComplete(result.value(), result.taskId());
+
+#ifdef DEBUG_ASYNC_ACTIONS
+            std::cout << "async action SUB_TASK_COMPLETE" << std::endl;
+#endif
+        }
 
         if (callback_) {
             callback_(result);
@@ -136,6 +152,7 @@ bool TaskManager::handleTaskResult(const Result &result)
         auto subTask = result.value().toTaskPtr();
 
         {
+            // TODO: different function for subtask? (TaskManager::onSubTaskComplete?)
             auto f = std::bind(&TaskManager::onTaskComplete, this, std::placeholders::_1);
             task->setSubTaskCallback(f);
         }

@@ -14,6 +14,9 @@ public:
     void onComplete(const Value &reslutValue, const TaskId &taskId);
     void onError(const err::Error &error);
 
+    void onSubTaskComplete(const Value &reslutValue, const TaskId &taskId);
+    // onSubTaskError
+
 protected:
     void specificAct(const TaskId &taskId, const ArgList &args) override;
 

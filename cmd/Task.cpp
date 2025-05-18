@@ -186,21 +186,6 @@ void Task::onSubTaskComplete(const Result &result)
         subResult.setTaskId(taskId());
         subTaskCallback_(subResult);
     }
-
-    auto asyncAction = std::dynamic_pointer_cast<AsyncAction>(actionPtr());
-
-    if (asyncAction) {
-#ifdef DEBUG_ASYNC_ACTIONS
-        std::cout << std::endl << "async action ON_COMPLETE" << std::endl;
-#endif
-
-        asyncAction->onComplete(result.value(), result.taskId());
-
-#ifdef DEBUG_ASYNC_ACTIONS
-        std::cout << "async action COMPLETE" << std::endl;
-#endif
-    }
-
 }
 
 void Task::onSubTaskError(const err::Error &error)
