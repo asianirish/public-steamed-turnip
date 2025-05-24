@@ -84,6 +84,9 @@ SOURCES += \
         math/Divide.cpp \
         math/Inc.cpp \
         math/IsEven.cpp \
+        math/LogicalAndAction.cpp \
+        math/LogicalOrAction.cpp \
+        math/LogicalXorAction.cpp \
         math/RemAction.cpp \
         math/SineOfRadians.cpp \
         test/TestActionMap.cpp \
@@ -178,6 +181,9 @@ HEADERS += \
     math/Inc.h \
     math/IsEven.h \
     math/Less.h \
+    math/LogicalAndAction.h \
+    math/LogicalOrAction.h \
+    math/LogicalXorAction.h \
     math/MultAction.h \
     math/RemAction.h \
     math/SineOfRadians.h \

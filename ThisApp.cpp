@@ -34,6 +34,9 @@
 #include "math/IsEven.h"
 #include "math/Divide.h"
 #include "math/Less.h"
+#include "math/LogicalAndAction.h"
+#include "math/LogicalOrAction.h"
+#include "math/LogicalXorAction.h"
 #include "math/MultAction.h"
 #include "math/AddAction.h"
 #include "math/DivAction.h"
@@ -95,9 +98,15 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, TestStringGen);
     REGISTER_TURNIP_CLASS(Action, CountingAction);
     REGISTER_TURNIP_CLASS(Action, ContextualAction);
+
     REGISTER_TURNIP_CLASS(Action, EqInt);
     REGISTER_TURNIP_CLASS(Action, LessInt);
     REGISTER_TURNIP_CLASS(Action, GreaterInt);
+
+    REGISTER_TURNIP_CLASS(Action, LogicalAndAction);
+    REGISTER_TURNIP_CLASS(Action, LogicalOrAction);
+    REGISTER_TURNIP_CLASS(Action, LogicalXorAction);
+
     REGISTER_TURNIP_CLASS(Action, PersonArgToMapAction);
     REGISTER_TURNIP_CLASS(Action, PrintPersonAction);
     REGISTER_TURNIP_CLASS(Action, MapToArgsAction);
@@ -139,8 +148,13 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     mathMenuAction->addAction("++", ACTION_CLASS(Inc));
     mathMenuAction->addAction("--", ACTION_CLASS(Decr));
     mathMenuAction->addAction("eqi", ACTION_CLASS(EqInt));
+
     mathMenuAction->addAction("lessi", ACTION_CLASS(LessInt));
     mathMenuAction->addAction("greateri", ACTION_CLASS(GreaterInt));
+
+    mathMenuAction->addAction("and", ACTION_CLASS(LogicalAndAction));
+    mathMenuAction->addAction("or", ACTION_CLASS(LogicalOrAction));
+    mathMenuAction->addAction("xor", ACTION_CLASS(LogicalXorAction));
 
     menu.registerAction("math", mathAction);
 
