@@ -21,6 +21,7 @@ SOURCES += \
         cmd/AsyncAction.cpp \
         cmd/AsyncCompositeAction.cpp \
         cmd/AsyncPrintAction.cpp \
+        cmd/CommonComposer.cpp \
         cmd/CompositeAction.cpp \
         cmd/ConditionalStringAction.cpp \
         cmd/ContextualAction.cpp \
@@ -107,6 +108,7 @@ HEADERS += \
     cmd/AsyncPrintAction.h \
     cmd/BinaryAction.h \
     cmd/CmpAction.h \
+    cmd/CommonComposer.h \
     cmd/CompositeAction.h \
     cmd/ConditionalStringAction.h \
     cmd/ContextualAction.h \

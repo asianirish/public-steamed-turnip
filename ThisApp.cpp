@@ -2,6 +2,7 @@
 
 #include "cmd/AsyncCompositeAction.h"
 #include "cmd/AsyncPrintAction.h"
+#include "cmd/CommonComposer.h"
 #include "cmd/HowLongSince.h"
 #include "cmd/MapToArgsAction.h"
 #include "cmd/PersonArgToMapAction.h"
@@ -151,6 +152,8 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
 
     mathMenuAction->addAction("lessi", ACTION_CLASS(LessInt));
     mathMenuAction->addAction("greateri", ACTION_CLASS(GreaterInt));
+    mathMenuAction->addAction("loei", CommonComposer::lessOrEqual());
+
 
     mathMenuAction->addAction("and", ACTION_CLASS(LogicalAndAction));
     mathMenuAction->addAction("or", ACTION_CLASS(LogicalOrAction));
