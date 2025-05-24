@@ -109,6 +109,16 @@ inline std::ostream& operator<<(std::ostream& os, const Value& value) {
     return os;
 }
 
+inline Value operator"" _val(unsigned long long number) {
+    return Value(static_cast<int64_t>(number));
+}
+
+
+inline Value operator"" _val(long double number) {
+    return Value(static_cast<double>(number));
+}
+
+
 } // namespace cmd
 } // namespace turnip
 
