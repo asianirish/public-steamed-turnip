@@ -174,8 +174,10 @@ HEADERS += \
     math/DivAction.h \
     math/Divide.h \
     math/Eq.h \
+    math/Greater.h \
     math/Inc.h \
     math/IsEven.h \
+    math/Less.h \
     math/MultAction.h \
     math/RemAction.h \
     math/SineOfRadians.h \
