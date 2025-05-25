@@ -46,6 +46,7 @@
 #include "math/SineOfRadians.h"
 
 #include "test/TestActionMap.h"
+#include "test/TestChance.h"
 #include "test/TestCmdValue.h"
 #include "test/TestSharedVector.h"
 #include "test/TestLazyPointer.h"
@@ -114,6 +115,8 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, HowLongSince);
     REGISTER_TURNIP_CLASS(Action, AsyncPrintAction);
     REGISTER_TURNIP_CLASS(Action, AsyncCompositeAction);
+
+    REGISTER_TURNIP_CLASS(Action, TestChance);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
@@ -186,6 +189,8 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("chl",compositeHowLong());
 
     menu.registerAction("aprint", ACTION_CLASS(AsyncPrintAction));
+
+    menu.registerAction("chance", ACTION_CLASS(TestChance));
 }
 
 const std::shared_ptr<cmd::Translator> ThisApp::createTranslator() const

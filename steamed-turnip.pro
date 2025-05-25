@@ -76,6 +76,7 @@ SOURCES += \
         cmd/rep/StringRep.cpp \
         cmd/rep/TaskRep.cpp \
         common/HumanStringGenerator.cpp \
+        common/RandomUtils.cpp \
         common/StringGenerator.cpp \
         console/Reader.cpp \
         example/MakeSentence.cpp \
@@ -91,6 +92,7 @@ SOURCES += \
         math/RemAction.cpp \
         math/SineOfRadians.cpp \
         test/TestActionMap.cpp \
+        test/TestChance.cpp \
         test/TestCmdValue.cpp \
         test/TestLazyPointer.cpp \
         test/TestSharedVector.cpp \
@@ -168,6 +170,7 @@ HEADERS += \
     common/HumanStringGenerator.h \
     common/LazyPointer.h \
     common/LimitedStack.h \
+    common/RandomUtils.h \
     common/SharedMap.h \
     common/SharedVector.h \
     common/StringGenerator.h \
@@ -191,6 +194,7 @@ HEADERS += \
     math/SineOfRadians.h \
     math/SubAction.h \
     test/TestActionMap.h \
+    test/TestChance.h \
     test/TestCmdValue.h \
     test/TestLazyPointer.h \
     test/TestSharedVector.h \
