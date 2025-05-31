@@ -311,7 +311,7 @@ void Reader::onDownArrowKey(std::size_t &cursor_position, std::string &command)
 
 void Reader::onResult(const cmd::Result &result)
 {
-    std::cout << "\nTaskId: " << result.taskId() << std::endl;
+    std::cout << "\nR TaskId: " << result.taskId() << std::endl;
 
     auto rep = result.representation();
 
@@ -327,7 +327,7 @@ void Reader::onError(const cmd::err::Error &error)
 {
     auto maybeTaskId = error.maybeTaskId();
     if (maybeTaskId) {
-        std::cout << "\nTaskId: " << *maybeTaskId;
+        std::cout << "\nE TaskId: " << *maybeTaskId;
     }
     std::cout << "\nError: " << error.description() << std::endl;
     displayPrompt();

@@ -41,8 +41,8 @@ private:
 
     bool handleTaskResult(const Result &result);
 
-    ResultCallback callback_;
-    ErrorCallback errorCallback_;
+    std::vector<ResultCallback> callbacks_;
+    std::vector<ErrorCallback> errorCallbacks_;
     StartCallback startCallback_;
 
     std::map<TaskId, TaskPtr> tasks_;

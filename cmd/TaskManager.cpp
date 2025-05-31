@@ -69,8 +69,8 @@ void TaskManager::onTaskComplete(const Result &result)
 #endif
         }
 
-        if (callback_) {
-            callback_(result);
+        for (const auto &callback : callbacks_) {
+            callback(result);
         }
     }
     // TODO: save the result of pure functions
@@ -94,8 +94,8 @@ void TaskManager::onError(const err::Error &error)
         // TODO: do not delete the task immediately (when?) and set Failed status (?)
         tasks_.erase(taskId);
 
-        if (errorCallback_) {
-            errorCallback_(error);
+        for (const auto &errorCallback : errorCallbacks_) {
+            errorCallback(error);
         }
     }
 }
@@ -115,7 +115,9 @@ TaskPtr TaskManager::task(const ActionPtr &actionPtr, const InputArgList &inputA
                 arg = argDef.convertInput(*inputArgIt);
             } catch (err::ConversionException &e) {
                 auto error = err::Error::createArgumentConversionError(e.type(), e.input(), index, argDef.name());
-                errorCallback_(error);
+                for (const auto &errorCallback : errorCallbacks_) {
+                    errorCallback(error);
+                }
                 return {};
             }
         } else {
@@ -123,7 +125,9 @@ TaskPtr TaskManager::task(const ActionPtr &actionPtr, const InputArgList &inputA
 
             if (arg.isNull()) {
                 auto error = err::Error::createMissingRequiredArgumentError(index, argDef.name());
-                errorCallback_(error);
+                for (const auto &errorCallback : errorCallbacks_) {
+                    errorCallback(error);
+                }
                 return {};
             }
         }
@@ -199,12 +203,12 @@ void TaskManager::setStartCallback(const StartCallback &newStartCallback)
 
 void TaskManager::setErrorCallback(const ErrorCallback &newErrorCallback)
 {
-    errorCallback_ = newErrorCallback;
+    errorCallbacks_.push_back(newErrorCallback);
 }
 
 void TaskManager::setCallback(const ResultCallback &newCallback)
 {
-    callback_ = newCallback;
+    callbacks_.push_back(newCallback);
 }
 
 } // namespace cmd
