@@ -35,7 +35,8 @@ bool ArgManager::execArgs(const ArgInfoList &argInfos)
         std::cout << "IS TASK: " << value.isTask() << std::endl;
 #endif
 
-        if (argDef.mustBeCalculated() && value.isTask()) {
+        if (argDef.mustBeCalculated() && value.isTask()
+            && argDef.type().inputMetaType().type() != def::MetaType::Task) {
 #ifdef DEBUG_ACTION_ARGS
             std::cout << "THE ARGUMENT MUST BE CALCULATED" << std::endl;
 #endif
