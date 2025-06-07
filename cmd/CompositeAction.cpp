@@ -13,7 +13,7 @@ Substitutor CompositeAction::substitutor() const
 
 Value CompositeAction::actImpl(const ArgList &args, err::Error &error)
 {
-    auto task = substitutor_.substitue(args);
+    auto task = substitutor_.substitute(args);
 
 #ifdef DEBUG_ACTION_TASKS
     std::cout << std::endl << "INNER TASK:" << task->taskId() << std::endl;

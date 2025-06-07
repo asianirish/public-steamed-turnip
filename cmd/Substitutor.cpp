@@ -41,7 +41,7 @@ void Substitutor::addParam(const Parameter &param)
     params_.push_back(param);
 }
 
-TaskPtr Substitutor::substitue(const ArgList &args)
+TaskPtr Substitutor::substitute(const ArgList &args)
 {
     int i = 0;
     for (const auto &arg : args) {
@@ -58,7 +58,7 @@ TaskPtr Substitutor::substitue(const ArgList &args)
             } else {
                 auto sbst = param.substitutor();
                 if (sbst) {
-                    auto subTask = sbst->substitue(args);
+                    auto subTask = sbst->substitute(args);
                     param.setValue(subTask);
                 }
             }

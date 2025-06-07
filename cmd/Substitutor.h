@@ -22,7 +22,7 @@ public:
     ParamList params() const;
     void addParam(const Parameter &param);
 
-    TaskPtr substitue(const ArgList &args);
+    TaskPtr substitute(const ArgList &args);
 
     VariantMap toMap() const;
 

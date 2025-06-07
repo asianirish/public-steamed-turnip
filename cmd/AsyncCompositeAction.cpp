@@ -71,7 +71,7 @@ void AsyncCompositeAction::addParams(const ParamList &paramList)
 
 void AsyncCompositeAction::emitRequest(const TaskId &taskId, const ArgList &args)
 {
-    auto task = substitutor_.substitue(args);
+    auto task = substitutor_.substitute(args);
 
 #ifdef DEBUG_ACTION_ARGS
     for (auto &arg : args) {
