@@ -36,8 +36,9 @@ Value PrintAction::actImpl(const ArgList &args, err::Error &error)
     }
 
     sleep(1);
-
     auto arg = args.at(0);
+
+#ifdef DEBUG_MULPIPLE_PRINT
     for (int i = 0; i < 100000; ++i) {
         mutex_.lock();
         for (int j = 0; j < 20; ++j) {
@@ -47,6 +48,10 @@ Value PrintAction::actImpl(const ArgList &args, err::Error &error)
         mutex_.unlock();
 
     }
+#else
+    std::cout << arg;
+    std::cout.flush();
+#endif
 
     return true;
 }
