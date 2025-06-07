@@ -31,6 +31,7 @@
 #include "math/DegreesToRadians.h"
 #include "math/Eq.h"
 #include "math/Greater.h"
+#include "math/Id.h"
 #include "math/Inc.h"
 #include "math/IsEven.h"
 #include "math/Divide.h"
@@ -109,6 +110,8 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, LogicalOrAction);
     REGISTER_TURNIP_CLASS(Action, LogicalXorAction);
 
+    REGISTER_TURNIP_CLASS(Action, StrId);
+
     REGISTER_TURNIP_CLASS(Action, PersonArgToMapAction);
     REGISTER_TURNIP_CLASS(Action, PrintPersonAction);
     REGISTER_TURNIP_CLASS(Action, MapToArgsAction);
@@ -161,6 +164,8 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     mathMenuAction->addAction("and", ACTION_CLASS(LogicalAndAction));
     mathMenuAction->addAction("or", ACTION_CLASS(LogicalOrAction));
     mathMenuAction->addAction("xor", ACTION_CLASS(LogicalXorAction));
+
+    mathMenuAction->addAction("id", ACTION_CLASS(StrId));
 
     menu.registerAction("math", mathAction);
 
