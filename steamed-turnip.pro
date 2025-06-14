@@ -29,6 +29,7 @@ SOURCES += \
         cmd/CountingAction.cpp \
         cmd/Context.cpp \
         cmd/DoNothing.cpp \
+        cmd/First.cpp \
         cmd/Global.cpp \
         cmd/HelpAction.cpp \
         cmd/HowLongSince.cpp \
@@ -118,6 +119,7 @@ HEADERS += \
     cmd/CountingAction.h \
     cmd/Context.h \
     cmd/DoNothing.h \
+    cmd/First.h \
     cmd/Global.h \
     cmd/HelpAction.h \
     cmd/HowLongSince.h \

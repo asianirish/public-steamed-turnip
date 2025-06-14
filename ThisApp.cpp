@@ -3,6 +3,7 @@
 #include "cmd/AsyncCompositeAction.h"
 #include "cmd/AsyncPrintAction.h"
 #include "cmd/CommonComposer.h"
+#include "cmd/First.h"
 #include "cmd/HowLongSince.h"
 #include "cmd/MapToArgsAction.h"
 #include "cmd/PersonArgToMapAction.h"
@@ -112,6 +113,8 @@ void ThisApp::registerActions()
 
     REGISTER_TURNIP_CLASS(Action, StrId);
 
+    REGISTER_TURNIP_CLASS(Action, First);
+
     REGISTER_TURNIP_CLASS(Action, PersonArgToMapAction);
     REGISTER_TURNIP_CLASS(Action, PrintPersonAction);
     REGISTER_TURNIP_CLASS(Action, MapToArgsAction);
@@ -198,6 +201,7 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("chance", ACTION_CLASS(TestChance));
 
     menu.registerAction("if", ACTION_CLASS(IfAction));
+    menu.registerAction("first", ACTION_CLASS(First));
 }
 
 const std::shared_ptr<cmd::Translator> ThisApp::createTranslator() const
