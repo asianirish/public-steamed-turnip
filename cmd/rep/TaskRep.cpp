@@ -9,8 +9,7 @@ TaskRep::TaskRep() {}
 
 Value TaskRep::input(const std::string &str) const
 {
-    (void)str;
-    throw std::logic_error("not used");
+    return str;
 }
 
 std::string TaskRep::output(const Value &value) const

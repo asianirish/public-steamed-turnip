@@ -1,12 +1,15 @@
 #include "Value.h"
 #include "Task.h"
 #include "SyncAction.h"
+#include "math/Id.h"
 
 #include <sstream>
 #include <algorithm>
 
 namespace turnip {
 namespace cmd {
+
+using namespace math;
 
 Value::Value() {}
 
@@ -334,6 +337,7 @@ ActionPtr Value::toActionPtr() const
         return action;
     }
 
+
     return nullptr;
 }
 
@@ -350,7 +354,15 @@ TaskPtr Value::toTaskPtr() const
 
     // TODO: from map (?)
 
-    return nullptr;
+    // neither task nor map of tasks
+    TaskPtr taskPtr(new Task());
+    auto idAction = mkActionPtr(StrId);
+    taskPtr->setActionPtr(idAction);
+
+    auto value = std::get<std::string>(data_);
+    taskPtr->setArgList({value});
+
+    return taskPtr;
 }
 
 Value::operator TaskPtr() const

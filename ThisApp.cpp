@@ -196,6 +196,8 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("aprint", ACTION_CLASS(AsyncPrintAction));
 
     menu.registerAction("chance", ACTION_CLASS(TestChance));
+
+    menu.registerAction("if", ACTION_CLASS(IfAction));
 }
 
 const std::shared_ptr<cmd::Translator> ThisApp::createTranslator() const
