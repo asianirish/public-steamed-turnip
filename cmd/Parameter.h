@@ -32,6 +32,7 @@ public:
 
     int position() const;
     void setPosition(int newPosition);
+    bool isPosition() const;
 
     Value value() const;
     void setValue(const Value &newValue);

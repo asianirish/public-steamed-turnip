@@ -60,6 +60,11 @@ void Parameter::setPosition(int newPosition)
     position_ = newPosition;
 }
 
+bool Parameter::isPosition() const
+{
+    return (position_ != INVALID_POSITION);
+}
+
 Value Parameter::value() const
 {
     if (alias_) {
