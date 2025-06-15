@@ -3,12 +3,14 @@
 #include "cmd/AsyncCompositeAction.h"
 #include "cmd/AsyncPrintAction.h"
 #include "cmd/CommonComposer.h"
+#include "cmd/ForAction.h"
 #include "cmd/First.h"
 #include "cmd/HowLongSince.h"
 #include "cmd/MapToArgsAction.h"
 #include "cmd/PersonArgToMapAction.h"
 #include "cmd/Context.h"
 #include "cmd/PrintPersonAction.h"
+#include "cmd/WhileAction.h"
 #include "common/Factory.h"
 #include "common/HumanStringGenerator.h"
 
@@ -46,6 +48,8 @@
 #include "math/RemAction.h"
 #include "math/SubAction.h"
 #include "math/SineOfRadians.h"
+
+#include "test/TestingComposer.h"
 
 #include "test/TestActionMap.h"
 #include "test/TestChance.h"
@@ -111,8 +115,10 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, LogicalOrAction);
     REGISTER_TURNIP_CLASS(Action, LogicalXorAction);
 
+    REGISTER_TURNIP_CLASS(Action, ForAction);
     REGISTER_TURNIP_CLASS(Action, StrId);
 
+    REGISTER_TURNIP_CLASS(Action, WhileAction);
     REGISTER_TURNIP_CLASS(Action, First);
 
     REGISTER_TURNIP_CLASS(Action, PersonArgToMapAction);
@@ -168,6 +174,7 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     mathMenuAction->addAction("or", ACTION_CLASS(LogicalOrAction));
     mathMenuAction->addAction("xor", ACTION_CLASS(LogicalXorAction));
 
+    menu.registerAction("for", ACTION_CLASS(ForAction));
     mathMenuAction->addAction("id", ACTION_CLASS(StrId));
 
     menu.registerAction("math", mathAction);
@@ -200,7 +207,13 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
 
     menu.registerAction("chance", ACTION_CLASS(TestChance));
 
+    menu.registerAction("ccpr", TestingComposer::concatPrint());
+    menu.registerAction("fcpr", TestingComposer::forConcatPrint());
+    menu.registerAction("count_task", TestingComposer::countTask());
+    menu.registerAction("while_task", TestingComposer::whileTask());
+
     menu.registerAction("if", ACTION_CLASS(IfAction));
+    menu.registerAction("while", ACTION_CLASS(WhileAction));
     menu.registerAction("first", ACTION_CLASS(First));
 }
 

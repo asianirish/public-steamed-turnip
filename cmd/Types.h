@@ -69,7 +69,16 @@ using RepPtr = std::shared_ptr<Representation>;
 #define mkRepPtr(R) RepPtr(common::Factory<Representation>::create(REPRESENTATION_CLASS(R)))
 #define mkDynRepPtr(R) std::dynamic_pointer_cast<R>(mkRepPtr(R))
 
-}
+} // namespace rep
+
+namespace loop {
+
+class State;
+using StatePtr = std::shared_ptr<State>;
+
+using StateId = TaskId;
+
+} // namespace loop
 
 } // namespace cmd
 } // namespace turnip

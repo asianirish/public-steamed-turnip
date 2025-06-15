@@ -46,7 +46,7 @@ public:
 
     Status status() const;
 
-    void executeSubTask(const TaskPtr &subTask);
+    void executeSubTask(TaskPtr &subTask);
 
     void setSubTaskCallback(const Callback &newSubTaskCallback);
 

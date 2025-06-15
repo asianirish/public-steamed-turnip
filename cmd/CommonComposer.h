@@ -10,6 +10,7 @@ class CommonComposer
 {
 public:
     static ActionPtr lessOrEqual();
+
 private:
     CommonComposer();
 };

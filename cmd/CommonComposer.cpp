@@ -1,10 +1,15 @@
 #include "CommonComposer.h"
 #include "cmd/CompositeAction.h"
 #include "cmd/Context.h"
+#include "cmd/PrintAction.h"
+#include "cmd/ForAction.h"
+
 #include "common/HumanStringGenerator.h"
+#include "math/AddAction.h"
 #include "math/Eq.h"
 #include "math/Less.h"
 #include "math/LogicalOrAction.h"
+#include "math/Inc.h"
 
 using namespace turnip::cmd::math;
 

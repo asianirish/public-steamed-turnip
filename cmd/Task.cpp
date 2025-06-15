@@ -85,7 +85,7 @@ TaskId Task::taskId() const
     return taskId_;
 }
 
-void Task::executeSubTask(const TaskPtr &subTask)
+void Task::executeSubTask(TaskPtr &subTask)
 {
     subTaskManager_ = std::make_shared<TaskManager>();
 
@@ -101,21 +101,26 @@ void Task::executeSubTask(const TaskPtr &subTask)
 
     auto argInfos = subTask->argInfos();
 
+    ArgList subArgs;
+
     int index = 0;
     for (const auto &argInfo : argInfos) {
         if (argInfo.argDef().defaultValue().isNull()) {
             if (argInfo.value().isNull()) {
                 auto error = err::Error::createTaskError(subTask->taskId(),
-                    std::string("Missing subtask ") + std::to_string(subTask->taskId()) + " argument [" + std::to_string(index) + "] " +
-                    (!argInfo.argDef().name().empty() ? ("('" + argInfo.argDef().name() + "')") : "") );
+                                                         std::string("Missing subtask ") + std::to_string(subTask->taskId()) + " argument [" + std::to_string(index) + "] " +
+                                                             (!argInfo.argDef().name().empty() ? ("('" + argInfo.argDef().name() + "')") : "") );
                 onSubTaskError(error);
                 return;
             }
         }
 
+        subArgs.push_back(argInfo.value());
+
         ++index;
     }
 
+    subTask->setArgList(subArgs);
     subTaskManager_->execute(subTask, ExecType::Direct);
 }
 

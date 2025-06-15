@@ -29,6 +29,7 @@ SOURCES += \
         cmd/CountingAction.cpp \
         cmd/Context.cpp \
         cmd/DoNothing.cpp \
+        cmd/ForAction.cpp \
         cmd/First.cpp \
         cmd/Global.cpp \
         cmd/HelpAction.cpp \
@@ -54,6 +55,7 @@ SOURCES += \
         cmd/TaskManager.cpp \
         cmd/Translator.cpp \
         cmd/Value.cpp \
+        cmd/WhileAction.cpp \
         cmd/def/ActionDef.cpp \
         cmd/def/ArgDef.cpp \
         cmd/def/MetaType.cpp \
@@ -65,6 +67,11 @@ SOURCES += \
         cmd/err/ConversionException.cpp \
         cmd/err/Error.cpp \
         cmd/err/MissingRequiredArgumentInfo.cpp \
+        cmd/loop/ActionEvState.cpp \
+        cmd/loop/IncState.cpp \
+        cmd/loop/State.cpp \
+        cmd/loop/StateManager.cpp \
+        cmd/loop/SyncEvState.cpp \
         cmd/rep/BoolRep.cpp \
         cmd/rep/CharRep.cpp \
         cmd/rep/DecIntRep.cpp \
@@ -98,7 +105,8 @@ SOURCES += \
         test/TestCmdValue.cpp \
         test/TestLazyPointer.cpp \
         test/TestSharedVector.cpp \
-        test/TestStringGen.cpp
+        test/TestStringGen.cpp \
+        test/TestingComposer.cpp
 
 HEADERS += \
     App.h \
@@ -119,6 +127,7 @@ HEADERS += \
     cmd/CountingAction.h \
     cmd/Context.h \
     cmd/DoNothing.h \
+    cmd/ForAction.h \
     cmd/First.h \
     cmd/Global.h \
     cmd/HelpAction.h \
@@ -146,6 +155,7 @@ HEADERS += \
     cmd/Types.h \
     cmd/UnaryAction.h \
     cmd/Value.h \
+    cmd/WhileAction.h \
     cmd/def/ActionDef.h \
     cmd/def/ArgDef.h \
     cmd/def/MetaType.h \
@@ -157,6 +167,11 @@ HEADERS += \
     cmd/err/ConversionException.h \
     cmd/err/Error.h \
     cmd/err/MissingRequiredArgumentInfo.h \
+    cmd/loop/ActionEvState.h \
+    cmd/loop/IncState.h \
+    cmd/loop/State.h \
+    cmd/loop/StateManager.h \
+    cmd/loop/SyncEvState.h \
     cmd/rep/BoolRep.h \
     cmd/rep/CharRep.h \
     cmd/rep/DecIntRep.h \
@@ -202,4 +217,5 @@ HEADERS += \
     test/TestCmdValue.h \
     test/TestLazyPointer.h \
     test/TestSharedVector.h \
-    test/TestStringGen.h
+    test/TestStringGen.h \
+    test/TestingComposer.h
