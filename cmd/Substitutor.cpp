@@ -43,27 +43,26 @@ void Substitutor::addParam(const Parameter &param)
 
 TaskPtr Substitutor::substitute(const ArgList &args)
 {
-    int i = 0;
-    for (const auto &arg : args) {
+    if (actionParam_.isPosition()) {
+        auto pos = actionParam_.position();
+        auto arg = args.at(pos); // TODO: check if exists
+        if (arg.isAction()) {
+            actionParam_.setValue(arg);
+        }
+    }
 
-        if (actionParam_.position() == i) {
-            if (arg.isAction()) {
-                actionParam_.setValue(arg);
+    for (auto &param : params_) {
+        if (param.isPosition()) {
+            auto pos = param.position();
+            auto arg = args.at(pos); // TODO: check if exists
+            param.setValue(arg);
+        } else {
+            auto sbst = param.substitutor();
+            if (sbst) {
+                auto subTask = sbst->substitute(args);
+                param.setValue(subTask);
             }
         }
-
-        for (auto &param : params_) {
-            if (param.position() == i) {
-                param.setValue(arg);
-            } else {
-                auto sbst = param.substitutor();
-                if (sbst) {
-                    auto subTask = sbst->substitute(args);
-                    param.setValue(subTask);
-                }
-            }
-        }
-        ++i;
     }
 
     // TODO: clone action type to avoid circular references in case of recursive dependency
