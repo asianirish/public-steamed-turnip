@@ -53,6 +53,9 @@ Value Batch::actImpl(const ArgList &args, err::Error &error)
         return {};
     }
 
+    std::cout << std::endl << "................." << std::endl;
+    std::cout << "BATCH INDEX: " << index << std::endl;
+
     VariantList result;
     for (auto i = index * size; i < index * size + size; ++i) {
         if (i >= static_cast<int64_t>(arr.size())) {
@@ -60,7 +63,10 @@ Value Batch::actImpl(const ArgList &args, err::Error &error)
         }
         auto val = arr.get(i);
         result.push_back(val);
+        std::cout << val.toString() << ", ";
     }
+
+    std::cout << std::endl;
 
     return result;
 }

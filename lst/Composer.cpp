@@ -1,7 +1,9 @@
 #include "Composer.h"
 
 #include "cmd/CompositeAction.h"
+#include "cmd/Const.h"
 
+#include "cmd/ForAction.h"
 #include "lst/ArgsToListAction.h"
 #include "lst/AtAction.h"
 #include "lst/Batch.h"
@@ -44,7 +46,7 @@ ActionPtr Composer::argListSize()
     const auto typeDef = def::TypeDef::createStringTypedef();
 
     def::ActionDef actionDef;
-    actionDef.setDescription("Concat args");
+    actionDef.setDescription("Arg List Size");
 
     for (size_t i = 0; i < 12; ++i)
     {
@@ -102,6 +104,8 @@ ActionPtr Composer::argListBatch()
 
     def::ActionDef actionDef;
 
+    actionDef.setDescription("ARG LIST BATCH");
+
     {
         const auto typeDef = def::TypeDef::createIntTypedef();
         def::ArgDef argDef;
@@ -109,6 +113,15 @@ ActionPtr Composer::argListBatch()
         argDef.setName("index");
         actionDef.addArgDef(argDef);
     }
+
+    {
+        const auto typeDef = def::TypeDef::createIntTypedef();
+        def::ArgDef argDef;
+        argDef.setType(typeDef);
+        argDef.setName("number");
+        actionDef.addArgDef(argDef);
+    }
+
 
     for (size_t i = 0; i < 12; ++i)
     {
@@ -126,6 +139,93 @@ ActionPtr Composer::argListBatch()
     auto mkLstParam = Parameter(mkActionPtr(ArgsToListAction), ParamList({2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}));
 
     ca->addParams(ParamList({0, 1, mkLstParam}));
+
+    return ca;
+}
+
+ActionPtr Composer::longArgListBatch()
+{
+    auto ca = mkDynActionPtr(CompositeAction);
+
+    def::ActionDef actionDef;
+
+    {
+        const auto typeDef = def::TypeDef::createIntTypedef();
+        def::ArgDef argDef;
+        argDef.setType(typeDef);
+        argDef.setName("index");
+        actionDef.addArgDef(argDef);
+    }
+
+    {
+        const auto typeDef = def::TypeDef::createIntTypedef();
+        def::ArgDef argDef;
+        argDef.setType(typeDef);
+        argDef.setName("number");
+        actionDef.addArgDef(argDef);
+    }
+
+    for (size_t i = 0; i < Const::ARG_MAX; ++i)
+    {
+        const auto typeDef = def::TypeDef::createStringTypedef();
+        def::ArgDef argDef;
+        argDef.setType(typeDef);
+        argDef.setDefaultValue("");
+        actionDef.addArgDef(argDef);
+    }
+
+    ParamList paramList;
+    for (size_t i = 2; i < Const::ARG_MAX; ++i)
+    {
+        paramList.push_back(i);
+    }
+    ca->setActionDef(actionDef);
+
+    ca->setAction(mkActionPtr(Batch));
+
+    auto mkLstParam = Parameter(mkActionPtr(ArgsToListAction), paramList);
+
+    ca->addParams(ParamList({0, 1, mkLstParam}));
+
+    return ca;
+}
+
+ActionPtr Composer::batches()
+{
+    auto ca = mkDynActionPtr(CompositeAction);
+
+    def::ActionDef actionDef;
+
+    {
+        const auto typeDef = def::TypeDef::createIntTypedef();
+        def::ArgDef argDef;
+        argDef.setType(typeDef);
+        argDef.setName("batchSize");
+        actionDef.addArgDef(argDef);
+    }
+
+    for (size_t i = 0; i < Const::ARG_MAX; ++i)
+    {
+        const auto typeDef = def::TypeDef::createStringTypedef();
+        def::ArgDef argDef;
+        argDef.setType(typeDef);
+        argDef.setDefaultValue("");
+        actionDef.addArgDef(argDef);
+    }
+
+    ParamList paramList({0_val, 0, });
+    for (size_t i = 1; i < Const::ARG_MAX; ++i)
+    {
+        paramList.push_back(i);
+    }
+
+    actionDef.setDescription("Batches");
+    ca->setActionDef(actionDef);
+
+    ca->setAction(mkActionPtr(ForAction));
+    auto argListParam =  Parameter(longArgListBatch(), paramList);
+
+    ca->addParams(ParamList({9_val, 0_val, 0_val, argListParam}));
 
     return ca;
 }

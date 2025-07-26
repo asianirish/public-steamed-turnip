@@ -233,6 +233,8 @@ void ThisApp::buildTestingSubMenu(turnip::cmd::Menu &menu)
     testingMenuAction->addAction("number_of_args", lst::Composer::argListSize());
     testingMenuAction->addAction("at_args", lst::Composer::atArgs());
     testingMenuAction->addAction("batch_of_args", lst::Composer::argListBatch());
+    testingMenuAction->addAction("batch_of_long_args", lst::Composer::longArgListBatch());
+    testingMenuAction->addAction("batches", lst::Composer::batches());
 
     menu.registerAction("testing", testingAction);
 }

@@ -17,6 +17,11 @@ public:
     static turnip::cmd::ActionPtr atArgs();
 
     static turnip::cmd::ActionPtr argListBatch();
+
+    static turnip::cmd::ActionPtr longArgListBatch();
+
+    static turnip::cmd::ActionPtr batches();
+
 private:
     Composer();
 };
