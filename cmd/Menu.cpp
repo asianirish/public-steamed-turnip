@@ -60,6 +60,7 @@ void Menu::registerHelpAction()
     auto helpPtr = std::dynamic_pointer_cast<HelpAction>(helpAction_);
     helpPtr->setMenu(this);
     actions_.insert({"help", helpAction_});
+    actions_.insert({"man", helpAction_});
 }
 
 const std::list<std::string> &Menu::commandList() const
