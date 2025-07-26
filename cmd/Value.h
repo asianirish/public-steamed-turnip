@@ -63,6 +63,8 @@ public:
 
     bool isMap() const;
 
+    bool isList() const;
+
     bool isString() const;
 
     bool isAction() const;
@@ -90,6 +92,9 @@ public:
 
     VariantMap toMap() const;
     operator VariantMap() const;
+
+    VariantList toList() const;
+    operator VariantList() const;
 
     ActionPtr toActionPtr() const;
     operator ActionPtr() const;

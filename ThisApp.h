@@ -19,11 +19,8 @@ private:
 
     std::string appName() const override;
 
-    turnip::cmd::ActionPtr sineOfDegrees();
     turnip::cmd::ActionPtr reverseSentence();
     turnip::cmd::ActionPtr doubleReverseSentence();
-
-    turnip::cmd::ActionPtr reverseDivide();
 
     turnip::cmd::ActionPtr multiPrint();
 
@@ -32,9 +29,9 @@ private:
 
     turnip::cmd::ActionPtr recursivePrint();
 
-    turnip::cmd::ActionPtr compositePrintPerson();
-
-    turnip::cmd::ActionPtr compositeHowLong();
+private:
+    void buildTestingSubMenu(turnip::cmd::Menu &menu);
+    void buildMathSubMenu(turnip::cmd::Menu &menu);
 };
 
 #endif // THISAPP_H

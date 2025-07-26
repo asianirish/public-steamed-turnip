@@ -87,6 +87,15 @@ public:
     void reserve(size_t n) {
         data_->reserve(n);
     }
+
+    std::vector<T> toStdVector() const {
+        if (data_) {
+            return *data_;
+        }
+
+        return {};
+    }
+
 private:
     std::shared_ptr<std::vector<T>> data_;
 };

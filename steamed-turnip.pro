@@ -3,6 +3,9 @@ CONFIG += console c++17
 CONFIG -= app_bundle
 CONFIG -= qt
 
+CONFIG += object_parallel_to_source
+
+# TARGET = sascomm
 TARGET = turnip
 
 DEFINES += TARGET_NAME=\\\"$$TARGET\\\"
@@ -25,6 +28,7 @@ SOURCES += \
         cmd/CommonComposer.cpp \
         cmd/CompositeAction.cpp \
         cmd/ConditionalStringAction.cpp \
+        cmd/Const.cpp \
         cmd/ContextualAction.cpp \
         cmd/CountingAction.cpp \
         cmd/Context.cpp \
@@ -89,7 +93,15 @@ SOURCES += \
         common/StringGenerator.cpp \
         console/Reader.cpp \
         example/MakeSentence.cpp \
+        lst/ArgsToListAction.cpp \
+        lst/AtAction.cpp \
+        lst/Batch.cpp \
+        lst/Composer.cpp \
+        lst/ConcatListAction.cpp \
+        lst/ListToArgsAction.cpp \
+        lst/SizeAction.cpp \
         main.cpp \
+        math/Composer.cpp \
         math/Decr.cpp \
         math/DegreesToRadians.cpp \
         math/Divide.cpp \
@@ -123,6 +135,7 @@ HEADERS += \
     cmd/CommonComposer.h \
     cmd/CompositeAction.h \
     cmd/ConditionalStringAction.h \
+    cmd/Const.h \
     cmd/ContextualAction.h \
     cmd/CountingAction.h \
     cmd/Context.h \
@@ -194,7 +207,15 @@ HEADERS += \
     common/StringGenerator.h \
     console/Reader.h \
     example/MakeSentence.h \
+    lst/ArgsToListAction.h \
+    lst/AtAction.h \
+    lst/Batch.h \
+    lst/Composer.h \
+    lst/ConcatListAction.h \
+    lst/ListToArgsAction.h \
+    lst/SizeAction.h \
     math/AddAction.h \
+    math/Composer.h \
     math/Decr.h \
     math/DegreesToRadians.h \
     math/DivAction.h \

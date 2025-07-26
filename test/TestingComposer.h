@@ -15,6 +15,10 @@ public:
 
     static turnip::cmd::ActionPtr whileTask();
 
+    static turnip::cmd::ActionPtr printPersonMap();
+
+    static turnip::cmd::ActionPtr map2HowLong();
+
 private:
     TestingComposer();
 };

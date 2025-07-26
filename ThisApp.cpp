@@ -1,5 +1,13 @@
 #include "ThisApp.h"
 
+#include "lst/Batch.h"
+#include "lst/Composer.h"
+
+#include "lst/ArgsToListAction.h"
+#include "lst/AtAction.h"
+#include "lst/ConcatListAction.h"
+#include "lst/ListToArgsAction.h"
+
 #include "cmd/AsyncCompositeAction.h"
 #include "cmd/AsyncPrintAction.h"
 #include "cmd/CommonComposer.h"
@@ -11,9 +19,6 @@
 #include "cmd/Context.h"
 #include "cmd/PrintPersonAction.h"
 #include "cmd/WhileAction.h"
-#include "common/Factory.h"
-#include "common/HumanStringGenerator.h"
-
 #include "cmd/ConditionalStringAction.h"
 #include "cmd/DoNothing.h"
 #include "cmd/ContextualAction.h"
@@ -28,8 +33,12 @@
 #include "cmd/TaskIdIncGenerator.h"
 #include "cmd/Task.h"
 
+#include "common/Factory.h"
+#include "common/HumanStringGenerator.h"
+
 #include "example/MakeSentence.h"
 
+#include "lst/SizeAction.h"
 #include "math/Decr.h"
 #include "math/DegreesToRadians.h"
 #include "math/Eq.h"
@@ -48,6 +57,7 @@
 #include "math/RemAction.h"
 #include "math/SubAction.h"
 #include "math/SineOfRadians.h"
+#include "math/Composer.h"
 
 #include "test/TestingComposer.h"
 
@@ -63,6 +73,7 @@ using namespace cmd;
 using namespace rep;
 using namespace math;
 using namespace example;
+using namespace lst;
 
 using namespace common;
 
@@ -129,6 +140,13 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, AsyncCompositeAction);
 
     REGISTER_TURNIP_CLASS(Action, TestChance);
+
+    REGISTER_TURNIP_CLASS(Action, ListToArgsAction);
+    REGISTER_TURNIP_CLASS(Action, ArgsToListAction);
+    REGISTER_TURNIP_CLASS(Action, ConcatListAction);
+    REGISTER_TURNIP_CLASS(Action, AtAction);
+    REGISTER_TURNIP_CLASS(Action, SizeAction);
+    REGISTER_TURNIP_CLASS(Action, Batch);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
@@ -140,6 +158,87 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("conds", ACTION_CLASS(ConditionalStringAction));
     menu.registerAction("concat", ACTION_CLASS(Concat));
 
+    menu.registerAction("amap", ACTION_CLASS(TestActionMap));
+
+    menu.registerAction("snt", ACTION_CLASS(MakeSentence));
+
+    menu.registerAction("rvrs", reverseSentence());
+    menu.registerAction("drvrs", doubleReverseSentence());
+
+    menu.registerAction("nothing", ACTION_CLASS(DoNothing));
+    menu.registerAction("multiprint", multiPrint());
+
+    menu.registerAction("yesno", yesNoPrint());
+
+    menu.registerAction("strgen", ACTION_CLASS(TestStringGen));
+
+    menu.registerAction("count", ACTION_CLASS(CountingAction));
+    menu.registerAction("rprint", recursivePrint());
+    menu.registerAction("ryn", recursiveYesNo());
+
+    menu.registerAction("pam", ACTION_CLASS(PersonArgToMapAction));
+    menu.registerAction("pp", ACTION_CLASS(PrintPersonAction));
+    menu.registerAction("hl", ACTION_CLASS(HowLongSince));
+
+    menu.registerAction("aprint", ACTION_CLASS(AsyncPrintAction));
+
+    menu.registerAction("chance", ACTION_CLASS(TestChance));
+
+    menu.registerAction("if", ACTION_CLASS(IfAction));
+    menu.registerAction("while", ACTION_CLASS(WhileAction));
+    menu.registerAction("first", ACTION_CLASS(First));
+
+    menu.registerAction("args2list", ACTION_CLASS(ArgsToListAction));
+
+    buildMathSubMenu(menu);
+    buildTestingSubMenu(menu);
+}
+
+const std::shared_ptr<cmd::Translator> ThisApp::createTranslator() const
+{
+    return std::shared_ptr<cmd::Translator>(new LineTranslator());
+}
+
+void ThisApp::registerRepresentaions()
+{
+    App::registerRepresentaions();
+    REGISTER_TURNIP_CLASS(Representation, HexIntRep);
+}
+
+const std::shared_ptr<TaskIdGenerator> ThisApp::createTaskIdGenenerator() const
+{
+    auto gen = std::make_shared<TaskIdIncGenerator>();
+    return gen;
+}
+
+std::string ThisApp::appName() const
+{
+    return std::string(TARGET_NAME);
+}
+
+void ThisApp::buildTestingSubMenu(turnip::cmd::Menu &menu)
+{
+    auto testingAction = ActionPtr(Factory<Action>::create(ACTION_CLASS(MenuAction)));
+    auto testingMenuAction = std::dynamic_pointer_cast<MenuAction>(testingAction);
+    testingMenuAction->setTranslator(translator());
+    testingMenuAction->setMenuName("testing");
+
+    testingMenuAction->addAction("ccpr", TestingComposer::concatPrint());
+    testingMenuAction->addAction("fcpr", TestingComposer::forConcatPrint());
+    testingMenuAction->addAction("count_task", TestingComposer::countTask());
+    testingMenuAction->addAction("while_task", TestingComposer::whileTask());
+    testingMenuAction->addAction("pp_map", TestingComposer::printPersonMap());
+    testingMenuAction->addAction("map_howlong", TestingComposer::map2HowLong());
+    testingMenuAction->addAction("concat_args", lst::Composer::concat());
+    testingMenuAction->addAction("number_of_args", lst::Composer::argListSize());
+    testingMenuAction->addAction("at_args", lst::Composer::atArgs());
+    testingMenuAction->addAction("batch_of_args", lst::Composer::argListBatch());
+
+    menu.registerAction("testing", testingAction);
+}
+
+void ThisApp::buildMathSubMenu(turnip::cmd::Menu &menu)
+{
     auto mathAction = ActionPtr(Factory<Action>::create(ACTION_CLASS(MenuAction)));
     auto mathMenuAction = std::dynamic_pointer_cast<MenuAction>(mathAction);
     mathMenuAction->setTranslator(translator());
@@ -148,9 +247,9 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     mathMenuAction->addAction("even", ACTION_CLASS(IsEven));
     mathMenuAction->addAction("d2r", ACTION_CLASS(DegreesToRadians));
     mathMenuAction->addAction("sinr", ACTION_CLASS(SineOfRadians));
-    mathMenuAction->addAction("sind", sineOfDegrees());
+    mathMenuAction->addAction("sind", math::Composer::sineOfDegrees());
     mathMenuAction->addAction("div", ACTION_CLASS(Divide));
-    mathMenuAction->addAction("rdiv", reverseDivide());
+    mathMenuAction->addAction("rdiv", math::Composer::reverseDivide());
 
     mathMenuAction->addAction("addi", ACTION_CLASS(AddInt));
     mathMenuAction->addAction("addf", ACTION_CLASS(AddFloat));
@@ -178,65 +277,6 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     mathMenuAction->addAction("id", ACTION_CLASS(StrId));
 
     menu.registerAction("math", mathAction);
-
-    menu.registerAction("amap", ACTION_CLASS(TestActionMap));
-
-    menu.registerAction("snt", ACTION_CLASS(MakeSentence));
-
-    menu.registerAction("rvrs", reverseSentence());
-    menu.registerAction("drvrs", doubleReverseSentence());
-
-    menu.registerAction("nothing", ACTION_CLASS(DoNothing));
-    menu.registerAction("multiprint", multiPrint());
-
-    menu.registerAction("yesno", yesNoPrint());
-
-    menu.registerAction("strgen", ACTION_CLASS(TestStringGen));
-
-    menu.registerAction("count", ACTION_CLASS(CountingAction));
-    menu.registerAction("rprint", recursivePrint());
-    menu.registerAction("ryn", recursiveYesNo());
-
-    menu.registerAction("pam", ACTION_CLASS(PersonArgToMapAction));
-    menu.registerAction("pp", ACTION_CLASS(PrintPersonAction));
-    menu.registerAction("cpp", compositePrintPerson());
-    menu.registerAction("hl", ACTION_CLASS(HowLongSince));
-    menu.registerAction("chl",compositeHowLong());
-
-    menu.registerAction("aprint", ACTION_CLASS(AsyncPrintAction));
-
-    menu.registerAction("chance", ACTION_CLASS(TestChance));
-
-    menu.registerAction("ccpr", TestingComposer::concatPrint());
-    menu.registerAction("fcpr", TestingComposer::forConcatPrint());
-    menu.registerAction("count_task", TestingComposer::countTask());
-    menu.registerAction("while_task", TestingComposer::whileTask());
-
-    menu.registerAction("if", ACTION_CLASS(IfAction));
-    menu.registerAction("while", ACTION_CLASS(WhileAction));
-    menu.registerAction("first", ACTION_CLASS(First));
-}
-
-const std::shared_ptr<cmd::Translator> ThisApp::createTranslator() const
-{
-    return std::shared_ptr<cmd::Translator>(new LineTranslator());
-}
-
-void ThisApp::registerRepresentaions()
-{
-    App::registerRepresentaions();
-    REGISTER_TURNIP_CLASS(Representation, HexIntRep);
-}
-
-const std::shared_ptr<TaskIdGenerator> ThisApp::createTaskIdGenenerator() const
-{
-    auto gen = std::make_shared<TaskIdIncGenerator>();
-    return gen;
-}
-
-std::string ThisApp::appName() const
-{
-    return std::string(TARGET_NAME);
 }
 
 ActionPtr ThisApp::recursiveYesNo()
@@ -386,40 +426,6 @@ ActionPtr ThisApp::multiPrint()
     return caAction;
 }
 
-ActionPtr ThisApp::reverseDivide()
-{
-    auto caRvrs = mkDynActionPtr(CompositeAction);
-
-    def::ActionDef actionDef;
-
-    const auto typeDef = def::TypeDef::createDoubleTypedef();
-
-    {
-        def::ArgDef argDef;
-        argDef.setType(typeDef);
-        argDef.setName("left number");
-        actionDef.addArgDef(argDef);
-    }
-
-    {
-        def::ArgDef argDef;
-        argDef.setType(typeDef);
-        argDef.setName("right number");
-        actionDef.addArgDef(argDef);
-    }
-
-    actionDef.setDescription("Reverse Divide");
-    actionDef.setResultRepresentation(mkRepPtr(DoubleRep));
-    caRvrs->setActionDef(actionDef);
-
-    //---
-
-    caRvrs->setAction(mkActionPtr(Divide));
-    caRvrs->addParams(ParamList({1, 0}));
-
-    return caRvrs;
-}
-
 ActionPtr ThisApp::doubleReverseSentence()
 {
     auto caRvrs = mkDynActionPtr(AsyncCompositeAction);
@@ -499,131 +505,4 @@ ActionPtr ThisApp::reverseSentence()
 
 
     return caRvrs;
-}
-
-ActionPtr ThisApp::sineOfDegrees()
-{
-    auto caSind = mkDynActionPtr(CompositeAction);
-
-    def::ActionDef actionDef;
-
-    const auto typeDef = def::TypeDef::createDoubleTypedef();
-
-    def::ArgDef argDef;
-    argDef.setType(typeDef);
-    argDef.setName("degrees");
-    actionDef.addArgDef(argDef);
-    actionDef.setDescription("Calculates the sine of a specified angle measured in degrees");
-
-    actionDef.setResultRepresentation(mkRepPtr(DoubleRep));
-
-    caSind->setActionDef(actionDef);
-
-    //---
-
-    // caSind->setSubstitutor(sbst);
-    caSind->setAction(mkActionPtr(SineOfRadians));
-    caSind->addParam(mkActionPtr(DegreesToRadians), ParamList({0}));
-
-    return caSind;
-}
-
-ActionPtr ThisApp::compositePrintPerson()
-{
-    auto caSind = mkDynActionPtr(CompositeAction);
-
-    ActionDef actionDef;
-
-    const auto stringTypeDef = TypeDef::createStringTypedef();
-    const auto intTypeDef = TypeDef::createIntTypedef();
-    const auto charTypeDef = TypeDef::createCharTypedef();
-
-    // defs:
-    {
-        ArgDef argDef;
-        argDef.setType(stringTypeDef);
-        argDef.setName("name");
-        argDef.setDesc("Person's Name");
-        actionDef.addArgDef(argDef);
-    }
-
-    {
-        ArgDef argDef;
-        argDef.setType(intTypeDef);
-        argDef.setName("year");
-        argDef.setDesc("Year of birth");
-        actionDef.addArgDef(argDef);
-    }
-
-    {
-        ArgDef argDef;
-        argDef.setType(charTypeDef); // TODO: constraint: 'm' or 'f'
-        argDef.setName("gender");
-        argDef.setDesc("Person's Gender");
-        actionDef.addArgDef(argDef);
-    }
-
-
-    actionDef.setDescription("Print Person");
-
-    caSind->setActionDef(actionDef);
-
-    // /defs
-
-    caSind->setAction(mkActionPtr(MapToArgsAction));
-    caSind->addParams(ParamList({mkActionPtr(PrintPersonAction),
-                                Parameter(mkActionPtr(PersonArgToMapAction), ParamList({0, 1, 2}))
-                                }));
-
-    return caSind;
-}
-
-ActionPtr ThisApp::compositeHowLong()
-{
-    auto caSind = mkDynActionPtr(CompositeAction);
-
-    ActionDef actionDef;
-
-    const auto stringTypeDef = TypeDef::createStringTypedef();
-    const auto intTypeDef = TypeDef::createIntTypedef();
-    const auto charTypeDef = TypeDef::createCharTypedef();
-
-    // defs:
-    {
-        ArgDef argDef;
-        argDef.setType(stringTypeDef);
-        argDef.setName("name");
-        argDef.setDesc("Person's Name");
-        actionDef.addArgDef(argDef);
-    }
-
-    {
-        ArgDef argDef;
-        argDef.setType(intTypeDef);
-        argDef.setName("year");
-        argDef.setDesc("Year of birth");
-        actionDef.addArgDef(argDef);
-    }
-
-    {
-        ArgDef argDef;
-        argDef.setType(charTypeDef); // TODO: constraint: 'm' or 'f'
-        argDef.setName("gender");
-        argDef.setDesc("Person's Gender");
-        actionDef.addArgDef(argDef);
-    }
-
-
-    actionDef.setDescription("Composite How Long Since");
-
-    caSind->setActionDef(actionDef);
-
-    // /defs
-
-    caSind->setAction(mkActionPtr(MapToArgsAction));
-    caSind->addParams(ParamList({mkActionPtr(HowLongSince),
-        Parameter(mkActionPtr(PersonArgToMapAction), ParamList({0, 1, 2}))
-    }));
-
-    return caSind;
 }

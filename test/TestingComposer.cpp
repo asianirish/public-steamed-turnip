@@ -1,11 +1,18 @@
 #include "TestingComposer.h"
 
+#include "lst/ArgsToListAction.h"
+#include "lst/ConcatListAction.h"
+// TODO: #include "lst/ListToArgsAction.h"
+
 #include "cmd/CommonComposer.h"
 #include "cmd/First.h"
 #include "cmd/ForAction.h"
 #include "cmd/CompositeAction.h"
+#include "cmd/HowLongSince.h"
+#include "cmd/MapToArgsAction.h"
+#include "cmd/PersonArgToMapAction.h"
 #include "cmd/PrintAction.h"
-
+#include "cmd/PrintPersonAction.h"
 #include "cmd/WhileAction.h"
 #include "cmd/def/ActionDef.h"
 
@@ -15,6 +22,7 @@
 using namespace turnip;
 using namespace cmd;
 using namespace math;
+using namespace lst;
 
 turnip::cmd::ActionPtr TestingComposer::concatPrint()
 {
@@ -44,6 +52,106 @@ turnip::cmd::ActionPtr TestingComposer::concatPrint()
     ca->addParam(mkActionPtr(Concat), ParamList({0, 1}));
 
     return ca;
+}
+
+ActionPtr TestingComposer::map2HowLong()
+{
+    auto caSind = mkDynActionPtr(CompositeAction);
+
+    ActionDef actionDef;
+
+    const auto stringTypeDef = TypeDef::createStringTypedef();
+    const auto intTypeDef = TypeDef::createIntTypedef();
+    const auto charTypeDef = TypeDef::createCharTypedef();
+
+    // defs:
+    {
+        ArgDef argDef;
+        argDef.setType(stringTypeDef);
+        argDef.setName("name");
+        argDef.setDesc("Person's Name");
+        actionDef.addArgDef(argDef);
+    }
+
+    {
+        ArgDef argDef;
+        argDef.setType(intTypeDef);
+        argDef.setName("year");
+        argDef.setDesc("Year of birth");
+        actionDef.addArgDef(argDef);
+    }
+
+    {
+        ArgDef argDef;
+        argDef.setType(charTypeDef); // TODO: constraint: 'm' or 'f'
+        argDef.setName("gender");
+        argDef.setDesc("Person's Gender");
+        actionDef.addArgDef(argDef);
+    }
+
+
+    actionDef.setDescription("Composite How Long Since");
+
+    caSind->setActionDef(actionDef);
+
+    // /defs
+
+    caSind->setAction(mkActionPtr(MapToArgsAction));
+    caSind->addParams(ParamList({mkActionPtr(HowLongSince),
+        Parameter(mkActionPtr(PersonArgToMapAction), ParamList({0, 1, 2}))
+    }));
+
+    return caSind;
+}
+
+ActionPtr TestingComposer::printPersonMap()
+{
+    auto caSind = mkDynActionPtr(CompositeAction);
+
+    ActionDef actionDef;
+
+    const auto stringTypeDef = TypeDef::createStringTypedef();
+    const auto intTypeDef = TypeDef::createIntTypedef();
+    const auto charTypeDef = TypeDef::createCharTypedef();
+
+    // defs:
+    {
+        ArgDef argDef;
+        argDef.setType(stringTypeDef);
+        argDef.setName("name");
+        argDef.setDesc("Person's Name");
+        actionDef.addArgDef(argDef);
+    }
+
+    {
+        ArgDef argDef;
+        argDef.setType(intTypeDef);
+        argDef.setName("year");
+        argDef.setDesc("Year of birth");
+        actionDef.addArgDef(argDef);
+    }
+
+    {
+        ArgDef argDef;
+        argDef.setType(charTypeDef); // TODO: constraint: 'm' or 'f'
+        argDef.setName("gender");
+        argDef.setDesc("Person's Gender");
+        actionDef.addArgDef(argDef);
+    }
+
+
+    actionDef.setDescription("Print Person");
+
+    caSind->setActionDef(actionDef);
+
+    // /defs
+
+    caSind->setAction(mkActionPtr(MapToArgsAction));
+    caSind->addParams(ParamList({mkActionPtr(PrintPersonAction),
+        Parameter(mkActionPtr(PersonArgToMapAction), ParamList({0, 1, 2}))
+    }));
+
+    return caSind;
 }
 
 ActionPtr TestingComposer::forConcatPrint()

@@ -93,6 +93,11 @@ bool Value::isMap() const
     return std::holds_alternative<VariantMap>(data_);
 }
 
+bool Value::isList() const
+{
+    return std::holds_alternative<VariantList>(data_);
+}
+
 bool Value::isString() const
 {
     return std::holds_alternative<std::string>(data_);
@@ -323,6 +328,20 @@ VariantMap Value::toMap() const
 Value::operator VariantMap() const
 {
     return toMap();
+}
+
+VariantList Value::toList() const
+{
+    if (isList()) {
+        return std::get<VariantList>(data_);
+    }
+
+    return {};
+}
+
+Value::operator VariantList() const
+{
+    return toList();
 }
 
 ActionPtr Value::toActionPtr() const
