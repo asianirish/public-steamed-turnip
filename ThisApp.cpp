@@ -1,6 +1,7 @@
 #include "ThisApp.h"
 
 #include "lst/Batch.h"
+#include "lst/BatchCount.h"
 #include "lst/Composer.h"
 
 #include "lst/ArgsToListAction.h"
@@ -147,6 +148,7 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, AtAction);
     REGISTER_TURNIP_CLASS(Action, SizeAction);
     REGISTER_TURNIP_CLASS(Action, Batch);
+    REGISTER_TURNIP_CLASS(Action, BatchCount);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)

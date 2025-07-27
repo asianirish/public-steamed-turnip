@@ -96,6 +96,7 @@ SOURCES += \
         lst/ArgsToListAction.cpp \
         lst/AtAction.cpp \
         lst/Batch.cpp \
+        lst/BatchCount.cpp \
         lst/Composer.cpp \
         lst/ConcatListAction.cpp \
         lst/ListToArgsAction.cpp \
@@ -210,6 +211,7 @@ HEADERS += \
     lst/ArgsToListAction.h \
     lst/AtAction.h \
     lst/Batch.h \
+    lst/BatchCount.h \
     lst/Composer.h \
     lst/ConcatListAction.h \
     lst/ListToArgsAction.h \
