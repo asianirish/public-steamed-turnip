@@ -1,5 +1,6 @@
 #include "ThisApp.h"
 
+#include "cmd/BatchNumber.h"
 #include "lst/Batch.h"
 #include "lst/BatchCount.h"
 #include "lst/Composer.h"
@@ -149,6 +150,7 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, SizeAction);
     REGISTER_TURNIP_CLASS(Action, Batch);
     REGISTER_TURNIP_CLASS(Action, BatchCount);
+    REGISTER_TURNIP_CLASS(Action, BatchNumber);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
@@ -191,6 +193,8 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("first", ACTION_CLASS(First));
 
     menu.registerAction("args2list", ACTION_CLASS(ArgsToListAction));
+
+    menu.registerAction("batchnum", ACTION_CLASS(BatchNumber));
 
     buildMathSubMenu(menu);
     buildTestingSubMenu(menu);
