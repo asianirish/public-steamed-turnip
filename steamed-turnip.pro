@@ -17,6 +17,7 @@ DEFINES += DEBUG_ASYNC_ACTIONS
 
 SOURCES += \
         App.cpp \
+        IApp.cpp \
         ThisApp.cpp \
         cmd/Action.cpp \
         cmd/Alias.cpp \
@@ -124,6 +125,7 @@ SOURCES += \
 
 HEADERS += \
     App.h \
+    IApp.h \
     ThisApp.h \
     cmd/Action.h \
     cmd/Alias.h \

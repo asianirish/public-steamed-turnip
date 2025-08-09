@@ -7,23 +7,29 @@ namespace cmd {
 
 Menu::Menu()
 {
+    taskManager_ = new TaskManager();
     // TODO: helpAction_->setTaskManager(taskManager_);
 
     {
         auto f = std::bind(&Menu::onTaskComplete, this, std::placeholders::_1);
-        taskManager_.setCallback(f);
+        taskManager_->setCallback(f);
     }
 
     {
         auto f = std::bind(&Menu::onTaskError, this, std::placeholders::_1);
-        taskManager_.setErrorCallback(f);
+        taskManager_->setErrorCallback(f);
     }
 
     {
         auto f = std::bind(&Menu::onTaskStart, this, std::placeholders::_1);
-        taskManager_.setStartCallback(f);
+        taskManager_->setStartCallback(f);
     }
 
+}
+
+Menu::~Menu()
+{
+    delete taskManager_;
 }
 
 ActionPtr Menu::registerAction(const std::string &commandName, const Value &actionInfo)
@@ -87,7 +93,7 @@ void Menu::executeAction(const std::string &command, const InputArgList &args)
     auto a = findAction(command, &ok);
 
     if (ok) {
-        taskManager_.execute(a, args);
+        taskManager_->execute(a, args);
     }
 }
 
@@ -97,7 +103,7 @@ TaskPtr Menu::executeAction(const std::string &command, const ArgList &args)
     auto a = findAction(command, &ok);
 
     if (ok) {
-        return taskManager_.execute(a, args);
+        return taskManager_->execute(a, args);
     }
 
     return {};
@@ -113,7 +119,7 @@ void Menu::setTranslator(const std::shared_ptr<Translator> &newTranslator)
     translator_ = newTranslator;
 }
 
-TaskManager Menu::taskManager() const
+TaskManager *Menu::taskManager() const
 {
     return taskManager_;
 }

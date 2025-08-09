@@ -24,6 +24,8 @@ public:
 
     Menu();
 
+    virtual ~Menu();
+
     ActionPtr registerAction(const std::string &commandName, const Value &actionInfo);
 
     void registerHelpAction();
@@ -39,7 +41,7 @@ public:
     std::shared_ptr<Translator> translator() const;
     void setTranslator(const std::shared_ptr<Translator> &newTranslator);
 
-    TaskManager taskManager() const;
+    TaskManager *taskManager() const;
 
     void setResultCallback(const ResultCallback &newResultCallback);
 
@@ -59,7 +61,7 @@ private:
 
     std::map<std::string, ActionPtr> actions_;
 
-    TaskManager taskManager_;
+    TaskManager *taskManager_ {nullptr};
 
     std::shared_ptr<Translator> translator_;
 

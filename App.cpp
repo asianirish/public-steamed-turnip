@@ -104,4 +104,9 @@ cmd::Menu *App::mainMenu()
     return &mainMenu_;
 }
 
+cmd::TaskManager *App::taskManager() const
+{
+    return mainMenu_.taskManager();
+}
+
 } // namespace turnip
