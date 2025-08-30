@@ -17,19 +17,24 @@ void AsyncAction::onComplete(const Value &reslutValue, const TaskId &taskId)
 
         // Notify that the action has concluded
         Result result(taskId, reslutValue, rep);
-        notify(result);
+
 #ifdef DEBUG_ASYNC_ACTIONS
         std::cout << "emitting result value " << reslutValue.toString() << " " << taskId << std::endl;
 #endif
         emitComplete(reslutValue, taskId);
+
+        // Calling this function results in the deletion of `this`, so it should be called only after completing any other actions.
+        notify(result);
     } else {
         auto error = err::Error::createTaskError(taskId, "Unkown task error");
 
 #ifdef DEBUG_ASYNC_ACTIONS
         std::cout << "emitting error" << std::endl;
 #endif
-        notifyError(error);
         // TODO: emitError(error);
+
+        // Calling this function results in the deletion of `this`, so it should be called only after completing any other actions.
+        notifyError(error);
     }
 }
 
