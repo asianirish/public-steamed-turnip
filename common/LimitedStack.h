@@ -40,6 +40,10 @@ public:
         return stack_.empty();
     }
 
+    bool clear() {
+        return stack_.clear();
+    }
+
     size_t size() const {
         return stack_.size();
     }
