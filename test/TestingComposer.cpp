@@ -1,5 +1,6 @@
 #include "TestingComposer.h"
 
+#include "cmd/DoNothing.h"
 #include "lst/ArgsToListAction.h"
 #include "lst/ConcatListAction.h"
 // TODO: #include "lst/ListToArgsAction.h"
@@ -246,6 +247,27 @@ ActionPtr TestingComposer::whileTask()
     auto lessParam = Parameter(CommonComposer::lessOrEqual(), ParamList({0_val, 6_val}));
 
     ca->addParams(ParamList({printParam, lessParam, 0_val, 0_val}));
+
+    return ca;
+}
+
+
+ActionPtr TestingComposer::multi()
+{
+    auto ca = mkDynActionPtr(CompositeAction);
+
+    auto numberArgType = def::TypeDef::createIntTypedef();
+
+    def::ActionDef actionDef;
+
+    actionDef.setDescription("Multi Nothing");
+    ca->setActionDef(actionDef);
+
+    ca->setAction(mkActionPtr(ForAction));
+
+    auto verParam = Parameter(mkActionPtr(DoNothing), ParamList());
+
+    ca->addParams(ParamList({10_val, 0_val, Value(-1), verParam}));
 
     return ca;
 }

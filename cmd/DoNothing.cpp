@@ -34,6 +34,12 @@ Value DoNothing::actImpl(const ArgList &args, err::Error &error)
 {
     (void) error;
 
+    std::cout << "DO NOTHING\n";
+
+    if (!args.size()) {
+        return false;
+    }
+
     if (args.at(0).toString().empty()) {
         return false;
     }

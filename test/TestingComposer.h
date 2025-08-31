@@ -19,6 +19,8 @@ public:
 
     static turnip::cmd::ActionPtr map2HowLong();
 
+    static turnip::cmd::ActionPtr multi();
+
 private:
     TestingComposer();
 };
