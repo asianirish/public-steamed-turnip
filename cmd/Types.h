@@ -80,6 +80,13 @@ using StateId = TaskId;
 
 } // namespace loop
 
+namespace def {
+
+class Constraint;
+using ConPtr = std::shared_ptr<Constraint>;
+
+} // namespace def
+
 } // namespace cmd
 } // namespace turnip
 

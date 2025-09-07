@@ -64,7 +64,11 @@ SOURCES += \
         cmd/WhileAction.cpp \
         cmd/def/ActionDef.cpp \
         cmd/def/ArgDef.cpp \
+        cmd/def/Constraint.cpp \
+        cmd/def/IntRangeConstraint.cpp \
+        cmd/def/ListConstraint.cpp \
         cmd/def/MetaType.cpp \
+        cmd/def/SetConstraint.cpp \
         cmd/def/TypeDef.cpp \
         cmd/err/AdditionalInfo.cpp \
         cmd/err/ArgumentConversionInfo.cpp \
@@ -176,7 +180,11 @@ HEADERS += \
     cmd/WhileAction.h \
     cmd/def/ActionDef.h \
     cmd/def/ArgDef.h \
+    cmd/def/Constraint.h \
+    cmd/def/IntRangeConstraint.h \
+    cmd/def/ListConstraint.h \
     cmd/def/MetaType.h \
+    cmd/def/SetConstraint.h \
     cmd/def/TypeDef.h \
     cmd/err/AdditionalInfo.h \
     cmd/err/ArgumentConversionInfo.h \

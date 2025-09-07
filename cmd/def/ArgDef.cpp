@@ -107,6 +107,16 @@ MetaType ArgDef::outputMetaType() const
     return type().outputMetaType();
 }
 
+ConPtr ArgDef::constraint() const
+{
+    return constraint_;
+}
+
+void ArgDef::setConstraint(const ConPtr &newConstraint)
+{
+    constraint_ = newConstraint;
+}
+
 } // namespace def
 } // namespace cmd
 } // namespace turnip

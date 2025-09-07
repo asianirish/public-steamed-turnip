@@ -37,6 +37,9 @@ public:
     MetaType inputMetaType() const;
     MetaType outputMetaType() const;
 
+    ConPtr constraint() const;
+    void setConstraint(const ConPtr &newConstraint);
+
 private:
     TypeDef type_;
     std::string name_;
@@ -45,6 +48,8 @@ private:
     Value defaultValue_;
 
     bool mustBeCalculated_ {true};
+
+    ConPtr constraint_;
 };
 
 } // namespace def
