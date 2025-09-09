@@ -175,17 +175,6 @@ Task::Status Task::status() const
 void Task::executeAction()
 {
     if (argManager_.execArgs(argInfos())) {
-
-        if (argErrorCallback_) {
-            auto error = turnip::cmd::err::Error::createCustomError("Argument error");
-            error.maybeSetTaskId(taskId_);
-
-            // TODO: set error info
-
-            // TODO: connect
-            argErrorCallback_(error);
-        }
-
         return;
     }
 
@@ -238,8 +227,16 @@ void Task::onArgResults(const ArgResults &argResults)
     for (const auto &argInfo : updatedArgInfos) {
         auto constraint = argInfo.argDef().constraint();
 
-        if (!constraint->isSatisfied(argInfo.value())) {
-            // TODO: errorCallback
+        if (constraint && !constraint->isSatisfied(argInfo.value())) {
+            if (argErrorCallback_) {
+                auto error = turnip::cmd::err::Error::createCustomError("Argument error");
+                error.maybeSetTaskId(taskId_);
+
+                // TODO: set error info
+
+                // TODO: connect
+                argErrorCallback_(error);
+            }
             return;
         }
 

@@ -1,5 +1,7 @@
 #include "PrintAction.h"
 
+#include "cmd/def/AlwaysForbidden.h"
+
 #include <iostream>
 #include <unistd.h>
 
@@ -19,6 +21,10 @@ def::ActionDef PrintAction::actionDef() const
     const auto typeDef = TypeDef::createStringTypedef();
     ArgDef argDef;
     argDef.setType(typeDef);
+
+    ConPtr con = ConPtr(new def::AlwaysForbidden());
+    argDef.setConstraint(con);
+
     actionDef.addArgDef(argDef);
 
     actionDef.setDescription("Outputs the specified string");
