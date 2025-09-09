@@ -108,18 +108,45 @@ private:
     friend std::ostream& operator<<(std::ostream& os, const Value& value);
 };
 
+inline bool operator==(const Value& lhs, const Value& rhs) {
+    return std::visit([](const auto& left, const auto& right) -> bool {
+        using LeftType = std::decay_t<decltype(left)>;
+        using RightType = std::decay_t<decltype(right)>;
+        if constexpr (std::is_same_v<LeftType, RightType>) {
+            return left == right;
+        } else {
+            return false;  // Different types cannot be equal
+        }
+    }, lhs.data(), rhs.data());
+}
+
+// TODO: ActionPtr and TaskPtr == operators
+
+inline bool operator<(const Value& lhs, const Value& rhs) {
+    return std::visit([](const auto& left, const auto& right) -> bool {
+        using LeftType = std::decay_t<decltype(left)>;
+        using RightType = std::decay_t<decltype(right)>;
+        if constexpr (std::is_same_v<LeftType, RightType>) {
+            return left < right;
+        } else {
+            // TODO: add rules for different types
+            return false;  // Different types cannot be compared
+        }
+    }, lhs.data(), rhs.data());
+}
+
 inline std::ostream& operator<<(std::ostream& os, const Value& value) {
     std::string stringValue = value;
     os << stringValue;
     return os;
 }
 
-inline Value operator"" _val(unsigned long long number) {
+inline Value operator""_val(unsigned long long number) {
     return Value(static_cast<int64_t>(number));
 }
 
 
-inline Value operator"" _val(long double number) {
+inline Value operator""_val(long double number) {
     return Value(static_cast<double>(number));
 }
 

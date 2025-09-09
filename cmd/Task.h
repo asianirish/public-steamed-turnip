@@ -56,6 +56,9 @@ public:
 
     VariantMap toMap() const;
 
+    ErrorCallback argErrorCallback() const;
+    void setArgErrorCallback(const ErrorCallback &newArgErrorCallback);
+
 private:
     ActionPtr actionPtr_;
     ArgList argList_;
@@ -70,6 +73,8 @@ private:
 
     Callback subTaskCallback_; // Member to hold the callback function
     ErrorCallback errorSubTaskCallback_;
+
+    ErrorCallback argErrorCallback_;
 
     ArgManager argManager_;
 

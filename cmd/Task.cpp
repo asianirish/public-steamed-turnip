@@ -3,6 +3,7 @@
 #include "cmd/SyncAction.h"
 #include "cmd/TaskManager.h"
 #include "cmd/ArgInfo.h"
+#include "cmd/def/Constraint.h"
 
 #include <thread>
 
@@ -156,6 +157,16 @@ VariantMap Task::toMap() const
     return mp;
 }
 
+Task::ErrorCallback Task::argErrorCallback() const
+{
+    return argErrorCallback_;
+}
+
+void Task::setArgErrorCallback(const ErrorCallback &newArgErrorCallback)
+{
+    argErrorCallback_ = newArgErrorCallback;
+}
+
 Task::Status Task::status() const
 {
     return status_;
@@ -164,6 +175,17 @@ Task::Status Task::status() const
 void Task::executeAction()
 {
     if (argManager_.execArgs(argInfos())) {
+
+        if (argErrorCallback_) {
+            auto error = turnip::cmd::err::Error::createCustomError("Argument error");
+            error.maybeSetTaskId(taskId_);
+
+            // TODO: set error info
+
+            // TODO: connect
+            argErrorCallback_(error);
+        }
+
         return;
     }
 
@@ -209,6 +231,18 @@ void Task::onArgResults(const ArgResults &argResults)
 {
     for (const auto &pr : argResults) {
         argList_[pr.first] = pr.second;
+    }
+
+    auto updatedArgInfos = argInfos();
+
+    for (const auto &argInfo : updatedArgInfos) {
+        auto constraint = argInfo.argDef().constraint();
+
+        if (!constraint->isSatisfied(argInfo.value())) {
+            // TODO: errorCallback
+            return;
+        }
+
     }
 
     executeAction();

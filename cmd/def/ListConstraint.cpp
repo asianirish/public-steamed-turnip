@@ -14,10 +14,7 @@ ListConstraint::ListConstraint(std::initializer_list<Value> acceptableValues)
     : acceptableValues_(acceptableValues) {}
 
 bool ListConstraint::isSatisfied(const Value &value) const {
-    (void) value;
-    return false;
-    // TODO: To make this class work properly, you need to implement the `==` operator for the `Value` class.
-    // return std::find(acceptableValues_.begin(), acceptableValues_.end(), value) != acceptableValues_.end();
+    return std::find(acceptableValues_.begin(), acceptableValues_.end(), value) != acceptableValues_.end();
 }
 
 std::string ListConstraint::description() const {

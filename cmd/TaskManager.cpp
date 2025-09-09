@@ -189,6 +189,11 @@ void TaskManager::execute(const TaskPtr &taskPtr, ExecType execType)
         actionPtr->setErrorCallback(f);
     }
 
+    {
+        auto f = std::bind(&TaskManager::onError, this, std::placeholders::_1);
+        taskPtr->setArgErrorCallback(f);
+    }
+
     if (startCallback_) {
         startCallback_(taskId);
     }
