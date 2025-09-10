@@ -178,7 +178,7 @@ void Task::executeAction()
         return;
     }
 
-    actionPtr_->act(taskId_, argList_);
+    onArgResultsConverted();
 }
 
 void Task::onSubTaskComplete(const Result &result)
@@ -222,6 +222,11 @@ void Task::onArgResults(const ArgResults &argResults)
         argList_[pr.first] = pr.second;
     }
 
+    onArgResultsConverted();
+}
+
+void Task::onArgResultsConverted()
+{
     auto updatedArgInfos = argInfos();
 
     for (const auto &argInfo : updatedArgInfos) {
@@ -242,7 +247,16 @@ void Task::onArgResults(const ArgResults &argResults)
 
     }
 
-    executeAction();
+#ifdef DEBUG_ACTION_ARGS
+    std::cout << "EXECUTING ACTION: " << actionPtr_->registeredClassName() << " taskId: " << taskId_ << std::endl;
+    std::cout << "ARGS: ";
+    for (const auto &arg : argList_) {
+        std::cout << arg << ", ";
+    }
+    std::cout << std::endl;
+#endif
+
+    actionPtr_->act(taskId_, argList_);
 }
 
 ArgInfoList Task::argInfos() const

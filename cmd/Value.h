@@ -122,6 +122,10 @@ inline bool operator==(const Value& lhs, const Value& rhs) {
 
 // TODO: ActionPtr and TaskPtr == operators
 
+inline bool operator!=(const Value& lhs, const Value& rhs) {
+    return !(lhs == rhs);
+}
+
 inline bool operator<(const Value& lhs, const Value& rhs) {
     return std::visit([](const auto& left, const auto& right) -> bool {
         using LeftType = std::decay_t<decltype(left)>;
