@@ -15,7 +15,7 @@ bool AlwaysForbidden::isSatisfied(const Value &value) const
 
 std::string AlwaysForbidden::description() const
 {
-    return "No Constraint";
+    return "Always Forbidden";
 }
 
 } // namespace def

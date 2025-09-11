@@ -1,4 +1,5 @@
 #include "Divide.h"
+#include "cmd/def/NotEqConstrain.h"
 
 namespace turnip {
 namespace cmd {
@@ -25,6 +26,11 @@ def::ActionDef Divide::actionDef() const
         ArgDef argDef;
         argDef.setType(typeDef);
         argDef.setName("right number");
+
+        auto con = mkPtr<NotEqConstrain>();
+        con->setNotEqValue(0.0);
+        argDef.setConstraint(con);
+
         actionDef.addArgDef(argDef);
     }
 

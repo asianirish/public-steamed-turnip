@@ -229,12 +229,16 @@ void Task::onArgResultsConverted()
 {
     auto updatedArgInfos = argInfos();
 
+    int i = 0;
     for (const auto &argInfo : updatedArgInfos) {
         auto constraint = argInfo.argDef().constraint();
 
         if (constraint && !constraint->isSatisfied(argInfo.value())) {
             if (argErrorCallback_) {
-                auto error = turnip::cmd::err::Error::createCustomError("Argument error");
+                auto error = turnip::cmd::err::Error::createCustomError("Argument #" + std::to_string(i)
+                                                                        + (argInfo.argDef().name().empty()?"":(" (" + argInfo.argDef().name() + ")"))
+                                                                        + " error\n"
+                                                                        + constraint->description());
                 error.maybeSetTaskId(taskId_);
 
                 // TODO: set error info
@@ -244,7 +248,7 @@ void Task::onArgResultsConverted()
             }
             return;
         }
-
+        ++i;
     }
 
 #ifdef DEBUG_ACTION_ARGS

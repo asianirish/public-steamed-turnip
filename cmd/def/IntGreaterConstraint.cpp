@@ -19,7 +19,7 @@ bool IntGreaterConstraint::isSatisfied(const Value &value) const
 
 std::string IntGreaterConstraint::description() const
 {
-    return "Greater Then";
+    return "Greater Then " + std::to_string(greaterThenValue_);;
 }
 
 int64_t IntGreaterConstraint::greaterThenValue() const

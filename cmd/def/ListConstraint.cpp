@@ -18,7 +18,19 @@ bool ListConstraint::isSatisfied(const Value &value) const {
 }
 
 std::string ListConstraint::description() const {
-    return "Value must be one of the predefined acceptable values in the list";
+    std::string desc("Value must be one of the predefined acceptable values in the list: [");
+
+    int i = 0;
+    for (const auto &value : acceptableValues_) {
+        if (i) {
+            desc += ", ";
+        }
+        desc += value.toString();
+        ++i;
+    }
+    desc += "]";
+
+    return desc;
 }
 
 } // namespace def

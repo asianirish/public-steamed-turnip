@@ -19,7 +19,7 @@ bool IntLessConstraint::isSatisfied(const Value &value) const
 
 std::string IntLessConstraint::description() const
 {
-    return "Less Then";
+    return "Less Then " + std::to_string(lessThenValue_);
 }
 
 int64_t IntLessConstraint::lessThenValue() const

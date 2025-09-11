@@ -10,9 +10,9 @@ TARGET = turnip
 
 DEFINES += TARGET_NAME=\\\"$$TARGET\\\"
 
-DEFINES += DEBUG_ACTION_ARGS
+# DEFINES += DEBUG_ACTION_ARGS
 # DEFINES += DEBUG_ACTION_TASKS
-DEFINES += DEBUG_ASYNC_ACTIONS
+# DEFINES += DEBUG_ASYNC_ACTIONS
 # DEFINES += DEBUG_MULPIPLE_PRINT
 
 SOURCES += \
@@ -64,6 +64,7 @@ SOURCES += \
         cmd/WhileAction.cpp \
         cmd/def/ActionDef.cpp \
         cmd/def/AlwaysForbidden.cpp \
+        cmd/def/AndConstraint.cpp \
         cmd/def/ArgDef.cpp \
         cmd/def/BlackListConstraint.cpp \
         cmd/def/Constraint.cpp \
@@ -72,6 +73,7 @@ SOURCES += \
         cmd/def/IntRangeConstraint.cpp \
         cmd/def/ListConstraint.cpp \
         cmd/def/MetaType.cpp \
+        cmd/def/NotConstraint.cpp \
         cmd/def/NotEqConstrain.cpp \
         cmd/def/SetConstraint.cpp \
         cmd/def/TypeDef.cpp \
@@ -185,6 +187,7 @@ HEADERS += \
     cmd/WhileAction.h \
     cmd/def/ActionDef.h \
     cmd/def/AlwaysForbidden.h \
+    cmd/def/AndConstraint.h \
     cmd/def/ArgDef.h \
     cmd/def/BlackListConstraint.h \
     cmd/def/Constraint.h \
@@ -193,6 +196,7 @@ HEADERS += \
     cmd/def/IntRangeConstraint.h \
     cmd/def/ListConstraint.h \
     cmd/def/MetaType.h \
+    cmd/def/NotConstraint.h \
     cmd/def/NotEqConstrain.h \
     cmd/def/SetConstraint.h \
     cmd/def/TypeDef.h \

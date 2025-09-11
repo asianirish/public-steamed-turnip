@@ -13,7 +13,7 @@ bool NotEqConstrain::isSatisfied(const Value &value) const
 
 std::string NotEqConstrain::description() const
 {
-    return "Not Equal";
+    return "Not Equal " + notEqValue_.toString();
 }
 
 Value NotEqConstrain::notEqValue() const
