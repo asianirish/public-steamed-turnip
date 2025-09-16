@@ -59,6 +59,17 @@ def::ActionDef ForAction::actionDef() const
         actionDef.addArgDef(argDef);
     }
 
+    const auto boolDef = TypeDef::createBoolTypedef();
+    {
+        ArgDef argDef;
+        argDef.setType(intDef);
+        argDef.setName("isInclusive");
+        argDef.setDesc("Is Inclusive");
+        argDef.setDefaultValue(false);
+        actionDef.addArgDef(argDef);
+    }
+
+
     return actionDef;
 }
 
@@ -68,9 +79,12 @@ void ForAction::emitRequest(const TaskId &taskId, const ArgList &args)
     auto counter = args.at(1).toInt();
     auto counterIndex = args.at(2).toInt();
     auto task = args.at(3).toTaskPtr();
+    auto isInclusive = args.at(4).toBool();
 
     auto state = mkPtr<loop::IncState>(&stateManager_, taskId, task->actionPtr(), task->argList());
     state->setCounterArgumentIndex(counterIndex);
+    std::cout << "SET INCLUSIVE:" << isInclusive << std::endl;
+    state->setIsInclusive(isInclusive);
 
     {
         auto f = std::bind(&ForAction::onResult, this, std::placeholders::_1);

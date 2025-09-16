@@ -267,7 +267,7 @@ ActionPtr TestingComposer::multi()
 
     auto verParam = Parameter(mkActionPtr(DoNothing), ParamList());
 
-    ca->addParams(ParamList({10_val, 0_val, Value(-1), verParam}));
+    ca->addParams(ParamList({10_val, 0_val, Value(-1), verParam, Value(true)}));
 
     return ca;
 }

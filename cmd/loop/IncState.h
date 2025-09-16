@@ -23,6 +23,9 @@ public:
     int counterArgumentIndex() const;
     void setCounterArgumentIndex(int newCounterArgumentIndex);
 
+    bool isInclusive() const;
+    void setIsInclusive(bool newIsInclusive);
+
 protected:
     void handleResult(const Value resultValue) override; // do nothing in this implementation
     bool evaluateSync() const override;
@@ -36,6 +39,8 @@ protected:
     int initialCounter_ {0};
 
     int counterArgumentIndex_ {INVALID_COUNTER_ARGUMENT_INDEX};
+
+    bool isInclusive_ {false};
 };
 
 } // namespace loop

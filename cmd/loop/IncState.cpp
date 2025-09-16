@@ -28,7 +28,7 @@ void IncState::setUpTo(int newUpTo)
 
 bool IncState::evaluateSync() const
 {
-    return (counter_ < upTo_);
+    return isInclusive_ ? (counter_ <= upTo_) : (counter_ < upTo_);
 }
 
 void IncState::modifyArgData(ArgList &newArgData)
@@ -47,6 +47,16 @@ void IncState::nextState()
 Value IncState::accumulated() const
 {
     return initialCounter_;
+}
+
+bool IncState::isInclusive() const
+{
+    return isInclusive_;
+}
+
+void IncState::setIsInclusive(bool newIsInclusive)
+{
+    isInclusive_ = newIsInclusive;
 }
 
 int IncState::counterArgumentIndex() const
