@@ -11,6 +11,7 @@ class ArgManager
 public:
     // Define a type for the callback function
     using ArgResultsCallback = std::function<void(const ArgResults&)>;
+    using ArgErrorResultCallback = std::function<void(const cmd::err::Error &)>;
 
     ArgManager();
 
@@ -21,12 +22,14 @@ public:
 
     void setArgResultsCallback(const ArgResultsCallback &newArgResultsCallback);
 
+    void setArgErrorResultCallback(const ArgErrorResultCallback &newArgErrorResultCallback);
+
 private:
     TaskManager taskManager_;
     std::map<TaskId, std::size_t> taskToArgNum_;
     ArgResults calculatedArgs_;
     ArgResultsCallback argResultsCallback_;
-
+    ArgErrorResultCallback argErrorResultCallback_;
 };
 
 } // namespace cmd

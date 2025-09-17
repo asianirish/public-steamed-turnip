@@ -83,13 +83,21 @@ void ArgManager::onArgResult(const Result &result)
 
 void ArgManager::onArgError(const err::Error &error)
 {
-    // TODO: implement
     std::cout << "ARG ERROR: " << error.description() << std::endl;
+
+    if (argErrorResultCallback_) {
+        argErrorResultCallback_(error);
+    }
 }
 
 void ArgManager::setArgResultsCallback(const ArgResultsCallback &newArgResultsCallback)
 {
     argResultsCallback_ = newArgResultsCallback;
+}
+
+void ArgManager::setArgErrorResultCallback(const ArgErrorResultCallback &newArgErrorResultCallback)
+{
+    argErrorResultCallback_ = newArgErrorResultCallback;
 }
 
 } // namespace cmd

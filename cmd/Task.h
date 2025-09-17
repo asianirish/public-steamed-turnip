@@ -85,6 +85,8 @@ private:
     void onArgResults(const ArgResults &argResults);
     void onArgResultsConverted();
 
+    void onArgError(const err::Error &error);
+
     ArgInfoList argInfos() const;
 };
 

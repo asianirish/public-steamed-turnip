@@ -30,7 +30,10 @@ Task::Task(ActionPtr actionPtr, const ArgList &argList)
         argManager_.setArgResultsCallback(f);
     }
 
-    // TODO: connect the error callback
+    {
+        auto f = std::bind(&Task::onArgError, this, std::placeholders::_1);
+        argManager_.setArgErrorResultCallback(f);
+    }
 }
 
 ActionPtr Task::actionPtr() const
@@ -261,6 +264,13 @@ void Task::onArgResultsConverted()
 #endif
 
     actionPtr_->act(taskId_, argList_);
+}
+
+void Task::onArgError(const err::Error &error)
+{
+    if (argErrorCallback_) {
+        argErrorCallback_(error);
+    }
 }
 
 ArgInfoList Task::argInfos() const
