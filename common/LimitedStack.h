@@ -68,6 +68,16 @@ public:
         return value;             // Return the removed element
     }
 
+    // Remove and return the first element
+    T takeFront() {
+        if (stack_.empty()) {
+            throw std::out_of_range("Stack is empty");  // Throw an exception if the stack is empty
+        }
+        T value = stack_.front();  // Get the first element
+        stack_.pop_front();        // Remove the first element
+        return value;             // Return the removed element
+    }
+
     // Provide begin iterator for range-based for loop
     typename std::deque<T>::iterator begin() {
         return stack_.begin();
