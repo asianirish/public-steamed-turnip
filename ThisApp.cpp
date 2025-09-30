@@ -317,7 +317,7 @@ ActionPtr ThisApp::recursiveYesNo()
     caAction->addParams(ParamList({
         {
             eqAlias, ParamList ({
-                Parameter{Value(1337)}, Parameter({incAlias, ParamList({0})})
+                Parameter{Value(1337)}, Parameter({incAlias, ParamList({0_pos})})
             })
         },
         {printAlias, {{Value("yes")}}},
@@ -356,7 +356,7 @@ ActionPtr ThisApp::recursivePrint()
     auto printAlias = context->registerValue(mkActionPtr(CountingAction), "print");
 
     caAction->setAction(selfAlias);
-    caAction->addParam(printAlias, ParamList({0}));
+    caAction->addParam(printAlias, ParamList({0_pos}));
 
     auto cntxAction = mkDynActionPtr(ContextualAction);
     cntxAction->setCompositeAction(caAction);
@@ -388,7 +388,7 @@ ActionPtr ThisApp::yesNoPrint()
     auto printAlias = context->registerValue(mkActionPtr(CountingAction), "print");
 
     caAction->setAction(mkActionPtr(IfAction));
-    caAction->addParams(ParamList({0,
+    caAction->addParams(ParamList({0_pos,
                                 {printAlias, {{Value("yes")}}},
                                 {printAlias, {{Value("no")}}}
                                   }
@@ -429,7 +429,7 @@ ActionPtr ThisApp::multiPrint()
     caAction->setAction(doNothingAlias);
 
     for (int i = 0; i < 4; ++i) {
-        caAction->addParam(printAlias, ParamList({i}));
+        caAction->addParam(printAlias, ParamList({Position(i)}));
     }
 
     return caAction;
@@ -470,7 +470,7 @@ ActionPtr ThisApp::doubleReverseSentence()
     //---
 
     caRvrs->setAction(reverseSentence());
-    caRvrs->addParams(ParamList({2, 1, 0}));
+    caRvrs->addParams(ParamList({2_pos, 1_pos, 0_pos}));
 
     return caRvrs;
 }
@@ -510,7 +510,7 @@ ActionPtr ThisApp::reverseSentence()
     //---
 
     caRvrs->setAction(mkActionPtr(MakeSentence));
-    caRvrs->addParams(ParamList({2, 1, 0}));
+    caRvrs->addParams(ParamList({2_pos, 1_pos, 0_pos}));
 
 
     return caRvrs;

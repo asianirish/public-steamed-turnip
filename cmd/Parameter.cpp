@@ -1,4 +1,5 @@
 #include "Parameter.h"
+#include "cmd/Position.h"
 #include "cmd/Substitutor.h"
 
 #include <climits>
@@ -6,11 +7,9 @@
 namespace turnip {
 namespace cmd {
 
-const int Parameter::INVALID_POSITION = INT_MIN;
+Parameter::Parameter() : Parameter(Position()) {}
 
-Parameter::Parameter() : Parameter(Parameter::INVALID_POSITION) {}
-
-Parameter::Parameter(int position) : position_(position)
+Parameter::Parameter(const Position &position) : position_(position)
 {
 
 }
@@ -50,19 +49,19 @@ Parameter::Parameter(const Alias &alias, const ParamList &paramList)
     substitutor_ = mkPtr<Substitutor>(alias, paramList);
 }
 
-int Parameter::position() const
+Position Parameter::position() const
 {
     return position_;
 }
 
-void Parameter::setPosition(int newPosition)
+void Parameter::setPosition(const Position &newPosition)
 {
     position_ = newPosition;
 }
 
 bool Parameter::isPosition() const
 {
-    return (position_ != INVALID_POSITION);
+    return position_.isValid();
 }
 
 Value Parameter::value() const
@@ -92,8 +91,8 @@ void Parameter::setSubstitutor(const SubstPtr &newSubstitutor)
 VariantMap Parameter::toMap() const
 {
     VariantMap mp;
-    if (position_ != INVALID_POSITION) {
-        mp.set("position", position_);
+    if (position_ .isValid()) {
+        mp.set("position", static_cast<int>(position_));
     }
 
     if (alias_) {

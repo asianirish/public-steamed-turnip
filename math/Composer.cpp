@@ -42,7 +42,7 @@ ActionPtr Composer::reverseDivide()
     //---
 
     caRvrs->setAction(mkActionPtr(Divide));
-    caRvrs->addParams(ParamList({1, 0}));
+    caRvrs->addParams(ParamList({1_pos, 0_pos}));
 
     return caRvrs;
 }
@@ -69,7 +69,7 @@ ActionPtr Composer::sineOfDegrees()
 
     // caSind->setSubstitutor(sbst);
     caSind->setAction(mkActionPtr(SineOfRadians));
-    caSind->addParam(mkActionPtr(DegreesToRadians), ParamList({0}));
+    caSind->addParam(mkActionPtr(DegreesToRadians), ParamList({0_pos}));
 
     return caSind;
 }

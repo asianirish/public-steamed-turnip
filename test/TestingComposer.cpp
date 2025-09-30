@@ -50,7 +50,7 @@ turnip::cmd::ActionPtr TestingComposer::concatPrint()
     ca->setActionDef(actionDef);
 
     ca->setAction(mkActionPtr(PrintAction));
-    ca->addParam(mkActionPtr(Concat), ParamList({0, 1}));
+    ca->addParam(mkActionPtr(Concat), ParamList({0_pos, 1_pos}));
 
     return ca;
 }
@@ -99,7 +99,7 @@ ActionPtr TestingComposer::map2HowLong()
 
     caSind->setAction(mkActionPtr(MapToArgsAction));
     caSind->addParams(ParamList({mkActionPtr(HowLongSince),
-        Parameter(mkActionPtr(PersonArgToMapAction), ParamList({0, 1, 2}))
+        Parameter(mkActionPtr(PersonArgToMapAction), ParamList({0_pos, 1_pos, 2_pos}))
     }));
 
     return caSind;
@@ -149,7 +149,7 @@ ActionPtr TestingComposer::printPersonMap()
 
     caSind->setAction(mkActionPtr(MapToArgsAction));
     caSind->addParams(ParamList({mkActionPtr(PrintPersonAction),
-        Parameter(mkActionPtr(PersonArgToMapAction), ParamList({0, 1, 2}))
+        Parameter(mkActionPtr(PersonArgToMapAction), ParamList({0_pos, 1_pos, 2_pos}))
     }));
 
     return caSind;
@@ -181,8 +181,8 @@ ActionPtr TestingComposer::forConcatPrint()
     ca->setActionDef(actionDef);
 
     ca->setAction(mkActionPtr(ForAction));
-    auto printParam =  Parameter(concatPrint(), ParamList({0_val, 0}));
-    auto incParam = Parameter(mkActionPtr(Inc), ParamList({1}));
+    auto printParam =  Parameter(concatPrint(), ParamList({0_val, 0_pos}));
+    auto incParam = Parameter(mkActionPtr(Inc), ParamList({1_pos}));
 
     ca->addParams(ParamList({incParam, 1_val, 0_val, printParam}));
 
@@ -217,8 +217,8 @@ ActionPtr TestingComposer::countTask()
 
     ca->setAction(mkActionPtr(First));
 
-    auto incParam = Parameter(mkActionPtr(Inc), ParamList({0}));
-    auto printParam =  Parameter(concatPrint(), ParamList({0, 1}));
+    auto incParam = Parameter(mkActionPtr(Inc), ParamList({0_pos}));
+    auto printParam =  Parameter(concatPrint(), ParamList({0_pos, 1_pos}));
     ca->addParams(ParamList({incParam, printParam}));
 
     return ca;
@@ -243,7 +243,7 @@ ActionPtr TestingComposer::whileTask()
 
     ca->setAction(mkActionPtr(WhileAction));
 
-    auto printParam = Parameter(countTask(), ParamList({0_val, 0}));
+    auto printParam = Parameter(countTask(), ParamList({0_val, 0_pos}));
     auto lessParam = Parameter(CommonComposer::lessOrEqual(), ParamList({0_val, 6_val}));
 
     ca->addParams(ParamList({printParam, lessParam, 0_val, 0_val}));

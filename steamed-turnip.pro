@@ -49,6 +49,7 @@ SOURCES += \
         cmd/MenuAction.cpp \
         cmd/Parameter.cpp \
         cmd/PersonArgToMapAction.cpp \
+        cmd/Position.cpp \
         cmd/PrintAction.cpp \
         cmd/PrintPersonAction.cpp \
         cmd/Result.cpp \
@@ -170,6 +171,7 @@ HEADERS += \
     cmd/MenuAction.h \
     cmd/Parameter.h \
     cmd/PersonArgToMapAction.h \
+    cmd/Position.h \
     cmd/PrintAction.h \
     cmd/PrintPersonAction.h \
     cmd/Result.h \

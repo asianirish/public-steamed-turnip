@@ -2,6 +2,7 @@
 #define PARAMETER_H
 
 #include "cmd/Alias.h"
+#include "cmd/Position.h"
 #include "cmd/Value.h"
 
 namespace turnip {
@@ -13,9 +14,8 @@ using SubstPtr = std::shared_ptr<Substitutor>;
 class Parameter
 {
 public:
-    static const int INVALID_POSITION;
     Parameter();
-    Parameter(int position);
+    Parameter(const Position &position);
     Parameter(const Value &value);
 
     Parameter(const ActionPtr &action);
@@ -30,8 +30,8 @@ public:
 
     Parameter(const Alias &alias, const ParamList &paramList);
 
-    int position() const;
-    void setPosition(int newPosition);
+    Position position() const;
+    void setPosition(const Position &newPosition);
     bool isPosition() const;
 
     Value value() const;
@@ -46,7 +46,7 @@ public:
     void setAlias(const Alias &newAlias);
 
 private:
-    int position_ {INVALID_POSITION};
+    Position position_;
     Value value_;
     std::shared_ptr<Alias> alias_;
     SubstPtr substitutor_;

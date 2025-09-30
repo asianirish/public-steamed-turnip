@@ -34,7 +34,8 @@ ActionPtr Composer::concat()
     ca->setActionDef(actionDef);
 
     ca->setAction(mkActionPtr(ConcatListAction));
-    ca->addParams(ParamList({Parameter(mkActionPtr(ArgsToListAction), ParamList({0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}))}));
+    ca->addParams(ParamList({Parameter(mkActionPtr(ArgsToListAction), ParamList({0_pos, 1_pos, 2_pos, 3_pos, 4_pos, 5_pos,
+                                                                                 6_pos, 7_pos, 8_pos, 9_pos, 10_pos, 11_pos}))}));
 
     return ca;
 }
@@ -59,7 +60,8 @@ ActionPtr Composer::argListSize()
     ca->setActionDef(actionDef);
 
     ca->setAction(mkActionPtr(SizeAction));
-    ca->addParams(ParamList({Parameter(mkActionPtr(ArgsToListAction), ParamList({0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}))}));
+    ca->addParams(ParamList({Parameter(mkActionPtr(ArgsToListAction), ParamList({0_pos, 1_pos, 2_pos, 3_pos, 4_pos, 5_pos,
+                                                                                 6_pos, 7_pos, 8_pos, 9_pos, 10_pos, 11_pos}))}));
 
     return ca;
 }
@@ -91,9 +93,10 @@ ActionPtr Composer::atArgs()
 
     ca->setAction(mkActionPtr(AtAction));
 
-    auto mkLstParam = Parameter(mkActionPtr(ArgsToListAction), ParamList({1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}));
+    auto mkLstParam = Parameter(mkActionPtr(ArgsToListAction), ParamList({1_pos, 2_pos, 3_pos, 4_pos, 5_pos,
+                                                                          6_pos, 7_pos, 8_pos, 9_pos, 10_pos, 11_pos}));
 
-    ca->addParams(ParamList({0, mkLstParam}));
+    ca->addParams(ParamList({0_pos, mkLstParam}));
 
     return ca;
 }
@@ -136,9 +139,10 @@ ActionPtr Composer::argListBatch()
 
     ca->setAction(mkActionPtr(Batch));
 
-    auto mkLstParam = Parameter(mkActionPtr(ArgsToListAction), ParamList({2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}));
+    auto mkLstParam = Parameter(mkActionPtr(ArgsToListAction), ParamList({2_pos, 3_pos, 4_pos, 5_pos, 6_pos,
+                                                                          7_pos, 8_pos, 9_pos, 10_pos, 11_pos, 12_pos}));
 
-    ca->addParams(ParamList({0, 1, mkLstParam}));
+    ca->addParams(ParamList({0_pos, 1_pos, mkLstParam}));
 
     return ca;
 }
@@ -177,7 +181,7 @@ ActionPtr Composer::longArgListBatch()
     ParamList paramList;
     for (size_t i = 2; i < Const::ARG_MAX; ++i)
     {
-        paramList.push_back(i);
+        paramList.push_back(Position(i));
     }
     ca->setActionDef(actionDef);
 
@@ -185,7 +189,7 @@ ActionPtr Composer::longArgListBatch()
 
     auto mkLstParam = Parameter(mkActionPtr(ArgsToListAction), paramList);
 
-    ca->addParams(ParamList({0, 1, mkLstParam}));
+    ca->addParams(ParamList({0_pos, 1_pos, mkLstParam}));
 
     return ca;
 }
@@ -213,10 +217,10 @@ ActionPtr Composer::batches()
         actionDef.addArgDef(argDef);
     }
 
-    ParamList paramList({0_val, 0, });
+    ParamList paramList({0_val, 0_pos, });
     for (size_t i = 1; i < Const::ARG_MAX; ++i)
     {
-        paramList.push_back(i);
+        paramList.push_back(Position(i));
     }
 
     actionDef.setDescription("Batches");

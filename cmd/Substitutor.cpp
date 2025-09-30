@@ -55,7 +55,7 @@ TaskPtr Substitutor::substitute(const ArgList &args)
         if (param.isPosition()) {
             auto pos = param.position();
 
-            if (pos != Parameter::INVALID_POSITION &&
+            if (pos.isValid() &&
                 static_cast<size_t>(pos) < args.size()) {
                 auto arg = args.at(pos);
                 param.setValue(arg);

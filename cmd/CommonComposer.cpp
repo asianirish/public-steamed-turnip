@@ -47,8 +47,8 @@ ActionPtr CommonComposer::lessOrEqual()
 
     ca->setAction(mkActionPtr(LogicalOrAction));
     ca->addParams(ParamList({
-        Parameter(lessAlias, ParamList({0, 1})),
-        Parameter(eqAlias, ParamList({0, 1})),
+        Parameter(lessAlias, ParamList({0_pos, 1_pos})),
+        Parameter(eqAlias, ParamList({0_pos, 1_pos})),
     }));
 
     return ca;
