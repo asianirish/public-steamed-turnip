@@ -11,6 +11,8 @@ class TaskIdGenerator
 public:
     TaskIdGenerator();
 
+    virtual ~TaskIdGenerator() = default;
+
     virtual void init() = 0;
     virtual TaskId next() = 0;
 };

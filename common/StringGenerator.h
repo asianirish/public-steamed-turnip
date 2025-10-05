@@ -11,6 +11,8 @@ class StringGenerator
 public:
     StringGenerator();
 
+    virtual ~StringGenerator() = default;
+
     virtual std::string generate() const = 0;
 };
 

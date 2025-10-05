@@ -20,6 +20,8 @@ public:
 
     State(StateManager *manager, TaskId loopTaskId, const ActionPtr &action, const ArgList &args);
 
+    virtual ~State() = default;
+
     void start();
 
     TaskId stateId() const;

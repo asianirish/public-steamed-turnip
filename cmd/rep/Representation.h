@@ -15,6 +15,8 @@ public:
 
     Representation();
 
+    virtual ~Representation() = default;
+
     virtual Value input(const std::string &str) const = 0;
     virtual std::string output(const Value &value) const = 0;
 
