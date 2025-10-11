@@ -69,6 +69,9 @@
 #include "test/TestSharedVector.h"
 #include "test/TestLazyPointer.h"
 #include "test/TestStringGen.h"
+#include "test/TestDynComboContainer.h"
+#include "test/TestStdComboContainer.h"
+
 
 using namespace turnip;
 using namespace cmd;
@@ -151,6 +154,9 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, Batch);
     REGISTER_TURNIP_CLASS(Action, BatchCount);
     REGISTER_TURNIP_CLASS(Action, BatchNumber);
+
+    REGISTER_TURNIP_CLASS(Action, TestDynComboContainer);
+    REGISTER_TURNIP_CLASS(Action, TestStdComboContainer);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
@@ -193,8 +199,10 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("first", ACTION_CLASS(First));
 
     menu.registerAction("args2list", ACTION_CLASS(ArgsToListAction));
-
     menu.registerAction("batchnum", ACTION_CLASS(BatchNumber));
+
+    menu.registerAction("dyn_combo", ACTION_CLASS(TestDynComboContainer));
+    menu.registerAction("std_combo", ACTION_CLASS(TestStdComboContainer));
 
     buildMathSubMenu(menu);
     buildTestingSubMenu(menu);

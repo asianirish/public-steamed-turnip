@@ -130,8 +130,10 @@ SOURCES += \
         test/TestActionMap.cpp \
         test/TestChance.cpp \
         test/TestCmdValue.cpp \
+        test/TestDynComboContainer.cpp \
         test/TestLazyPointer.cpp \
         test/TestSharedVector.cpp \
+        test/TestStdComboContainer.cpp \
         test/TestStringGen.cpp \
         test/TestingComposer.cpp
 
@@ -226,6 +228,7 @@ HEADERS += \
     cmd/rep/SimpleStringRep.h \
     cmd/rep/StringRep.h \
     cmd/rep/TaskRep.h \
+    common/DynComboContainer.h \
     common/Factory.h \
     common/HumanStringGenerator.h \
     common/LazyPointer.h \
@@ -233,6 +236,7 @@ HEADERS += \
     common/RandomUtils.h \
     common/SharedMap.h \
     common/SharedVector.h \
+    common/StdComboContainer.h \
     common/StringGenerator.h \
     console/Reader.h \
     example/MakeSentence.h \
@@ -266,7 +270,9 @@ HEADERS += \
     test/TestActionMap.h \
     test/TestChance.h \
     test/TestCmdValue.h \
+    test/TestDynComboContainer.h \
     test/TestLazyPointer.h \
     test/TestSharedVector.h \
+    test/TestStdComboContainer.h \
     test/TestStringGen.h \
     test/TestingComposer.h
