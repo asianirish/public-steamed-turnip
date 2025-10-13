@@ -1,46 +1,47 @@
-#ifndef DYN_COMBO_CONTAINER_H
-#define DYN_COMBO_CONTAINER_H
+#ifndef EX_COMBO_CONTAINER_H
+#define EX_COMBO_CONTAINER_H
 
 #include <vector>
 #include <iterator>
 #include <stdexcept>
+#include <iostream>
 
 namespace turnip {
 namespace common {
 
 template<typename T>
-using DynCombo = std::vector<T>;
+using ExCombo = std::vector<T>;
 
-template<typename T>
-class DynComboContainer;
+template<template<typename, typename...> class Container, typename T>
+class ExComboContainer;
 
-template<typename T>
-class DynComboContainerIterator
+template<template<typename, typename...> class Container, typename T>
+class ExComboContainerIterator
 {
 public:
     using iterator_category = std::forward_iterator_tag;
-    using value_type = DynCombo<T>;
+    using value_type = ExCombo<T>;
     using difference_type = std::ptrdiff_t;
-    using pointer = DynCombo<T>*;
-    using reference = DynCombo<T>&;
+    using pointer = ExCombo<T>*;
+    using reference = ExCombo<T>&;
 
-    DynComboContainerIterator(const DynComboContainer<T> &container, const DynCombo<T> &curCombo) :
+    ExComboContainerIterator(const ExComboContainer<Container, T> &container, const ExCombo<T> &curCombo) :
         _container(container),
         _curCombo(curCombo)
     {
     }
 
     // builds an invalid iterator
-    DynComboContainerIterator() = default;
+    ExComboContainerIterator() = default;
 
-    DynCombo<T> operator*() const {
+    ExCombo<T> operator*() const {
         return _curCombo;
     }
 
-    const DynCombo<T> &curCombo() const;
-    void setCurCombo(const DynCombo<T> &newCurCombo);
+    const ExCombo<T> &curCombo() const;
+    void setCurCombo(const ExCombo<T> &newCurCombo);
 
-    const DynComboContainerIterator<T> &operator++() {
+    const ExComboContainerIterator<Container, T> &operator++() {
         int i = _curCombo.size() - 1;
         if (!tryToEdit(i)) {
             _curCombo.clear();
@@ -48,13 +49,13 @@ public:
         return *this;
     }
 
-    bool operator !=(const DynComboContainerIterator<T> &other) const {
+    bool operator !=(const ExComboContainerIterator<Container, T> &other) const {
         return (_curCombo != other._curCombo);
     }
 
 private:
-    DynComboContainer<T> _container;
-    DynCombo<T> _curCombo;
+    ExComboContainer<Container, T> _container;
+    ExCombo<T> _curCombo;
 
     T maxValue(int index) const {
         return _container.values()[index].back();
@@ -99,19 +100,19 @@ private:
 };
 
 /////////////////////////////////////
-/// \brief The DynComboContainer class
+/// \brief The ExComboContainer class
 ///
-template<typename T>
-class DynComboContainer
+template<template<typename, typename...> class Container, typename T>
+class ExComboContainer
 {
 public:
-    DynComboContainer() {}
+    ExComboContainer() {}
 
-    DynComboContainer(const std::vector<std::vector<T>> &values)
+    ExComboContainer(const std::vector<Container<T>> &values)
         : _values(values)
     {}
 
-    using iterator = DynComboContainerIterator<T>;
+    using iterator = ExComboContainerIterator<Container, T>;
 
     inline size_t comboLength() const {
         return _values.size();
@@ -119,12 +120,12 @@ public:
 
 
     iterator begin() const {
-        iterator it(*this, DynCombo<T>());
+        iterator it(*this, ExCombo<T>());
 
         size_t comboLength = _values.size();
 
         if (!_values.empty()) {
-            DynCombo<T> combo;
+            ExCombo<T> combo;
             for (size_t i = 0; i < comboLength; i++) {
                 combo.push_back(_values[i].front());
             }
@@ -139,23 +140,23 @@ public:
         return iterator();
     }
 
-    const std::vector<std::vector<T>> &values() const {
+    const std::vector<Container<T>> &values() const {
         return _values;
     }
 
 private:
-    std::vector<std::vector<T>> _values;
+    std::vector<Container<T>> _values;
 };
 
 
-template<typename T>
-const DynCombo<T> &DynComboContainerIterator<T>::curCombo() const
+template<template<typename, typename...> class Container, typename T>
+const ExCombo<T> &ExComboContainerIterator<Container, T>::curCombo() const
 {
     return _curCombo;
 }
 
-template<typename T>
-void DynComboContainerIterator<T>::setCurCombo(const DynCombo<T> &newCurCombo)
+template<template<typename, typename...> class Container, typename T>
+void ExComboContainerIterator<Container, T>::setCurCombo(const ExCombo<T> &newCurCombo)
 {
     _curCombo = newCurCombo;
 }
@@ -163,5 +164,5 @@ void DynComboContainerIterator<T>::setCurCombo(const DynCombo<T> &newCurCombo)
 } // namespace common
 } // namespace turnip
 
-#endif // DYN_COMBO_CONTAINER_H
+#endif // EX_COMBO_CONTAINER_H
 

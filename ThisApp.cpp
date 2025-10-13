@@ -71,6 +71,7 @@
 #include "test/TestStringGen.h"
 #include "test/TestDynComboContainer.h"
 #include "test/TestStdComboContainer.h"
+#include "test/TestExListComboContainer.h"
 
 
 using namespace turnip;
@@ -157,6 +158,7 @@ void ThisApp::registerActions()
 
     REGISTER_TURNIP_CLASS(Action, TestDynComboContainer);
     REGISTER_TURNIP_CLASS(Action, TestStdComboContainer);
+    REGISTER_TURNIP_CLASS(Action, TestExListComboContainer);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
@@ -203,6 +205,7 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
 
     menu.registerAction("dyn_combo", ACTION_CLASS(TestDynComboContainer));
     menu.registerAction("std_combo", ACTION_CLASS(TestStdComboContainer));
+    menu.registerAction("exlist_combo", ACTION_CLASS(TestExListComboContainer));
 
     buildMathSubMenu(menu);
     buildTestingSubMenu(menu);
