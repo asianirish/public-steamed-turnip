@@ -61,6 +61,7 @@
 #include "math/SineOfRadians.h"
 #include "math/Composer.h"
 
+#include "test/TestValueToStringVector.h"
 #include "test/TestingComposer.h"
 
 #include "test/TestActionMap.h"
@@ -159,6 +160,7 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, TestDynComboContainer);
     REGISTER_TURNIP_CLASS(Action, TestStdComboContainer);
     REGISTER_TURNIP_CLASS(Action, TestExListComboContainer);
+    REGISTER_TURNIP_CLASS(Action, TestValueToStringVector);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
@@ -206,6 +208,7 @@ void ThisApp::registerMenu(turnip::cmd::Menu &menu)
     menu.registerAction("dyn_combo", ACTION_CLASS(TestDynComboContainer));
     menu.registerAction("std_combo", ACTION_CLASS(TestStdComboContainer));
     menu.registerAction("exlist_combo", ACTION_CLASS(TestExListComboContainer));
+    menu.registerAction("val2vec", ACTION_CLASS(TestValueToStringVector));
 
     buildMathSubMenu(menu);
     buildTestingSubMenu(menu);

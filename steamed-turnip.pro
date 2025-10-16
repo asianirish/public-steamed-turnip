@@ -136,6 +136,7 @@ SOURCES += \
         test/TestSharedVector.cpp \
         test/TestStdComboContainer.cpp \
         test/TestStringGen.cpp \
+        test/TestValueToStringVector.cpp \
         test/TestingComposer.cpp
 
 HEADERS += \
@@ -278,4 +279,5 @@ HEADERS += \
     test/TestSharedVector.h \
     test/TestStdComboContainer.h \
     test/TestStringGen.h \
+    test/TestValueToStringVector.h \
     test/TestingComposer.h

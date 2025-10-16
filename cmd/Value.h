@@ -102,6 +102,9 @@ public:
     TaskPtr toTaskPtr() const;
     operator TaskPtr() const;
 
+    std::vector<std::string> toStringVector() const;
+    operator std::vector<std::string>() const;
+
 private:
     ValueData data_;
 

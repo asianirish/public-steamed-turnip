@@ -1,6 +1,5 @@
 #include "Value.h"
 #include "Task.h"
-#include "SyncAction.h"
 #include "math/Id.h"
 
 #include <sstream>
@@ -387,6 +386,30 @@ TaskPtr Value::toTaskPtr() const
 Value::operator TaskPtr() const
 {
     return toTaskPtr();
+}
+
+std::vector<std::string> Value::toStringVector() const
+{
+    if (!isList()) {
+        return {};
+    }
+
+    auto vec = toList();
+
+    std::vector<std::string> result;
+    result.reserve(vec.size());
+
+    std::transform(vec.begin(), vec.end(), std::back_inserter(result),
+        [](const Value &val) {
+            return val.toString();
+        });
+
+    return result;
+}
+
+Value::operator std::vector<std::string>() const
+{
+    return toStringVector();
 }
 
 } // namespace cmd
