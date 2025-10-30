@@ -33,7 +33,6 @@
 #include "cmd/rep/HexIntRep.h"
 #include "cmd/CompositeAction.h"
 #include "cmd/TaskIdIncGenerator.h"
-#include "cmd/Task.h"
 
 #include "common/Factory.h"
 #include "common/HumanStringGenerator.h"
