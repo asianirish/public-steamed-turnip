@@ -91,8 +91,23 @@ void TaskManager::onError(const err::Error &error)
 #else
     if (tasks_.find(taskId) != tasks_.end()) {
 #endif
+        auto tsk = tasks_.at(taskId);
+
         // TODO: do not delete the task immediately (when?) and set Failed status (?)
         tasks_.erase(taskId);
+
+        auto asyncAction = std::dynamic_pointer_cast<AsyncAction>(tsk->actionPtr());
+
+        if (asyncAction) {
+#ifdef DEBUG_ASYNC_ACTIONS
+            std::cout << std::endl << "async action ON_SUB_TASK_ERROR" << std::endl;
+#endif
+            // TODO: asyncAction->onSubTaskError(error);
+
+#ifdef DEBUG_ASYNC_ACTIONS
+            std::cout << "async action SUB_TASK_ERROR" << std::endl;
+#endif
+        }
 
         for (const auto &errorCallback : errorCallbacks_) {
             errorCallback(error);

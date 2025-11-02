@@ -11,7 +11,6 @@ def::ActionDef AsyncCompositeAction::actionDef() const
     return actionDef_;
 }
 
-
 void AsyncCompositeAction::setActionDef(const def::ActionDef &newActionDef)
 {
     actionDef_ = newActionDef;
@@ -20,11 +19,6 @@ void AsyncCompositeAction::setActionDef(const def::ActionDef &newActionDef)
 Substitutor AsyncCompositeAction::substitutor() const
 {
     return substitutor_;
-}
-
-void AsyncCompositeAction::onSubTaskComplete(const Value &reslutValue, const TaskId &taskId)
-{
-    emitComplete(reslutValue, taskId);
 }
 
 void AsyncCompositeAction::setAction(const ActionPtr &action)
@@ -37,7 +31,7 @@ void AsyncCompositeAction::setAction(const Alias &alias)
     substitutor_.setActionParam(alias);
 }
 
-void AsyncCompositeAction::addParam(int position)
+void AsyncCompositeAction::addParam(const Position &position)
 {
     substitutor_.addParam(Parameter(position));
 }

@@ -17,12 +17,10 @@ public:
 
     Substitutor substitutor() const;
 
-    void onSubTaskComplete(const Value &reslutValue, const TaskId &taskId);
-
     void setAction(const ActionPtr &action);
     void setAction(const Alias &alias);
 
-    void addParam(int position);
+    void addParam(const Position &position);
     void addParam(const Value &value);
     void addParam(const ActionPtr &action);
     void addParam(const ActionPtr &action, const ParamList &paramList);
