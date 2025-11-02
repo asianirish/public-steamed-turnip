@@ -9,7 +9,7 @@ turnip::cmd::def::ActionDef TestSharedVector::actionDef() const
 {
     turnip::cmd::def::ActionDef actionDef;
     actionDef.setDescription("Shared Vector Test");
-    return actionDef;;
+    return actionDef;
 }
 
 turnip::cmd::Value TestSharedVector::actImpl(const turnip::cmd::ArgList &args, turnip::cmd::err::Error &error)

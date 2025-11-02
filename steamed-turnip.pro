@@ -39,6 +39,7 @@ SOURCES += \
         cmd/First.cpp \
         cmd/Global.cpp \
         cmd/HelpAction.cpp \
+        cmd/Helper.cpp \
         cmd/HowLongSince.cpp \
         cmd/IfAction.cpp \
         cmd/Info.cpp \
@@ -136,6 +137,7 @@ SOURCES += \
         test/TestSharedVector.cpp \
         test/TestStdComboContainer.cpp \
         test/TestStringGen.cpp \
+        test/TestToStringVector.cpp \
         test/TestValueToStringVector.cpp \
         test/TestingComposer.cpp
 
@@ -165,6 +167,7 @@ HEADERS += \
     cmd/First.h \
     cmd/Global.h \
     cmd/HelpAction.h \
+    cmd/Helper.h \
     cmd/HowLongSince.h \
     cmd/IfAction.h \
     cmd/Info.h \
@@ -279,5 +282,6 @@ HEADERS += \
     test/TestSharedVector.h \
     test/TestStdComboContainer.h \
     test/TestStringGen.h \
+    test/TestToStringVector.h \
     test/TestValueToStringVector.h \
     test/TestingComposer.h
