@@ -72,7 +72,7 @@
 #include "test/TestDynComboContainer.h"
 #include "test/TestStdComboContainer.h"
 #include "test/TestExListComboContainer.h"
-
+#include "test/TestToStringVector.h"
 
 using namespace turnip;
 using namespace cmd;
@@ -160,12 +160,14 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, TestStdComboContainer);
     REGISTER_TURNIP_CLASS(Action, TestExListComboContainer);
     REGISTER_TURNIP_CLASS(Action, TestValueToStringVector);
+    REGISTER_TURNIP_CLASS(Action, TestToStringVector);
 }
 
 void ThisApp::registerMenu(turnip::cmd::Menu &menu)
 {
     menu.registerAction("print", ACTION_CLASS(PrintAction));
     menu.registerAction("shv", ACTION_CLASS(TestSharedVector));
+    menu.registerAction("2strvec", ACTION_CLASS(TestToStringVector));
     menu.registerAction("cval", ACTION_CLASS(TestCmdValue));
     menu.registerAction("lazy", ACTION_CLASS(TestLazyPointer));
     menu.registerAction("conds", ACTION_CLASS(ConditionalStringAction));
