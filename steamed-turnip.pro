@@ -103,6 +103,7 @@ SOURCES += \
         cmd/rep/SimpleStringRep.cpp \
         cmd/rep/StringRep.cpp \
         cmd/rep/TaskRep.cpp \
+        common/Helper.cpp \
         common/HumanStringGenerator.cpp \
         common/RandomUtils.cpp \
         common/StringGenerator.cpp \
@@ -236,6 +237,7 @@ HEADERS += \
     common/DynComboContainer.h \
     common/ExComboContainer.h \
     common/Factory.h \
+    common/Helper.h \
     common/HumanStringGenerator.h \
     common/LazyPointer.h \
     common/LimitedStack.h \
