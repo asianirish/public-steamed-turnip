@@ -44,6 +44,8 @@
 #include "math/DegreesToRadians.h"
 #include "math/Eq.h"
 #include "math/Greater.h"
+#include "math/LogicalNotAction.h"
+#include "math/NotEq.h"
 #include "math/Id.h"
 #include "math/Inc.h"
 #include "math/IsEven.h"
@@ -127,10 +129,12 @@ void ThisApp::registerActions()
     REGISTER_TURNIP_CLASS(Action, EqInt);
     REGISTER_TURNIP_CLASS(Action, LessInt);
     REGISTER_TURNIP_CLASS(Action, GreaterInt);
+    REGISTER_TURNIP_CLASS(Action, NotEqInt);
 
     REGISTER_TURNIP_CLASS(Action, LogicalAndAction);
     REGISTER_TURNIP_CLASS(Action, LogicalOrAction);
     REGISTER_TURNIP_CLASS(Action, LogicalXorAction);
+    REGISTER_TURNIP_CLASS(Action, LogicalNotAction);
 
     REGISTER_TURNIP_CLASS(Action, ForAction);
     REGISTER_TURNIP_CLASS(Action, StrId);
@@ -291,11 +295,12 @@ void ThisApp::buildMathSubMenu(turnip::cmd::Menu &menu)
     mathMenuAction->addAction("lessi", ACTION_CLASS(LessInt));
     mathMenuAction->addAction("greateri", ACTION_CLASS(GreaterInt));
     mathMenuAction->addAction("loei", CommonComposer::lessOrEqual());
-
+    mathMenuAction->addAction("noteqi", ACTION_CLASS(NotEqInt));
 
     mathMenuAction->addAction("and", ACTION_CLASS(LogicalAndAction));
     mathMenuAction->addAction("or", ACTION_CLASS(LogicalOrAction));
     mathMenuAction->addAction("xor", ACTION_CLASS(LogicalXorAction));
+    mathMenuAction->addAction("not", ACTION_CLASS(LogicalNotAction));
 
     menu.registerAction("for", ACTION_CLASS(ForAction));
     mathMenuAction->addAction("id", ACTION_CLASS(StrId));

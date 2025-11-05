@@ -125,6 +125,7 @@ SOURCES += \
         math/Inc.cpp \
         math/IsEven.cpp \
         math/LogicalAndAction.cpp \
+        math/LogicalNotAction.cpp \
         math/LogicalOrAction.cpp \
         math/LogicalXorAction.cpp \
         math/RemAction.cpp \
@@ -269,9 +270,11 @@ HEADERS += \
     math/IsEven.h \
     math/Less.h \
     math/LogicalAndAction.h \
+    math/LogicalNotAction.h \
     math/LogicalOrAction.h \
     math/LogicalXorAction.h \
     math/MultAction.h \
+    math/NotEq.h \
     math/RemAction.h \
     math/SineOfRadians.h \
     math/SubAction.h \
