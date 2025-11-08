@@ -5,6 +5,7 @@
 #include <iterator>
 #include <stdexcept>
 #include <iostream>
+#include <algorithm>
 
 namespace turnip {
 namespace common {

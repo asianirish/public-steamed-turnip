@@ -4,6 +4,7 @@
 #include <vector>
 #include <iterator>
 #include <stdexcept>
+#include <algorithm>
 
 namespace turnip {
 namespace common {

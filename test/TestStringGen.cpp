@@ -1,6 +1,8 @@
 #include "TestStringGen.h"
 #include "common/HumanStringGenerator.h"
 
+#include <cstdint>
+
 using namespace turnip::cmd;
 using namespace turnip::common;
 

@@ -4,6 +4,8 @@
 #include "Constraint.h"
 #include "cmd/Value.h"
 
+#include <cstdint>
+
 namespace turnip {
 namespace cmd {
 namespace def {
