@@ -1,7 +1,11 @@
 #include "Action.h"
 
+#include "def/Constraint.h"
+
 namespace turnip {
 namespace cmd {
+
+using namespace def;
 
 const std::string Action::CLASS_NAME_KEY {"className"};
 const std::string Action::DATA_KEY {"data"};
@@ -42,20 +46,50 @@ void Action::notifyError(const err::Error &error)
 
 ArgList Action::handleArgs(const ArgList &args, bool *ok)
 {
-    if (ok) {
-        *ok = true;
+    ArgList newArgs;
+    // The action's argument definitions, assumed accessible
+    const auto &defs = this->actionDef().argDefs();
+
+    // Result flag
+    bool result = true;
+
+    size_t i = 0;
+    // Ensure we process each expected argument position
+    for (const auto &def : defs) {
+
+        Value actual;
+        if (i < args.size()) {
+            actual = args[i];
+        } else {
+            // If no value provided, use the default value from the definition
+            if (!def.defaultValue().isNull()) {
+            actual = def.defaultValue();
+            } else {
+                *ok = false;
+                return {};
+            }
+        }
+
+        // TODO: Type check (if needed)
+        // if (def.type() != actual.type()) {
+        //     // Optionally, try to convert, or error
+        //     // Uncomment if you want to attempt conversion:
+        //     // actual = actual.convertTo(def.type());
+        //     result = false;
+        // }
+
+        // Constraint check (if any)
+        auto constraint = def.constraint();
+        if (constraint && !constraint->isSatisfied(actual)) {
+            *ok = false;
+            return {};
+        }
+
+        newArgs.push_back(actual);
+        ++i;
     }
 
-    // TODO: implement
-    // auto argDefs = this->actionDef().argDefs();
-
-    // if (argDefs.size() == 1) {
-    //     auto argDef0 = argDefs.front();
-
-    //     auto arg0 = args.at(0);
-    //     arg0-
-    // }
-    return args;
+    return newArgs;
 }
 
 std::string Action::registeredClassName() const
