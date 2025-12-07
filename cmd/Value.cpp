@@ -456,6 +456,8 @@ bool Value::canConvert(def::MetaType::Type tp) const
     case def::MetaType::Type::Action:
         return canBeAction();
     }
+
+    return false;
 }
 
 MetaType::Type Value::type() const
