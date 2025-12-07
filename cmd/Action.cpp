@@ -63,30 +63,32 @@ ArgList Action::handleArgs(const ArgList &args, bool *ok)
         } else {
             // If no value provided, use the default value from the definition
             if (!def.defaultValue().isNull()) {
-            actual = def.defaultValue();
+                actual = def.defaultValue();
             } else {
-                *ok = false;
+                result = false;
                 return {};
             }
         }
 
-        // TODO: Type check (if needed)
-        // if (def.type() != actual.type()) {
-        //     // Optionally, try to convert, or error
-        //     // Uncomment if you want to attempt conversion:
-        //     // actual = actual.convertTo(def.type());
-        //     result = false;
-        // }
+        // Type check
+        auto inputType = def.type().inputMetaType().type();
+        if (!actual.isTask() && !actual.canConvert(inputType)) { // a task can be calculated
+            result = false;
+        }
 
         // Constraint check (if any)
         auto constraint = def.constraint();
         if (constraint && !constraint->isSatisfied(actual)) {
-            *ok = false;
+            result = false;
             return {};
         }
 
         newArgs.push_back(actual);
         ++i;
+    }
+
+    if (ok) {
+        *ok = result;
     }
 
     return newArgs;

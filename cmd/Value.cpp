@@ -82,6 +82,26 @@ bool Value::isNull() const
     return std::holds_alternative<std::monostate>(data_);
 }
 
+bool Value::isBool() const
+{
+    return std::holds_alternative<bool>(data_);
+}
+
+bool Value::isChar() const
+{
+    return std::holds_alternative<char>(data_);
+}
+
+bool Value::isInt() const
+{
+    return std::holds_alternative<int64_t>(data_);
+}
+
+bool Value::isDouble() const
+{
+    return std::holds_alternative<double>(data_);
+}
+
 bool Value::isTask() const
 {
     return std::holds_alternative<TaskPtr>(data_);
@@ -410,6 +430,177 @@ std::vector<std::string> Value::toStringVector() const
 Value::operator std::vector<std::string>() const
 {
     return toStringVector();
+}
+
+bool Value::canConvert(def::MetaType::Type tp) const
+{
+    switch (tp) {
+    case def::MetaType::Type::Invalid:
+        return canBeInvalid();
+    case def::MetaType::Type::Bool:
+        return canBeBool();
+    case def::MetaType::Type::Char:
+        return canBeChar();
+    case def::MetaType::Type::Int:
+        return canBeInt();
+    case def::MetaType::Type::Double:
+        return canBeDouble();
+    case def::MetaType::Type::String:
+        return true;
+    case def::MetaType::Type::Map:
+        return canBeMap();
+    case def::MetaType::Type::List:
+        return canBeList();
+    case def::MetaType::Type::Task:
+        return canBeTask();
+    case def::MetaType::Type::Action:
+        return canBeAction();
+    }
+}
+
+MetaType::Type Value::type() const
+{
+    return metaType().type();
+}
+
+MetaType Value::metaType() const
+{
+    if (isBool()) {
+        return MetaType(MetaType::Type::Bool);
+    }
+
+    if (isChar()) {
+        return MetaType(MetaType::Type::Char);
+    }
+
+    if (isInt()) {
+       return MetaType(MetaType::Type::Int);
+    }
+
+    if (isDouble()) {
+        return MetaType(MetaType::Type::Double);
+    }
+
+    if (isString()) {
+        return MetaType(MetaType::Type::String);
+    }
+
+    if (isMap()) {
+        return MetaType(MetaType::Type::Map);
+    }
+
+    if (isList()) {
+        return MetaType(MetaType::Type::List);
+    }
+
+    if (isTask()) {
+        return MetaType(MetaType::Type::Task);
+    }
+
+    if (isAction()) {
+        return MetaType(MetaType::Type::Action);
+    }
+
+    return {};
+}
+
+
+bool Value::canBeInvalid() const
+{
+    if (isNull()) {
+        return true;
+    }
+
+    return false;
+}
+
+bool Value::canBeBool() const
+{
+    return true;
+}
+
+bool Value::canBeChar() const
+{
+    if (isChar() || isBool() || isInt() || isDouble()) {
+        return true;
+    }
+
+    if (isString()) {
+        return !toString().empty();
+    }
+
+    return false;
+}
+
+bool Value::canBeInt() const
+{
+    if (isChar() || isBool() || isInt() || isDouble()) {
+        return true;
+    }
+
+    if (isString()) {
+        try {
+            std::stoll(toString()); // TODO: hex and bin
+            return true;
+
+        } catch (const std::invalid_argument&) {
+            return false; // no conversion could be performed
+        } catch (const std::out_of_range&) {
+            return false; // value out of int range
+        }
+
+    }
+
+    return false;
+}
+
+bool Value::canBeDouble() const
+{
+    if (isChar() || isBool() || isInt() || isDouble()) {
+        return true;
+    }
+
+    if (isString()) {
+        try {
+            size_t pos;
+            std::stod(toString(), &pos);
+            return pos == toString().size(); // all characters must be used
+        } catch (const std::invalid_argument&) {
+            return false;
+        } catch (const std::out_of_range&) {
+            return false;
+        }
+    }
+
+    return false;
+}
+
+bool Value::canBeMap() const
+{
+    if (isMap() || isAction()) { // TODO: string as json?
+        return true;
+    }
+
+    return true;
+}
+
+bool Value::canBeList() const
+{
+    return isList();
+}
+
+bool Value::canBeTask() const
+{
+    if (isNull()) {
+        return false;
+    }
+
+    return true; // non-task and non-map types will form an Id(value) task
+}
+
+bool Value::canBeAction() const
+{
+    return (isAction() || isMap());
 }
 
 } // namespace cmd

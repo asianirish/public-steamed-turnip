@@ -2,6 +2,7 @@
 #define VALUE_H
 
 #include "cmd/Types.h"
+#include "cmd/def/MetaType.h"
 
 #include <iostream>
 
@@ -59,6 +60,14 @@ public:
 
     bool isNull() const;
 
+    bool isBool() const;
+
+    bool isChar() const;
+
+    bool isInt() const;
+
+    bool isDouble() const;
+
     bool isTask() const;
 
     bool isMap() const;
@@ -105,10 +114,27 @@ public:
     std::vector<std::string> toStringVector() const;
     operator std::vector<std::string>() const;
 
+    def::MetaType metaType() const;
+    def::MetaType::Type type() const;
+
+    bool canConvert(def::MetaType::Type tp) const;
+
 private:
     ValueData data_;
 
     friend std::ostream& operator<<(std::ostream& os, const Value& value);
+
+private:
+    bool canBeInvalid() const;
+    bool canBeBool() const;
+    bool canBeChar() const;
+    bool canBeInt() const;
+    bool canBeDouble() const;
+    bool canBeMap() const;
+    bool canBeList() const;
+    bool canBeTask() const;
+    bool canBeAction() const;
+
 };
 
 inline bool operator==(const Value& lhs, const Value& rhs) {
